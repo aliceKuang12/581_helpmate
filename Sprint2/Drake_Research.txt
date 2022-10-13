@@ -1,0 +1,31 @@
+RDS database:
+    • Security:
+        • KMS encryption at rest for underlying EBS volumes / snapshots
+        • Transparent Data Encryption (TDE) for Oracle and SQL Server
+        • SSL encryption to RDS is possible for all DB (in-flight)
+        • IAM authentication for MySQL and PostgreSQL
+        • Authorization still happens within RDS (not in IAM)
+        • Can copy an un-encrypted RDS snapshot into an encrypted one
+        • CloudTrail cannot be used to track queries made within RDS
+    • Engines: PostgreSQL, MySQL, MariaDB, Oracle, Microsoft SQL Server
+    • Managed DB: provisioning, backups, patching, monitoring
+    • Launched within a VPC, usually in private subnet, control network access 
+using security groups (important when using Lambda)
+    • Storage by EBS (gp2 or io1), can increase volume size with auto-scaling
+    • Backups: automated with point-in-time recovery. Backups expire
+    • Snapshots: manual, can make copies of snapshots cross region
+    • RDS Events: get notified via SNS for events (operations, outages…)
+
+OOP: Back end will divide components based on each big function and inharitant from the library
+
+Docker:
+    • Docker Engine is an open source containerization technology for building and containerizing your applications. Docker Engine acts as a client-server application with:
+    • A server with a long-running daemon process dockerd.
+    • APIs which specify interfaces that programs can use to talk to and instruct the Docker daemon.
+    • A command line interface (CLI) client docker.
+    • The CLI uses Docker APIs to control or interact with the Docker daemon through scripting or direct CLI commands. Many other Docker applications use the underlying API and CLI. The daemon creates and manage Docker objects, such as images, containers, networks, and volumes.
+
+
+
+
+
