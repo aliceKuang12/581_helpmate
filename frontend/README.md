@@ -7,6 +7,13 @@ The 'components' folder has a function and class file
     The 'Text' function has the title text
     The 'TestClass' class has the modules text
 
+# Eva's Notes
+
+When running the program
+1. enter folder in the terminal
+2. run 'npm install'
+3. run 'npm start'
+The page should then open in chrome
 
 # Getting Started with Create React App
 
