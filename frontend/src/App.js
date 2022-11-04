@@ -3,17 +3,15 @@ import './App.css';
 import Text from './components/Text'
 import TestClass from './components/TestClass'
 import UserName from './components/UserName'
+import {Button} from '@material-ui/core'; //importing material ui component
+import Header from './NavBar.js';
+
 
 function App() {
   return (
     <div className="Background">
       <div className="MenuBackground">
-          <div className="Menu">
-            <Text></Text>
-          </div>
-          <div className="UserName">
-            <UserName></UserName>
-          </div>
+          <Header/>
       </div>
       <table>
         <tr>
