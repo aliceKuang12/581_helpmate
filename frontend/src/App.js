@@ -16,36 +16,40 @@ function App() {
       <table>
         <tr>
           <td>
-          <al>
-            &ensp;Alerts&ensp;
-          </al>
-          </td>
-          <td>
-          <ac>
+            <box>
+            &ensp;Top Alerts&ensp;
+            <card>&ensp;new card&ensp;</card>
+            </box>
+            <space>&ensp;</space>
+            <box>
             &ensp;Academics&ensp;
-          </ac>
-          </td>
-          <td>
-          <he>
+            <card>&ensp;new card&ensp;</card>
+            </box>
+            <space>&ensp;</space>
+            <box>
             &ensp;Health&ensp;
-          </he>
+            <card>&ensp;new card&ensp;</card>
+            </box>
+            <br></br>          
           </td>
         </tr>
+        <space>&ensp;</space>
         <tr>
           <td>
-          <no>
+          <box>
             &ensp;Notes&ensp;
-          </no>
-          </td>
-          <td>
-          <trav>
+            <card>&ensp;new card&ensp;</card>
+            </box>
+            <space>&ensp;</space>
+            <box>
             &ensp;Travel&ensp;
-          </trav>
-          </td>
-          <td>
-          <so>
+            <card>&ensp;new card&ensp;</card>
+            </box>
+            <space>&ensp;</space>
+            <box>
             &ensp;Social&ensp;
-          </so>
+            <card>&ensp;new card&ensp;</card>
+            </box>
           </td>
         </tr>
       </table>
