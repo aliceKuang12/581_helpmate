@@ -12,7 +12,9 @@ The 'components' folder has a function and class file
 When running the program
 1. enter folder in the terminal
 2. run 'npm install'
-3. run 'npm start'
+3. install @material-ui/core
+4. install @material-ui/icons
+5. run 'npm start'
 The page should then open in chrome
 
 # Getting Started with Create React App
