@@ -36,6 +36,7 @@ td {
   border: 2px solid black;
   font-family: calibri;
   font-size: calc(20px + 2vmin);
+  background-color: "blue";
 }
 
 tr {
@@ -93,4 +94,9 @@ space {
   to {
     transform: rotate(360deg);
   }
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
 }

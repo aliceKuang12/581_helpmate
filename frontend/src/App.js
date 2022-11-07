@@ -3,9 +3,17 @@ import './App.css';
 import Text from './components/Text'
 import TestClass from './components/TestClass'
 import UserName from './components/UserName'
-import {Button} from '@material-ui/core'; //importing material ui component
+import {Button, Typography} from '@material-ui/core'; //importing material ui component
 import Header from './NavBar.js';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 
+const Item = styled(Paper)(({ theme }) => ({
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 function App() {
   return (
@@ -13,46 +21,57 @@ function App() {
       <div className="MenuBackground">
           <Header/>
       </div>
-      <table>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Item>
+          <table>
         <tr>
           <td>
             <box>
-            &ensp;Top Alerts&ensp;
-            <card>&ensp;new card&ensp;</card>
+              &ensp;Top Alerts&ensp;
+              <card>&ensp;new card&ensp;</card>
             </box>
             <space>&ensp;</space>
             <box>
-            &ensp;Academics&ensp;
-            <card>&ensp;new card&ensp;</card>
+              &ensp;Academics&ensp;
+              <card>&ensp;new card&ensp;</card>
             </box>
             <space>&ensp;</space>
             <box>
-            &ensp;Health&ensp;
-            <card>&ensp;new card&ensp;</card>
+              &ensp;Health&ensp;
+              <card>&ensp;new card&ensp;</card>
             </box>
             <br></br>          
           </td>
         </tr>
-        <space>&ensp;</space>
-        <tr>
-          <td>
-          <box>
-            &ensp;Notes&ensp;
-            <card>&ensp;new card&ensp;</card>
-            </box>
-            <space>&ensp;</space>
-            <box>
-            &ensp;Travel&ensp;
-            <card>&ensp;new card&ensp;</card>
-            </box>
-            <space>&ensp;</space>
-            <box>
-            &ensp;Social&ensp;
-            <card>&ensp;new card&ensp;</card>
-            </box>
-          </td>
-        </tr>
-      </table>
+          </table>
+          </Item>
+        </Grid>
+        <Grid item xs={12}>
+          <Item><table>
+          <tr>
+            <td>
+              <box>
+              &ensp;Top Alerts&ensp;
+              <card>&ensp;new card&ensp;</card>
+              </box>
+              <space>&ensp;</space>
+              <box>
+              &ensp;Academics&ensp;
+              <card>&ensp;new card&ensp;</card>
+              </box>
+              <space>&ensp;</space>
+              <box>
+              &ensp;Health&ensp;
+              <card>&ensp;new card&ensp;</card>
+              </box>
+              <br></br>          
+            </td>
+            </tr>
+          </table></Item>
+        </Grid>
+      </Grid>
+      
     </div>
   );
 }
