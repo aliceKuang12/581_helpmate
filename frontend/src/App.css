@@ -1,3 +1,9 @@
+.LoginPage {
+  background-image: url("https://i.pinimg.com/originals/0e/6c/e4/0e6ce4d40a7041ff195fa8ce7d5ef2f7.jpg");
+  background-size: 'cover';
+  background-repeat: 'no-repeat';
+}
+
 .Background {
   background-color:#323781;
   min-height: 100vh;
