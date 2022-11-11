@@ -10,8 +10,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { ThemeProvider } from "@material-ui/core/styles";
-import customtheme from "./components/Theme";
+// import { ThemeProvider } from "@material-ui/core/styles";
+// import customtheme from "./components/Theme";
 
 const pages = ['Home', 'Academics', 'Health','Social','Travel','Streaks'];
 const settings = [ 'Account', 'Logout'];

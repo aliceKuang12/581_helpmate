@@ -1,5 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
+import Homepage from './pages/Homepage'
+import Login from './pages/Login'
 import SignUp from './components/SignUp'
 // import Text from './components/Text'
 // import TestClass from './components/TestClass'
@@ -12,7 +14,8 @@ function App() {
   return (
       <Router>
         <Routes>
-          {/* <Route path = '/' element={}/> */}
+          <Route path = '/' element={<Homepage/>}/>
+          <Route path = '/login' element={<Login/>}/>
           <Route path = '/signup' element={<SignUp/>}/> 
         </Routes>
     </Router> 
