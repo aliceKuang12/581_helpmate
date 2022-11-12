@@ -103,9 +103,9 @@ function Header(){
               </Button>
             ))}
           </Box>
-
+          <Typography color="black" marginRight={3}>Welcome, "Users name"</Typography>
           <Box sx={{ color:'black', flexGrow: 0 }}>
-            <typography>Welcome, "Users name"     </typography>
+            
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
