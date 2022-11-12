@@ -6,6 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import SignUp from './SignUp';
 import Stack from '@mui/material/Stack';
 import { Grid, Typography } from '@mui/material';
 
@@ -26,39 +27,13 @@ export default function BasicForm() {
         Create Account
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>New Account</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Fill in your information to create a new account.
-          </DialogContentText>
-          <Grid container spacing={3}>
-            <Grid item xs={3} sx={{ my: 1}}>
-              <Typography>
-                Birthday:
-              </Typography>
-            </Grid>
-            <Grid item xs={8}>
-              <TextField
-                fullWidth
-                autoFocus
-                margin="dense"
-                id="1"
-                type="date"
-                variant="standard"
-                size="small"
-              />
-            </Grid>
-          </Grid>
-          
+        <SignUp />
           <br />
         </DialogContent>
-
-
-
-
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
+          <Button onClick={handleClose}>Sign Up</Button>
         </DialogActions>
       </Dialog>
     </div>
