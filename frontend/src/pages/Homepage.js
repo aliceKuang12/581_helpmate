@@ -5,7 +5,7 @@ import TestClass from '../components/TestClass'
 import UserName from '../components/UserName'
 import { Button, Typography } from '@material-ui/core'; //importing material ui component
 import Header from '../components/NavBar'
-import TourCard from '../components/TourCard'
+import TopicCard from '../components/TopicCard'
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -21,14 +21,12 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-
-
 const Homepage = () => {
 
     return (
         <div className="Background">
             <div className = "Header">
-                <Header></Header>
+                <Header/>
             </div>
             <div className = "body">
                 <Container sx = {{marginY: 5}}>
@@ -42,10 +40,13 @@ const Homepage = () => {
                         </Typography>,
                         <Grid container spacing = {5}>
                         {Modules.sections.map((section, index) => (
-                            <TourCard tour={section} key = {index}></TourCard>
+                            <TopicCard topic={section} key = {index}></TopicCard>
                         ))}
                         </Grid>
                     ))}
+                    <Box>
+            
+                    </Box>
                 </Container>
             </div>
         </div>

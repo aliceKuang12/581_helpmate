@@ -2,18 +2,18 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
-const TourCard = ({tour}) => {
+import Stack from '@mui/material/Stack'
+const TopicCard = ({topic}) => {
     return( <Grid item xs = {4}>
         <Paper>
             <img 
-                src = {tour.img}
+                src = {topic.img}
                 alt = ""
                 className = "img">
             </img>
             <Box padding = {1}>
                 <Typography variant = "subtitle1" component = "h2">
-                    {tour.name}
+                    {topic.name}
                 </Typography>
                 <Box 
                     sx = {{
@@ -21,9 +21,17 @@ const TourCard = ({tour}) => {
                         alignItems: "center",
                     }}
                 >
+                    <Stack sx ={{padding: 1}}>
                     <Typography variant = "body2" component = "p">
-                        Random text
+                        * {topic.event1}
+                    </Typography> 
+                    <Typography variant = "body2" component = "p">
+                        * {topic.event2}
                     </Typography>
+                    <Typography variant = "body2" component = "p">
+                        * {topic.event3}
+                    </Typography>
+                    </Stack>
                 </Box>
             </Box>  
                
@@ -32,4 +40,4 @@ const TourCard = ({tour}) => {
     ); 
 };
 
-export default TourCard;
+export default TopicCard;
