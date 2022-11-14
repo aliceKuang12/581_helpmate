@@ -1,80 +1,49 @@
-import logo from '../logo.svg';
 import '../App.css';
+import { Typography } from '@material-ui/core'; //importing material ui component
 import Header from '../components/NavBar'
-import Text from '../components/Text'
-import TestClass from '../components/TestClass'
-import UserName from '../components/UserName'
-import { Button, Typography } from '@material-ui/core'; //importing material ui component
+import TopicCard from '../components/TopicCard'
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { styled } from '@mui/material/styles';
+// import Paper from '@material-ui/core/Paper';
+// import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
-const Item = styled(Paper)(({ theme }) => ({
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
+import modules from "./modules.json"
+
+// const Item = styled(Paper)(({ theme }) => ({
+//     textAlign: 'center',
+//     color: theme.palette.text.secondary,
+// }));
 
 
 const Homepage = () => {
 
     return (
         <div className="Background">
-            <div className="MenuBackground">
-
+            <div className = "Header">
+                <Header/>
             </div>
-            <Header/>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Item>
-                        <table>
-                            <tr>
-                                <td>
-                                    <box>
-                                        &ensp;Top Alerts&ensp;
-                                        <card>&ensp;new card&ensp;</card>
-                                    </box>
-                                    <space>&ensp;</space>
-                                    <box>
-                                        &ensp;Academics&ensp;
-                                        <card>&ensp;new card&ensp;</card>
-                                    </box>
-                                    <space>&ensp;</space>
-                                    <box>
-                                        &ensp;Health&ensp;
-                                        <card>&ensp;new card&ensp;</card>
-                                    </box>
-                                    <br></br>
-                                </td>
-                            </tr>
-                        </table>
-                    </Item>
-                </Grid>
-                <Grid item xs={12}>
-                    <Item><table>
-                        <tr>
-                            <td>
-                                <box>
-                                    &ensp;Top Alerts&ensp;
-                                    <card>&ensp;new card&ensp;</card>
-                                </box>
-                                <space>&ensp;</space>
-                                <box>
-                                    &ensp;Academics&ensp;
-                                    <card>&ensp;new card&ensp;</card>
-                                </box>
-                                <space>&ensp;</space>
-                                <box>
-                                    &ensp;Health&ensp;
-                                    <card>&ensp;new card&ensp;</card>
-                                </box>
-                                <br></br>
-                            </td>
-                        </tr>
-                    </table></Item>
-                </Grid>
-            </Grid>
-
+            <div className = "body">
+                <Container sx = {{marginY: 5}}>
+                    {modules.map((Modules) => (
+                        <Typography
+                        variant = "h4"
+                        component = "h2"
+                        marginTop = {5}
+                        marginBottom = {3}>
+                            {Modules.name} 
+                        </Typography>,
+                        <Grid container spacing = {5}>
+                        {Modules.sections.map((section, index) => (
+                            <TopicCard topic={section} key = {index}></TopicCard>
+                        ))}
+                        </Grid>
+                    ))}
+                    <Box>
+            
+                    </Box>
+                </Container>
+            </div>
         </div>
     );
 }
