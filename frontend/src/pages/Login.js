@@ -10,6 +10,11 @@ const theme = createTheme({
     },
 });
 
+const onClickLogin = () => {
+    alert('clicked');
+    window.location.href = "/";
+}
+
 const Login = () => {
     return (
         <Container className="LoginPage" sx={{width: 1300, height: 1000}}>
@@ -18,10 +23,15 @@ const Login = () => {
             
             <Box >
                 <br/><br/> <br/><br/><br/>
-                <Typography variant="h3" component="h2" sx={{ marginX: 23 }}>
+                <Typography 
+                    variant="h3" 
+                    component="h2" sx={{ marginX: 23 }}>
                     HelpMate 
                 </Typography>
-                <Typography variant="body1" component="p" sx={{ marginY: 3, marginX: 27 }}>
+                <Typography 
+                    variant="body1" 
+                    component="p" 
+                    sx={{ marginY: 3, marginX: 27 }}>
                     Here to help you!
                 </Typography>
             </Box>
@@ -30,15 +40,22 @@ const Login = () => {
                 <TextField id="outlined-basic" label="Enter username" variant="filled" />
                 <br /> <br />
                 <TextField id="outlined-basic" label="Enter password" type="password" variant="filled" />
-                <Typography variant="caption" component="p" 
-                            sx={{marginTop: 1, marginLeft: 11, color: "blue", fontSize: 14}}
-                            onClick={() => {alert('User authentication, future sprint'); }}>
+                <Typography 
+                    variant="caption" 
+                    component="p" 
+                    sx={{marginTop: 1, marginLeft: 11, color: "blue", fontSize: 14}}
+                    onClick={() => {alert('User authentication, future sprint'); }}>
                     Forgot Password?
                 </Typography>
                 <br/><br/><br/>
-                <Button variant="contained" label="Password" type="password" className="LoginButtons"
-                         sx={{ marginLeft: 8 }}
-                         onClick={() => {alert('clicked'); }}>
+                <Button 
+                    variant="contained" 
+                    label="Password" 
+                    type="password" 
+                    className="LoginButtons"
+                    sx={{ marginLeft: 8 }}
+                    onClick={onClickLogin}
+                >
                     Login
                 </Button>
                 <br/>
