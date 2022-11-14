@@ -1,5 +1,5 @@
 .Background {
-  background-color: #323781;
+  background-color: #0066ff;
   min-height: 100vh;
 }
 
@@ -46,11 +46,6 @@ td {
 
 tr {
   background-image: url("https://mdbootstrap.com/img/new/slides/041.jpg");
-}
-
-box {
-  border: 2px solid black;
-  background-color: rgb(196, 199, 201);
 }
 
 card {
@@ -100,4 +95,9 @@ space {
   to {
     transform: rotate(360deg);
   }
+}
+
+.img{
+  width: 100%;
+  height: 5rem;
 }

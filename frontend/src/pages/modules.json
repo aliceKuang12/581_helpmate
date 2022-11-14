@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Modules",
+        "sections":[
+            {
+                "id": 1,
+                "name": "Top Alerts",
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg"
+            },
+            {
+                "id": 2,
+                "name": "Academics",
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg"
+            },
+            {
+                "id": 3,
+                "name": "Health",
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg"
+            },
+            {
+                "id": 4,
+                "name": "Notes",
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg"
+            },
+            {
+                "id": 5,
+                "name": "Travel",
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg"
+            },
+            {
+                "id": 6,
+                "name": "Social",
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg"
+            }
+        ] 
+    }
+]

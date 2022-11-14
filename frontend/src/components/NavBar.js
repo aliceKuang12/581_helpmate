@@ -23,8 +23,11 @@ function Header(){
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
       };
-      const handleOpenUserMenu = (event) => {
+      const handleOpenUserMenu = (event, setting) => {
         setAnchorElUser(event.currentTarget);
+        if (setting === "Logout") {
+          window.location.href = '/login';
+        }
       };
     
       const handleCloseNavMenu = () => {
@@ -36,7 +39,7 @@ function Header(){
       };
 
     return (
-      <AppBar position="static">
+      <AppBar position="static" sx={{ bgcolor: "yellow" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -97,15 +100,15 @@ function Header(){
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'black', display: 'block' }} 
               >
                 {page}
               </Button>
             ))}
           </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <typography textAlign="left">Welcome, "Users name"     </typography>
+          <Typography color="black" marginRight={3}>Welcome, "Users name"</Typography>
+          <Box sx={{ color:'black', flexGrow: 0 }}>
+            
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -128,7 +131,7 @@ function Header(){
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={handleCloseUserMenu(setting)}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
