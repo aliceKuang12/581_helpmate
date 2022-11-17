@@ -17,11 +17,10 @@ import modules from "./modules.json"
 
 
 const Homepage = () => {
-
     return (
         <div className="Background">
             <div className = "Header">
-                <Header/>
+                <Header />
             </div>
             <div className = "body">
                 <Container sx = {{marginY: 5}}>

@@ -16,27 +16,27 @@ import customtheme from "./Theme";
 const pages = ['Home', 'Academics', 'Health','Social','Travel','Streaks'];
 const settings = [ 'Account', 'Logout'];
 
-function Header(){
+function Header() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-      };
-      const handleOpenUserMenu = (event, setting) => {
-        setAnchorElUser(event.currentTarget);
-        if (setting === "Logout") {
-          window.location.href = '/login';
-        }
-      };
+      setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event, setting) => {
+      setAnchorElUser(event.currentTarget);
+      if (setting === "Logout") {
+        window.location.href = '/login';
+      }
+    };
     
-      const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-      };
+    const handleCloseNavMenu = () => {
+      setAnchorElNav(null);
+    };
     
-      const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-      };
+    const handleCloseUserMenu = () => {
+      setAnchorElUser(null);
+    };
 
     return (
       <AppBar position="static" sx={{ bgcolor: "yellow" }}>
@@ -71,7 +71,10 @@ function Header(){
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem 
+                  key={page} 
+                  onClick={handleCloseNavMenu}
+                >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -110,7 +113,10 @@ function Header(){
           <Box sx={{ color:'black', flexGrow: 0 }}>
             
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton 
+                onClick={handleOpenUserMenu} 
+                sx={{ p: 0 }}
+              >
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -131,7 +137,9 @@ function Header(){
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu(setting)}>
+                <MenuItem 
+                  key={setting} 
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
