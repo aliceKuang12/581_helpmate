@@ -6,32 +6,50 @@
             {
                 "id": 1,
                 "name": "Top Alerts",
-                "img": "https://mdbootstrap.com/img/new/slides/041.jpg"
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg",
+                "event1": "9:00a - Interview Call",
+                "event2": "4:00p - Operating Systems Exam",
+                "event3": "8:00p - Online Discussion"
             },
             {
                 "id": 2,
                 "name": "Academics",
-                "img": "https://mdbootstrap.com/img/new/slides/041.jpg"
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg",
+                "event1": "9:00a - Interview Call",
+                "event2": "4:00p - Operating Systems Exam",
+                "event3": "8:00p - Online Discussion"
             },
             {
                 "id": 3,
                 "name": "Health",
-                "img": "https://mdbootstrap.com/img/new/slides/041.jpg"
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg",                
+                "event1": "9:00a - Interview Call",
+                "event2": "4:00p - Operating Systems Exam",
+                "event3": "8:00p - Online Discussion"
             },
             {
                 "id": 4,
                 "name": "Notes",
-                "img": "https://mdbootstrap.com/img/new/slides/041.jpg"
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg",
+                "event1": "9:00a - Interview Call",
+                "event2": "4:00p - Operating Systems Exam",
+                "event3": "8:00p - Online Discussion"
             },
             {
                 "id": 5,
                 "name": "Travel",
-                "img": "https://mdbootstrap.com/img/new/slides/041.jpg"
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg",
+                "event1": "9:00a - Interview Call",
+                "event2": "4:00p - Operating Systems Exam",
+                "event3": "8:00p - Online Discussion"
             },
             {
                 "id": 6,
                 "name": "Social",
-                "img": "https://mdbootstrap.com/img/new/slides/041.jpg"
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg",
+                "event1": "9:00a - Interview Call",
+                "event2": "4:00p - Operating Systems Exam",
+                "event3": "8:00p - Online Discussion"
             }
         ] 
     }
