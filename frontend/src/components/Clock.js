@@ -14,11 +14,14 @@ const Clock = () => {
     setInterval(updateTime, 1000);
 
     return (
-        <Container sx ={{marginX: 2}}>
+        //https://medium.com/12-developer-labors/css-all-the-ways-to-align-elements-left-and-right-52ecce4a4af9
+        <Container sx ={{marginX: 2}}> 
             <Typography
             variant = "h3"
             component = "h3"
-            align = 'right'
+            position = "absolute"
+            right = {15}
+            align = 'center'
             marginTop = {5}
             marginBottom = {3}
             >

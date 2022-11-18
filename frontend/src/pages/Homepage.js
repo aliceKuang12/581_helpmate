@@ -2,15 +2,12 @@ import '../App.css';
 import { Typography } from '@material-ui/core'; //importing material ui component
 import Header from '../components/NavBar'
 import TopicCard from '../components/TopicCard'
-import Grid from '@material-ui/core/Grid';
-// import Paper from '@material-ui/core/Paper';
-// import { styled } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Clock from '../components/Clock'
-
 import modules from "./modules.json"
-
 // const Item = styled(Paper)(({ theme }) => ({
 //     textAlign: 'center',
 //     color: theme.palette.text.secondary,
@@ -19,11 +16,14 @@ import modules from "./modules.json"
 
 const Homepage = () => {
     return (
-        <div className="Background">
+        <div className="Background" > 
             <div className = "Header">
                 <Header />
-            </div>
-            <Clock/>
+            </div>,
+            
+           < Grid className = "Clock" >
+                <Clock />
+            </Grid>, <br/><br/><br/><br/><br/>
             <div className = "body">
                 <Container sx = {{marginY: 5}}>
                     {modules.map((Modules) => (
@@ -34,15 +34,15 @@ const Homepage = () => {
                         marginBottom = {3}>
                             {Modules.name} 
                         </Typography>,
+             
                         <Grid container spacing = {5}>
-                        {Modules.sections.map((section, index) => (
-                            <TopicCard topic={section} key = {index}></TopicCard>
-                        ))}
+                            {Modules.sections.map((section, index) => (
+                                <TopicCard topic={section} key = {index}></TopicCard>
+                            ))}
+                            
                         </Grid>
                     ))}
-                    <Box>
-            
-                    </Box>
+                       
                 </Container>
             </div>
         </div>
