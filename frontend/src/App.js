@@ -2,6 +2,7 @@
 import './App.css';
 import Homepage from './pages/Homepage'
 import Login from './pages/Login'
+import Template from './pages/Template'
 // import SignUp from './components/SignUp'
 // import Text from './components/Text'
 // import TestClass from './components/TestClass'
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path = '/' element={<Homepage/>}/>
           <Route path = '/login' element={<Login/>}/>
+          <Route path = '/template' element={<Template/>}/>
         </Routes>
     </Router> 
   );
