@@ -10,7 +10,7 @@ const Template = () => {
     return(
         <div>
             <NavBar></NavBar>
-            <Container> 
+            <Container sx = {{marginY: 5}}> 
                 <Grid container spacing={6}>
                     <ModuleCard/>
                     <ModuleCard/>
