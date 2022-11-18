@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 // import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import Clock from '../components/Clock'
 
 import modules from "./modules.json"
 
@@ -22,6 +23,7 @@ const Homepage = () => {
             <div className = "Header">
                 <Header />
             </div>
+            <Clock/>
             <div className = "body">
                 <Container sx = {{marginY: 5}}>
                     {modules.map((Modules) => (
