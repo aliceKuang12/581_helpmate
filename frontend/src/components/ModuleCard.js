@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid"
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-import Clock from '../components/Clock'
+
 
 
 const ModuleCard = () => {
@@ -22,7 +22,6 @@ const ModuleCard = () => {
             <Typography varient='h4' component='h2'>
                 Today's Events: 
             </Typography>
-            <Clock/>
             </Box>
         </Paper>
     </Grid>

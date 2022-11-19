@@ -19,11 +19,10 @@ const Homepage = () => {
         <div className="Background" > 
             <div className = "Header">
                 <Header />
-            </div>,
-            
-           < Grid className = "Clock" >
-                <Clock />
-            </Grid>, <br/><br/><br/><br/><br/>
+            </div>
+            <div className = "Clock">
+                <Clock/>
+            </div>
             <div className = "body">
                 <Container sx = {{marginY: 5}}>
                     {modules.map((Modules) => (
