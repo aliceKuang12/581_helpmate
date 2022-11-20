@@ -10,11 +10,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { ThemeProvider } from "@material-ui/core/styles";
-import customtheme from "./Theme";
+// import { ThemeProvider } from "@material-ui/core/styles";
+// import customtheme from "./Theme";
 
 const pages = ['Home', 'Academics', 'Health','Social','Travel','Streaks'];
-const settings = [ 'Account', 'Logout'];
 
 function Header() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -23,11 +22,9 @@ function Header() {
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event, setting) => {
+    const handleOpenUserMenu = (event) => {
       setAnchorElUser(event.currentTarget);
-      if (setting === "Logout") {
-        window.location.href = '/login';
-      }
+      console.log(event.currentTarget);
     };
     
     const handleCloseNavMenu = () => {
@@ -37,6 +34,11 @@ function Header() {
     const handleCloseUserMenu = () => {
       setAnchorElUser(null);
     };
+
+    const handleLogOut = () => {
+      setAnchorElUser(null);
+      window.location.href = '/login';
+    }
 
     return (
       <AppBar position="static" sx={{ bgcolor: "yellow" }}>
@@ -136,13 +138,14 @@ function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem 
-                  key={setting} 
-                >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem>
+                <Typography textAlign="center">Account</Typography>
+              </MenuItem>
+              <MenuItem 
+                onClick={handleLogOut}
+              >
+                <Typography textAlign="center">Log Out</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
