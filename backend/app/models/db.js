@@ -26,6 +26,7 @@ exports.infor = connection.query(queryState, function (error, results, fields) {
         // connected!
         
         data = JSON.parse(JSON.stringify(results))
+        console.log(data);
         return data;
         // return data;
         

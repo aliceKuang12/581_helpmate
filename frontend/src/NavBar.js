@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,7 +20,19 @@ const settings = [ 'Account', 'Logout'];
 function Header(){
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [user, setUser] = React.useState("");
 
+    const getUser = () => {
+      axios.get('http://localhost:5000/', {
+      headers: { "Access-Control-Allow-Origin": "*"
+    }
+  })
+    .then(function (response) {
+        console.log(response.data);
+        setUser(response.data.name);
+  });
+
+    }
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
       };
@@ -34,7 +47,8 @@ function Header(){
       const handleCloseUserMenu = () => {
         setAnchorElUser(null);
       };
-
+    React.useEffect(() => {getUser();}, [])
+    console.log(user);
     return (
       <AppBar position="static">
       <Container maxWidth="xl">
@@ -90,7 +104,6 @@ function Header(){
               textDecoration: 'none',
             }}
           >
-            LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -105,6 +118,10 @@ function Header(){
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+              {user}
+              {/* <Typography
+                value = {user}
+              </Typography> */}
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -132,6 +149,7 @@ function Header(){
                 </MenuItem>
               ))}
             </Menu>
+            
           </Box>
         </Toolbar>
       </Container>

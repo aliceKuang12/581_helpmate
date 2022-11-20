@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 import Text from './components/Text'
 import TestClass from './components/TestClass'
 import UserName from './components/UserName'
@@ -7,14 +8,32 @@ import {Button} from '@material-ui/core'; //importing material ui component
 import Header from './NavBar.js';
 
 
+
 function App() {
+  
+  const apiGet = ()=>{
+
+    axios.get('http://localhost:5000/', {
+      headers: { "Access-Control-Allow-Origin": "*"
+    }
+  })
+    .then(function (response) {
+        console.log(response.data);
+
+  });
+  }
+  
   return (
+    // <div>
+    //   <button onClick={apiGet}>fetch api</button>
+    // </div>
     <div className="Background">
       <div className="MenuBackground">
           <Header/>
       </div>
       <table>
         <tr>
+      
           <td>
             <box>
             &ensp;Top Alerts&ensp;
@@ -54,6 +73,7 @@ function App() {
         </tr>
       </table>
     </div>
+   
   );
 }
 
