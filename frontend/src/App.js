@@ -1,5 +1,6 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+<<<<<<< HEAD
 import axios from 'axios';
 import Text from './components/Text'
 import TestClass from './components/TestClass'
@@ -7,6 +8,18 @@ import UserName from './components/UserName'
 import {Button} from '@material-ui/core'; //importing material ui component
 import Header from './NavBar.js';
 
+=======
+import Homepage from './pages/Homepage'
+import Login from './pages/Login'
+import Template from './pages/Template'
+// import SignUp from './components/SignUp'
+// import Text from './components/Text'
+// import TestClass from './components/TestClass'
+// import UserName from './components/UserName'
+// import {Button} from '@material-ui/core'; //importing material ui component
+// import Header from './NavBar.js';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+>>>>>>> 1525aadb7a432197178d2c4af1e39f1c38afa3e0
 
 
 function App() {
@@ -24,6 +37,7 @@ function App() {
   }
   
   return (
+<<<<<<< HEAD
     // <div>
     //   <button onClick={apiGet}>fetch api</button>
     // </div>
@@ -74,6 +88,15 @@ function App() {
       </table>
     </div>
    
+=======
+      <Router>
+        <Routes>
+          <Route path = '/' element={<Homepage/>}/>
+          <Route path = '/login' element={<Login/>}/>
+          <Route path = '/template' element={<Template/>}/>
+        </Routes>
+    </Router> 
+>>>>>>> 1525aadb7a432197178d2c4af1e39f1c38afa3e0
   );
 }
 
