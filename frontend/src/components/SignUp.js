@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 import TextField from '@mui/material/TextField';
 // import _isEmpty from 'lodash/isEmpty';
 import PropTypes from 'prop-types';
@@ -9,7 +10,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 //import withStyles from '@mui/styles/withStyles';
-
+import { AXIOS_HEADER } from '../constants';
 
 
 const SignUp = (props) => {
@@ -57,23 +58,33 @@ const SignUp = (props) => {
             dob: '',
             avt: '',
         })
-        handleClose();
-    }
-    const handleSubmit = () => {
-        console.log(data)
-        setData({
-            fname: '',
-            lname: '',
-            username: '',
-            email: '',
-            password: '',
-            phone: '',
-            address: '',
-            dob: '',
-            avt: '',
-        })
         handleClose()
     }
+
+    const handleSubmit = () => {
+        axios({
+            url: '',
+            method: 'POST',
+            headers: AXIOS_HEADER,
+            params: data,
+        }).then(() => {
+            setData({
+                fname: '',
+                lname: '',
+                username: '',
+                email: '',
+                password: '',
+                phone: '',
+                address: '',
+                dob: '',
+                avt: '',
+            })
+            handleClose();
+        }).catch((e) => {
+            console.log(e);
+        })
+    }
+
     return (
         <Dialog open={isOpen}>
             <DialogContent>
