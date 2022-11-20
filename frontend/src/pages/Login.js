@@ -11,7 +11,7 @@ import BasicForm from "../components/BasicForm";
 // });
 
 const onClickLogin = () => {
-    alert('clicked');
+    // alert('clicked');
     window.location.href = "/";
 }
 
@@ -53,6 +53,7 @@ const Login = () => {
                     label="Password" 
                     type="password" 
                     className="w-100"
+                    onClick={onClickLogin}
                     sx={{ width: 200, mx: 2}}
                 >
                     Login
