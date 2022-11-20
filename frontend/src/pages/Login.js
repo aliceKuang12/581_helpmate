@@ -26,7 +26,7 @@ const Login = () => {
                 <Typography 
                     variant="h3" 
                     component="h2" sx={{ marginX: 23 }}>
-                    HelpMate 
+                    Help Mate 
                 </Typography>
                 <Typography 
                     variant="body1" 
@@ -56,7 +56,7 @@ const Login = () => {
                     sx={{ marginLeft: 8 }}
                     onClick={onClickLogin}
                 >
-                    Login
+                    Log In
                 </Button>
                 <br/>
                 <br/>
