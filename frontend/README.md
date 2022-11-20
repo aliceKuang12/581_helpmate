@@ -15,6 +15,11 @@ When running the program
 3. run 'npm start'
 The page should then open in chrome
 
+# Dependencies to install
+1. npm install @mui/icons-material
+2. npm install @mui/material
+3. npm install
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
