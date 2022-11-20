@@ -7,18 +7,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 
 function App() {
-  
-  const apiGet = ()=>{
-    axios.get('http://localhost:5000/', {
-      headers: { "Access-Control-Allow-Origin": "*"
-    }
-  })
-    .then(function (response) {
-        console.log(response.data);
-
-  });
-  }
-  
   return (
       <Router>
         <Routes>
