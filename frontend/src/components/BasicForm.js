@@ -14,7 +14,7 @@ export default function BasicForm() {
   };
   return (
     <div >
-      <Button variant="outlined" onClick={handleClickOpen}  sx={{fill: "blue", color:"navy"}}>
+      <Button variant="contained" onClick={handleClickOpen}  sx={{width: 200}}>
         Create Account
       </Button>
       <SignUp
