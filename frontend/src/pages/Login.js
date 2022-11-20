@@ -52,9 +52,8 @@ const Login = () => {
                     variant="contained" 
                     label="Password" 
                     type="password" 
-                    className="LoginButtons"
-                    sx={{ marginLeft: 8 }}
-                    onClick={onClickLogin}
+                    className="w-100"
+                    sx={{ width: 200, mx: 2}}
                 >
                     Login
                 </Button>
