@@ -18,7 +18,7 @@ import Image from '../HomeBackground.jpg'
 const Homepage = () => {
     return (
         <div> 
-        <Container maxWidth="100" maxHeight="100" style={{ backgroundImage: `url(${Image})` }}>
+        <Container maxWidth="100" maxheight="100" style={{ backgroundImage: `url(${Image})` }}>
             <Header />
            < Grid className = "Clock" >
                 <Clock />

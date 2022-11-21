@@ -12,7 +12,7 @@ import Image from '../BirdBackground.jpg'
 const Template = () => {
     return(
         <div>
-            <Container maxWidth="100" maxHeight="100" style={{ backgroundImage: `url(${Image})` }}> 
+            <Container maxWidth="100" maxheight="100" style={{ backgroundImage: `url(${Image})` }}> 
                 <NavBar></NavBar>
                 <Grid container spacing={12}>
                     <Grid item xs={12}>
