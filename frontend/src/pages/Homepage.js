@@ -1,4 +1,5 @@
 import '../App.css';
+import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core'; //importing material ui component
 import Header from '../components/NavBar'
 import TopicCard from '../components/TopicCard'
@@ -13,10 +14,11 @@ import Image from '../images/homebackground2.jpeg'
 // }));
 
 
-const Homepage = () => {
+const Homepage = (props) => {
+    const { user } = props
     return (
         <div style={{ backgroundImage: `url(${Image})`, backgroundSize: "cover" }}> 
-            <Header />
+            <Header user={user}/>
            <div className = "Clock" >
                 <Clock />
             </div>
@@ -44,6 +46,14 @@ const Homepage = () => {
             </div>
         </div>
     );
+}
+
+Homepage.defaultProps = {
+    user: ''
+}
+
+Homepage.propTypes = {
+    user: PropTypes.string
 }
 
 export default Homepage;

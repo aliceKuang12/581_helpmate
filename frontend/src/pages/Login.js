@@ -1,21 +1,22 @@
 import { useState } from "react";
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate, useNavigation, Navigate } from "react-router-dom";
+import PropTypes from 'prop-types';
 import { Typography, Container, TextField, Box, Paper } from "@mui/material";
 import Button from '@mui/material/Button';
 import BasicForm from "../components/BasicForm";
 
-const Login = () => {
-    // const [userName, setUserName] = useState('');
+const Login = (props) => {
     const navigate = useNavigate();
     const onClickLogin = () => {
         navigate({
-            pathname: '/'
+            pathname: '/',
+            
         },)
     }
     
-    // const handleChange = (value) => {
-    //     setUserName(value);
-    // }
+    const handleChange = (value) => {
+        props.setCurrentUser(value);
+    }
     return (
         <Container className="LoginPage" sx={{width: 1300, height: 1000}}>
             <br/><br/><br/>
@@ -43,7 +44,7 @@ const Login = () => {
                     id="outlined-basic" 
                     label="Enter username" 
                     variant="filled" 
-                    // onChange={e => handleChange(e.target.value)}
+                    onChange={e => handleChange(e.target.value)}
                 />
                 <br /> <br />
                 <TextField 
@@ -81,6 +82,10 @@ const Login = () => {
             </Paper>
         </Container>
     );
+}
+
+Login.propTypes = {
+    setCurrentUser: PropTypes.func.isRequired,
 }
 
 export default Login;
