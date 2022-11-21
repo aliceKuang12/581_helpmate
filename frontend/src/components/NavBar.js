@@ -19,16 +19,16 @@ const pages = ['Home', 'Academics', 'Health','Social','Travel','Streaks'];
 export default function Header() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [user, setUser] = React.useState('');
-    const getUser = () => {
-        axios.get('http://localhost:5000/', {
-        headers: { "Access-Control-Allow-Origin": "*"}
-    })
-      .then(function (response) {
-          console.log(response.data);
-          setUser(response.data.name);
-    });
-    }
+    // const [user, setUser] = React.useState('');
+    // const getUser = () => {
+    //     axios.get('http://localhost:5000/', {
+    //     headers: { "Access-Control-Allow-Origin": "*"}
+    // })
+    //   .then(function (response) {
+    //       console.log(response.data);
+    //       setUser(response.data.name);
+    // });
+    // }
 
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
@@ -51,7 +51,7 @@ export default function Header() {
       window.location.href = '/login';
     }
 
-    React.useEffect(() => {getUser();}, [])
+    // React.useEffect(() => {getUser();}, [])
     return (
       <AppBar position="static" sx={{ bgcolor: "yellow" }}>
       <Container maxWidth="xl">
@@ -123,7 +123,7 @@ export default function Header() {
               </Button>
             ))}
           </Box>
-          <Typography color="black" marginRight={3}>Welcome, {user}</Typography>
+          <Typography color="black" marginRight={3}>Welcome, </Typography>
           <Box sx={{ color:'black', flexGrow: 0 }}>
             
             <Tooltip title="Open settings">
