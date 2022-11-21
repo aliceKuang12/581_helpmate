@@ -7,8 +7,8 @@ import Typography from '@mui/material/Typography';
 const Clock = () => {
     const options = { month: 'long', day: 'numeric' };
 
-    let time = new Date().toLocaleTimeString();
-    let date = new Date().toLocaleDateString();
+    let time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    let date = new Date().toLocaleDateString('en-US', options);
     const [currentTime,setCurrentTime] = useState(time);
     const [currentDate,setCurrentDate] = useState(date);
 
