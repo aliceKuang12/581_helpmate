@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import AddIcon from '@mui/icons-material/Add';
 import AddEvent from "../components/AddEvent"
+import Divider from '@material-ui/core/Divider';
 
 
 const TopicCard = ({topic}) => {
@@ -21,24 +22,23 @@ const TopicCard = ({topic}) => {
                 </Typography>
                 <Box 
                     sx = {{
-                        display: "flex",
+                        //display: "flex",
                         alignItems: "center",
                     }}
                 >
                     <Stack sx ={{padding: 1}}>
-                    <Typography variant = "body2" component = "p">
-                        * {topic.event1}
+                    <Typography variant = "body2" component = "li">
+                        {topic.event1}
                     </Typography> 
-                    <Typography variant = "body2" component = "p">
-                        * {topic.event2}
+                    <Typography variant = "body2" component = "li">
+                        {topic.event2}
                     </Typography>
-                    <Typography variant = "body2" component = "p">
-                        * {topic.event3}
+                    <Typography variant = "body2" component = "li">
+                        {topic.event3}
                     </Typography>
-                    -----------------------------------------------
-                    <br/>
-                    
+                    <Divider style={{height:1, backgroundColor:'black', marginTop: 10, marginBottom: 10}}/>
                     <Grid container spacing={2} sx ={{mx:2}}>
+                    
                         <Grid item xs={2} sx ={{mt: 5}}>
                             <AddIcon/>
                         </Grid>

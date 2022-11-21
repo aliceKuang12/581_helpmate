@@ -16,7 +16,7 @@ const Template = () => {
             <Container maxWidth="100vh" maxHeight="100vh" style={{ backgroundImage: `url(${Image})`, backgroundSize: "cover" }}> 
             <NavBar></NavBar>
             <Clock/>
-                <Grid container spacing={12}>
+                <Grid container spacing={12} marginBottom={5}>
                     <Grid  item xs={12}>
                         <Grid container spacing={6}>
                             <ModuleCard/>
