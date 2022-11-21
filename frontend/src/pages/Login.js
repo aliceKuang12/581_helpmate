@@ -1,21 +1,21 @@
+import { useState } from "react";
+import { useNavigate, useNavigation } from "react-router-dom";
 import { Typography, Container, TextField, Box, Paper } from "@mui/material";
-// import { createTheme } from '@mui/material/styles';
-
 import Button from '@mui/material/Button';
-// import CreateAccount from "../components/CreateAccount";
 import BasicForm from "../components/BasicForm";
-// const theme = createTheme({
-//     typography: {
-//         fontSize: 32,
-//     },
-// });
-
-const onClickLogin = () => {
-    // alert('clicked');
-    window.location.href = "/";
-}
 
 const Login = () => {
+    // const [userName, setUserName] = useState('');
+    const navigate = useNavigate();
+    const onClickLogin = () => {
+        navigate({
+            pathname: '/'
+        },)
+    }
+    
+    // const handleChange = (value) => {
+    //     setUserName(value);
+    // }
     return (
         <Container className="LoginPage" sx={{width: 1300, height: 1000}}>
             <br/><br/><br/>
@@ -25,7 +25,9 @@ const Login = () => {
                 <br/><br/> <br/><br/><br/>
                 <Typography 
                     variant="h3" 
-                    component="h2" sx={{ marginX: 23 }}>
+                    component="h2" 
+                    sx={{ marginX: 23 }}
+                >
                     Help Mate 
                 </Typography>
                 <Typography 
@@ -37,9 +39,19 @@ const Login = () => {
             </Box>
             <br/>
             <Box sx={{ marginY: 5, marginX: 23 }}>
-                <TextField id="outlined-basic" label="Enter username" variant="filled" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Enter username" 
+                    variant="filled" 
+                    // onChange={e => handleChange(e.target.value)}
+                />
                 <br /> <br />
-                <TextField id="outlined-basic" label="Enter password" type="password" variant="filled" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Enter password"
+                    type="password" 
+                    variant="filled" 
+                />
                 <Typography 
                     variant="caption" 
                     component="p" 
