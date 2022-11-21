@@ -10,12 +10,14 @@ import Template from './pages/Template'
 // import {Button} from '@material-ui/core'; //importing material ui component
 // import Header from './NavBar.js';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import SimpleSignUp from './pages/SimpleSignUp';
 
 function App() {
   return (
       <Router>
         <Routes>
           <Route path = '/' element={<Homepage/>}/>
+          <Route path ='signup' element={<SimpleSignUp/>}/>
           <Route path = '/login' element={<Login/>}/>
           <Route path = '/template' element={<Template/>}/>
         </Routes>
