@@ -25,7 +25,7 @@ const Homepage = () => {
                 <Clock />
             </div>
             <div className = "body">
-                <Container sx = {{marginY: 5}}>
+                <Container sx = {{marginY: 1}}>
                     {modules.map((Modules) => (
                         <Typography
                         variant = "h4"
