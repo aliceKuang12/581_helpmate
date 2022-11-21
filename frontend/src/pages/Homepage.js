@@ -8,7 +8,8 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Clock from '../components/Clock'
 import modules from "./modules.json"
-import Image from '../HomeBackground.jpg'
+//import Image from '../HomeBackground.jpg'
+import Image from '../homebackground2.jpeg'
 // const Item = styled(Paper)(({ theme }) => ({
 //     textAlign: 'center',
 //     color: theme.palette.text.secondary,
@@ -17,12 +18,12 @@ import Image from '../HomeBackground.jpg'
 
 const Homepage = () => {
     return (
-        <div> 
-        <Container maxWidth="100" maxHeight="100" style={{ backgroundImage: `url(${Image})` }}>
+        <div style={{ backgroundImage: `url(${Image})`, backgroundSize: "cover" }}> 
+        <Container maxWidth="100" maxHeight="100" >
             <Header />
-           < Grid className = "Clock" >
+           <div className = "Clock" >
                 <Clock />
-            </Grid>, <br/><br/><br/><br/><br/>
+            </div>
             <div className = "body">
                 <Container sx = {{marginY: 5}}>
                     {modules.map((Modules) => (
