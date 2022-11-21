@@ -7,7 +7,8 @@ import '../App.css';
 import Box from '@mui/material/Box'
 import Paper from "@mui/material/Paper"
 import Clock from '../components/Clock'
-import Image from '../images/BirdBackground.jpg'
+//import Image from '../images/BirdBackground.jpg'
+import Image from '../images/birdBackground2.jpg'
 
 const Template = () => {
     return(
