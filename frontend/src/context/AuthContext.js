@@ -48,10 +48,11 @@ export function AuthProvider({ children }) {
     currentUser,
     login,
     signup,
-    logout,
-    resetPassword,
-    updateEmail,
-    updatePassword
+    logout
+    // logout,
+    // resetPassword,
+    // updateEmail,
+    // updatePassword
   }
 
   return (
