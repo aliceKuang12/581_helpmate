@@ -12,13 +12,11 @@ import Image from '../BirdBackground.jpg'
 const Template = () => {
     return(
         <div>
-            <Container maxWidth="100" maxHeight="100" style={{ backgroundImage: `url(${Image})` }}> 
-                <NavBar></NavBar>
+            <Container maxWidth="100vh" maxHeight="100vh" style={{ backgroundImage: `url(${Image})` }}> 
+            <NavBar></NavBar>
+            <Clock/>
                 <Grid container spacing={12}>
-                    <Grid item xs={12}>
-                        <Clock/>
-                    </Grid>
-                    <Grid sx = {{margin: 5}} item xs={12}>
+                    <Grid  item xs={12}>
                         <Grid container spacing={6}>
                             <ModuleCard/>
                             <ModuleCard2/>
