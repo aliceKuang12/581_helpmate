@@ -9,7 +9,7 @@ import Container from '@mui/material/Container';
 import Clock from '../components/Clock'
 import modules from "./modules.json"
 //import Image from '../HomeBackground.jpg'
-import Image from '../homebackground2.jpeg'
+import Image from '../images/homebackground2.jpeg'
 // const Item = styled(Paper)(({ theme }) => ({
 //     textAlign: 'center',
 //     color: theme.palette.text.secondary,
