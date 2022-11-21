@@ -1,0 +1,1 @@
+export const AXIOS_HEADER = '{ "Access-Control-Allow-Origin": "*"}'

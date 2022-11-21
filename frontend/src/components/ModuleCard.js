@@ -15,8 +15,8 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 const ModuleCard = () => {
-    return <Grid item xs={6}>
-        <Paper>
+    return <Grid item xs={6} marginBottom = {5}>
+        <Paper sx = {{opacity:.9}}>
             <Box 
                 padding={2}
                 sx={{
@@ -33,11 +33,17 @@ const ModuleCard = () => {
                         Today's Events: 
                     </Typography>
                 </Item>
-                <Item elevation={0} >
-                <Stack spacing={2} direction="row" sx={{height: '100%', width: '100%',}}>
-                    <Item elevation={10} sx={{width: '25%',}}><CreateEvent/></Item>
-                    <Item elevation={10} sx={{width: '25%',}}><DeleteEvent/></Item>
-                    <Item elevation={10} sx={{width: '25%',}}><ViewEvent/></Item>
+                <Item elevation={0}>
+                <Stack spacing={2} 
+                    direction="row" 
+                    justifyContent="center" 
+                    sx={{height: '100%', 
+                        width: '100%', 
+                        textAlign: 'center',}}
+                    >
+                    <Item elevation={10} sx={{width: '25%',background:'white'}}><CreateEvent/></Item>
+                    <Item elevation={10} sx={{width: '25%',background:'white'}}><DeleteEvent/></Item>
+                    <Item elevation={10} sx={{width: '25%',background:'white'}}><ViewEvent/></Item>
                 </Stack>
                 </Item>
             </Stack>

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
 import TextField from '@mui/material/TextField';
 // import _isEmpty from 'lodash/isEmpty';
-import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import { Button } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -9,7 +10,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 //import withStyles from '@mui/styles/withStyles';
-
+// import { AXIOS_HEADER } from '../constants';
 
 
 const SignUp = (props) => {
@@ -57,23 +58,33 @@ const SignUp = (props) => {
             dob: '',
             avt: '',
         })
-        handleClose();
-    }
-    const handleSubmit = () => {
-        console.log(data)
-        setData({
-            fname: '',
-            lname: '',
-            username: '',
-            email: '',
-            password: '',
-            phone: '',
-            address: '',
-            dob: '',
-            avt: '',
-        })
         handleClose()
     }
+
+    const handleSubmit = () => {
+        // axios({
+        //     url: '',
+        //     method: 'POST',
+        //     headers: AXIOS_HEADER,
+        //     params: data,
+        // }).then(() => {
+            setData({
+                fname: '',
+                lname: '',
+                username: '',
+                email: '',
+                password: '',
+                phone: '',
+                address: '',
+                dob: '',
+                avt: '',
+            })
+            handleClose();
+        // }).catch((e) => {
+        //     console.log(e);
+        // })
+    }
+
     return (
         <Dialog open={isOpen}>
             <DialogContent>
@@ -217,10 +228,15 @@ const SignUp = (props) => {
     )
 }
 
+SignUp.defaultProps = {
+    isOpen: false,
+    handleClose: () => {},
+}
+
 SignUp.propTypes = {
     classes: PropTypes.object.isRequired,
-    isOpen: PropTypes.bool.isRequired,
-    handleClose: PropTypes.func.isRequired,
+    isOpen: PropTypes.bool,
+    handleClose: PropTypes.func,
 };  
 
 export default SignUp;

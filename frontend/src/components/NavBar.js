@@ -1,4 +1,6 @@
 import * as React from 'react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,14 +12,23 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-// import { ThemeProvider } from "@material-ui/core/styles";
-// import customtheme from "./Theme";
 
 const pages = ['Home', 'Academics', 'Health','Social','Travel','Streaks'];
 
-function Header() {
+export default function Header(props) {
+    const { user } = props
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    // const [user, setUser] = React.useState('');
+    // const getUser = () => {
+    //     axios.get('http://localhost:5000/', {
+    //     headers: { "Access-Control-Allow-Origin": "*"}
+    // })
+    //   .then(function (response) {
+    //       console.log(response.data);
+    //       setUser(response.data.name);
+    // });
+    // }
 
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
@@ -40,6 +51,7 @@ function Header() {
       window.location.href = '/login';
     }
 
+    // React.useEffect(() => {getUser();}, [])
     return (
       <AppBar position="static" sx={{ bgcolor: "yellow" }}>
       <Container maxWidth="xl">
@@ -111,7 +123,7 @@ function Header() {
               </Button>
             ))}
           </Box>
-          <Typography color="black" marginRight={3}>Welcome, "Users name"</Typography>
+          <Typography color="black" marginRight={3}>Welcome, {user}</Typography>
           <Box sx={{ color:'black', flexGrow: 0 }}>
             
             <Tooltip title="Open settings">
@@ -151,6 +163,13 @@ function Header() {
         </Toolbar>
       </Container>
     </AppBar>
-    );
+  );
 }
-export default Header;
+
+Header.defaultProps = {
+  user: ''
+}
+
+Header.propTypes = {
+  user: PropTypes.string
+}
