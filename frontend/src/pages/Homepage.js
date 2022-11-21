@@ -19,13 +19,13 @@ import Image from '../images/homebackground2.jpeg'
 const Homepage = () => {
     return (
         <div style={{ backgroundImage: `url(${Image})`, backgroundSize: "cover" }}> 
-        <Container maxWidth="100" maxHeight="100" >
+
             <Header />
            <div className = "Clock" >
                 <Clock />
             </div>
             <div className = "body">
-                <Container sx = {{marginY: 1}}>
+                <Container>
                     {modules.map((Modules) => (
                         <Typography
                         variant = "h4"
@@ -45,7 +45,6 @@ const Homepage = () => {
                        
                 </Container>
             </div>
-        </Container>
         </div>
     );
 }
