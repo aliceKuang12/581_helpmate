@@ -27,6 +27,7 @@ const Clock = () => {
             align = 'right'
             //marginTop = {5}
             //marginBottom = {3}
+            color = 'white'
             >
                 {currentTime}
             </Typography>
