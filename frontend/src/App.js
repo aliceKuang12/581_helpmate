@@ -5,7 +5,8 @@ import Homepage from './pages/Homepage'
 import Login from './pages/Login'
 import Template from './pages/Template'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-
+import Health from './pages/Health'
+import Travel from './pages/Travel'
 
 function App() {
   const [currentUser, setCurrentUser] = useState('')
@@ -19,6 +20,8 @@ function App() {
           <Route 
             path = '/login' 
             element={<Login setCurrentUser={setCurrentUser}/>}/>
+          <Route path = '/health' element={<Health/>}/>
+          <Route path = '/travel' element={<Travel/>}/>
           <Route path = '/template' element={<Template/>}/>
         </Routes>
     </Router> 
