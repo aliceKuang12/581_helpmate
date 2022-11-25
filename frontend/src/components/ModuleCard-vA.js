@@ -63,11 +63,9 @@ const ModuleCard = (  ) => {
                         width: '100%', 
                         textAlign: 'center',}}
                     >
-                    <Grid>
                     <CreateEvent/>
-                    <DeleteEvent/>
                     <ViewEvent/>
-                    </Grid>
+                    <DeleteEvent/>
                 </Stack>
                 </Item>
             </Stack>

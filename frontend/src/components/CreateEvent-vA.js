@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
+import CreateIcon from '@mui/icons-material/Create';
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
 
@@ -17,7 +18,7 @@ export default function BasicForm() {
   return (
     <div >
       <Button onClick={handleClickOpen} variant="outlined" sx={{backgroundColor: "cornsilk", fill: "blue", color:"Black" }}>
-        Create Event
+      <CreateIcon sx={{fontSize: "large", color: "blue"}}/>
       </Button>
 
       <Dialog open={open} onClose={handleClose}>
