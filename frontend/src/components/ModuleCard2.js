@@ -28,7 +28,7 @@ const ModuleCard = () => {
             >
             <Stack spacing={2} sx={{height: '100%', width: '100%',}}>
                 <Item elevation={0} sx={{height: '90%', width: '100%',}}>
-                    <Typography varient='h4' component='h2'>
+                    <Typography varient='h4' component='h2' sx={{fontWeight: 'bold'}}>
                         Other Event Info: 
                     </Typography>
                 </Item>

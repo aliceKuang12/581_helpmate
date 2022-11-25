@@ -14,8 +14,9 @@ const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(1),
   }));
 
-const ModuleCard = () => {
-    return <Grid item xs={6} marginBottom = {5}>
+const ModuleCard = (  ) => {
+    return (
+    <Grid item xs={6} marginBottom = {5}>
         <Paper sx = {{opacity:.9}}>
             <Box 
                 padding={2}
@@ -29,9 +30,30 @@ const ModuleCard = () => {
             >
             <Stack spacing={2} sx={{height: '100%', width: '100%',}}>
                 <Item elevation={0} sx={{height: '90%', width: '100%',}}>
-                    <Typography varient='h4' component='h2'>
+                    <Typography varient='h4' component='h2' sx={{fontWeight: 'bold'}}>
                         Today's Events: 
                     </Typography>
+                    <Typography varient='h4' component='h2' >
+                         * Item 1
+                    </Typography>
+                    <Typography varient='h4' component='h2' >
+                         * Item 2
+                    </Typography><br/>
+                    <Typography varient='h4' component='h2' sx={{fontWeight: 'bold'}}>
+                        Tomorrow's Events: 
+                    </Typography>
+                    <Typography varient='h4' component='h2' >
+                         * Item 1
+                    </Typography>
+                    <Typography varient='h4' component='h2' >
+                         * Item 2
+                    </Typography><br/>
+                    <Typography varient='h4' component='h2' sx={{fontWeight: 'bold'}}>
+                        This Week's Events: 
+                    </Typography>
+                    <Typography varient='h4' component='h2' >
+                         ---
+                    </Typography><br/>
                 </Item>
                 <Item elevation={0}>
                 <Stack spacing={2} 
@@ -41,15 +63,18 @@ const ModuleCard = () => {
                         width: '100%', 
                         textAlign: 'center',}}
                     >
+                   
                     <Item elevation={10} sx={{width: '25%',background:'white'}}><CreateEvent/></Item>
                     <Item elevation={10} sx={{width: '25%',background:'white'}}><DeleteEvent/></Item>
                     <Item elevation={10} sx={{width: '25%',background:'white'}}><ViewEvent/></Item>
+                    
                 </Stack>
                 </Item>
             </Stack>
             </Box>
         </Paper>
-    </Grid>
+    </Grid>)
 }
 
 export default ModuleCard
+//<Item elevation={10} sx={{width: '25%',background:'white'}}>

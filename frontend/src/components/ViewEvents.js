@@ -16,7 +16,7 @@ export default function BasicForm() {
 
   return (
     <div >
-      <Button onClick={handleClickOpen}  sx={{fill: "blue", color:"Black", }}>
+      <Button onClick={handleClickOpen} sx={{ fill: "blue", color:"Black" }}>
         View Events
       </Button>
 

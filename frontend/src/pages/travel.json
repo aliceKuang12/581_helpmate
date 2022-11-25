@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "TravelInfo",
+        "sections":[
+            {
+                "id": 1,
+                "name": "Today's Events",
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg",
+                "event1": "11:25a - Catch bus at KU Edwards",
+                "event2": "4:30p - Catch bus at Naismith and Irving"
+            },
+            {
+                "id": 2,
+                "name": "New Events",
+                "img": "https://mdbootstrap.com/img/new/slides/041.jpg",
+                "event1": "9:00a - Depart from KU School of Engineering",
+                "event2": "4:00p - Southwest Flight #2771"
+            }
+          
+        ] 
+    }
+]
