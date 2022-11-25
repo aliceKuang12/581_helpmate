@@ -75,8 +75,8 @@ const SimpleSignUp = () => {
                     <br/><br/>
                 </FormControl>
                 <Typography>
-                    Have an account? Log in 
-                    <Link to="/login" >here</Link> .
+                    Have an account?  <br/>
+                    <Link to="/login" >Log in here</Link> 
                 </Typography>
                 <br/><br/>
             </Paper>
