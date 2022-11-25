@@ -14,7 +14,7 @@ const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(1),
   }));
 
-const ModuleCard = (  ) => {
+const ModuleCard = ( ) => {
     return (
     <Grid item xs={6} marginBottom = {5}>
         <Paper sx = {{opacity:.9}}>
