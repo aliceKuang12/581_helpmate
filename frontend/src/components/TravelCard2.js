@@ -5,8 +5,7 @@ import Box from '@mui/material/Box'
 import Clock from './Clock'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
-import UploadButton from "./UploadImage"
-import Ticket from '../images/ticket.jpg'
+import UploadImage from "./UploadImage"
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
@@ -14,6 +13,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 const ModuleCard = (  ) => {
+
     return (
     <Grid item xs={6} marginBottom = {5}>
         <Paper sx = {{opacity:.9}}>
@@ -27,12 +27,17 @@ const ModuleCard = (  ) => {
                     borderRadius: 1,
                 }}
             >
-            <Stack spacing={2} sx={{height: '100%', width: '100%',}}>
-                <Item elevation={0} sx={{height: '90%', width: '100%',}}>
-                    <Typography varient='h4' component='h2' sx={{fontWeight: 'bold'}}>
-                        Travel Information:
+            <Stack spacing={2} 
+                   justifyContent="center" 
+                   sx={{height: '100%', width: '100%'}}>
+                <Item elevation={0} >
+                    <Typography 
+                        varient='h4' 
+                        component='h2' 
+                        sx={{fontWeight: 'bold', textAlign: 'center'}}
+                    >
+                    Travel Information
                     </Typography>
-             
                 </Item>
                 <Item elevation={0}>
                 <Stack  
@@ -42,17 +47,8 @@ const ModuleCard = (  ) => {
                         width: '100%', 
                         textAlign: 'center',}}
                     >
-                    <Grid container-spacing={2}  alignItems="center" justifyContent="center" >
-                        <Grid item xs={10} sx={{mx: 5}}>
-                            <img src={Ticket} width="300" height="350" />
-                        </Grid> <br/>
-                        <Grid sx={{mx: 15}}>
-                        <UploadButton/>
-                        </Grid>
-                        <br/>
-                    </Grid>
-                    
-                    
+                    <UploadImage/>
+                    <br/>
                 </Stack>
                 </Item>
             </Stack>
