@@ -6,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import CreateIcon from '@mui/icons-material/Create';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
+import Checkbox from './Checkbox';
 import { Typography } from '@mui/material';
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
@@ -28,7 +29,11 @@ export default function BasicForm() {
     notes,
     ticket,
   } = data;
-
+  const [file, setFile] = useState();
+  function saveUrl(e) {
+      console.log(e.target.files);
+      setFile(URL.createObjectURL(e.target.files[0]));
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -51,57 +56,111 @@ export default function BasicForm() {
       
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-            <Grid container
-            justifyContent="center"
+            <br/>
+            <Typography sx={{textAlign: 'center'}}>
+            Create Travel  
+            </Typography> 
+            <br/> 
+          <Grid container  spacing={2}
+            //justifyContent="center"
             alignItems="center"
-            direction="column"
-            sx={{ minHeight: "100vh" }}
-          >
-            <Typography>
-            Create Event Info 
-            </Typography> <br/> <br/>
-            <Grid item xs={12}>
+          >  
+            <Grid item xs={2}>
+            <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
+              Title:
+            </Typography>  
+            </Grid>
+            <Grid item xs={9.5}>
               <TextField
                 id="title"
-                label="title"
+                label="event title"
                 variant="outlined"
                 onChange={e => handleChange(e.target.value, 'title')}
                 value={title}
-                fullWidth sx={{ marginBottom: '1rem' }}
-              />
+                fullWidth
+              /> 
+            </Grid>
+              
+            <Grid item xs={2}>
+            <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
+              Date:
+            </Typography>
+            </Grid>
+            <Grid item xs={5}>
               <TextField
               id="date"
               label="mm/dd/yyyy"
               variant="outlined"
               onChange={e => handleChange(e.target.value, 'date')}
               value={date}
-              />  &nbsp; &nbsp; &nbsp; 
+              />  
+            </Grid>
+            <Grid item xs={4.5}>
             <TextField
                 id="time"
                 label="hh:mm"
                 variant="outlined"
                 onChange={e => handleChange(e.target.value, 'time')}
                 value={time}
-              /><br/><br/>
+              />
+            </Grid>
+
+            <Grid item xs={2}>
+            <Typography sx={{fontSize: 16, textAlign: 'left', padding: 2}}>
+              Address:
+            </Typography>
+            </Grid>
+            <Grid item xs={9.5}>    
               <TextField
                 id="address"
-                label="address"
+                label="street address, city, state, zip"
                 variant="outlined"
                 onChange={e => handleChange(e.target.value, 'address')}
                 value={address}
-                fullWidth sx={{ marginBottom: '1rem' }}
+                fullWidth 
               />
-              <TextField
-                id="notes"
-                label="notes"
-                variant="outlined"
-                onChange={e => handleChange(e.target.value, 'notes')}
-                value={notes}
-                fullWidth sx={{ marginBottom: '1rem' }}
-              />
-              add checkbox: completed
             </Grid>
-          </Grid>
+            
+             <Grid item xs={2}>
+                <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
+                  Notes: 
+               </Typography>
+             </Grid> 
+             <Grid item xs={9.5}>
+              <TextField
+                  id="notes"
+                  label="text"
+                  onChange={e => handleChange(e.target.value, 'notes')}
+                  multiline
+                  fullWidth
+                  rows={4}
+              />
+            </Grid>
+            
+            <Grid item xs={2}>
+                <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
+                  Files: 
+               </Typography>
+             </Grid> 
+            <Grid item xs={4}>
+            <Button variant="contained" component="label">
+               Upload
+              <input hidden accept="image/*" multiple type="file" onChange={saveUrl} />
+            </Button>
+            </Grid>
+
+            <Grid item xs={2}>
+               <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
+                Complete: 
+               </Typography>
+             </Grid> 
+             <Grid item xs={4}>
+                <Checkbox/>        
+             </Grid>
+             <Grid item xs={2}/>
+             <Grid item xs={2}><img src={file} width="40" height="40"/>
+            </Grid>
+            </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
