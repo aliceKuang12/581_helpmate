@@ -7,7 +7,7 @@ import Template from './pages/Template'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Health from './pages/Health'
 import Travel from './pages/Travel'
-
+import PasswordReset from './pages/PasswordReset'
 function App() {
   const [currentUser, setCurrentUser] = useState('')
 
@@ -21,6 +21,7 @@ function App() {
             path = '/login' 
             element={<Login setCurrentUser={setCurrentUser}/>}/>
           <Route path = '/health' element={<Health/>}/>
+          <Route path = '/reset' element={<PasswordReset/>}/>
           <Route path = '/travel' element={<Travel/>}/>
           <Route path = '/template' element={<Template/>}/>
         </Routes>

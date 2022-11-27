@@ -1,11 +1,11 @@
-import ModuleCard from '../components/ModuleCard'
-import ModuleCard2 from '../components/ModuleCard2'
+import ModuleCard from '../components/HealthCard1'
+import ModuleCard2 from '../components/HealthCard2'
 import Grid from "@mui/material/Grid"
 import NavBar from '../components/NavBar'
 import '../App.css';
 import Clock from '../components/Clock'
 //import Image from '../images/BirdBackground.jpg'
-import Image from '../images/birdBackground2.jpg'
+import Image from '../images/hiker.jpg'
 
 const Template = () => {
     return(

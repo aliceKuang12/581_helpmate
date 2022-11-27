@@ -23,7 +23,7 @@ export default function BasicForm() {
 
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-            Calender
+            Connect to Gmail API, future sprint
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>

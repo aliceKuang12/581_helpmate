@@ -23,7 +23,7 @@ export default function BasicForm() {
 
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-            Delete Event Info
+            Delete any event on page, future sprint
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

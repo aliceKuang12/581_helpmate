@@ -8,26 +8,24 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import Checkbox from './Checkbox';
 import { Typography } from '@mui/material';
-export default function BasicForm() {
+export default function CreateHealth() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState({
     title: '',
+    category: '',
     date: '',
     time: '',
     completed: '',
-    address: '',
     notes: '',
-    ticket: '',
   });
 
   const {
     title,
+    category,
     date,
     time,
     completed,
-    address,
     notes,
-    ticket,
   } = data;
   const [file, setFile] = useState();
   function saveUrl(e) {
@@ -57,8 +55,8 @@ export default function BasicForm() {
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
             <br/>
-            <Typography sx={{textAlign: 'center'}}>
-            Create Travel  
+            <Typography  variant="h4" sx={{textAlign: 'center'}}>
+            Health Event
             </Typography> 
             <br/> 
           <Grid container  spacing={2}
@@ -80,7 +78,23 @@ export default function BasicForm() {
                 fullWidth
               /> 
             </Grid>
-              
+
+            <Grid item xs={2}>
+            <Typography sx={{fontSize: 16, textAlign: 'left', padding: 2}}>
+              Category:
+            </Typography>
+            </Grid>
+            <Grid item xs={9.5}>    
+              <TextField
+                id="category"
+                label="category"
+                variant="outlined"
+                onChange={e => handleChange(e.target.value, 'category')}
+                value={category}
+                fullWidth 
+              />
+            </Grid>
+
             <Grid item xs={2}>
             <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
               Date:
@@ -107,22 +121,6 @@ export default function BasicForm() {
               />
             </Grid> 
             
-            <Grid item xs={2}>
-            <Typography sx={{fontSize: 16, textAlign: 'left', padding: 2}}>
-              Address:
-            </Typography>
-            </Grid>
-            <Grid item xs={9.5}>    
-              <TextField
-                id="address"
-                label="street address, city, state, zip"
-                variant="outlined"
-                onChange={e => handleChange(e.target.value, 'address')}
-                value={address}
-                fullWidth 
-              />
-            </Grid>
-            
              <Grid item xs={2}>
                 <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
                   Notes: 
@@ -139,20 +137,8 @@ export default function BasicForm() {
                   rows={4}
               />
             </Grid>
-            
-            <Grid item xs={2}>
-                <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
-                  Files: 
-               </Typography>
-             </Grid> 
-            <Grid item xs={4}>
-            <Button variant="contained" component="label">
-               Upload
-              <input hidden accept="image/*" multiple type="file" onChange={saveUrl} />
-              
-            </Button>
-            </Grid>
 
+            <Grid item xs={4}/>
             <Grid item xs={2}>
                <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
                 Complete: 
@@ -161,9 +147,7 @@ export default function BasicForm() {
              <Grid item xs={4}>
                 <Checkbox/>        
              </Grid>
-             <Grid item xs={2}/>
-             <Grid item xs={2}><img src={file} width="40" height="40"/>
-            </Grid>
+          
             </Grid>
         </DialogContent>
         <DialogActions>
