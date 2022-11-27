@@ -89,22 +89,24 @@ export default function BasicForm() {
             <Grid item xs={5}>
               <TextField
               id="date"
-              label="mm/dd/yyyy"
+              type="date"
               variant="outlined"
               onChange={e => handleChange(e.target.value, 'date')}
               value={date}
+              fullWidth
               />  
             </Grid>
             <Grid item xs={4.5}>
             <TextField
                 id="time"
-                label="hh:mm"
+                type="time"
                 variant="outlined"
                 onChange={e => handleChange(e.target.value, 'time')}
                 value={time}
+                fullWidth
               />
-            </Grid>
-
+            </Grid> 
+            
             <Grid item xs={2}>
             <Typography sx={{fontSize: 16, textAlign: 'left', padding: 2}}>
               Address:
