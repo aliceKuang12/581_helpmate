@@ -32,7 +32,7 @@ const SimpleSignUp = () => {
             }
         }
     }
-    console.log(error)
+
     return (
         <div align="center">
             <Paper className='w-400' sx={{maxWidth: 400}}>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import TextField from '@mui/material/TextField';
@@ -11,6 +11,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 //import withStyles from '@mui/styles/withStyles';
 // import { AXIOS_HEADER } from '../constants';
+import { useAuth } from '../context/AuthContext'
 
 
 const SignUp = (props) => {
@@ -18,6 +19,11 @@ const SignUp = (props) => {
         isOpen,
         handleClose,
     } = props;
+    const { signup } = useAuth()
+    const emailRef = useRef()
+    const passwordRef = useRef()
+    const passwordConfirmRef = useRef()
+    const [error, setError] = useState("")
     const [data, setData] = useState({
         fname: '',
         lname: '',
@@ -61,7 +67,25 @@ const SignUp = (props) => {
         handleClose()
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (passwordConfirmRef.current.value !== passwordRef.current.value) {
+            alert('Passwords do not match!')
+            setError('Passwords do not match!')
+        } else {
+            try {
+                setError("")
+                await signup(emailRef.current.value, passwordRef.current.value)
+                handleData();
+                alert("Sucessfully signed up!")
+                handleClose();
+            } catch (e) {
+                alert(e)
+            }
+        }
+    }
+    
+    const handleData = () => {
         // axios({
         //     url: '',
         //     method: 'POST',
@@ -79,7 +103,6 @@ const SignUp = (props) => {
                 dob: '',
                 avt: '',
             })
-            handleClose();
         // }).catch((e) => {
         //     console.log(e);
         // })
@@ -111,10 +134,12 @@ const SignUp = (props) => {
                             <TextField 
                                 id="email" 
                                 label="Email" 
-                                variant="outlined" 
+                                variant="outlined"
+                                inputRef={emailRef}
                                 onChange={e => handleChange(e.target.value, 'email')}
                                 value={email}
                                 fullWidth sx={{marginBottom: '1rem'}}
+                                required
                             />
                             </Grid>
                             <Grid item xs={12}>
@@ -157,16 +182,24 @@ const SignUp = (props) => {
                                             id="password" 
                                             label="Password" 
                                             variant="outlined"
+                                            inputRef={passwordRef}
+                                            type="password"
                                             onChange={e => handleChange(e.target.value, 'password')}
-                                            value={password}
-                                            fullWidth sx={{marginBottom: '1rem'}}/>
+                                            // value={password}
+                                            fullWidth sx={{marginBottom: '1rem'}}
+                                            required
+                                        />
                                     </Grid>
                                     <Grid item xs={6}>
                                         <TextField 
                                             id="password-cf" 
                                             label="Password Confirmation" 
                                             variant="outlined"
-                                            fullWidth sx={{marginBottom: '1rem'}}/>
+                                            inputRef={passwordConfirmRef}
+                                            type="password" 
+                                            fullWidth sx={{marginBottom: '1rem'}}
+                                            required
+                                        />
                                     </Grid>
                                 </Grid>
                                 
