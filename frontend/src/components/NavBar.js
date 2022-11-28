@@ -12,11 +12,13 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { useAuth } from '../context/AuthContext'
 
 const pages = ['Home', 'Academics', 'Health','Social','Travel','Streaks'];
 
 export default function Header(props) {
     const { user } = props
+    const { logout } = useAuth()
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     // const [user, setUser] = React.useState('');
@@ -48,10 +50,10 @@ export default function Header(props) {
 
     const handleLogOut = () => {
       setAnchorElUser(null);
+      logout();
       window.location.href = '/login';
     }
-
-    // React.useEffect(() => {getUser();}, [])
+    
     return (
       <AppBar position="static" sx={{ bgcolor: "yellow" }}>
       <Container maxWidth="xl">

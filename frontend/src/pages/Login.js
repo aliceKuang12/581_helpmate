@@ -1,17 +1,35 @@
+import { useState, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { Typography, Container, TextField, Box, Paper } from "@mui/material";
 import Button from '@mui/material/Button';
 import BasicForm from "../components/BasicForm";
+import { useAuth } from '../context/AuthContext'
 
 const Login = (props) => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+    const { login } = useAuth()
+    const emailRef = useRef()
+    const passwordRef = useRef()
+    const [error, setError] = useState("")
     const onClickLogin = () => {
-        navigate({
-            pathname: '/',
-        },)
+        if (!(passwordRef.current.value && emailRef.current.value )) {
+            setError("Empty field(s) exist")
+            alert(error);
+        } else {
+            handleLogin();
+        }
     }
-    
+    const handleLogin = async (e) => {
+        try {
+            await login(emailRef.current.value, passwordRef.current.value);
+            navigate({
+                pathname: '/',
+            },)
+        } catch (e) {
+            alert(e);
+        }
+    }
     const handleChange = (value) => {
         props.setCurrentUser(value);
     }
@@ -43,13 +61,24 @@ const Login = (props) => {
                     label="Enter username" 
                     variant="filled" 
                     onChange={e => handleChange(e.target.value)}
+                    required
+                />
+                <br /> <br />
+                <TextField 
+                    id="outlined-basic"
+                    label="Enter email"
+                    inputRef={emailRef}
+                    variant="filled"
+                    // onChange={e => handleChange(e.target.value)}
                 />
                 <br /> <br />
                 <TextField 
                     id="outlined-basic" 
                     label="Enter password"
-                    type="password" 
-                    variant="filled" 
+                    type="password"
+                    inputRef={passwordRef}
+                    variant="filled"
+                    required
                 />
                 <Typography 
                     variant="caption" 
@@ -66,6 +95,7 @@ const Login = (props) => {
                     className="w-100"
                     onClick={onClickLogin}
                     sx={{ width: 200, mx: 2}}
+                    required
                 >
                     Log In
                 </Button>
