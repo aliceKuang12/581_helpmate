@@ -19,6 +19,7 @@ const SimpleSignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (passwordConfirmRef.current.value !== passwordRef.current.value) {
+            alert('Passwords do not match!')
             setError('Passwords do not match!')
         } else {
 
