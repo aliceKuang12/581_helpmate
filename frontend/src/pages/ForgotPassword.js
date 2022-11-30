@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import Alert from '@mui/material/Alert';
 
 export default function ForgotPassword() {
     const emailRef = useRef()
@@ -21,11 +22,8 @@ export default function ForgotPassword() {
             setError("")
             setLoading(true)
             await resetPassword(emailRef.current.value)
-            alert('Check your inbox for further instructions')
             setMessage('Check your inbox for further instructions')
-            //alert("Sucessfully signed up!")
         } catch (e) {
-            alert("Failed to reset password")
             setError("Failed to reset password")
         }
 
@@ -33,8 +31,9 @@ export default function ForgotPassword() {
 
     return (
         <div align="center">
-
             <Paper className='w-400' sx={{ maxWidth: 600, marginY: 15 }}>
+                {error && <Alert severity="danger">{error}</Alert>}
+                {message && <Alert severity="success">{message}</Alert>}
                 <Typography variant="h6">Enter the email associated with your account: </Typography><br /><br />
                 <FormControl>
                     <TextField
