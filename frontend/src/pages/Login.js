@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { Typography, Container, TextField, Box, Paper } from "@mui/material";
 import Button from '@mui/material/Button';
 import BasicForm from "../components/BasicForm";
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 const Login = (props) => {
     const navigate = useNavigate()
@@ -84,8 +85,8 @@ const Login = (props) => {
                     variant="caption" 
                     component="p" 
                     sx={{marginTop: 1, marginLeft: 11, color: "blue", fontSize: 14}}
-                    onClick={() => {alert('User authentication, future sprint'); }}>
-                    Forgot Password?
+                    >
+                    <Link to="/forgot-password">Forgot Password? </Link>
                 </Typography>
                 <br/><br/><br/>
                 <Button 

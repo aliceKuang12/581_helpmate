@@ -8,6 +8,7 @@ import SimpleSignUp from './pages/SimpleSignUp'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext';
 import Container from '@mui/material/Container'
+import ForgotPassword from './pages/ForgotPassword';
 
 function App() {
   const [currentUser, setCurrentUser] = useState('')
@@ -27,6 +28,7 @@ function App() {
             />
             <Route path='/template' element={<Template />} />
             <Route path='/signup' element={<SimpleSignUp />} />
+            <Route path='/forgot-password' element={<ForgotPassword />} />
           </Routes>
         </AuthProvider>
       </Router>
