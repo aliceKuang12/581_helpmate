@@ -16,15 +16,16 @@ export default function ForgotPassword() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             setMessage('')
             setError("")
             setLoading(true)
-            await resetMessage(emailRef.current.value)
+            await resetPassword(emailRef.current.value)
+            alert('Check your inbox for further instructions')
             setMessage('Check your inbox for further instructions')
             //alert("Sucessfully signed up!")
         } catch (e) {
+            alert("Failed to reset password")
             setError("Failed to reset password")
         }
 
