@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
-const pages = ['Home', 'Academics', 'Health','Social','Travel','Streaks'];
+const pages = ['home', 'academics', 'health','social','travel','streaks'];
 
 export default function Header(props) {
     const { user } = props
@@ -49,6 +49,11 @@ export default function Header(props) {
     const handleLogOut = () => {
       setAnchorElUser(null);
       window.location.href = '/login';
+    }
+
+    const handleChangePage = (page) => {
+      setAnchorElUser(null);
+      window.location.href = '/' + page;
     }
 
     // React.useEffect(() => {getUser();}, [])
@@ -116,7 +121,7 @@ export default function Header(props) {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick= {() => handleChangePage(page)}
                 sx={{ my: 2, color: 'black', display: 'block' }} 
               >
                 {page}
