@@ -26,6 +26,9 @@ function App() {
           <Route path = '/travel' element={<Travel/>}/>
           <Route path = '/social' element={<Social/>}/>
           <Route path = '/template' element={<Template/>}/>
+          <Route path = '/academics' element={<Template/>}/>
+          <Route path = '/streaks' element={<Template/>}/>
+          <Route path = '/home' element = {<Homepage/>}/>
         </Routes>
     </Router> 
   );
