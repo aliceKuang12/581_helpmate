@@ -4,7 +4,6 @@ import axios from 'axios';
 import Homepage from './pages/Homepage'
 import Login from './pages/Login'
 import Template from './pages/Template'
-import SimpleSignUp from './pages/SimpleSignUp'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Health from './pages/Health'
 import Travel from './pages/Travel'
@@ -32,17 +31,15 @@ function App() {
               path = '/login' 
               element={<Login setCurrentUser={setCurrentUser}/>}
             />
-            <Route path = '/health' element={<Health/>}/>
-            <Route path = '/reset' element={<PasswordReset/>}/>
-            <Route path = '/travel' element={<Travel/>}/>
-            <Route path = '/social' element={<Social/>}/>
+            <Route path = '/health' element={<Health setCurrentUser={setCurrentUser}/>} />
+            <Route path = '/travel' element={<Travel setCurrentUser={setCurrentUser}/>}/>
+            <Route path = '/social' element={<Social setCurrentUser={setCurrentUser}/>}/>
             <Route path = '/template' element={<Template/>}/>
-            <Route path = '/academics' element={<Academics/>}/>
-            <Route path = '/streaks' element={<Streaks/>}/>
-            <Route path = '/home' element = {<Homepage/>}/>
-            <Route path='/template' element={<Template />} />
-            <Route path='/signup' element={<SimpleSignUp />} />
+            <Route path = '/academics' element={<Academics setCurrentUser={setCurrentUser}/>}/>
+            <Route path = '/streaks' element={<Streaks setCurrentUser={setCurrentUser}/>}/>
+            <Route path = '/home' element = {<Homepage setCurrentUser={setCurrentUser}/>}/>
             <Route path='/forgot-password' element={<ForgotPassword />} />
+            <Route path = '/reset' element={<PasswordReset/>}/>
           </Routes>
         </AuthProvider>
       </Router>
