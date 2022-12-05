@@ -2,7 +2,7 @@ import Grid from "@mui/material/Grid"
 import NavBar from '../components/NavBar'
 import '../App.css';
 import Clock from '../components/Clock'
-import Image from '../images/birdBackground2.jpg'
+import Image from '../images/streaksBackground.jpg'
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -10,7 +10,7 @@ import { styled } from '@mui/material/styles';
 import { Typography } from "@material-ui/core";
 
 const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body1,
+    ...theme.typography.h4,
     padding: theme.spacing(1),
     textAlign: 'left',
     color: theme.palette.text.secondary,
