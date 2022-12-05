@@ -9,6 +9,7 @@ import Health from './pages/Health'
 import Travel from './pages/Travel'
 import Social from './pages/Social'
 import Academics from './pages/Academic'
+import Streaks from './pages/Streaks'
 import PasswordReset from './pages/PasswordReset'
 function App() {
   const [currentUser, setCurrentUser] = useState('')
