@@ -32,9 +32,9 @@ app.listen(PORT, () => {
 app.post('/email-confirmation', async (req, res) => {
   try {
     res.json(await email.sendMail(req.body.to, req.body.from, req.body.subject, req.body.text));
-    res.sendStatus(200)
+    // res.sendStatus(200)
   } catch (err) {
-    console.log("ERRR")
     console.log(err);
+    res.json(err);
   }
 });
