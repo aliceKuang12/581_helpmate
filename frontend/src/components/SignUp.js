@@ -67,6 +67,28 @@ const SignUp = (props) => {
         handleClose()
     }
 
+    const sendMail = async () => {
+        await axios({
+            url: 'http://localhost:5001/email-confirmation',
+            method: 'POST',
+            // headers: Object.assign({ 'Content-Type': 'application/json' }, AxiosHeaders),
+            data: {
+                to: emailRef.current.value,
+                from: "huyennm1104@gmail.com",
+                subject: "Welcome to HelpMate!",
+                text: "You have successfully signed up!"
+            },
+            headers: {
+                Accept: "application/json, text/plain, */*"
+            },
+        })
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((e) => {
+            console.log(e);
+        })
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (passwordConfirmRef.current.value !== passwordRef.current.value) {
@@ -77,13 +99,16 @@ const SignUp = (props) => {
                 setError("")
                 await signup(emailRef.current.value, passwordRef.current.value)
                 handleData();
-                alert("Sucessfully signed up!")
+                sendMail();
+                alert("Sucessfully signed up! Check your email!")
                 handleClose();
             } catch (e) {
-                alert(e)
+                alert(e);
             }
         }
     }
+
+
     
     const handleData = () => {
         // axios({
