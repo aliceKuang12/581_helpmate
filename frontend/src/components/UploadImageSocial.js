@@ -5,7 +5,7 @@ import UploadIcon from '@mui/icons-material/Upload';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import Ticket from '../images/socialimage.jpg'
+import DefaultImage from '../images/socialimage.jpg'
 
 export default function UploadImage() {
   const [file, setFile] = useState("Invalid Image Source");
@@ -17,7 +17,7 @@ export default function UploadImage() {
     <Grid container-spacing={2}  alignItems="center" justifyContent="center" >
         <Grid item xs={10} sx={{mx: 5}}>
            <img src={file} width="300" height="350" 
-           onError = {() => setFile(Ticket)}
+           onError = {() => setFile(DefaultImage)}
            />
         </Grid>
     <br/>
