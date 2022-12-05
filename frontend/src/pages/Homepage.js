@@ -8,20 +8,13 @@ import Container from '@mui/material/Container';
 import Clock from '../components/Clock'
 import modules from "./modules.json"
 import Image from '../images/homebackground2.jpeg'
-// const Item = styled(Paper)(({ theme }) => ({
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-// }));
-
 
 const Homepage = (props) => {
     const { user } = props
     return (
         <div style={{ backgroundImage: `url(${Image})`, backgroundSize: "cover" }}> 
             <Header user={user}/>
-           <div className = "Clock" >
-                <Clock />
-            </div>
+            <Clock />
             <div className = "body">
                 <Container>
                     {modules.map((Modules) => (

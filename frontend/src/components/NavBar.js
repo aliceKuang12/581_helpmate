@@ -12,11 +12,13 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { useAuth } from '../context/AuthContext'
 
 const pages = ['home', 'academics', 'health','social','travel','streaks'];
 
 export default function Header(props) {
     const { user } = props
+    const { logout } = useAuth()
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     // const [user, setUser] = React.useState('');
@@ -48,8 +50,10 @@ export default function Header(props) {
 
     const handleLogOut = () => {
       setAnchorElUser(null);
+      logout();
       window.location.href = '/login';
     }
+<<<<<<< HEAD
 
     const handleChangePage = (page) => {
       setAnchorElUser(null);
@@ -57,6 +61,9 @@ export default function Header(props) {
     }
 
     // React.useEffect(() => {getUser();}, [])
+=======
+    
+>>>>>>> origin/firebase
     return (
       <AppBar position="static" sx={{ bgcolor: "yellow" }}>
       <Container maxWidth="xl">
