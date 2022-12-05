@@ -53,7 +53,6 @@ export default function Header(props) {
       logout();
       window.location.href = '/login';
     }
-<<<<<<< HEAD
 
     const handleChangePage = (page) => {
       setAnchorElUser(null);
@@ -61,9 +60,6 @@ export default function Header(props) {
     }
 
     // React.useEffect(() => {getUser();}, [])
-=======
-    
->>>>>>> origin/firebase
     return (
       <AppBar position="static" sx={{ bgcolor: "yellow" }}>
       <Container maxWidth="xl">

@@ -6,44 +6,22 @@ import Login from './pages/Login'
 import Template from './pages/Template'
 import SimpleSignUp from './pages/SimpleSignUp'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-<<<<<<< HEAD
 import Health from './pages/Health'
 import Travel from './pages/Travel'
 import Social from './pages/Social'
 import Academics from './pages/Academic'
 import Streaks from './pages/Streaks'
 import PasswordReset from './pages/PasswordReset'
-=======
 import { AuthProvider } from './context/AuthContext';
 import Container from '@mui/material/Container'
 import ForgotPassword from './pages/ForgotPassword';
 
->>>>>>> origin/firebase
 function App() {
   const [currentUser, setCurrentUser] = useState('')
 
   return (
     <Container>
       <Router>
-<<<<<<< HEAD
-        <Routes>
-          <Route 
-            path = '/' 
-            element={<Homepage user={currentUser}/>}/>
-          <Route 
-            path = '/login' 
-            element={<Login setCurrentUser={setCurrentUser}/>}/>
-          <Route path = '/health' element={<Health/>}/>
-          <Route path = '/reset' element={<PasswordReset/>}/>
-          <Route path = '/travel' element={<Travel/>}/>
-          <Route path = '/social' element={<Social/>}/>
-          <Route path = '/template' element={<Template/>}/>
-          <Route path = '/academics' element={<Academics/>}/>
-          <Route path = '/streaks' element={<Streaks/>}/>
-          <Route path = '/home' element = {<Homepage/>}/>
-        </Routes>
-    </Router> 
-=======
         <AuthProvider>
           <Routes>
             <Route 
@@ -54,6 +32,14 @@ function App() {
               path = '/login' 
               element={<Login setCurrentUser={setCurrentUser}/>}
             />
+            <Route path = '/health' element={<Health/>}/>
+            <Route path = '/reset' element={<PasswordReset/>}/>
+            <Route path = '/travel' element={<Travel/>}/>
+            <Route path = '/social' element={<Social/>}/>
+            <Route path = '/template' element={<Template/>}/>
+            <Route path = '/academics' element={<Academics/>}/>
+            <Route path = '/streaks' element={<Streaks/>}/>
+            <Route path = '/home' element = {<Homepage/>}/>
             <Route path='/template' element={<Template />} />
             <Route path='/signup' element={<SimpleSignUp />} />
             <Route path='/forgot-password' element={<ForgotPassword />} />
@@ -61,7 +47,6 @@ function App() {
         </AuthProvider>
       </Router>
     </Container>
->>>>>>> origin/firebase
   );
 }
 
