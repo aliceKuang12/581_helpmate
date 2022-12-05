@@ -28,7 +28,7 @@ function App() {
           <Route path = '/social' element={<Social/>}/>
           <Route path = '/template' element={<Template/>}/>
           <Route path = '/academics' element={<Academics/>}/>
-          <Route path = '/streaks' element={<Template/>}/>
+          <Route path = '/streaks' element={<Streaks/>}/>
           <Route path = '/home' element = {<Homepage/>}/>
         </Routes>
     </Router> 
