@@ -11,5 +11,23 @@
       "StackId": "arn:aws:cloudformation:us-east-2:580962619799:stack/amplify-helpmate1-dev-133003/b1380ce0-8a0a-11ed-b4f1-0ae1d011f7d4",
       "AmplifyAppId": "d3eq60rsj1nhub"
     }
+  },
+  "api": {
+    "helpmate1": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
+    }
   }
 }
