@@ -5,6 +5,9 @@ type Todo {
   description: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
 }
 
 input ModelStringInput {
@@ -160,6 +163,7 @@ enum ModelSortDirection {
 type ModelTodoConnection {
   items: [Todo]!
   nextToken: String
+  startedAt: AWSTimestamp
 }
 
 input ModelTodoFilterInput {
@@ -174,6 +178,7 @@ input ModelTodoFilterInput {
 type Query {
   getTodo(id: ID!): Todo
   listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
+  syncTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelTodoConnection
 }
 
 input ModelTodoConditionInput {
@@ -188,16 +193,19 @@ input CreateTodoInput {
   id: ID
   name: String!
   description: String
+  _version: Int
 }
 
 input UpdateTodoInput {
   id: ID!
   name: String
   description: String
+  _version: Int
 }
 
 input DeleteTodoInput {
   id: ID!
+  _version: Int
 }
 
 type Mutation {
