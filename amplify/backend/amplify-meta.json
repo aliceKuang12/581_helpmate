@@ -31,12 +31,65 @@
         "GraphQLAPIEndpointOutput": "https://iaidmtcctvcsfktfsjuexse4z4.appsync-api.us-east-2.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-hgppbb5cfvachcxr5546767try"
       },
-      "lastPushTimeStamp": "2023-01-08T17:11:40.853Z",
+      "lastPushTimeStamp": "2023-01-08T20:25:52.332Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-helpmate1-helpmate-110155-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apihelpmate1"
       },
       "lastPushDirHash": "Nm4xU2LCEXbgKv2Rv6mZDTkbG9U="
+    }
+  },
+  "auth": {
+    "helpmate1e9c404d2": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL",
+          "PHONE_NUMBER"
+        ],
+        "signupAttributes": [
+          "ADDRESS",
+          "BIRTHDATE",
+          "EMAIL",
+          "FAMILY_NAME",
+          "NAME",
+          "PHONE_NUMBER",
+          "PREFERRED_USERNAME",
+          "PICTURE",
+          "PROFILE"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-helpmate1-helpmate-110155-deployment/amplify-cfn-templates/auth/helpmate1e9c404d2-cloudformation-template.json",
+        "logicalId": "authhelpmate1e9c404d2"
+      },
+      "lastPushTimeStamp": "2023-01-08T20:25:52.674Z",
+      "output": {
+        "CreatedSNSRole": "arn:aws:iam::580962619799:role/snse9c404d2110155-helpmate",
+        "UserPoolId": "us-east-2_TxNNEMqSX",
+        "AppClientIDWeb": "5v9bk2gpi57d14s8tbmcf12pu3",
+        "AppClientID": "6ns9mahldbclg7dgvemt6j9k2a",
+        "IdentityPoolId": "us-east-2:4d574408-d0e5-4bb2-bd57-0acc71710e7a",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-2:580962619799:userpool/us-east-2_TxNNEMqSX",
+        "IdentityPoolName": "helpmate1e9c404d2_identitypool_e9c404d2__helpmate",
+        "UserPoolName": "helpmate1e9c404d2_userpool_e9c404d2"
+      },
+      "lastPushDirHash": "hac+BGrlmI/g+JfFUzA+gSoEbpU="
     }
   }
 }
