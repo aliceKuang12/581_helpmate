@@ -40,7 +40,7 @@ function App() {
             <Route path = '/home' element = {<Homepage setCurrentUser={setCurrentUser}/>}/>
             <Route path='/forgot-password' element={<ForgotPassword />} />
             <Route path = '/reset' element={<PasswordReset/>}/>
-          </Routes>
+          </Routes>c
         </AuthProvider>
       </Router>
     </Container>
