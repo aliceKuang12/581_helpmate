@@ -1,50 +1,81 @@
-import './App.css';
-import { useState } from "react";
-import axios from 'axios';
-import Homepage from './pages/Homepage'
-import Login from './pages/Login'
-import Template from './pages/Template'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Health from './pages/Health'
-import Travel from './pages/Travel'
-import Social from './pages/Social'
-import Academics from './pages/Academic'
-import Streaks from './pages/Streaks'
-import PasswordReset from './pages/PasswordReset'
-import { AuthProvider } from './context/AuthContext';
-import Container from '@mui/material/Container'
-import ForgotPassword from './pages/ForgotPassword';
+/* src/App.js */
+import React, { useEffect, useState } from 'react'
+import { Amplify, API, graphqlOperation } from 'aws-amplify'
+import { createTodo } from './graphql/mutations'
+import { listTodos } from './graphql/queries'
 
-function App() {
-  const [currentUser, setCurrentUser] = useState('')
+import awsExports from "./aws-exports";
+Amplify.configure(awsExports);
+
+const initialState = { name: '', description: '' }
+
+const App = () => {
+  const [formState, setFormState] = useState(initialState)
+  const [todos, setTodos] = useState([])
+
+  useEffect(() => {
+    fetchTodos()
+  }, [])
+
+  function setInput(key, value) {
+    setFormState({ ...formState, [key]: value })
+  }
+
+  async function fetchTodos() {
+    try {
+      const todoData = await API.graphql(graphqlOperation(listTodos))
+      const todos = todoData.data.listTodos.items
+      setTodos(todos)
+    } catch (err) { console.log('error fetching todos') }
+  }
+
+  async function addTodo() {
+    try {
+      if (!formState.name || !formState.description) return
+      const todo = { ...formState }
+      setTodos([...todos, todo])
+      setFormState(initialState)
+      await API.graphql(graphqlOperation(createTodo, {input: todo}))
+    } catch (err) {
+      console.log('error creating todo:', err)
+    }
+  }
 
   return (
-    <Container>
-      <Router>
-        <AuthProvider>
-          <Routes>
-            <Route 
-              path = '/' 
-              element={<Homepage user={currentUser}/>}
-            />
-            <Route 
-              path = '/login' 
-              element={<Login setCurrentUser={setCurrentUser}/>}
-            />
-            <Route path = '/health' element={<Health setCurrentUser={setCurrentUser}/>} />
-            <Route path = '/travel' element={<Travel setCurrentUser={setCurrentUser}/>}/>
-            <Route path = '/social' element={<Social setCurrentUser={setCurrentUser}/>}/>
-            <Route path = '/template' element={<Template/>}/>
-            <Route path = '/academics' element={<Academics setCurrentUser={setCurrentUser}/>}/>
-            <Route path = '/streaks' element={<Streaks setCurrentUser={setCurrentUser}/>}/>
-            <Route path = '/home' element = {<Homepage setCurrentUser={setCurrentUser}/>}/>
-            <Route path='/forgot-password' element={<ForgotPassword />} />
-            <Route path = '/reset' element={<PasswordReset/>}/>
-          </Routes>c
-        </AuthProvider>
-      </Router>
-    </Container>
-  );
+    <div style={styles.container}>
+      <h2>Amplify Todos</h2>
+      <input
+        onChange={event => setInput('name', event.target.value)}
+        style={styles.input}
+        value={formState.name}
+        placeholder="Name"
+      />
+      <input
+        onChange={event => setInput('description', event.target.value)}
+        style={styles.input}
+        value={formState.description}
+        placeholder="Description"
+      />
+      <button style={styles.button} onClick={addTodo}>Create Todo</button>
+      {
+        todos.map((todo, index) => (
+          <div key={todo.id ? todo.id : index} style={styles.todo}>
+            <p style={styles.todoName}>{todo.name}</p>
+            <p style={styles.todoDescription}>{todo.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  )
+}
+
+const styles = {
+  container: { width: 400, margin: '0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 20 },
+  todo: {  marginBottom: 15 },
+  input: { border: 'none', backgroundColor: '#ddd', marginBottom: 10, padding: 8, fontSize: 18 },
+  todoName: { fontSize: 20, fontWeight: 'bold' },
+  todoDescription: { marginBottom: 0 },
+  button: { backgroundColor: 'black', color: 'white', outline: 'none', fontSize: 18, padding: '12px 0px' }
 }
 
 export default App

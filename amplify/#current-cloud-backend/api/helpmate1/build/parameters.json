@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "helpmate1",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-helpmate1-helpmate-110155-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/725bc9d213a03b08a3b1986e66686f0eb9c6b93b"
+}

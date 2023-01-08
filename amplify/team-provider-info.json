@@ -23,6 +23,11 @@
       "StackName": "amplify-helpmate1-helpmate-110155",
       "StackId": "arn:aws:cloudformation:us-east-2:580962619799:stack/amplify-helpmate1-helpmate-110155/28b8dc70-8f76-11ed-8006-02f192b9f3ee",
       "AmplifyAppId": "d3eq60rsj1nhub"
+    },
+    "categories": {
+      "api": {
+        "helpmate1": {}
+      }
     }
   }
 }

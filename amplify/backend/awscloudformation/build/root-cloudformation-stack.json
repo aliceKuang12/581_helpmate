@@ -151,6 +151,20 @@
           "Ref": "UnauthRoleName"
         }
       }
+    },
+    "apihelpmate1": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-helpmate1-helpmate-110155-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "Parameters": {
+          "AppSyncApiName": "helpmate1",
+          "DynamoDBBillingMode": "PAY_PER_REQUEST",
+          "DynamoDBEnableServerSideEncryption": false,
+          "S3DeploymentBucket": "amplify-helpmate1-helpmate-110155-deployment",
+          "S3DeploymentRootKey": "amplify-appsync-files/725bc9d213a03b08a3b1986e66686f0eb9c6b93b",
+          "env": "helpmate"
+        }
+      }
     }
   }
 }
