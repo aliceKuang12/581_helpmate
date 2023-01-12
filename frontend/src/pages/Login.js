@@ -6,6 +6,9 @@ import Button from '@mui/material/Button';
 import BasicForm from "../components/BasicForm";
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
+import { signInWithGoogle } from "../context/AuthContext"
+import "./Login.css"
+
 
 const Login = (props) => {
     const navigate = useNavigate()
@@ -57,6 +60,7 @@ const Login = (props) => {
             </Box>
             <br/>
             <Box sx={{ marginY: 5, marginX: 23 }}>
+
                 <TextField 
                     id="outlined-basic" 
                     label="Enter username" 
@@ -100,8 +104,17 @@ const Login = (props) => {
                 >
                     Log In
                 </Button>
-                <br/>
-                <br/>
+                <br/><br/>
+                <Button
+                    className="w-100"
+                    class="login-with-google-btn"
+                    sx={{ width: 200, mx: 2}}
+                    variant="outlined"
+                    muted="muted"
+                    onClick={signInWithGoogle}
+                    >
+                    Sign in with Google
+                </Button>
                 <br/>
             </Box>
             <Box sx={{mx: 25}}>

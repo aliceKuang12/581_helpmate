@@ -131,7 +131,7 @@ export default function Header(props) {
               </Button>
             ))}
           </Box>
-          <Typography color="black" marginRight={3}>Welcome, {user}</Typography>
+          <Typography color="black" marginRight={3}>Welcome, {localStorage.getItem("name")}</Typography>
           <Box sx={{ color:'black', flexGrow: 0 }}>
             
             <Tooltip title="Open settings">
@@ -139,7 +139,7 @@ export default function Header(props) {
                 onClick={handleOpenUserMenu} 
                 sx={{ p: 0 }}
               >
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={localStorage.getItem("profilePic")} />
               </IconButton>
             </Tooltip>
             <Menu

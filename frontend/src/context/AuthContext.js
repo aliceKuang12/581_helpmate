@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react"
 import { auth } from "../firebase"
-
+import { GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 const AuthContext = React.createContext()
 
 export function useAuth() {
@@ -35,6 +35,9 @@ export function AuthProvider({ children }) {
 //     return currentUser.updatePassword(password)
 //   }
 
+
+
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user)
@@ -61,3 +64,24 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   )
 }
+
+// Setup google login tutorial: https://www.youtube.com/watch?v=vDT7EnUpEoo
+const provider = new GoogleAuthProvider()
+
+export const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+    .then((result) => {
+        const name = result.user.displayName;
+        const email = result.user.email;
+        const profilePic = result.user.photoURL;
+
+        localStorage.setItem("name", name)
+        localStorage.setItem("email", email)
+        localStorage.setItem("profilePic", profilePic)
+
+        window.location = "/home";
+    })
+    .catch((error) => {
+        console.log(error)
+    });   
+};
