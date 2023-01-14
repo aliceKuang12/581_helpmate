@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react"
 import { auth } from "../firebase"
-import { GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+
 const AuthContext = React.createContext()
 
 export function useAuth() {
@@ -16,10 +17,13 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
+    localStorage.setItem("name", email)
     return auth.signInWithEmailAndPassword(email, password)
   }
 
   function logout() {
+    localStorage.clear()
+    // if(hasLogin) signOutWithGoogle()
     return auth.signOut()
   }
 
@@ -27,16 +31,13 @@ export function AuthProvider({ children }) {
     return auth.sendPasswordResetEmail(email)
   }
 
-//   function updateEmail(email) {
-//     return currentUser.updateEmail(email)
-//   }
+  //   function updateEmail(email) {
+  //     return currentUser.updateEmail(email)
+  //   }
 
-//   function updatePassword(password) {
-//     return currentUser.updatePassword(password)
-//   }
-
-
-
+  //   function updatePassword(password) {
+  //     return currentUser.updatePassword(password)
+  //   }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -67,21 +68,41 @@ export function AuthProvider({ children }) {
 
 // Setup google login tutorial: https://www.youtube.com/watch?v=vDT7EnUpEoo
 const provider = new GoogleAuthProvider()
-
+// provider.addScope('https://www.googleapis.com/auth/fitness.activity.read')
+// provider.addScope('https://www.googleapis.com/auth/fitness.heart_rate.read')
+// provider.addScope('https://www.googleapis.com/auth/fitness.sleep.read')
+// provider.addScope('https://www.googleapis.com/auth/fitness.blood_pressure.read')
 export const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
+  //const [user, setUser] = useState({hasLogin:false, accessToken: ''})  
+  signInWithPopup(auth, provider)
     .then((result) => {
-        const name = result.user.displayName;
-        const email = result.user.email;
-        const profilePic = result.user.photoURL;
+     
 
-        localStorage.setItem("name", name)
-        localStorage.setItem("email", email)
-        localStorage.setItem("profilePic", profilePic)
+      // The signed-in user info.
+      const user = result.user
+      const name = result.user.displayName
+      const email = result.user.email
+      const profilePic = result.user.photoURL
 
-        window.location = "/home";
+
+      localStorage.setItem("user", user)
+      localStorage.setItem("name", name)
+      localStorage.setItem("email", email)
+      localStorage.setItem("profilePic", profilePic)
+
+      // Authorization: `Bearer ${accessToken}`
+      // axios.post('https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate?alt=json', data, axiosconfig)
+
+      window.location = "/home"
+      
+      // This gives you a Google Access Token. You can use it to access Google APIs.
+      const credential = GoogleAuthProvider.credentialFromResult(result)
+      const token = result.credential.accessToken
+
+      localStorage.setItem("token", token)
     })
     .catch((error) => {
-        console.log(error)
-    });   
-};
+      console.log(error)
+    })
+}
+
