@@ -5,31 +5,32 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 export default function BasicForm() {
-  const [open, setOpen] = React.useState(false);
+ // const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const openCalendar = () => {
+    const url = "https://calendar.google.com/calendar/u/0/r";
+    window.open(url, '_blank', 'noopener,noreferrer');
+   // setOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   return (
     <div >
-      <Button onClick={handleClickOpen} variant="outlined" sx={{backgroundColor: "cornsilk", fill: "blue", color:"Black" }}>
+      <Button onClick={openCalendar} variant="outlined" sx={{backgroundColor: "cornsilk", fill: "blue", color:"Black" }}>
         <CalendarMonthIcon sx={{fontSize: "large", color: "blue"}}/>
       </Button>
+    </div>
+  );
+}
 
-      <Dialog open={open} onClose={handleClose}>
+      {/* <Dialog open={open} onClose={handleClose}>
         <DialogContent>
             Connect to Gmail API, future sprint
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
         </DialogActions>
-      </Dialog>
-      
-    </div>
-  );
-}
+      </Dialog> */}
