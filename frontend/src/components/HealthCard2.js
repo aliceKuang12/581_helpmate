@@ -6,15 +6,11 @@ import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
-import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import BrunchDiningIcon from '@mui/icons-material/BrunchDining';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
-import RiceBowlIcon from '@mui/icons-material/RiceBowl';
 import { Button } from "@mui/material";
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import axios from "axios";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -71,7 +67,6 @@ const ModuleCard = (  ) => {
                     >
                     Health Statistics<br/> 
                     </Typography>
-                    <button onClick={retreiveHandler}>Retreive Cookie</button> <br/> {setName}
                 </Item>
                 <Item elevation={0}>
                 <Stack  
@@ -105,12 +100,7 @@ const ModuleCard = (  ) => {
 
 
                     </Paper> <br/><br/>
-                <Grid container spacing={1}>    
-                <Grid item xs={3}></Grid>
-                <Grid item xs={1}><Button variant="contained" onClick="handleChange()" > <KeyboardArrowLeftIcon/> </Button></Grid>
-                <Grid item xs={1}></Grid> &nbsp;
-                <Grid item xs={1}><Button variant="contained" onClick="handleChange()" > <KeyboardArrowRightIcon/> </Button></Grid>
-                </Grid>
+
                 </Stack>
                 </Item>
             </Stack>
@@ -120,14 +110,11 @@ const ModuleCard = (  ) => {
 }
 
 export default ModuleCard
-//<Item elevation={10} sx={{width: '25%',background:'white'}}>
-/*                   <Typography sx={{fontWeight: 'bold'}}>
-                        Ongoing: 
-                    </Typography>
-                    <Typography sx={{ fontSize: 14}}>
-                        <DirectionsRunIcon  sx={{fontSize: "medium"}}/> 9000 Steps Challenge 
-                    </Typography>
-                    <Typography sx={{ fontSize: 14}}>
-                        <RiceBowlIcon  sx={{fontSize: "medium"}}/> Keto 
-                    </Typography>
-                    */
+/*
+<Grid container spacing={1}>    
+<Grid item xs={3}></Grid>
+<Grid item xs={1}><Button variant="contained" onClick="handleChange()" > <KeyboardArrowLeftIcon/> </Button></Grid>
+<Grid item xs={1}></Grid> &nbsp;
+<Grid item xs={1}><Button variant="contained" onClick="handleChange()" > <KeyboardArrowRightIcon/> </Button></Grid>
+</Grid>
+*/
