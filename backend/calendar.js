@@ -73,10 +73,12 @@ const app = express();
   * Lists the next 10 events on the user's primary calendar.
   * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
   */
- async function listEvents(auth) {
+ 
+ async function listEvents(auth, _calendarId='primary') {
+    // console.log(calendarList.list())
      const calendar = google.calendar({ version: 'v3', auth });
      const res = await calendar.events.list({
-         calendarId: 'primary',
+         calendarId: _calendarId,
          timeMin: new Date().toISOString(),
          maxResults: 10,
          singleEvents: true,
