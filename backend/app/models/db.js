@@ -1,5 +1,5 @@
-const mysql = require("mysql");
-const dbConfig = require("../config/db.config.js");
+import mysql from "mysql";
+import dbConfig from "../config/db.config.js";
 
 const connection = mysql.createConnection({
     host: dbConfig.host,
@@ -18,18 +18,14 @@ connection.connect(function(err) {
 
 let queryState = "SELECT * from User where passWords= \'Drake21\'";
 let data;
-exports.infor = connection.query(queryState, function (error, results, fields) {
+const infor = connection.query(queryState, function (error, results, fields) {
     if (error) {
         connection.destroy();
         throw error;
     } else {
-        // connected!
-        
         data = JSON.parse(JSON.stringify(results))
         console.log(data);
         return data;
-        // return data;
-        
         // callback(error, results);
         // connection.end(function (err) { callback(err, results); });
     }
@@ -52,4 +48,4 @@ exports.infor = connection.query(queryState, function (error, results, fields) {
 //     });
 // };
 
-// exports.infor=data;
+export default infor;

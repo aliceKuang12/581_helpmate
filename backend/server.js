@@ -1,14 +1,3 @@
-//const sql = require("./app/models/db.js");
-
-// const express = require('express');
-// const cors = require("cors");
-// const app = express();
-// const { google } = require("googleapis");
-// const request = require("request");
-// const urlParse = require("url-parse");
-// const queryParse = require("query-string");
-// const bodyParser = require("body-parser");
-// const axios = require("axios");
 import express from "express";
 const app = express();
 import cors from "cors"
