@@ -1,16 +1,5 @@
-//const sql = require("./app/models/db.js");
 
-// const express = require('express');
-// const cors = require("cors");
-// const app = express();
-// const { google } = require("googleapis");
-// const request = require("request");
-// const urlParse = require("url-parse");
-// const queryParse = require("query-string");
-// const bodyParser = require("body-parser");
-// const axios = require("axios");
 import express from "express";
-const app = express();
 import cors from "cors"
 import { google } from "googleapis"
 import request from "request"
@@ -18,11 +7,13 @@ import urlParse from "url-parse"
 import queryParse from "query-string"
 import bodyParser from "body-parser";
 import axios from "axios"
+import sql from "./app/models/db.js"
+
+const app = express();
 
 // var corsOptions = {
 //   origin: "http://localhost:8081"
 // };
-
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extende: true }));
@@ -31,11 +22,11 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/json
 app.use(express.json()); /* bodyParser.json() is deprecated */
 
-// app.get("/" , (req, res) => {
-//   console.log(sql.infor);
-//   res.json({ message: "" });
-//   res.json({name:"Drake"});
-// });
+app.get("/" , (req, res) => {
+  console.log(sql.infor);
+  res.json({ message: "" });
+  res.json({name:"Drake"});
+});
 
 // simple route https://youtu.be/-yH1ZnZBWyU
 app.get("/getUrl", (req, res) => {
@@ -86,7 +77,6 @@ app.get("/steps", async (req, res) => {
   );
 
   const tokens = await oauth2Client.getToken(code);
-  // console.log(tokens);
   res.send("Hello");
 
   let stepArray = []
@@ -134,7 +124,8 @@ app.get("/steps", async (req, res) => {
 });
 
 // set port, listen for requests
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
+  console.log(`inforrr ${sql.development}`);
 });
