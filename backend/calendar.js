@@ -75,7 +75,6 @@ const app = express();
   */
  
  async function listEvents(auth, _calendarId='primary') {
-    // console.log(calendarList.list())
      const calendar = google.calendar({ version: 'v3', auth });
      const res = await calendar.events.list({
          calendarId: _calendarId,

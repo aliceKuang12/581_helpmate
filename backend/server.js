@@ -8,11 +8,6 @@ import queryParse from "query-string"
 import bodyParser from "body-parser";
 import axios from "axios"
 
-// var corsOptions = {
-//   origin: "http://localhost:8081"
-// };
-
-
 app.use(cors());
 app.use(bodyParser.urlencoded({ extende: true }));
 app.use(bodyParser.json());
@@ -20,19 +15,8 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/json
 app.use(express.json()); /* bodyParser.json() is deprecated */
 
-// app.get("/" , (req, res) => {
-//   console.log(sql.infor);
-//   res.json({ message: "" });
-//   res.json({name:"Drake"});
-// });
-
 // simple route https://youtu.be/-yH1ZnZBWyU
 app.get("/getUrl", (req, res) => {
-
-  //console.log(sql.infor) {
-  // res.json({ message: "" });/
-  // res.json({name:"Drake"});
-
   const oauth2Client = new google.auth.OAuth2(
     //client-id
     "744855455027-gdjvbr2gaht9pfnpiald3afpeo1lo83m.apps.googleusercontent.com",
@@ -75,7 +59,6 @@ app.get("/steps", async (req, res) => {
   );
 
   const tokens = await oauth2Client.getToken(code);
-  // console.log(tokens);
   res.send("Hello");
 
   let stepArray = []
@@ -100,8 +83,6 @@ app.get("/steps", async (req, res) => {
           endTimeMillis: 1673676000000,
         },
       });
-   
-      //console.log(result);
       stepArray = result.data.bucket;
   } catch(e) {
     console.log("Error 1: " + e);
@@ -109,9 +90,7 @@ app.get("/steps", async (req, res) => {
 
   try{
     for(const dataSet of stepArray) {
-     // console.log(dataSet);
       for(const points of dataSet.dataset) {
-       // console.log(points);
         for(const steps of points.point){
           console.log(steps.value);
         }
