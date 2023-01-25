@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid"
 import NavBar from '../components/NavBar'
 import '../App.css';
 import Clock from '../components/Clock'
-import Image from '../images/AcademicBackground.jpg'
+import Image from '../images/BirdBackground.jpg'
 
 const Template = () => {
     return(
