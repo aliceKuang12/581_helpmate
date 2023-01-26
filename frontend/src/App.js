@@ -9,7 +9,7 @@ import Travel from './pages/Travel'
 import Social from './pages/Social'
 import Academics from './pages/Academic'
 import Streaks from './pages/Streaks'
-import PasswordReset from './pages/PasswordReset'
+// import PasswordReset from './pages/PasswordReset'
 import { AuthProvider } from './context/AuthContext';
 import Container from '@mui/material/Container'
 import ForgotPassword from './pages/ForgotPassword';
@@ -38,7 +38,7 @@ function App() {
             <Route path = '/streaks' element={<Streaks setCurrentUser={setCurrentUser}/>}/>
             <Route path = '/home' element = {<Homepage setCurrentUser={setCurrentUser}/>}/>
             <Route path='/forgot-password' element={<ForgotPassword />} />
-            <Route path = '/reset' element={<PasswordReset/>}/>
+            {/* <Route path = '/reset' element={<PasswordReset/>}/> */}
           </Routes>c
         </AuthProvider>
       </Router>
