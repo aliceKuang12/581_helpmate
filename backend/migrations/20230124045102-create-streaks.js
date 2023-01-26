@@ -10,31 +10,32 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'users',
-          key: 'user_id'
+          key: 'userId'
         },
         onUpdate: 'cascade',
         onDelete: 'cascade'
       },
-      academic_streak: {
+      academicStreak: {
         type: Sequelize.INTEGER,
       },
-      social_streak: {
+      socialStreak: {
         type: Sequelize.INTEGER,
       },
-      health_streak: {
+      healthStreak: {
         type: Sequelize.INTEGER,
       },
-      travel_streak: {
+      travelStreak: {
         type: Sequelize.INTEGER,
       },
       created_at: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
       },
       updated_at: {
         allowNull: false,

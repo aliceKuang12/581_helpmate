@@ -10,12 +10,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'users',
-          key: 'user_id'
+          key: 'userId'
         },
         onUpdate: 'cascade',
         onDelete: 'cascade'
@@ -27,7 +27,7 @@ module.exports = {
       category: {
         type: Sequelize.TEXT,
       },
-      event_time: {
+      eventTime: {
         type: Sequelize.DATE,
         allowNull: false
       },
@@ -40,15 +40,12 @@ module.exports = {
       completed: {
         type: Sequelize.BOOLEAN,
       },
-      created_on: {
+      createdAt: {
+        allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
       },
-      created_at: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
       }
