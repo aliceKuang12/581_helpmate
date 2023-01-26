@@ -5,15 +5,10 @@ import path from 'path';
 import { basename } from 'path';
 import { Sequelize } from 'sequelize';
 import process from 'process';
-import config from '/../config/config,json';
-// const fs = require('fs');
-// const path = require('path');
-// const Sequelize = require('sequelize');
-// const process = require('process');
-// const basename = path.basename(__filename);
-// const config = require(__dirname + '/../config/config.json')[env];
-const config = config[env];
+import config from '/../config/config.json';
+
 const env = process.env.NODE_ENV || 'development';
+const config = config[env];
 const db = {};
 
 let sequelize;
