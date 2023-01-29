@@ -1,6 +1,7 @@
 import sql from "./db.js";
 
 const User = function(user) {
+    this.token = user.token;
     this.username = user.username;
     this.password = user.password;
     this.email = user.email;
@@ -20,7 +21,6 @@ User.create = (newUser, result) => {
             result(err, null);
             return;
         }
-        console.log("Created customer: ", res);
         result(null, res);
     })
 }

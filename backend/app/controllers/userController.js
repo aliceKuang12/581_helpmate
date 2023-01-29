@@ -1,4 +1,15 @@
 import User from "../models/user.js";
+import bcrypt from 'bcrypt';
+
+const hashPassword = (password) => {
+    const saltRounds = 10;
+    const hashedPassword = bcrypt.hashSync(password, saltRounds);
+    return hashedPassword;
+}
+
+// const checkPassword = (password, User) => {
+//     const match = bcrypt.compareSync(password, User.password);
+// }
 
 export const createUser = (req, res) => {
     if (!req.body) {
@@ -6,16 +17,18 @@ export const createUser = (req, res) => {
             message: "Content cannot be empty"
         })
     }
+    
     const newUser = new User({
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        cell: req.body.cell,
-        fname: req.body.fname,
-        lname: req.body.lname,
-        birthday: req.body.birthday,
-        profilePic: req.body.profilePic,
-        address: req.body.address
+        token: req.query.token,
+        username: req.query.username,
+        password: hashPassword(req.query.password),
+        email: req.query.email,
+        cell: req.query.cell,
+        fname: req.query.fname,
+        lname: req.query.lname,
+        birthday: req.query.birthday,
+        profilePic: req.query.profilePic,
+        address: req.query.address
     })
 
     User.create(newUser, (err, data) => {
@@ -25,11 +38,12 @@ export const createUser = (req, res) => {
             })
         } else {
             res.send(data);
+            console.log(newUser);
         }
     })
 };
 
-export const findAll = (res) => {  
+export const findAll = (req, res) => {  
     User.getAll((err, data) => {
       if (err)
         res.status(500).send({
@@ -39,21 +53,3 @@ export const findAll = (res) => {
       else res.send(data);
     });
 };
-
-const test = {
-    body: {
-        username: "Test1",
-        password: "1234",
-        email: "test1@gmail.com",
-        cell: "",
-        fname: "Test1",
-        lname: "User",
-        birthday: new Date(1995, 11, 17),
-        profilePic: "",
-        address: ""
-    }
-}
-const res = ""
-
-createUser(test, res);
-// findAll(res);
