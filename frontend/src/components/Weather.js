@@ -2,6 +2,12 @@ import {useEffect, useState, useRef} from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
+//https://maxrozen.com/fetching-data-react-with-useeffect
+//https://bobbyhadz.com/blog/react-cant-perform-react-state-update-on-unmounted-component
+//https://javascript.info/fetch
+//https://www.weatherapi.com/api-explorer.aspx
+
+
 function useIsMounted() {
   const isMounted = useRef(false);
 
