@@ -12,13 +12,15 @@ import DialogContent from '@mui/material/DialogContent';
 //import withStyles from '@mui/styles/withStyles';
 import { AXIOS_HEADER } from '../constants';
 import { useAuth } from '../context/AuthContext'
+import { DATE_REGEX } from '../constants';
 
 const SignUp = (props) => {
     const { 
         isOpen,
         handleClose,
     } = props;
-    const { signup, deleteUser } = useAuth()
+    const { signup } = useAuth()
+    const { deleteuser } = useAuth()
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
@@ -51,8 +53,6 @@ const SignUp = (props) => {
         setData(prevState => ({...prevState, [key]: value,}));
     };
 
-
-
     const handleCancel = () => {
         setData({
             fname: '',
@@ -67,13 +67,20 @@ const SignUp = (props) => {
         })
         handleClose()
     }
-
+    const validateDate = (dateStr) => {
+        if (dateStr.match(DATE_REGEX) === null) {
+            setError("Invalid birthday format");
+            alert("Invalid birthday format");
+            return false;
+        }
+        return true;
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (passwordConfirmRef.current.value !== passwordRef.current.value) {
             alert('Passwords do not match!')
             setError('Passwords do not match!')
-        } else {
+        } else if (validateDate(birthday)) {
             try {
                 const res = await signup(emailRef.current.value, passwordRef.current.value);
                 if (res) {
@@ -109,7 +116,6 @@ const SignUp = (props) => {
             })
             handleClose();
         }).catch((e) => {
-            deleteUser(db.token);
             console.log(e);
         })
     }
@@ -232,7 +238,11 @@ const SignUp = (props) => {
                                     onChange={e => handleChange(e.target.value, 'birthday')}
                                     value={birthday}
                                     placeholder="yyyy-mm-dd"
-                                    fullWidth sx={{marginBottom: '1rem'}}/>
+                                    fullWidth sx={{marginBottom: '1rem'}}
+                                    // helperText={validateDate(birthday) ? '': "Please follow formate YYYY-MM-DD"}
+                                    // error={!validateDate(birthday)}
+
+                                />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField 
