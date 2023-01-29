@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 //https://bobbyhadz.com/blog/react-cant-perform-react-state-update-on-unmounted-component
 //https://javascript.info/fetch
 //https://www.weatherapi.com/api-explorer.aspx
-
+//https://developer.mozilla.org/en-US/docs/Web/API/Response/json
 
 function useIsMounted() {
   const isMounted = useRef(false);
