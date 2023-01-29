@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import TextField from '@mui/material/TextField';
-// import _isEmpty from 'lodash/isEmpty';
+import _isEmpty from 'lodash/isEmpty';
 import { Grid, Typography } from '@material-ui/core';
 import { Button } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -10,16 +10,15 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 //import withStyles from '@mui/styles/withStyles';
-// import { AXIOS_HEADER } from '../constants';
+import { AXIOS_HEADER } from '../constants';
 import { useAuth } from '../context/AuthContext'
-
 
 const SignUp = (props) => {
     const { 
         isOpen,
         handleClose,
     } = props;
-    const { signup } = useAuth()
+    const { signup, deleteUser } = useAuth()
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
@@ -32,8 +31,8 @@ const SignUp = (props) => {
         password: '',
         phone: '',
         address: '',
-        dob: '',
-        avt: '',
+        birthday: '',
+        profilePic: '',
     });
 
     const {
@@ -44,14 +43,16 @@ const SignUp = (props) => {
         password,
         phone,
         address,
-        avt,
-        dob,
+        profilePic,
+        birthday,
     } = data;
     
     const handleChange = (value, key) => {
         setData(prevState => ({...prevState, [key]: value,}));
     };
-    
+
+
+
     const handleCancel = () => {
         setData({
             fname: '',
@@ -61,8 +62,8 @@ const SignUp = (props) => {
             password: '',
             phone: '',
             address: '',
-            dob: '',
-            avt: '',
+            birthday: '',
+            profilePic: '',
         })
         handleClose()
     }
@@ -74,24 +75,27 @@ const SignUp = (props) => {
             setError('Passwords do not match!')
         } else {
             try {
-                setError("")
-                await signup(emailRef.current.value, passwordRef.current.value)
-                handleData();
-                alert("Sucessfully signed up!")
-                handleClose();
+                const res = await signup(emailRef.current.value, passwordRef.current.value);
+                if (res) {
+                    handleData({token: res, ...data});
+                }
             } catch (e) {
                 alert(e)
             }
         }
     }
     
-    const handleData = () => {
-        // axios({
-        //     url: '',
-        //     method: 'POST',
-        //     headers: AXIOS_HEADER,
-        //     params: data,
-        // }).then(() => {
+    const handleData = (db) => {
+        if (_isEmpty(db.birthday)) {
+            db.birthday = '0001-01-01'
+        }
+        axios({
+            url: 'http://localhost:3003/users',
+            method: 'POST',
+            headers: AXIOS_HEADER,
+            params: db,
+        }).then(() => {
+            alert("Sucessfully signed up!")
             setData({
                 fname: '',
                 lname: '',
@@ -100,12 +104,14 @@ const SignUp = (props) => {
                 password: '',
                 phone: '',
                 address: '',
-                dob: '',
-                avt: '',
+                birthday: '',
+                profilePic: '',
             })
-        // }).catch((e) => {
-        //     console.log(e);
-        // })
+            handleClose();
+        }).catch((e) => {
+            deleteUser(db.token);
+            console.log(e);
+        })
     }
 
     return (
@@ -153,7 +159,8 @@ const SignUp = (props) => {
                                             fullWidth sx={{marginBottom: '1rem'}}
                                             value={fname}
                                             placeholder="First name"
-                                            />
+                                            required
+                                        />
                                     </Grid>
                                     <Grid item xs={6}>
                                         <TextField 
@@ -162,7 +169,9 @@ const SignUp = (props) => {
                                             variant="outlined" 
                                             onChange={e => handleChange(e.target.value, 'lname')}
                                             value={lname}
-                                            fullWidth sx={{marginBottom: '1rem'}}/> 
+                                            fullWidth sx={{marginBottom: '1rem'}}
+                                            required
+                                        /> 
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -173,7 +182,9 @@ const SignUp = (props) => {
                                     variant="outlined" 
                                     onChange={e => handleChange(e.target.value, 'username')}
                                     value={username}
-                                    fullWidth sx={{marginBottom: '1rem'}}/>
+                                    fullWidth sx={{marginBottom: '1rem'}}
+                                    required
+                                />
                             </Grid>
                             <Grid item xs={12}>
                                 <Grid container spacing = {3}>
@@ -185,7 +196,7 @@ const SignUp = (props) => {
                                             inputRef={passwordRef}
                                             type="password"
                                             onChange={e => handleChange(e.target.value, 'password')}
-                                            // value={password}
+                                            value={password}
                                             fullWidth sx={{marginBottom: '1rem'}}
                                             required
                                         />
@@ -218,8 +229,9 @@ const SignUp = (props) => {
                                     id="dob" 
                                     label="Date of birth" 
                                     variant="outlined" 
-                                    onChange={e => handleChange(e.target.value, 'dob')}
-                                    value={dob}
+                                    onChange={e => handleChange(e.target.value, 'birthday')}
+                                    value={birthday}
+                                    placeholder="yyyy-mm-dd"
                                     fullWidth sx={{marginBottom: '1rem'}}/>
                             </Grid>
                             <Grid item xs={12}>
@@ -236,9 +248,8 @@ const SignUp = (props) => {
                                     id="avt" 
                                     label="Profile Picture" 
                                     variant="outlined" 
-                                    value={avt}
-                                    fullWidth 
-                                    sx={{marginBottom: '1rem'}}
+                                    value={profilePic}
+                                    fullWidth sx={{marginBottom: '1rem'}}
                                 />
                             </Grid>
                         </Paper>
