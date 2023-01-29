@@ -20,22 +20,13 @@ const Clock = () => {
     const updateDate = () => {
         let date = new Date().toLocaleDateString('en-US', options);
         setCurrentDate(date);
-    }
-
-    fetch("http://api.weatherapi.com/v1/current.json?key=7f716f37a5c243009af191541232501&q=Lawrence, KS&aqi=no", {
-        "method": "GET",
-        "headers": {}
-        })
-        .then(response => response.json())
-        .then(result => console.log(result))
-        .catch(err => {
-            console.error(err);
-        });
-        
+    }   
     
 
     setInterval(updateTime, 1000);
     setInterval(updateDate, 1000);
+
+
 
     return (
         //https://medium.com/12-developer-labors/css-all-the-ways-to-align-elements-left-and-right-52ecce4a4af9
