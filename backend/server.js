@@ -6,7 +6,6 @@ import urlParse from "url-parse"
 import queryParse from "query-string"
 import bodyParser from "body-parser";
 import axios from "axios"
-import sql from "./app/models/db.js"
 
 const app = express();
 
@@ -107,5 +106,6 @@ app.get("/steps", async (req, res) => {
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
-  console.log(`inforrr ${sql.development}`);
 });
+
+export default app;

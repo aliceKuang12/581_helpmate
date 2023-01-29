@@ -14,7 +14,6 @@ app.use(express.json()); /* bodyParser.json() is deprecated */
 
 // simple route
 app.get("/", (req, res) => {
-  console.log(infor)
   res.json({name:"Drake"});
 });
 
