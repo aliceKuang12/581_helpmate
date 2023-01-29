@@ -2,6 +2,7 @@ import {useState} from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
+
 //https://www.youtube.com/watch?v=T_lFnwLiATc
 
 const Clock = () => {
@@ -20,6 +21,18 @@ const Clock = () => {
         let date = new Date().toLocaleDateString('en-US', options);
         setCurrentDate(date);
     }
+
+    fetch("http://api.weatherapi.com/v1/current.json?key=7f716f37a5c243009af191541232501&q=Lawrence, KS&aqi=no", {
+        "method": "GET",
+        "headers": {}
+        })
+        .then(response => response.json())
+        .then(result => console.log(result))
+        .catch(err => {
+            console.error(err);
+        });
+        
+    
 
     setInterval(updateTime, 1000);
     setInterval(updateDate, 1000);
