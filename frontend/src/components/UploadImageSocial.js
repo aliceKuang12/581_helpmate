@@ -17,8 +17,21 @@ import img2 from '../images/socialUploadTest.jpg'
 import img3 from '../images/hiker.jpg'
 
 
-
 export default function UploadImage() {
+
+// saving multiple urls: https://www.youtube.com/watch?v=PDtW-XAshqs
+  const [ selectedImages, setSelectedImages ] = useState([]);
+  const onSelectFile = (event) => {
+    const selectedFiles = event.target.files;
+    const selectedFilesArray = Array.from(selectedFiles)
+    
+    const imagesArray = selectedFilesArray.map((file) => {
+      return URL.createObjectURL(file);
+    });
+
+    setSelectedImages(imagesArray);
+  }
+  
 
   const MyCollection = [
     {
@@ -47,21 +60,22 @@ export default function UploadImage() {
   };
 
   const [file, setFile] = useState("Invalid Image Source");
-  function saveUrl(e) {
-      console.log(e.target.files);
-      setFile(URL.createObjectURL(e.target.files[0]));
-  }
+  // function saveUrl(e) {
+  //     console.log(e.target.files);
+  //     setFile(URL.createObjectURL(e.target.files[0]));
+  // }
   return (
     <Grid container-spacing={2}  alignItems="center" justifyContent="center" >
         <Grid item xs={10} sx={{mx: 5}}>
            <img 
-              src={MyCollection[index].img}
+              src= {selectedImages[index] ? selectedImages[index] : MyCollection[index].img }
               style={{
                 height: 255,
                 width: "100%",
                 maxWidth: 400,
                 display: "block",
                 overflow: "hidden",
+
               }}
               alt={MyCollection[index].label} 
            onError = {() => setFile(DefaultImage)}
@@ -78,14 +92,14 @@ export default function UploadImage() {
               size="small"
               onClick={goToPrevPicture}
               disabled={index === 0}
-            >
+            > 
               {theme.direction !== "ltr" ? (
                 <KeyboardArrowRight />
               ) : (
                 <KeyboardArrowLeft />
               )}
             </Button>
-          }
+          } 
           nextButton={
             <Button
               size="small"
@@ -110,7 +124,7 @@ export default function UploadImage() {
       <UploadIcon sx={{fontSize: "medium" }} /> &nbsp; Upload
         <input hidden accept="image/*" 
                 multiple type="file" 
-                onChange={saveUrl}/>
+                onChange={onSelectFile}/>
       </Button>
       
     </Grid>
