@@ -6,6 +6,12 @@ import DialogContent from '@mui/material/DialogContent';
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
 
+  const openCalendar = () => {
+    const url = "https://calendar.google.com/calendar/u/0/r";
+    window.open(url, '_blank', 'noopener,noreferrer');
+   // setOpen(true);
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -16,7 +22,7 @@ export default function BasicForm() {
 
   return (
     <div >
-      <Button onClick={handleClickOpen} sx={{ fill: "blue", color:"Black" }}>
+      <Button onClick={openCalendar} sx={{ fill: "blue", color:"Black" }}>
         View Events
       </Button>
 
