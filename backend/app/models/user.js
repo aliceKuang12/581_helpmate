@@ -1,3 +1,4 @@
+import { query } from "express";
 import sql from "./db.js";
 
 const User = function(user) {

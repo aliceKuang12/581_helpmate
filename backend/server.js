@@ -12,9 +12,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extende: true }));
 app.use(bodyParser.json());
-
-// parse requests of content-type - application/json
-app.use(express.json()); /* bodyParser.json() is deprecated */
+app.use(express.json());
 
 // simple route https://youtu.be/-yH1ZnZBWyU
 app.get("/getUrl", (req, res) => {
@@ -43,8 +41,6 @@ app.get("/getUrl", (req, res) => {
     console.log("statusCode: ", response && response.statusCode);
     res.send({ url });
   });
-
-
 });
 
 app.get("/steps", async (req, res) => {

@@ -1,5 +1,7 @@
 import User from "../models/user.js";
 import bcrypt from 'bcrypt';
+import sql from "../models/db.js";
+import session from "express-session"
 
 const hashPassword = (password) => {
     const saltRounds = 10;
@@ -7,12 +9,13 @@ const hashPassword = (password) => {
     return hashedPassword;
 }
 
-// const checkPassword = (password, User) => {
-//     const match = bcrypt.compareSync(password, User.password);
-// }
+const checkPassword = (password, User) => {
+    const match = bcrypt.compareSync(password, User.password);
+    return match;
+}
 
 export const createUser = (req, res) => {
-    if (!req.body) {
+    if (!req.query) {
         res.status(400).send({
             message: "Content cannot be empty"
         })
@@ -43,12 +46,50 @@ export const createUser = (req, res) => {
     })
 };
 
+export const login = (req, res, next) => {
+    if (!req.query) {
+        res.status(400).send({
+            message: "Content cannot be empty"
+        })
+    }
+
+    const email = req.query.email;
+    const password = req.query.password;
+    // const username = req.username;
+
+    if (email && password) {
+        let query = `SELECT * FROM users WHERE email = "${email}"`;
+        sql.query(query, (err, data) => {
+            if (err) {
+                return res.status(500).send({message: err.message || "Some error occurred while logging in."})
+            }
+            if (res.length == 0) {
+                return res.status(401).send({message: "Incorrect email address!"});
+            } else {
+                if (checkPassword(password, data[0])) {
+                    req.session.user = data[0];
+                    req.session.regenerate(function (err) {
+                        if (err) next(err)
+                        req.session.save(function (err) {
+                            if (err) return next(err);
+                            return res.status(200);
+                        })
+                    })
+                } else {
+                    return res.status(401).send({message: "Incorrect password"});
+                }
+            }
+        })
+    }
+    
+}
+
 export const findAll = (req, res) => {  
     User.getAll((err, data) => {
       if (err)
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving tutorials."
+            err.message || "Some error occurred while retrieving users."
         });
       else res.send(data);
     });

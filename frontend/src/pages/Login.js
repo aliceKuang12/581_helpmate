@@ -6,8 +6,10 @@ import Button from '@mui/material/Button';
 import BasicForm from "../components/BasicForm";
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { signInWithGoogle } from "../context/AuthContext"
 import "./Login.css"
+import { AXIOS_HEADER } from '../constants';
 
 
 const CLIENT_ID = "604737241673-l8a7fo1div65eqnasbf4jute8v3pc764.apps.googleusercontent.com"
@@ -28,14 +30,34 @@ const Login = (props) => {
         }
     }
     const handleLogin = async (e) => {
-        try {
-            await login(emailRef.current.value, passwordRef.current.value);
-            navigate({
-                pathname: '/',
-            },)
-        } catch (e) {
-            alert(e);
-        }
+        // try {
+        //     await login(emailRef.current.value, passwordRef.current.value);
+        //     navigate({
+        //         pathname: '/',
+        //     },)
+        // } catch (e) {
+        //     alert(e);
+        // }
+        console.log("Logging in")
+        axios({
+            url: 'http://localhost:3003/login',
+            method: 'POST',
+            headers: AXIOS_HEADER,
+            params: {
+                email: emailRef.current.value,
+                password: passwordRef.current.value
+            },
+        }).then((res) => {
+            console.log(res);
+            if (res.status === 200) {
+                alert("Successfully logged in!");
+                window.location.href = "/";
+            } else {
+                throw res;
+            }
+        }).catch((err) => {
+            alert(err.message);
+        })
     }
 
     const handleChange = (value) => {
