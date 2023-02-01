@@ -6,6 +6,7 @@ import TopicCard from '../components/TopicCard'
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Clock from '../components/Clock'
+import Weather from '../components/Weather'
 import modules from "./modules.json"
 import Image from '../images/homebackground2.jpeg'
 
@@ -15,6 +16,7 @@ const Homepage = (props) => {
         <div style={{ backgroundImage: `url(${Image})`, backgroundSize: "cover" }}> 
             <Header user={user}/>
             <Clock />
+            <Weather />
             <div className = "body">
                 <Container>
                     {modules.map((Modules) => (

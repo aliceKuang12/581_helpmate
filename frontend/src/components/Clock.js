@@ -2,6 +2,7 @@ import {useState} from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
+
 //https://www.youtube.com/watch?v=T_lFnwLiATc
 
 const Clock = () => {
@@ -19,10 +20,13 @@ const Clock = () => {
     const updateDate = () => {
         let date = new Date().toLocaleDateString('en-US', options);
         setCurrentDate(date);
-    }
+    }   
+    
 
     setInterval(updateTime, 1000);
     setInterval(updateDate, 1000);
+
+
 
     return (
         //https://medium.com/12-developer-labors/css-all-the-ways-to-align-elements-left-and-right-52ecce4a4af9
