@@ -1,4 +1,4 @@
-const Tutorial = require("../models/queryStatement.js");
+const Tutorial = require("../models/templateModel.js");
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {

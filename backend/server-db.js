@@ -1,24 +1,24 @@
-import infor  from "./app/models/db.js";
-import cors from "cors";
-import express from "express"
-// var corsOptions = {
-  //   origin: "http://localhost:8081"
-  // };
+// import infor  from "./app/models/db.js";
+// import cors from "cors";
+// import express from "express"
+// // var corsOptions = {
+//   //   origin: "http://localhost:8081"
+//   // };
   
-const app = express();
-app.use(cors());
+// const app = express();
+// app.use(cors());
 
-// parse requests of content-type - application/json
-app.use(express.json()); /* bodyParser.json() is deprecated */
+// // parse requests of content-type - application/json
+// app.use(express.json()); /* bodyParser.json() is deprecated */
 
 
-// simple route
-app.get("/", (req, res) => {
-  res.json({name:"Drake"});
-});
+// // simple route
+// app.get("/", (req, res) => {
+//   res.json({name:"Drake"});
+// });
 
-// set port, listen for requests
-const PORT = process.env.PORT || 5002;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+// // set port, listen for requests
+// const PORT = process.env.PORT || 5002;
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}.`);
+// });
