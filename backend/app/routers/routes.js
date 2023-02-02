@@ -9,11 +9,11 @@ app.use(session({
     saveUninitialized: true
 }))
 
-app.post("/users", user.createUser);
+app.post("/users", (req, res) => user.createUser(req, res));
 
 app.get("/users", user.findAll);
 
-app.post("/login", express.urlencoded({extended: false}), (req, res) => user.login(req, res));
+app.post("/login", express.urlencoded({extended: false}), (req, res, next) => user.login(req, res, next));
 
 app.get("/logout", (req, res, next) => {
     req.session.user = null;

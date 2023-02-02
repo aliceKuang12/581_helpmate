@@ -67,12 +67,12 @@ export const login = (req, res, next) => {
                 return res.status(401).send({message: "Incorrect email address!"});
             } else {
                 if (checkPassword(password, data[0])) {
-                    req.session.user = data[0];
                     req.session.regenerate(function (err) {
                         if (err) next(err)
+                        req.session.user = data[0];
                         req.session.save(function (err) {
                             if (err) return next(err);
-                            return res.status(200);
+                            return res.status(200).json(req.session.user);
                         })
                     })
                 } else {
