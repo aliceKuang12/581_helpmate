@@ -48,6 +48,11 @@ export default function Header(props) {
       setAnchorElUser(null);
     };
 
+    const goToProfile = () => {
+      setAnchorElUser(null);
+      window.location.href = '/profile';
+    }
+
     const handleLogOut = () => {
       setAnchorElUser(null);
       logout();
@@ -158,7 +163,9 @@ export default function Header(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem>
+              <MenuItem
+                onClick={goToProfile}
+              >
                 <Typography textAlign="center">Account</Typography>
               </MenuItem>
               <MenuItem 
