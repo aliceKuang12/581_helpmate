@@ -37,7 +37,7 @@ export const createUser = (req, res) => {
     User.create(newUser, (err, data) => {
         if (err) {
             res.status(500).send({
-                message: err.message || "An error has occured"
+                message: err.message || "An error has occured while creating new user"
             })
         } else {
             res.send(data);
@@ -86,11 +86,13 @@ export const login = (req, res, next) => {
 
 export const findAll = (req, res) => {  
     User.getAll((err, data) => {
-      if (err)
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving users."
-        });
-      else res.send(data);
+        if (err) {
+            return res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving users."
+            });
+        }
+        
+        res.send(data);
     });
 };

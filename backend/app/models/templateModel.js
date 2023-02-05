@@ -10,10 +10,6 @@ const Tutorial = function(tutorial) {
 Tutorial.getAll = (title, result) => {
     let query = "SELECT * FROM User";
   
-    // if (title) {
-    //   query += ` WHERE title LIKE '%${title}%'`;
-    // }
-  
     sql.query(query, (err, res) => {
       if (err) {
         console.log("error: ", err);

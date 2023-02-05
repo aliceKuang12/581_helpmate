@@ -97,7 +97,7 @@ const SignUp = (props) => {
             db.birthday = '0001-01-01'
         }
         axios({
-            url: 'http://localhost:3003/users',
+            url: 'http://localhost:3003/signup',
             method: 'POST',
             headers: AXIOS_HEADER,
             params: db,
