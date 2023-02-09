@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
 import Paper from "@mui/material/Paper"
 import { Divider, Stack, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import img from '../images/ku_building_1.jpg'
 import Image from '../images/streaksBackground.jpg'
+import axios from 'axios'
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -16,6 +17,22 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 const Profile = () => {
+    const [users, setUsers] = useState([]);
+
+    // useEffect strucutre: https://reactjs.org/docs/hooks-effect.html
+    useEffect(() => {
+        const fetchAllUsers = async () => {
+            try {
+                const res = await axios.get("http://localhost:3003/users")
+                setUsers(res.data);
+                console.log(res);
+            } catch(err) {
+                console.log(err);
+            }
+        }
+        fetchAllUsers()
+    }, []);
+
     return (
 
         <div style={{
@@ -33,6 +50,12 @@ const Profile = () => {
                     }}
                 >
                     My Profile
+                    {/* // loops through and retreive all users names
+                        {users.map(user=>(
+                        <div className="user">
+                            <h2>{user.fname}</h2>      
+                        </div>
+                    ))} */}
                 </Typography>
             <br /><br />
             <Stack direction="row"
