@@ -25,7 +25,8 @@ const Homepage = (props) => {
                                 variant = "h4"
                                 component = "h2"
                                 margintop = {5}
-                                marginbottom = {3}>
+                                marginbottom = {3}
+                                color = "#FFFFFF">
                                     {Modules.name} 
                                 </Typography>,
                     
