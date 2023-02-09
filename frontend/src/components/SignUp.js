@@ -20,7 +20,7 @@ const SignUp = (props) => {
         handleClose,
     } = props;
     const { signup } = useAuth()
-    const { deleteuser } = useAuth()
+   // const { deleteuser } = useAuth()
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
@@ -34,7 +34,8 @@ const SignUp = (props) => {
         phone: '',
         address: '',
         birthday: '',
-        profilePic: '',
+        token:'',
+        //profilePic: ''
     });
 
     const {
@@ -45,7 +46,8 @@ const SignUp = (props) => {
         password,
         phone,
         address,
-        profilePic,
+       // profilePic,
+        token,
         birthday,
     } = data;
     
@@ -63,7 +65,8 @@ const SignUp = (props) => {
             phone: '',
             address: '',
             birthday: '',
-            profilePic: '',
+            token: '',
+            profilePic: ''
         })
         handleClose()
     }
@@ -86,6 +89,8 @@ const SignUp = (props) => {
                 if (res) {
                     handleData({token: res, ...data});
                 }
+                await axios.post("http://localhost:3003/createUser", data)
+                alert("User successfully created")
             } catch (e) {
                 alert(e)
             }
@@ -112,7 +117,7 @@ const SignUp = (props) => {
                 phone: '',
                 address: '',
                 birthday: '',
-                profilePic: '',
+               // profilePic: '',
             })
             handleClose();
         }).catch((e) => {
@@ -255,13 +260,22 @@ const SignUp = (props) => {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField 
+                                    id="token" 
+                                    label="Token"
+                                    variant="outlined"
+                                    onChange={e => handleChange(e.target.value, 'token')}
+                                    value={token}
+                                    fullWidth sx={{marginBottom: '1rem'}}/>
+                            </Grid>
+                            {/* <Grid item xs={12}>
+                                <TextField 
                                     id="avt" 
                                     label="Profile Picture" 
                                     variant="outlined" 
                                     value={profilePic}
                                     fullWidth sx={{marginBottom: '1rem'}}
                                 />
-                            </Grid>
+                            </Grid> */}
                         </Paper>
                     </Grid>
                 </Grid>

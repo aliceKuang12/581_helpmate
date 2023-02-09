@@ -30,8 +30,8 @@ app.post("/signup", (req, res) => user.createUser(req, res));
 
 // manual userCreation method
 app.post("/createUser", (req, res) => {
-    const q = "INSERT INTO users (`username`, `fname`, `lname`, `email`, `password`, `cell`, `token`) VALUES (?)";
-   // const values = ["akuang", "alice", "k", "akuang@gmail.com", "pass12","999-888-9898","alice135"];
+    const q = "INSERT INTO users (`username`, `fname`, `lname`, `email`, `password`, `cell`, `token`, `birthday`) VALUES (?)";
+   // const values = ["akuang", "alice", "k", "akuang@gmail.com", "pass12","999-888-9898","alice135", "2000-01-01"];
    const values = [
     req.body.username,
     req.body.fname,
@@ -39,7 +39,8 @@ app.post("/createUser", (req, res) => {
     req.body.email,
     req.body.password,
     req.body.cell,
-    req.body.token
+    req.body.token,
+    req.body.birthday
    ] 
    sql.query(q, [values], (err, data) => {
         if (err) return res.json(err)
