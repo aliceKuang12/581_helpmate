@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles'
 import img from '../images/ku_building_1.jpg'
 import Image from '../images/streaksBackground.jpg'
 import axios from 'axios'
-import JsonData from './user1.json'
+//import JsonData from './user1.json'
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
