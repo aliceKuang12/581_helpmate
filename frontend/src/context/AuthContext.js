@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react"
 import { auth } from "../firebase"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import axios from 'axios'
 
 const AuthContext = React.createContext()
 
@@ -19,8 +20,11 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
-    localStorage.setItem("name", email)
+    localStorage.setItem("email", email)
+    
+    localStorage.setItem("name", "get from db")
     return auth.signInWithEmailAndPassword(email, password)
+
   }
 
   function logout() {
@@ -111,4 +115,3 @@ export const signInWithGoogle = () => {
       console.log(error)
     })
 }
-
