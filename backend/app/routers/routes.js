@@ -50,14 +50,8 @@ app.post("/createUser", (req, res) => {
 
 app.get("/users", user.findAll); // works, same as "select * from users"
 
-// https://www.youtube.com/watch?v=fPuLnzSjPLE
-// app.get("/userTable", (req, res) => {
-//     const q = "SELECT * FROM users"
-//     sql.query(q, (err, data)=>{
-//         if(err) return res.json(err)
-//         return res.json(data);
-//     })
-// })
+// get user profile based on their email
+app.get("/user/:email",  (req, res) => { user.findOne(req, res)}); // same as "select * from users where email =`:email`"
 
 //academic module
 app.post("/academics/create", (req, res) => academic.createEvent(req, res));

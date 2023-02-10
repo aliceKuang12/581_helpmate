@@ -21,6 +21,7 @@ const Login = (props) => {
     const emailRef = useRef()
     const passwordRef = useRef()
     const [error, setError] = useState("")
+    const [users, setUsers] = useState([]);
     const onClickLogin = () => {
         if (!(passwordRef.current.value && emailRef.current.value)) {
             setError("Empty field(s) exist")
@@ -29,35 +30,30 @@ const Login = (props) => {
             handleLogin();
         }
     }
-    const handleLogin = async (e) => {
-        // try {
-        //     await login(emailRef.current.value, passwordRef.current.value);
-        //     navigate({
-        //         pathname: '/',
-        //     },)
-        // } catch (e) {
-        //     alert(e);
-        // }
-        console.log("Logging in")
-        axios({
-            url: 'http://localhost:3003/login',
-            method: 'POST',
-            headers: AXIOS_HEADER,
-            params: {
-                email: emailRef.current.value,
-                password: passwordRef.current.value
-            },
-        }).then((res) => {
+
+    const mySqlFetch = async (email, pass) => {
+        try {
+            const res = await axios.post("http://localhost:3003/login?email=" + email + "&password=" +pass) // 3003/users for entire db
+            setUsers(res.data);
             console.log(res);
-            if (res.status === 200) {
-                alert("Successfully logged in!");
-                window.location.href = "/";
-            } else {
-                throw res;
-            }
-        }).catch((err) => {
-            alert(err.message);
-        })
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    const handleLogin = async (e) => {
+        try {
+            await login(emailRef.current.value, passwordRef.current.value);
+             // mySqlFetch(emailRef.current.value, passwordRef.current.value);
+            navigate({
+                pathname: '/',
+            },)
+        } catch (e) {
+            alert(e);
+        }
+        console.log("Logging in")
+
+
     }
 
     const handleChange = (value) => {

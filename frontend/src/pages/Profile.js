@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles'
 import img from '../images/ku_building_1.jpg'
 import Image from '../images/streaksBackground.jpg'
 import axios from 'axios'
-
+import JsonData from './user1.json'
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -17,21 +17,58 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 const Profile = () => {
-    const [users, setUsers] = useState([]);
+    // https://youtu.be/fPuLnzSjPLE?t=1335
+    const [data, setData] = useState([]);
 
+    const DisplayNames = data.map(
+        (info) => {
+            return (
+                <div>
+                    <Typography>Name: {info.fname} {info.lname}</Typography>
+                    <Typography> Username: @{info.username}</Typography>
+                </div>
+            )
+        }
+    )
+
+    const DisplayData = data.map(
+        (info) => {
+            return (<div>
+                <Typography>Name: {info.fname} {info.lname}</Typography>
+
+                <Typography> Username:{info.username}</Typography>
+                <Typography>Email: {info.email}</Typography>
+                <Typography>Cell: {info.cell ? info.cell : "N/a"}</Typography>
+                <Typography>Address: {info.address=='Undefined' ? "N/a" : info.address}</Typography>
+
+                <br />
+
+                <Typography sx={{ fontWeight: 'bold' }}>
+                    Security
+                </Typography>
+                <Typography> Birthday: {info.birthday} </Typography>
+                <Typography>Password: {info.password}</Typography>
+
+            </div>
+            )
+        }
+    )
     // useEffect strucutre: https://reactjs.org/docs/hooks-effect.html
     useEffect(() => {
         const fetchAllUsers = async () => {
-            try {
-                const res = await axios.get("http://localhost:3003/users")
-                setUsers(res.data);
-                console.log(res);
-            } catch(err) {
-                console.log(err);
-            }
+            await axios.get("http://localhost:3003/user/" + localStorage.getItem("email"))
+                .then(res => {
+                    setData((res.data));
+                    console.log(res.data);
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
         fetchAllUsers()
     }, []);
+
+
 
     return (
 
@@ -40,28 +77,25 @@ const Profile = () => {
             backgroundSize: "cover"
         }}>
             <NavBar />
-            
+
             <Typography
-                    sx={{
-                        textAlign: 'left',
-                        fontSize: 'h6.fontSize',
-                        px: 4,
-                        mt: 4
-                    }}
-                >
-                    My Profile
-                    {/* // loops through and retreive all users names
-                        {users.map(user=>(
-                        <div className="user">
-                            <h2>{user.fname}</h2>      
-                        </div>
-                    ))} */}
-                </Typography>
+                sx={{
+                    textAlign: 'left',
+                    fontSize: 'h6.fontSize',
+                    px: 4,
+                    mt: 4
+                }}
+            >
+                My Profile
+
+
+
+            </Typography>
             <br /><br />
             <Stack direction="row"
 
                 spacing={4}
-                sx={{px:4}}>
+                sx={{ px: 4 }}>
 
                 <Item sx={{ px: 5, py: 2 }}>
                     <img src={localStorage.getItem("profilePic") ?
@@ -69,9 +103,7 @@ const Profile = () => {
                         width={200} height={200} alt='Profile Photo'
                     />
                     <br /><br />
-                    {localStorage.getItem("name") ? localStorage.getItem("name") : "FirstName_LastName"}
-                    <br />
-                    @Username
+                    {DisplayNames}
                 </Item>
 
                 <Item sx={{
@@ -86,36 +118,25 @@ const Profile = () => {
                     >
                         Contact Information
                     </Typography>
+                    {DisplayData}
 
-                    <Typography>
-                        Email: test@test.com
-                    </Typography>
-                    <Typography>
-                        Cell: XXX-XXX-XXXX
-                    </Typography>
-                    <Typography>
-                        Address: N/A
-                    </Typography>
-                    <br /><br />
-                    <Typography
-                        sx={{ fontWeight: 'bold' }}
-                    >
-                        Security
-                    </Typography>
-                    <Typography>
-                        Birthday: XX_XX_XXXX
-                    </Typography>
-                    <Typography>
-                        Password: XXXXXXXXXX
-                    </Typography>
 
                 </Item>
             </Stack>
-            <br /> <br/>
-            <br /> <br/>
+            <br /> <br />
+            <br /> <br />
+
         </div>
     )
 }
 
 
 export default Profile;
+
+/*
+             {users.map(user=>{
+                    <div className='user'>
+                        <p>{user.fname}</p>
+                        {/* //{user.email==localStorage.getItem("name") ? user.email: "no"} 
+                      </div>
+      */

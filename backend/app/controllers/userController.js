@@ -1,4 +1,5 @@
 import User from "../models/user.js";
+// const User = require("../models/user.js");
 import bcrypt from 'bcrypt';
 import sql from "../models/db.js";
 import session from "express-session"
@@ -24,6 +25,7 @@ export const createUser = (req, res) => {
     const newUser = new User({
         token: req.query.token,
         username: req.query.username,
+        //password: req.query.password,
         password: hashPassword(req.query.password),
         email: req.query.email,
         cell: req.query.cell,
@@ -47,25 +49,26 @@ export const createUser = (req, res) => {
 };
 
 export const login = (req, res, next) => {
-    if (!req.query) {
+    if (!req.params) {
         res.status(400).send({
             message: "Content cannot be empty"
         })
     }
 
-    const email = req.query.email;
-    const password = req.query.password;
+    const email = req.params.email;
+    const password = req.params.password;
     // const username = req.username;
 
     if (email && password) {
-        let query = `SELECT * FROM users WHERE email = "${email}"`;
-        sql.query(query, (err, data) => {
+        let query = `SELECT * FROM users WHERE email = (?)`;
+        sql.query(query, [[email]], (err, data) => {
             if (err) {
                 return res.status(500).send({message: err.message || "Some error occurred while logging in."})
             }
             if (res.length == 0) {
                 return res.status(401).send({message: "Incorrect email address!"});
             } else {
+                console.log(data);
                 if (checkPassword(password, data[0])) {
                     req.session.regenerate(function (err) {
                         if (err) next(err)
@@ -82,6 +85,21 @@ export const login = (req, res, next) => {
         })
     }
     
+}
+
+
+export const findOne = (req, res) => {
+    const email = req.params.email;
+    User.getOne(email, (err, data) => {
+        if (err) {
+            return res.status(500).send({
+                message:
+                    err.message || "Error occurred while retrieving `findone` user."
+            });
+        }
+        
+        res.send(data);
+    });
 }
 
 export const findAll = (req, res) => {  

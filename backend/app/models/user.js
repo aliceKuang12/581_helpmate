@@ -39,5 +39,19 @@ User.getAll = (result) => {
     })
 }
 
+User.getOne  = (email, result) => {
+    //console.log(email)
+    //const email = req.params.email;
+    let query = "SELECT * FROM users where email = ?";
+    sql.query(query, [email], (err, res) => {
+        if (err) {
+            console.log("Cannot retrieve user with email: ", err);
+            result(err,null);
+        } else {
+            console.log("User: ", res);
+            result(null,res);
+        }
+    })
+}
 
 export default User;
