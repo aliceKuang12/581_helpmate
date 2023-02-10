@@ -7,9 +7,13 @@ import queryParse from "query-string"
 import bodyParser from "body-parser";
 import axios from "axios"
 
+var corsOptions = {
+  origin: "http://localhost:3000"
+}
+
 const app = express();
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extende: true }));
 app.use(bodyParser.json());
 app.use(express.json());

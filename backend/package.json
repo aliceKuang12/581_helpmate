@@ -36,6 +36,5 @@
     "request": "^2.88.2",
     "sequelize": "^6.28.0",
     "url-parse": "^1.5.10"
-  },
-  "type": "module"
+  }
 }
