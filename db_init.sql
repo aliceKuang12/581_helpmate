@@ -9,7 +9,7 @@ Values ('Testuser2', " ", '14a41ts', 'Test2@Gmail.Com', 9135821111, 'Test2', 'Us
 
 
 -- Get Number Of Entries
-Select Count(*)As Count From Users;
+Select Count(*)As Count From users;
 	          
 			  
 -- Initialize Academic
