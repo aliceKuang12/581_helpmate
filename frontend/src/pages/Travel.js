@@ -7,8 +7,26 @@ import Clock from '../components/Clock'
 //import Image from '../images/BirdBackground.jpg'
 import Image from '../images/Greece.jpg'
 import TravelInfo from './travel.json'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
 const Template = () => {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchAllTravel = async () => {
+            await axios.get("http://localhost:3003/travel/")
+                .then(res => {
+                    //setData((res.data));
+                    console.log(res.data);
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+        fetchAllTravel()
+    }, []);
+
     return(
         <div style={{ backgroundImage: `url(${Image})`, 
         backgroundSize: "cover" }}>
