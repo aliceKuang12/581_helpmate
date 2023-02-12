@@ -9,22 +9,6 @@ import Image from '../images/BirdBackground.jpg'
 import axios from 'axios'
 
 const Template = () => {
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        const fetchAllAcademic = async () => {
-            await axios.get("http://localhost:3003/academics/")
-                .then(res => {
-                    //setData((res.data));
-                    console.log(res.data);
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        }
-        fetchAllAcademic()
-    }, []);
-
     return(
         <div style={{ backgroundImage: `url(${Image})`, 
         backgroundSize: "cover" }}>
