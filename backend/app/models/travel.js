@@ -24,7 +24,9 @@ Travel.create = (newEvent, result) => {
 }
 
 Travel.show = (user_id, result) => {
-    let query = `SELECT * from travel WHERE userId = ${user_id}`
+    // WHERE userId = ${user_id}
+    // add to end of querery when checking userId
+    let query = `SELECT * from travel`
     sql.query(query, (err, res) => {
         if (err) {
             result(err,null);
