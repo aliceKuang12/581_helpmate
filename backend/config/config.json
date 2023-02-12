@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "CAT_33k1w1",
-    "database": "helpMate",
+    "database": "helpmate",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
