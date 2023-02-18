@@ -20,9 +20,10 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
-    localStorage.setItem("email", email)
-    
-    localStorage.setItem("name", "get from db")
+    localStorage.setItem("email", email);
+
+    localStorage.setItem("name", email);
+
     return auth.signInWithEmailAndPassword(email, password)
 
   }
@@ -86,7 +87,7 @@ export const signInWithGoogle = () => {
   //const [user, setUser] = useState({hasLogin:false, accessToken: ''})  
   signInWithPopup(auth, provider)
     .then((result) => {
-     
+
 
       // The signed-in user info.
       const user = result.user
@@ -104,7 +105,7 @@ export const signInWithGoogle = () => {
       // axios.post('https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate?alt=json', data, axiosconfig)
 
       window.location = "/home"
-      
+
       // This gives you a Google Access Token. You can use it to access Google APIs.
       const credential = GoogleAuthProvider.credentialFromResult(result)
       const token = result.credential.accessToken

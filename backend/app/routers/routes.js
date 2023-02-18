@@ -1,8 +1,10 @@
 import session from "express-session"
 import express from "express";
-import * as user from "../controllers/userController.js";
+import * as user from "../controllers/userController1.js";
 import * as academic from "../controllers/academicController.js";
 import * as travel from "../controllers/travelController.js";
+import * as health from "../controllers/healthController.js";
+import * as social from "../controllers/socialController.js";
 import app from "../../server.js"
 import sql from "../models/db.js";
 app.use(session({
@@ -61,3 +63,10 @@ app.get("/academics", (req, res) => academic.showAcademic(req, res));
 app.post("/travel/create", (req, res) => travel.createEvent(req, res));
 app.get("/travel", (req, res) => travel.showTravel(req, res));
 
+//health module
+app.post("/health/create", (req, res) => health.createEvent(req, res));
+app.get("/health", (req, res) => health.showTravel(req, res));
+
+//social module
+app.post("/travel/create", (req, res) => travel.createEvent(req, res));
+app.get("/travel/:userId", (req, res) => travel.showTravel(req, res));
