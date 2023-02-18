@@ -6,7 +6,6 @@ import '../App.css';
 import Clock from '../components/Clock'
 //import Image from '../images/BirdBackground.jpg'
 import Image from '../images/Greece.jpg'
-import TravelInfo from './travel.json'
 
 const Template = () => {
     return(

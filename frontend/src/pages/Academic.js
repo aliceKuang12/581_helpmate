@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react'
 import ModuleCard2 from '../components/AcademicCard1'
 import ModuleCard from '../components/AcademicCard2'
 import Grid from "@mui/material/Grid"
@@ -5,6 +6,7 @@ import NavBar from '../components/NavBar'
 import '../App.css';
 import Clock from '../components/Clock'
 import Image from '../images/BirdBackground.jpg'
+import axios from 'axios'
 
 const Template = () => {
     return(

@@ -21,12 +21,12 @@ export const createEvent = (req, res) => {
 }
 
 export const showAcademic = (req, res) => {
-    if (!req.query) {
+    if (!req.params) {
         return res.status(400).send({
             message: "Content cannot be empty"
         })
     }
-    Academic.show(req.query.user_id, (err, data) => {
+    Academic.show(req.params.userId, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message: err.message || "Some error occurred while retrieving academic events."

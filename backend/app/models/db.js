@@ -11,4 +11,9 @@ const sql = mysql2.createConnection({
     database: development.database
 });
 
+sql.connect(error => {
+    if (error) throw error; 
+    console.log("Successfully connected to the database.");
+});
+
 export default sql; 

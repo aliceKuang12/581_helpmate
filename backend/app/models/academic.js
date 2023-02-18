@@ -22,8 +22,10 @@ Academic.create = (newEvent, result) => {
 }
 
 Academic.show = (user_id, result) => {
-    let query = `SELECT * from academic WHERE userId = ${user_id}`;
-    sql.query(query, (err, res) => {
+    // WHERE userId = ? 
+    // implement when pulling data with a specific userID
+    let query = `SELECT * from academic`;
+    sql.query(query, [user_id], (err, res) => {
         if (err) {
             console.log(err);
             result(err, null);
