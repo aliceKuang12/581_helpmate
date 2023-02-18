@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import Checkbox from './Checkbox';
 import { Typography } from '@mui/material';
+import  axios from 'axios';
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState({
@@ -44,7 +45,10 @@ export default function BasicForm() {
   };
 
   const handleChange = (value, key) => {
-    setData(prevState => ({...prevState, [key]: value,}));
+    console.log(value);
+    axios.get('http://localhost:3003/calendar')
+  .then(response => console.log(response.data))
+  .catch(error => console.error(error));
   };
 
   return (

@@ -5,6 +5,7 @@ import * as academic from "../controllers/academicController.js";
 import * as travel from "../controllers/travelController.js";
 import app from "../../server.js"
 import sql from "../models/db.js";
+import {google} from 'googleapis'
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -59,5 +60,39 @@ app.get("/academics", (req, res) => academic.showAcademic(req, res));
 
 //travel module
 app.post("/travel/create", (req, res) => travel.createEvent(req, res));
+app.post("/create-tokens", async (req, res, next) =>{
+    try {
+        console.log(req);
+    } catch (error) {
+        next(error);
+    }
+})
 app.get("/travel", (req, res) => travel.showTravel(req, res));
+
+app.get('/calendar', (req, res) => {
+    // Create a new instance of the Calendar API client
+    const auth = new google.auth.GoogleAuth({
+      keyFile: './credentials.json',
+      scopes: 'https://www.googleapis.com/auth/calendar'
+    });
+    const calendar = google.calendar({version: 'v3', auth});
+  
+    // Make a request to the Calendar API to retrieve a list of events
+    calendar.events.list({
+      calendarId: 'primary',
+      timeMin: new Date().toISOString(),
+      maxResults: 10,
+      singleEvents: true,
+      orderBy: 'startTime',
+    }, (err, response) => {
+      if (err) {
+        console.error('Error retrieving events:', err);
+        res.status(500).send('Error retrieving events');
+      } else {
+        // Send the event data back to the front end as a response
+        res.json(response.data);
+      }
+    });
+  });
+
 

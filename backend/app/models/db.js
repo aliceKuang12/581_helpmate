@@ -2,7 +2,7 @@
 import mysql2 from "mysql2";
 import dbConfig from "../config/db.config.js";
 
-const development = dbConfig.development;
+const development = dbConfig.production;
 
 const sql = mysql2.createConnection({
     host: development.host,
