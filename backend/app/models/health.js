@@ -21,6 +21,24 @@ Health.create = (newEvent, result) => {
     })
 }
 
+
+Health.getOne  = (email, result) => {
+    console.log(email)
+    //const email = req.params.email;
+    //let q1 = "SELECT userId from users where email = ?" ;
+  //  let query = "SELECT * FROM health where userId = (SELECT userId from users where email = ?)";
+    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?)`;
+    sql.query(query, [email], (err, res) => {
+        if (err) {
+            console.log("Cannot retrieve user with email: ", err);
+            result(err,null);
+        } else {
+            console.log("User: ", res);
+            result(null,res);
+        }
+    })
+}
+
 Health.show = (user_id, result) => {
     // WHERE userId = ? 
     // implement when pulling data with a specific userID
@@ -34,5 +52,6 @@ Health.show = (user_id, result) => {
         result(null, res);
     })
 }
+
 
 export default Health;

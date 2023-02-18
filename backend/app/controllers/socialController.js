@@ -21,6 +21,20 @@ export const createEvent = (req, res) => {
     })
 }
 
+export const userSocial = (req, res) => {
+    const email = req.params.email;
+    Social.getOne(email, (err, data) => {
+        if (err) {
+            return res.status(500).send({
+                message:
+                    err.message || "Error occurred while retrieving socials for user."
+            });
+        }
+        
+        res.send(data);
+    });
+}
+
 export const showSocial = (req, res) => {
     if (!req.params) {
         return res.status(400).send({

@@ -20,6 +20,20 @@ export const createEvent = (req, res) => {
     })
 }
 
+export const userHealth = (req, res) => {
+    const email = req.params.email;
+    Health.getOne(email, (err, data) => {
+        if (err) {
+            return res.status(500).send({
+                message:
+                    err.message || "Error occurred while retrieving health for user."
+            });
+        }
+        
+        res.send(data);
+    });
+}
+
 export const showHealth = (req, res) => {
     if (!req.params) {
         return res.status(400).send({
