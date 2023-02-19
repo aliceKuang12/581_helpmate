@@ -42,6 +42,7 @@ export default function CreateHealth() {
   };
 
   const handleChange = (value, key) => {
+    console.log(value);
     setData(prevState => ({...prevState, [key]: value,}));
   };
 
