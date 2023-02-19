@@ -3,7 +3,9 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-export default function BasicForm() {
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+
+export default function ViewEvent({color}) {
   const [open, setOpen] = React.useState(false);
 
   const openCalendar = () => {
@@ -22,8 +24,8 @@ export default function BasicForm() {
 
   return (
     <div >
-      <Button onClick={openCalendar} sx={{ fill: "blue", color:"Black" }}>
-        View Events
+      <Button onClick={openCalendar} variant="outlined" sx={{backgroundColor: "cornsilk", fill: "blue", color:"Black" }}>
+        <CalendarMonthIcon sx={{fontSize: "large", color: {color}}}/>
       </Button>
 
       <Dialog open={open} onClose={handleClose}>

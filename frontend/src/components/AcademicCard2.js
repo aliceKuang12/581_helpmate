@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
 import CreateEvent from "./CreateAcademic"
 import DeleteEvent from "./DeleteEventAcademic"
-import ViewEvent from "./ViewEventsAcademic"
+import ViewEvent from "./ViewEvents"
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
@@ -64,7 +64,7 @@ const ModuleCard = ( ) => {
                         textAlign: 'center',}}
                     >
                     <CreateEvent/>
-                    <ViewEvent/>
+                    <ViewEvent color ="red"/>
                     <DeleteEvent/>
                 </Stack>
                 </Item>
