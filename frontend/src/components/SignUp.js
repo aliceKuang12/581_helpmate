@@ -89,7 +89,6 @@ const SignUp = (props) => {
                 if (res) {
                     handleData({token: res, ...data});
                 }
-                await axios.post("http://localhost:3003/createUser", data)
                 alert("User successfully created")
             } catch (e) {
                 alert(e)
