@@ -89,7 +89,6 @@ const SignUp = (props) => {
                 if (res) {
                     handleData({token: res, ...data});
                 }
-                alert("User successfully created")
             } catch (e) {
                 alert(e)
             }

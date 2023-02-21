@@ -49,15 +49,14 @@ export const createUser = (req, res) => {
 };
 
 export const login = (req, res, next) => {
-    if (!req.params) {
+    if (!req.query) {
         res.status(400).send({
             message: "Content cannot be empty"
         })
     }
 
-    const email = req.params.email;
-    const password = req.params.password;
-    // const username = req.username;
+    const email = req.query.email;
+    const password = req.query.password;
 
     if (email && password) {
         let query = `SELECT * FROM users WHERE email = (?)`;

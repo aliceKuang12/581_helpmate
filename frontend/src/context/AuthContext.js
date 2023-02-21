@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react"
 import { auth } from "../firebase"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import axios from 'axios'
+import { AXIOS_HEADER } from '../constants';
 
 const AuthContext = React.createContext()
 
@@ -22,10 +23,29 @@ export function AuthProvider({ children }) {
   function login(email, password) {
     localStorage.setItem("email", email);
 
-    localStorage.setItem("name", email);
-
-    return auth.signInWithEmailAndPassword(email, password)
-
+    return axios({
+      url: 'http://localhost:3003/login',
+      method: 'POST',
+      headers: AXIOS_HEADER,
+      params: {
+        email: email,
+        password: password
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+          alert("Successfully logged in!");
+          console.log(res.data);
+          alert("HERE");
+          setCurrentUser(res.data);
+          localStorage.setItem("name", res.data.fname);
+          localStorage.setItem('user', JSON.stringify(res.data));
+          setLoading(false)
+      } else {
+          throw res;
+      }
+    }).catch((err) => {
+      alert(err.message);
+    })
   }
 
   function logout() {
@@ -53,7 +73,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
-      setCurrentUser(user)
+  //     setCurrentUser(user)
       setLoading(false)
     })
 
@@ -76,6 +96,8 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   )
 }
+
+export default AuthContext;
 
 // Setup google login tutorial: https://www.youtube.com/watch?v=vDT7EnUpEoo
 const provider = new GoogleAuthProvider()
