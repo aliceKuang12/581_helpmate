@@ -8,6 +8,7 @@ import urlParse from "url-parse"
 import queryParse from "query-string"
 import bodyParser from "body-parser";
 import axios from "axios";
+import env from '../.env.js';
 
 //https://expressjs.com/en/guide/routing.html
 const router1 = express.Router();
@@ -41,10 +42,9 @@ app.use(
 );
 
 function getOauth2Client(url) {
-  return new google.auth.OAuth2(
-    //client-id,
-    //client-secret,
-    //link to redirect 
+  return new google.auth.OAuth2(    
+    env.googleFit.client_id,
+    env.googleFit.client_secret,
     url
   );
 }
@@ -83,7 +83,7 @@ router1.get("/steps", async (req, res) => {
   const code = queryParse.parse(queryURL.query).code;
   const oauth2Client = getOauth2Client("http://localhost:5000/steps");
   const tokens = await oauth2Client.getToken(code);
-  res.send("localhost:5000/steps served");
+ // res.send("localhost:5000/steps served");
 
   console.log('//------------------------------------------------')
   let stepArray = []
@@ -115,15 +115,18 @@ router1.get("/steps", async (req, res) => {
   }
 
   try {
+    let entries=[];
     for (const dataSet of stepArray) {
       // console.log(dataSet);
       for (const points of dataSet.dataset) {
         // console.log(points);
         for (const steps of points.point) {
           console.log(steps.value);
+          entries.push(steps.value)
         }
       }
     }
+    res.send(entries);
   } catch (e) {
     console.log("Error 2: " + e);
   }
