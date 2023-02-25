@@ -4,3 +4,4 @@ backend/config/config.json
 backend/server.js
 frontend/package.json
 backend/package.json
+backend/app/config/db.config.js

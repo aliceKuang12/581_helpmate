@@ -13,6 +13,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   async function signup(email, password) {
     const res = await auth.createUserWithEmailAndPassword(email, password)
@@ -34,12 +35,11 @@ export function AuthProvider({ children }) {
     }).then((res) => {
       if (res.status === 200) {
           alert("Successfully logged in!");
-          console.log(res.data);
-          alert("HERE");
           setCurrentUser(res.data);
           localStorage.setItem("name", res.data.fname);
           localStorage.setItem('user', JSON.stringify(res.data));
-          setLoading(false)
+          setIsAuthenticated(true);
+          setLoading(false);
       } else {
           throw res;
       }
@@ -49,6 +49,7 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
+    alert("Bye....");
     localStorage.clear()
     // if(hasLogin) signOutWithGoogle()
     return auth.signOut()
@@ -72,14 +73,16 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
+    // const unsubscribe = async  () => {
+    //   if (isAuthenticated)
+    //     setLoading(false)
+    // }
     const unsubscribe = auth.onAuthStateChanged(user => {
-  //     setCurrentUser(user)
       setLoading(false)
     })
-
     return unsubscribe
   }, [])
-
+  console.log('userContext', currentUser);
   const value = {
     currentUser,
     login,
