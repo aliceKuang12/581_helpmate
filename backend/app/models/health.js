@@ -35,7 +35,9 @@ Health.getOne = (email, result) => {
     //const email = req.params.email;
     //let q1 = "SELECT userId from users where email = ?" ;
     //  let query = "SELECT * FROM health where userId = (SELECT userId from users where email = ?)";
-    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?) ORDER BY eventTime DESC`;
+    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?)
+                AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
+                ORDER BY eventTime DESC`;
     sql.query(query, [email], (err, res) => {
         if (err) {
             console.log("Cannot retrieve user with email: ", err);
@@ -49,7 +51,9 @@ Health.getOne = (email, result) => {
 
 // query for steps category given user email
 Health.getOne1 = (email, result) => {
-    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?) and category =\"Steps\" ORDER BY eventTime DESC`;
+    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?) 
+                AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
+                and category =\"Steps\" ORDER BY eventTime DESC`;
     sql.query(query, [email], (err, res) => {
         if (err) {
             console.log("Cannot retrieve event for given user or category: ", err);
@@ -63,7 +67,9 @@ Health.getOne1 = (email, result) => {
 
 // query for activity category given user email
 Health.getOne2 = (email, result) => {
-    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?) and category =\"Activity\" ORDER BY eventTime DESC`;
+    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?) 
+                AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
+                and category =\"Activity\" ORDER BY eventTime DESC`;
     sql.query(query, [email], (err, res) => {
         if (err) {
             console.log("Cannot retrieve event for given user or category: ", err);

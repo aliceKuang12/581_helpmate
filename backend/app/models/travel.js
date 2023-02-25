@@ -23,6 +23,21 @@ Travel.create = (newEvent, result) => {
     })
 }
 
+Travel.getOne  = (email, result) => {
+    //console.log(email)
+    //const email = req.params.email;
+    let query = "SELECT * FROM travel where userId = (SELECT id from users where email = ?)";
+    sql.query(query, [email], (err, res) => {
+        if (err) {
+            console.log("Cannot retrieve user's travel info: ", err);
+            result(err,null);
+        } else {
+            console.log("User: ", res);
+            result(null,res);
+        }
+    })
+}
+
 Travel.show = (user_id, result) => {
     // WHERE userId = ${user_id}
     // add to end of querery when checking userId

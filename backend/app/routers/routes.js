@@ -66,17 +66,12 @@ app.post("/user/:token",  (req, res) => {
 //academic module
 app.post("/academics/create", (req, res) => academic.createEvent(req, res));
 app.get("/academics", (req, res) => academic.showAcademic(req, res));
+app.get("/academics/:email", (req, res) => academic.userAcademic(req, res));
 
 //travel module
 app.post("/travel/create", (req, res) => travel.createEvent(req, res));
-app.post("/create-tokens", async (req, res, next) =>{
-    try {
-        console.log(req);
-    } catch (error) {
-        next(error);
-    }
-})
 app.get("/travel", (req, res) => travel.showTravel(req, res));
+app.get("/travel/:email", (req, res) => travel.userTravel(req, res));
 
 //health module
 app.post("/health/create", (req, res) => health.createEvent(req, res));
@@ -90,6 +85,15 @@ app.get("/health/activity/:email", (req, res) => health.userActivity(req, res));
 app.post("/social/create", (req, res) => social.createEvent(req, res));
 app.get("/social/", (req, res) => social.showSocial(req, res));
 app.get("/social/:email", (req, res) => social.userSocial(req, res));
+
+//google calendar paths
+app.post("/create-tokens", async (req, res, next) =>{
+  try {
+      console.log(req);
+  } catch (error) {
+      next(error);
+  }
+})
 
 app.get('/calendar', (req, res) => {
     // Create a new instance of the Calendar API client
