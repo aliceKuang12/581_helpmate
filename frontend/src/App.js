@@ -17,8 +17,6 @@ import ForgotPassword from './pages/ForgotPassword';
 import Profile from './pages/Profile';
 
 function App() {
-  const [currentUser, setCurrentUser] = useState('')
-
   return (
     <Container>
       <Router>
@@ -26,20 +24,20 @@ function App() {
           <Routes>
             <Route 
               path = '/' 
-              element={<Homepage user={currentUser}/>}
+              element={<Homepage/>}
             />
             <Route 
               path = '/login' 
-              element={<Login setCurrentUser={setCurrentUser}/>}
+              element={<Login/>}
             />
-            <Route path = '/health' element={<Health setCurrentUser={setCurrentUser}/>} />
-            <Route path = '/travel' element={<Travel setCurrentUser={setCurrentUser}/>}/>
-            <Route path = '/social' element={<Social setCurrentUser={setCurrentUser}/>}/>
+            <Route path = '/health' element={<Health/>} />
+            <Route path = '/travel' element={<Travel/>}/>
+            <Route path = '/social' element={<Social/>}/>
             <Route path = '/template' element={<Template/>}/>
-            <Route path = '/academics' element={<Academics setCurrentUser={setCurrentUser}/>}/>
-            <Route path = '/profile' element={<Profile setCurrentUser={setCurrentUser}/>}/>
-            <Route path = '/streaks' element={<Streaks setCurrentUser={setCurrentUser}/>}/>
-            <Route path = '/home' element = {<Homepage setCurrentUser={setCurrentUser}/>}/>
+            <Route path = '/academics' element={<Academics/>}/>
+            <Route path = '/profile' element={<Profile/>}/>
+            <Route path = '/streaks' element={<Streaks/>}/>
+            <Route path = '/home' element = {<Homepage/>}/>
             <Route path='/forgot-password' element={<ForgotPassword />} />
             {/* <Route path = '/reset' element={<PasswordReset/>}/> */}
           </Routes>c

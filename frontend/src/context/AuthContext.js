@@ -11,7 +11,7 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState()
+  const [currentUser, setCurrentUser] = useState(undefined)
   const [loading, setLoading] = useState(true)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
@@ -73,16 +73,17 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    // const unsubscribe = async  () => {
-    //   if (isAuthenticated)
-    //     setLoading(false)
-    // }
-    const unsubscribe = auth.onAuthStateChanged(user => {
+    const unsubscribe = async  () => {
+      const user = localStorage.getItem('user');
+      setCurrentUser(user);
       setLoading(false)
-    })
-    return unsubscribe
+    }
+    // const unsubscribe = auth.onAuthStateChanged(user => {
+    //   setLoading(false)
+    // })
+    unsubscribe();
   }, [])
-  console.log('userContext', currentUser);
+
   const value = {
     currentUser,
     login,
@@ -92,6 +93,8 @@ export function AuthProvider({ children }) {
     // updateEmail,
     // updatePassword
   }
+
+  console.log(value);
 
   return (
     <AuthContext.Provider value={value}>

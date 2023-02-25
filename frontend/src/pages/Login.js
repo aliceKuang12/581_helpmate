@@ -56,12 +56,6 @@ const Login = (props) => {
 
     }
 
-    const handleChange = (value) => {
-        // localStorage.setItem("email", emailRef)
-        // localStorage.setItem("name", userName)
-        props.setCurrentUser(value);
-    }
-
     return (
         <Container className="LoginPage" sx={{ width: 1300, height: 1000 }}>
             <br /><br /><br />
@@ -99,7 +93,6 @@ const Login = (props) => {
                         label="Enter email"
                         inputRef={emailRef}
                         variant="filled"
-                        onChange={e => handleChange(e.target.value)}
                     />
                     <br /> <br />
                     <TextField

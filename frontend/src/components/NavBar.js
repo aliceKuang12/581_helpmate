@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import React from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -13,21 +12,18 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/AuthContext';
 
 const pages = ['home', 'academics', 'health', 'social', 'travel', 'streaks'];
 
 export default function Header(props) {
-  // const { user } = props
-  const { logout } = useAuth()
+  const { logout, currentUser } = useAuth()
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [data, setData] = React.useState('');
 
  // don't set the user here! to avoid duplicate api calls, 
  // better to save the user data at login
-
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -60,7 +56,6 @@ export default function Header(props) {
     window.location.href = '/' + page;
   }
 
-  // React.useEffect(() => {getUser();}, [])
   return (
     <AppBar position="static" sx={{ bgcolor: "yellow" }}>
       <Container maxWidth="xl">

@@ -70,11 +70,9 @@ const Homepage = (props) => {
         fetchAllTables()
     }, []);
 
-
-    const { user } = props
     return (
         <div style={{ backgroundImage: `url(${Image})`, backgroundSize: "cover" }}>
-            <Header user={user} />
+            <Header/>
             <Clock />
             <Weather />
             <br/><br/>
