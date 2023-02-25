@@ -52,9 +52,16 @@ app.post("/createUser", (req, res) => {
 })
 
 app.get("/users", user.findAll); // works, same as "select * from users"
-
-// get user profile based on their email
 app.get("/user/:email",  (req, res) => { user.findOne(req, res)}); // same as "select * from users where email =`:email`"
+app.post("/user/:token",  (req, res) => {
+  const userId = req.params.id; // alice user local
+  const token = req.params.token;
+  const q = "UPDATE users SET `token` = ? WHERE `id` = ?";
+  db.query(q, [token], [userId], (err, data) => {
+    if (err) return res.json(err);
+    return res.json("User's token has been updated successfully.");
+  })
+})
 
 //academic module
 app.post("/academics/create", (req, res) => academic.createEvent(req, res));
@@ -75,6 +82,9 @@ app.get("/travel", (req, res) => travel.showTravel(req, res));
 app.post("/health/create", (req, res) => health.createEvent(req, res));
 app.get("/health/", (req, res) => health.showHealth(req, res));
 app.get("/health/:email", (req, res) => health.userHealth(req, res));
+app.get("/health/steps/:email", (req, res) => health.userSteps(req, res));
+app.get("/health/activity/:email", (req, res) => health.userActivity(req, res));
+// app.get("/health/:category/:email", (req, res) => health.userSteps1(req, res));
 
 //social module
 app.post("/social/create", (req, res) => social.createEvent(req, res));

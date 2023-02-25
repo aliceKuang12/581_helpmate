@@ -22,9 +22,10 @@ const Profile = () => {
 
     const DisplayNames = data.map(
         (info) => {
+            let date = info.eventTime; 
+            date = date.slice(1,10);
             return (
                 <div>
-                    <Typography>Name: {info.fname} {info.lname}</Typography>
                     <Typography> Username: @{info.username}</Typography>
                 </div>
             )
@@ -35,8 +36,6 @@ const Profile = () => {
         (info) => {
             return (<div>
                 <Typography>Name: {info.fname} {info.lname}</Typography>
-
-                <Typography> Username:{info.username}</Typography>
                 <Typography>Email: {info.email}</Typography>
                 <Typography>Cell: {info.cell ? info.cell : "N/a"}</Typography>
                 <Typography>Address: {info.address=='Undefined' ? "N/a" : info.address}</Typography>
@@ -71,7 +70,6 @@ const Profile = () => {
 
 
     return (
-
         <div style={{
             backgroundImage: `url(${Image})`,
             backgroundSize: "cover"
@@ -87,9 +85,6 @@ const Profile = () => {
                 }}
             >
                 My Profile
-
-
-
             </Typography>
             <br /><br />
             <Stack direction="row"
@@ -119,17 +114,13 @@ const Profile = () => {
                         Contact Information
                     </Typography>
                     {DisplayData}
-
-
                 </Item>
             </Stack>
             <br /> <br />
             <br /> <br />
-
         </div>
     )
 }
-
 
 export default Profile;
 
