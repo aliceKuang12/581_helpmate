@@ -38,7 +38,6 @@ const ModuleCard = () => {
                     <Typography>Category: {info.category}</Typography>
                     <Typography>Event Time: {info.eventTime}</Typography>
                     <Typography>Location: {info.location}</Typography>
-                    <Typography>Location: {info.location}</Typography>
                     {info.notes ? <Typography>Notes: {info.notes} </Typography> : ""}
                     <Typography>Status: {info.completed ? "Complete" : "Incomplete"}</Typography>
                 </Item>
