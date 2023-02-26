@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,25 +8,52 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import Checkbox from './Checkbox';
 import { Typography } from '@mui/material';
+import axios from 'axios'
+import createTypography from '@mui/material/styles/createTypography';
+
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
-  const [data, setData] = useState({
+  const [post, setPost] = React.useState(null);
+  /* const [data, setData] = useState({
     title: '',
     date: '',
     time: '',
     completed: '',
     address: '',
     notes: '',
+  }); */
+
+  const [data, setData] = useState({
+    userId: '17',
+    title: '',
+    category: '',
+    date: '',
+    eventTime: '',
+    location: '',
+    completed: '0',
+    notes: '',
   });
 
-  const {
+  /* const {
     title,
     date,
     time,
     completed,
     address,
     notes,
+  } = data; */
+
+  const {
+    userID,
+    title,
+    category,
+    date,
+    eventTime,
+    location,
+    completed,
+    notes,
   } = data;
+
   const [file, setFile] = useState();
   function saveUrl(e) {
       console.log(e.target.files);
@@ -41,9 +68,38 @@ export default function BasicForm() {
     setOpen(false);
   };
 
+  const handleCreate = () => {
+    console.log(data);
+    createAcademicPost();
+    setOpen(false);
+  };
+
   const handleChange = (value, key) => {
     setData(prevState => ({...prevState, [key]: value,}));
   };
+
+  useEffect(() => {
+    const fetchAcademic = async () => {
+        await axios.get("http://localhost:3003/academics/")
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    fetchAcademic()
+  }, []);
+
+  function createAcademicPost() {
+    console.log("creating post")
+    axios
+      .post("http://localhost:3003/academics/create", data)
+      .then((response) => {
+        console.log(response.data);
+        setPost(response.data);
+      });
+  }
 
   return (
     <div >
@@ -78,6 +134,22 @@ export default function BasicForm() {
                 fullWidth
               /> 
             </Grid>
+
+            <Grid item xs={2}>
+            <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
+            Category:
+            </Typography>  
+            </Grid>
+            <Grid item xs={9.5}>
+              <TextField
+                id="title"
+                label="event category"
+                variant="outlined"
+                onChange={e => handleChange(e.target.value, 'category')}
+                value={category}
+                fullWidth
+              /> 
+            </Grid>
               
             <Grid item xs={2}>
             <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
@@ -96,27 +168,27 @@ export default function BasicForm() {
             </Grid>
             <Grid item xs={4.5}>
             <TextField
-                id="time"
+                id="eventTime"
                 type="time"
                 variant="outlined"
-                onChange={e => handleChange(e.target.value, 'time')}
-                value={time}
+                onChange={e => handleChange(e.target.value, 'eventTime')}
+                value={eventTime}
                 fullWidth
               />
             </Grid> 
             
             <Grid item xs={2}>
             <Typography sx={{fontSize: 16, textAlign: 'left', padding: 2}}>
-              Address:
+              Location:
             </Typography>
             </Grid>
             <Grid item xs={9.5}>    
               <TextField
-                id="address"
+                id="location"
                 label="street address, city, state, zip"
                 variant="outlined"
-                onChange={e => handleChange(e.target.value, 'address')}
-                value={address}
+                onChange={e => handleChange(e.target.value, 'location')}
+                value={location}
                 fullWidth 
               />
             </Grid>
@@ -153,7 +225,7 @@ export default function BasicForm() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Create</Button>
+          <Button onClick={handleCreate}>Create</Button>
         </DialogActions>
       </Dialog>
       

@@ -64,12 +64,44 @@ app.post("/user/:token",  (req, res) => {
 })
 
 //academic module
-app.post("/academics/create", (req, res) => academic.createEvent(req, res));
+//app.post("/academics/create", (req, res) => academic.createEvent(req, res));
+app.post("/academics/create", (req, res) => {
+  const q = "Insert Into academic (`userId`, `title`, `category`, `eventTime`, `location`, `completed`, `notes`) VALUES (?)";
+ const values = [
+  req.body.userId,
+  req.body.title,
+  req.body.category,
+  req.body.date,
+  req.body.location,
+  req.body.completed,
+  req.body.notes,
+ ] 
+ sql.query(q, [values], (err, data) => {
+      if (err) return res.json(err)
+      return res.json("New event added to academics");
+  })
+})
 app.get("/academics", (req, res) => academic.showAcademic(req, res));
 app.get("/academics/:email", (req, res) => academic.userAcademic(req, res));
 
 //travel module
-app.post("/travel/create", (req, res) => travel.createEvent(req, res));
+//app.post("/travel/create", (req, res) => travel.createEvent(req, res));
+app.post("/travel/create", (req, res) => {
+  const q = "Insert Into travel(`userId`, `title`, `category`, `eventTime`, `location`, `notes`, `completed`) VALUES (?)";
+ const values = [
+  req.body.userId,
+  req.body.title,
+  req.body.category,
+  req.body.date,
+  req.body.address,
+  req.body.notes,
+  req.body.completed,
+ ] 
+ sql.query(q, [values], (err, data) => {
+      if (err) return res.json(err)
+      return res.json("New event added to travel");
+  })
+})
 app.get("/travel", (req, res) => travel.showTravel(req, res));
 app.get("/travel/:email", (req, res) => travel.userTravel(req, res));
 
