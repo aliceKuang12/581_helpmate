@@ -1,6 +1,14 @@
+/**
+ * Author: Alice Kuang
+ * Update Date: 2/25/23
+ * Creation Date: 2/20/23
+ * Description: Methods for creating a health event and retreiving health events with for 
+ *      specific categories (i.e. steps and activities)
+ */
+
 import sql from "./db.js";
 
-const Health = function(health) {
+const Health = function (health) {
     this.userId = health.userId;
     this.title = health.title;
     this.category = health.category;
@@ -14,7 +22,7 @@ Health.create = (newEvent, result) => {
     let query = "INSERT INTO health SET ?"
     sql.query(query, newEvent, (err, res) => {
         if (err) {
-            result(err,null);
+            result(err, null);
             return;
         }
         result(null, res);
@@ -22,22 +30,71 @@ Health.create = (newEvent, result) => {
 }
 
 
-Health.getOne  = (email, result) => {
+Health.getOne = (email, result) => {
     console.log(email)
     //const email = req.params.email;
     //let q1 = "SELECT userId from users where email = ?" ;
-  //  let query = "SELECT * FROM health where userId = (SELECT userId from users where email = ?)";
-    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?)`;
+    //  let query = "SELECT * FROM health where userId = (SELECT userId from users where email = ?)";
+    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?)
+                AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
+                ORDER BY eventTime DESC`;
     sql.query(query, [email], (err, res) => {
         if (err) {
             console.log("Cannot retrieve user with email: ", err);
-            result(err,null);
+            result(err, null);
         } else {
-            console.log("User: ", res);
-            result(null,res);
+            console.log("Health event: ", res);
+            result(null, res);
         }
     })
 }
+
+// query for steps category given user email
+Health.getOne1 = (email, result) => {
+    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?) 
+                AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
+                and category =\"Steps\" ORDER BY eventTime DESC`;
+    sql.query(query, [email], (err, res) => {
+        if (err) {
+            console.log("Cannot retrieve event for given user or category: ", err);
+            result(err, null);
+        } else {
+            console.log("Health event: ", res);
+            result(null, res);
+        }
+    })
+}
+
+// query for activity category given user email
+Health.getOne2 = (email, result) => {
+    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?) 
+                AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
+                and category =\"Activity\" ORDER BY eventTime DESC`;
+    sql.query(query, [email], (err, res) => {
+        if (err) {
+            console.log("Cannot retrieve event for given user or category: ", err);
+            result(err, null);
+        } else {
+            console.log("Health event: ", res);
+            result(null, res);
+        }
+    })
+}
+
+// Health.getOne11 = (category, email, result) => {
+//     let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?) and category =\"?\" ORDER BY eventTime DESC`;
+//     sql.query(query, [email], [category], (err, res) => {
+//         if (err) {
+//             console.log("Cannot retrieve event for given user or category: ", err);
+//             result(err, null);
+//         } else {
+//             console.log("Health event: ", res);
+//             result(null, res);
+//         }
+//     })
+// }
+
+
 
 Health.show = (user_id, result) => {
     // WHERE userId = ? 

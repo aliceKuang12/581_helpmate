@@ -21,9 +21,22 @@ Academic.create = (newEvent, result) => {
     })
 }
 
+// return academic events based on userId
+Academic.getOne  = (email, result) => {
+    let query = "SELECT * FROM academic where userId = (SELECT id from users where email = ?)";
+    sql.query(query, [email], (err, res) => {
+        if (err) {
+            console.log("Cannot retrieve user's academic info: ", err);
+            result(err,null);
+        } else {
+            console.log("User: ", res);
+            result(null,res);
+        }
+    })
+}
+
+// return entire table
 Academic.show = (user_id, result) => {
-    // WHERE userId = ? 
-    // implement when pulling data with a specific userID
     let query = `SELECT * from academic`;
     sql.query(query, [user_id], (err, res) => {
         if (err) {

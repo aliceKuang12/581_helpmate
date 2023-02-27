@@ -1,4 +1,16 @@
-import React, {useState} from 'react';
+/**
+ * CreateTravel.js 
+ *
+ * Form to create a new travel event for the travel page. 
+ * Allows users to dynamically update the events stored in the DBs.
+ *
+ * @link   URL
+ * @file   This file defines the CreateTravel class.
+ * @author Eva Morrison. Alice Kuang.
+ * @since  2/26/23
+ */
+
+import React, {useEffect, useState} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -11,17 +23,20 @@ import { Typography } from '@mui/material';
 import  axios from 'axios';
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
+  const [post, setPost] = React.useState(null);
   const [data, setData] = useState({
+    userId: '17',
     title: '',
     date: '',
     time: '',
-    completed: '',
+    completed: '0',
     address: '',
     notes: '',
     ticket: '',
   });
 
   const {
+    userId,
     title,
     date,
     time,
@@ -44,12 +59,53 @@ export default function BasicForm() {
     setOpen(false);
   };
 
+  const handleCreate = () => {
+    console.log(data);
+    createTravelPost();
+    setOpen(false);
+  };
+
   const handleChange = (value, key) => {
-    console.log(value);
+    //update the data to be the user's input
+    setData(prevState => ({...prevState, [key]: value,}));
+    //console.log(value);
     axios.get('http://localhost:3003/calendar')
   .then(response => console.log(response.data))
   .catch(error => console.error(error));
   };
+
+  /**
+ * Tutorial from: https://www.freecodecamp.org/news/how-to-use-axios-with-react/#how-to-make-a-post-request
+ * useEffect hook to connect with the travel database
+ * prints all travel information to the console
+ */
+  useEffect(() => {
+    const fetchTravel = async () => {
+        await axios.get("http://localhost:3003/travel/")
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    fetchTravel()
+  }, []);
+
+  /**
+ * Tutorial from: https://www.freecodecamp.org/news/how-to-use-axios-with-react/#how-to-make-a-post-request
+ * function: createTravelPost
+ * uses axios post to take the user form data and post to local database
+ */
+  function createTravelPost() {
+    console.log("creating post")
+    axios
+      .post("http://localhost:3003/travel/create", data)
+      .then((response) => {
+        console.log(response.data);
+        setPost(response.data);
+      });
+  }
 
   return (
     <div >
@@ -172,7 +228,7 @@ export default function BasicForm() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Create</Button>
+          <Button onClick={handleCreate}>Create</Button>
         </DialogActions>
       </Dialog>
       

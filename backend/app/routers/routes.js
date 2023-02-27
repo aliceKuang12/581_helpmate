@@ -1,3 +1,15 @@
+/**
+ * routes.js 
+ *
+ * routes to connect the frontend to the backend databases.
+ * Includes all APIs to get and post.
+ *
+ * @link   URL
+ * @file   This file defines the routes class.
+ * @author Eva Morrison. Alice Kuang. Minh Huyen Nguyen.
+ * @since  2/26/23
+ */
+
 import session from "express-session"
 import express from "express";
 import * as user from "../controllers/userController.js";
@@ -52,34 +64,80 @@ app.post("/createUser", (req, res) => {
 })
 
 app.get("/users", user.findAll); // works, same as "select * from users"
-
-// get user profile based on their email
 app.get("/user/:email",  (req, res) => { user.findOne(req, res)}); // same as "select * from users where email =`:email`"
+app.post("/user/:token",  (req, res) => {
+  const userId = req.params.id; // alice user local
+  const token = req.params.token;
+  const q = "UPDATE users SET `token` = ? WHERE `id` = ?";
+  db.query(q, [token], [userId], (err, data) => {
+    if (err) return res.json(err);
+    return res.json("User's token has been updated successfully.");
+  })
+})
 
 //academic module
-app.post("/academics/create", (req, res) => academic.createEvent(req, res));
+//app.post("/academics/create", (req, res) => academic.createEvent(req, res));
+app.post("/academics/create", (req, res) => {
+  const q = "Insert Into academic (`userId`, `title`, `category`, `eventTime`, `location`, `completed`, `notes`) VALUES (?)";
+ const values = [
+  req.body.userId,
+  req.body.title,
+  req.body.category,
+  req.body.date,
+  req.body.location,
+  req.body.completed,
+  req.body.notes,
+ ] 
+ sql.query(q, [values], (err, data) => {
+      if (err) return res.json(err)
+      return res.json("New event added to academics");
+  })
+})
 app.get("/academics", (req, res) => academic.showAcademic(req, res));
+app.get("/academics/:email", (req, res) => academic.userAcademic(req, res));
 
 //travel module
-app.post("/travel/create", (req, res) => travel.createEvent(req, res));
-app.post("/create-tokens", async (req, res, next) =>{
-    try {
-        console.log(req);
-    } catch (error) {
-        next(error);
-    }
+//app.post("/travel/create", (req, res) => travel.createEvent(req, res));
+app.post("/travel/create", (req, res) => {
+  const q = "Insert Into travel(`userId`, `title`, `category`, `eventTime`, `location`, `notes`, `completed`) VALUES (?)";
+ const values = [
+  req.body.userId,
+  req.body.title,
+  req.body.category,
+  req.body.date,
+  req.body.address,
+  req.body.notes,
+  req.body.completed,
+ ] 
+ sql.query(q, [values], (err, data) => {
+      if (err) return res.json(err)
+      return res.json("New event added to travel");
+  })
 })
 app.get("/travel", (req, res) => travel.showTravel(req, res));
+app.get("/travel/:email", (req, res) => travel.userTravel(req, res));
 
 //health module
 app.post("/health/create", (req, res) => health.createEvent(req, res));
 app.get("/health/", (req, res) => health.showHealth(req, res));
 app.get("/health/:email", (req, res) => health.userHealth(req, res));
+app.get("/health/steps/:email", (req, res) => health.userSteps(req, res));
+app.get("/health/activity/:email", (req, res) => health.userActivity(req, res));
+// app.get("/health/:category/:email", (req, res) => health.userSteps1(req, res));
 
 //social module
 app.post("/social/create", (req, res) => social.createEvent(req, res));
 app.get("/social/", (req, res) => social.showSocial(req, res));
 app.get("/social/:email", (req, res) => social.userSocial(req, res));
+
+//google calendar paths
+app.post("/create-tokens", async (req, res, next) =>{
+  try {
+      console.log(req);
+  } catch (error) {
+      next(error);
+  }
+})
 
 app.get('/calendar', (req, res) => {
     // Create a new instance of the Calendar API client

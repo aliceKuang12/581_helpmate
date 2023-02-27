@@ -31,7 +31,7 @@ const Homepage = (props) => {
             let URL4 = "http://localhost:3003/social/"
             let URL5 = "https://jsonplaceholder.typicode.com/"
 
-            const promise1 = await axios.get(URL1).then(res => {
+            const promise1 = await axios.get(URL1 + localStorage.getItem("email")).then(res => {
                 setAcademic((res.data));
                 console.log(res.data);
             })
@@ -39,7 +39,7 @@ const Homepage = (props) => {
                     console.log(err)
                 });
 
-            const promise2 = await axios.get(URL2).then(res => {
+            const promise2 = await axios.get(URL2+ localStorage.getItem("email")).then(res => {
                 setHealth((res.data));
                 console.log(res.data);
             })
@@ -47,7 +47,7 @@ const Homepage = (props) => {
                     console.log(err)
                 });
 
-            const promise3 = await axios.get(URL3).then(res => {
+            const promise3 = await axios.get(URL3+ localStorage.getItem("email")).then(res => {
                 setTravel((res.data));
                 console.log(res.data);
             })
@@ -55,7 +55,7 @@ const Homepage = (props) => {
                     console.log(err)
                 });
 
-            const promise4 = await axios.get(URL4).then(res => {
+            const promise4 = await axios.get(URL4+ localStorage.getItem("email")).then(res => {
                 setSocial((res.data));
                 console.log(res.data);
             })

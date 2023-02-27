@@ -25,7 +25,6 @@ const Profile = () => {
     const user = JSON.parse(currentUser);
 
     return (
-
         <div style={{
             backgroundImage: `url(${Image})`,
             backgroundSize: "cover"
@@ -54,7 +53,6 @@ const Profile = () => {
                         width={200} height={200} alt='Profile Photo'
                     />
                     <br /><br />
-                    {/* {DisplayNames} */}
                     <div>
                     <Typography>Name: {user.fname} {user.lname}</Typography>
                     <Typography> Username: @{user.username}</Typography>
@@ -73,7 +71,6 @@ const Profile = () => {
                     >
                         Contact Information
                     </Typography>
-                    {/* {DisplayData} */}
                     <div>
                         <Typography>Name: {user.fname} {user.lname}</Typography>
 
@@ -91,12 +88,10 @@ const Profile = () => {
                         {/* <Typography>Password: {currentUser.password}</Typography> */}
 
                     </div>
-
                 </Item>
             </Stack>
             <br /> <br />
             <br /> <br />
-
         </div>
     )
 }
