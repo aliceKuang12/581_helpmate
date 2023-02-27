@@ -1,3 +1,15 @@
+/**
+ * CreateTravel.js 
+ *
+ * Form to create a new travel event for the travel page. 
+ * Allows users to dynamically update the events stored in the DBs.
+ *
+ * @link   URL
+ * @file   This file defines the CreateTravel class.
+ * @author Eva Morrison. Alice Kuang.
+ * @since  2/26/23
+ */
+
 import React, {useEffect, useState} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';

@@ -1,3 +1,15 @@
+/**
+ * CreateAssign.js 
+ *
+ * Form to create a new assignment for the academic page. 
+ * Allows users to dynamically update the events stored in the DBs.
+ *
+ * @link   URL
+ * @file   This file defines the CreateAssign class.
+ * @author Eva Morrison. Alice Kuang.
+ * @since  2/26/23
+ */
+
 import React, {useEffect, useState} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -78,6 +90,11 @@ export default function BasicForm() {
     setData(prevState => ({...prevState, [key]: value,}));
   };
 
+  /**
+  * Tutorial from: https://www.freecodecamp.org/news/how-to-use-axios-with-react/#how-to-make-a-post-request
+  * useEffect hook to connect with the travel database
+  * prints all travel information to the console
+  */
   useEffect(() => {
     const fetchAcademic = async () => {
         await axios.get("http://localhost:3003/academics/")
@@ -91,6 +108,11 @@ export default function BasicForm() {
     fetchAcademic()
   }, []);
 
+  /**
+  * Tutorial from: https://www.freecodecamp.org/news/how-to-use-axios-with-react/#how-to-make-a-post-request
+  * function: createTravelPost
+  * uses axios post to take the user form data and post to local database
+  */
   function createAcademicPost() {
     console.log("creating post")
     axios
