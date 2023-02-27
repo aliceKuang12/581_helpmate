@@ -11,7 +11,7 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(undefined)
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem('user'))
   const [loading, setLoading] = useState(true)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
@@ -78,9 +78,6 @@ export function AuthProvider({ children }) {
       setCurrentUser(user);
       setLoading(false)
     }
-    // const unsubscribe = auth.onAuthStateChanged(user => {
-    //   setLoading(false)
-    // })
     unsubscribe();
   }, [])
 
@@ -93,8 +90,6 @@ export function AuthProvider({ children }) {
     // updateEmail,
     // updatePassword
   }
-
-  console.log(value);
 
   return (
     <AuthContext.Provider value={value}>
