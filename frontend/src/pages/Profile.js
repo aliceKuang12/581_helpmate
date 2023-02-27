@@ -6,6 +6,7 @@ import { styled } from '@mui/material/styles'
 import img from '../images/ku_building_1.jpg'
 import Image from '../images/streaksBackground.jpg'
 import axios from 'axios'
+import { useAuth } from '../context/AuthContext'
 //import JsonData from './user1.json'
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -18,57 +19,10 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Profile = () => {
     // https://youtu.be/fPuLnzSjPLE?t=1335
+    //get User from the Context, then display data
     const [data, setData] = useState([]);
-
-    const DisplayNames = data.map(
-        (info) => {
-            return (
-                <div>
-                    <Typography>Name: {info.fname} {info.lname}</Typography>
-                    <Typography> Username: @{info.username}</Typography>
-                </div>
-            )
-        }
-    )
-
-    const DisplayData = data.map(
-        (info) => {
-            return (<div>
-                <Typography>Name: {info.fname} {info.lname}</Typography>
-
-                <Typography> Username:{info.username}</Typography>
-                <Typography>Email: {info.email}</Typography>
-                <Typography>Cell: {info.cell ? info.cell : "N/a"}</Typography>
-                <Typography>Address: {info.address=='Undefined' ? "N/a" : info.address}</Typography>
-
-                <br />
-
-                <Typography sx={{ fontWeight: 'bold' }}>
-                    Security
-                </Typography>
-                <Typography> Birthday: {info.birthday} </Typography>
-                <Typography>Password: {info.password}</Typography>
-
-            </div>
-            )
-        }
-    )
-    // useEffect strucutre: https://reactjs.org/docs/hooks-effect.html
-    useEffect(() => {
-        const fetchAllUsers = async () => {
-            await axios.get("http://localhost:3003/user/" + localStorage.getItem("email"))
-                .then(res => {
-                    setData((res.data));
-                    console.log(res.data);
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        }
-        fetchAllUsers()
-    }, []);
-
-
+    const { currentUser } = useAuth();
+    const user = JSON.parse(currentUser);
 
     return (
 
@@ -87,9 +41,6 @@ const Profile = () => {
                 }}
             >
                 My Profile
-
-
-
             </Typography>
             <br /><br />
             <Stack direction="row"
@@ -103,7 +54,11 @@ const Profile = () => {
                         width={200} height={200} alt='Profile Photo'
                     />
                     <br /><br />
-                    {DisplayNames}
+                    {/* {DisplayNames} */}
+                    <div>
+                    <Typography>Name: {user.fname} {user.lname}</Typography>
+                    <Typography> Username: @{user.username}</Typography>
+                    </div>
                 </Item>
 
                 <Item sx={{
@@ -118,8 +73,24 @@ const Profile = () => {
                     >
                         Contact Information
                     </Typography>
-                    {DisplayData}
+                    {/* {DisplayData} */}
+                    <div>
+                        <Typography>Name: {user.fname} {user.lname}</Typography>
 
+                        <Typography> Username: {user.username}</Typography>
+                        <Typography>Email: {user.email}</Typography>
+                        <Typography>Cell: {user.cell ? user.cell : "N/a"}</Typography>
+                        <Typography>Address: {user.address=='Undefined' ? "N/a" : user.address}</Typography>
+
+                        <br />
+
+                        <Typography sx={{ fontWeight: 'bold' }}>
+                            Security
+                        </Typography>
+                        <Typography> Birthday: {user.birthday} </Typography>
+                        {/* <Typography>Password: {currentUser.password}</Typography> */}
+
+                    </div>
 
                 </Item>
             </Stack>
@@ -129,7 +100,6 @@ const Profile = () => {
         </div>
     )
 }
-
 
 export default Profile;
 
