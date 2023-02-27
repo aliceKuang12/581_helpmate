@@ -1,3 +1,15 @@
+/**
+ * routes.js 
+ *
+ * routes to connect the frontend to the backend databases.
+ * Includes all APIs to get and post.
+ *
+ * @link   URL
+ * @file   This file defines the routes class.
+ * @author Eva Morrison. Alice Kuang. Minh Huyen Nguyen.
+ * @since  2/26/23
+ */
+
 import session from "express-session"
 import express from "express";
 import * as user from "../controllers/userController.js";
