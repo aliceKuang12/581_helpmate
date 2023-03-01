@@ -21,23 +21,12 @@ const Login = (props) => {
     const emailRef = useRef()
     const passwordRef = useRef()
     const [error, setError] = useState("")
-    const [users, setUsers] = useState([]);
     const onClickLogin = () => {
         if (!(passwordRef.current.value && emailRef.current.value)) {
             setError("Empty field(s) exist")
             alert(error);
         } else {
             handleLogin();
-        }
-    }
-
-    const mySqlFetch = async (email, pass) => {
-        try {
-            const res = await axios.post("http://localhost:3003/login?email=" + email + "&password=" +pass) // 3003/users for entire db
-            setUsers(res.data);
-            console.log(res);
-        } catch (err) {
-            console.log(err);
         }
     }
 
@@ -52,8 +41,6 @@ const Login = (props) => {
             alert(e);
         }
         console.log("Logging in")
-
-
     }
 
     return (
@@ -144,10 +131,6 @@ const Login = (props) => {
             </Paper>
         </Container>
     );
-}
-
-Login.propTypes = {
-    setCurrentUser: PropTypes.func.isRequired,
 }
 
 export default Login;
