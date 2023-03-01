@@ -21,7 +21,8 @@ export default function Header(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [data, setData] = React.useState('');
-  console.log(JSON.parse(currentUser).id);
+  const user = JSON.parse(currentUser);
+
  // don't set the user here! to avoid duplicate api calls, 
  // better to save the user data at login
   const handleOpenNavMenu = (event) => {
@@ -127,7 +128,7 @@ export default function Header(props) {
               </Button>
             ))}
           </Box>
-          <Typography color="black" marginRight={3}>Welcome, { JSON.parse(currentUser).fname }</Typography>
+          <Typography color="black" marginRight={3}>Welcome, { user.fname }</Typography>
           <Box sx={{ color: 'black', flexGrow: 0 }}>
 
             <Tooltip title="Open settings">

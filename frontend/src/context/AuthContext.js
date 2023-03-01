@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
           alert("Successfully logged in!");
           setCurrentUser(res.data);
           localStorage.setItem("name", res.data.fname);
-          localStorage.setItem('user', JSON.stringify(res.data));
+          localStorage.setItem("user", JSON.stringify(res.data));
           setIsAuthenticated(true);
           setLoading(false);
       } else {
