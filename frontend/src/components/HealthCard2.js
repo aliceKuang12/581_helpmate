@@ -1,6 +1,6 @@
 /**
  * Author: Alice Kuang
- * Update Date: 2/25/23
+ * Update Date: 3/04/23
  * Creation Date: 11/20/22
  * Description: This card pulls from user's health data through the mysql
  *      api. It is also able to get the stetps of the users googleFIt account
@@ -20,6 +20,7 @@ import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import { Button } from "@mui/material";
 import axios from "axios";
+import CreateEvent from "./QuickCreateHealth"
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
@@ -183,6 +184,7 @@ const ModuleCard = () => {
                                 Add today's data
                             </Button>
                         </div>
+                        <CreateEvent/>
                     </Stack>
                 </Box>
             </Paper>
