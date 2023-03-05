@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import UploadIcon from '@mui/icons-material/Upload';
@@ -12,26 +12,26 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import Typography from "@material-ui/core/Typography";
 import { useTheme } from "@material-ui/core/styles";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import img1 from '../images/ticket.jpg'
-import img2 from '../images/ticket.jpg'
-import img3 from '../images/ticket.jpg'
-
+import img1 from '../images/ku1.jpg'
+import img2 from '../images/ku2.jpg'
+import img3 from '../images/ku3.jpg'
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 export default function UploadImage() {
 
-// saving multiple urls: https://www.youtube.com/watch?v=PDtW-XAshqs
-  const [ selectedImages, setSelectedImages ] = useState([]);
+  // saving multiple urls: https://www.youtube.com/watch?v=PDtW-XAshqs
+  const [selectedImages, setSelectedImages] = useState([]);
   const onSelectFile = (event) => {
     const selectedFiles = event.target.files;
     const selectedFilesArray = Array.from(selectedFiles)
-    
+
     const imagesArray = selectedFilesArray.map((file) => {
       return URL.createObjectURL(file);
     });
 
     setSelectedImages(imagesArray);
   }
-  
+
 
   const MyCollection = [
     {
@@ -43,15 +43,15 @@ export default function UploadImage() {
       img: img2,
     },
     {
-     label: "Third Picture",
-     img: img3,
+      label: "Third Picture",
+      img: img3,
     },
   ];
 
   const CollectionSize = MyCollection.length;
   const theme = useTheme();
   const [index, setActiveStep] = React.useState(0);
- 
+
   const goToNextPicture = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -65,68 +65,74 @@ export default function UploadImage() {
   //     setFile(URL.createObjectURL(e.target.files[0]));
   // }
   return (
-    <Grid container-spacing={2}  alignItems="center" justifyContent="center" >
-        <Grid item xs={10} sx={{mx: 5}}>
-           <img 
-              src= {selectedImages[index] ? selectedImages[index] : MyCollection[index].img }
-              style={{
-                height: 255,
-                width: "100%",
-                maxWidth: 400,
-                display: "block",
-                overflow: "hidden",
 
-              }}
-              alt={MyCollection[index].label} 
-           onError = {() => setFile(DefaultImage)}
-           />
-        </Grid>
-    <br/>
-    <MobileStepper
-          variant="text"
-          position="static"
-          index={index}
-          steps={CollectionSize}
-          backButton={
-            <Button
-              size="small"
-              onClick={goToPrevPicture}
-              disabled={index === 0}
-            > 
-              {theme.direction !== "ltr" ? (
-                <KeyboardArrowRight />
-              ) : (
-                <KeyboardArrowLeft />
-              )}
-            </Button>
-          } 
-          nextButton={
-            <Button
-              size="small"
-              onClick={goToNextPicture}
-              disabled={index === CollectionSize - 1}
-            >
-              {theme.direction !== "rtl" ? (
-                <KeyboardArrowRight />
-              ) : (
-                <KeyboardArrowLeft />
-              )}
-            </Button>
-          }
+    <Grid container-spacing={2} alignItems="center" justifyContent="center" >
+      <Grid item xs={10} sx={{ mx: 5 }}>
+        <br />
+        <img
+          src={selectedImages[index] ? selectedImages[index] : MyCollection[index].img}
+          style={{
+            height: 255,
+            width: "100%",
+            maxWidth: 400,
+            display: "block",
+            overflow: "hidden",
+
+          }}
+          alt={MyCollection[index].label}
+          onError={() => setFile(DefaultImage)}
         />
-       <br/>
-      <Button variant="contained" component="label"
-      sx={{
-        backgroundColor: "darkgreen",
-        fontFamily: "arial",
-      }}
-      >
-      <UploadIcon sx={{fontSize: "medium" }} /> &nbsp; Upload
-        <input hidden accept="image/*" 
-                multiple type="file" 
-                onChange={onSelectFile}/>
-      </Button>
-      
+      </Grid>
+      <br />
+      <MobileStepper
+        variant="text"
+        position="static"
+        index={index}
+        steps={CollectionSize}
+        activeStep={index}
+        backButton={
+          <Button
+            size="small"
+            onClick={goToPrevPicture}
+            disabled={index === 0}
+          >
+            {theme.direction !== "ltr" ? (
+              <KeyboardArrowRight />
+            ) : (
+              <KeyboardArrowLeft />
+            )}
+          </Button>
+        }
+        nextButton={
+          <Button
+            size="small"
+            onClick={goToNextPicture}
+            disabled={index === 2}
+          >
+            {theme.direction !== "rtl" ? (
+              <KeyboardArrowRight />
+            ) : (
+              <KeyboardArrowLeft />
+            )}
+          </Button>
+        }
+      />
+      <br />
+      <Grid>
+        <Button variant="outlined" component="label"
+          sx={{
+            // backgroundColor: "darkgreen",
+            fontFamily: "arial",
+          }}
+        >
+          <AddPhotoAlternateIcon sx={{ fontSize: "medium" }} />
+
+          <input hidden accept="image/*"
+            multiple type="file"
+            onChange={onSelectFile} />
+        </Button>
+      </Grid>
+      <br/>
     </Grid>
   );
 }

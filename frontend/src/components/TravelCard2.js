@@ -9,7 +9,7 @@ import UploadImage from "./UploadImage"
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
-    padding: theme.spacing(1),
+    // padding: theme.spacing(1),
   }));
 
 const ModuleCard = (  ) => {
@@ -30,7 +30,7 @@ const ModuleCard = (  ) => {
             <Stack spacing={2} 
                    justifyContent="center" 
                    sx={{height: '100%', width: '100%'}}>
-                <Item elevation={0} >
+                {/* <Item elevation={0} > */}
                     <Typography 
                         varient='h4' 
                         component='h2' 
@@ -38,19 +38,21 @@ const ModuleCard = (  ) => {
                     >
                     Travel Information
                     </Typography>
-                </Item>
+                {/* </Item> */}
                 <Item elevation={0}>
-                <Stack  
+                {/* <Stack  
                     direction="row" 
                     justifyContent="center" 
                     sx={{height: '100%', 
                         width: '100%', 
                         textAlign: 'center',}}
                     >
-                    <UploadImage/>
                     <br/>
-                </Stack>
+                </Stack> */}
+                
+                <UploadImage/>
                 </Item>
+                
             </Stack>
             </Box>
         </Paper>

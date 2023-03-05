@@ -12,9 +12,10 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: 'transparent',
-    padding: theme.spacing(1),
+    backgroundColor: 'transparent'
 }));
+
+
 
 const ModuleCard = () => {
     const [data, setData] = useState([]);
@@ -24,6 +25,7 @@ const ModuleCard = () => {
             return (
                 <div>
                     <Typography>Title: {info.title}</Typography>
+                    
                 </div>
             )
         }
@@ -32,15 +34,18 @@ const ModuleCard = () => {
     const DisplayData = data.map(
         (info) => {
             return (
-                <Item elevation={0} sx={{ height: '90%', width: '100%', }}>
-                    <Typography sx={{ fontWeight: 'bold' }}>Title: {info.title}</Typography>
-                    <Typography>Category: {info.category}</Typography>
-                    <Typography>Event Time: {info.eventTime}</Typography>
-                    <Typography>Location: {info.location}</Typography>
-                    {info.notes ? <Typography>Notes: {info.notes} </Typography> : ""}
-                    <Typography>Status: {info.completed ? "Complete" : "Incomplete"}</Typography>
-                </Item>
-            )
+                <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
+                    <Item elevation={0} sx={{ height: '90%', width: '100%', }}>
+                        <Typography sx={{ fontWeight: 'bold' }}>Title: {info.title}</Typography>
+                        {/* <Typography>Category: {info.category}</Typography> */}
+                        <Typography>Event Time: {info.eventTime}</Typography>
+                        <Typography>Location: {info.location}</Typography>
+                        {info.notes ? <Typography>Notes: {info.notes} </Typography> : ""}
+                        <Typography>Status: {info.completed ? "Complete" : "Incomplete"}</Typography>
+                    </Item>
+                    <br/>
+                </Stack>
+            );
         }
     )
 
@@ -59,15 +64,14 @@ const ModuleCard = () => {
     }, []);
 
     return (
-        <Grid item xs={6} marginBottom={5}>
-            <Paper sx={{ opacity: .9 }}>
+        <Grid item xs={6} marginBottom={5} > 
+            <Paper sx={{ opacity: .9, bg: 'lightblue'}}>
                 <br />
                 <Typography varient='h2' component='h2' sx={{ fontWeight: 'bold' }}>
                     Today's Events:
                 </Typography>
-                <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
-                    {DisplayData}
-                </Stack>
+                <br/>
+                {DisplayData}
                 <br />  <br />
                 <Stack spacing={2}
                     direction="row"
@@ -82,7 +86,7 @@ const ModuleCard = () => {
                     <ViewEvent color="blue" />
                     <DeleteEvent />
                 </Stack>
-                <br/>
+                <br />
             </Paper>
         </Grid>)
 }
