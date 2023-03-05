@@ -33,10 +33,7 @@ const Login = (props) => {
     const handleLogin = async (e) => {
         try {
             await login(emailRef.current.value, passwordRef.current.value);
-             // mySqlFetch(emailRef.current.value, passwordRef.current.value);
-            navigate({
-                pathname: '/',
-            },)
+            navigate("/home");
         } catch (e) {
             alert(e);
         }

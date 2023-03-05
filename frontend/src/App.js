@@ -24,12 +24,12 @@ function App() {
           <Routes>
             <Route 
               path = '/' 
-              element={<Homepage/>}
-            />
-            <Route 
-              path = '/login' 
               element={<Login/>}
             />
+            {/* <Route 
+              path = '/login' 
+              element={<Login/>}
+            /> */}
             <Route path = '/health' element={<Health/>} />
             <Route path = '/travel' element={<Travel/>}/>
             <Route path = '/social' element={<Social/>}/>

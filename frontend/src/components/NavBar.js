@@ -49,7 +49,7 @@ export default function Header(props) {
   const handleLogOut = () => {
     setAnchorElUser(null);
     logout();
-    window.location.href = '/login';
+    window.location.href = '/';
   }
 
   const handleChangePage = (page) => {
