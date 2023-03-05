@@ -75,23 +75,32 @@ export const userActivity = (req, res) => {
     });
 }
 
-// get category, query by email and category
-// export const userSteps1 = (req, res) => {
-//     console.log(req.params.email)
-//     console.log(req.params.category)
-//     const email = req.params.email;
-//     const category = req.params.category;
-//     Health.getOne11(category, email, (err, data) => {
-//         if (err) {
-//             return res.status(500).send({
-//                 message:
-//                     err.message || "Error occurred while retrieving health for user."
-//             });
-//         }
-        
-//         res.send(data);
-//     });
-// }
+// get activity, query by email 
+export const stepStreak = (req, res) => {
+    const email = req.params.email;
+    Health.getStreaks1(email, (err, data) => {
+        if (err) {
+            return res.status(500).send({
+                message:
+                    err.message || "Error occurred while retrieving health for user."
+            });
+        }
+        res.send(data);
+    });
+}
+
+export const activityStreak = (req, res) => {
+    const email = req.params.email;
+    Health.getStreaks2(email, (err, data) => {
+        if (err) {
+            return res.status(500).send({
+                message:
+                    err.message || "Error occurred while retrieving health for user."
+            });
+        }        
+        res.send(data);
+    });
+}
 
 export const showHealth = (req, res) => {
     if (!req.params) {

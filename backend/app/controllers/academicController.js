@@ -34,6 +34,20 @@ export const userAcademic = (req, res) => {
     });
 }
 
+export const assignments = (req, res) => {
+    const email = req.params.email;
+    Academic.getStreak(email, (err, data) => {
+        if (err) {
+            return res.status(500).send({
+                message:
+                    err.message || "Error occurred while retrieving user's academic info."
+            });
+        }
+        
+        res.send(data);
+    });
+}
+
 export const showAcademic = (req, res) => {
     if (!req.params) {
         return res.status(400).send({

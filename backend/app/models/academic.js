@@ -35,6 +35,23 @@ Academic.getOne  = (email, result) => {
     })
 }
 
+// return assignment completion streak
+Academic.getStreak  = (email, result) => {
+    let query = `SELECT count(*) as streak FROM academic where userId = (SELECT id from users where email = ?) 
+                 AND Category=\"Assignment\" AND completed=1 
+                 AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW();`;
+    sql.query(query, [email], (err, res) => {
+        if (err) {
+            console.log("Cannot retrieve user's assignment streak: ", err);
+            result(err,null);
+        } else {
+            console.log("Assignment Streak: ", res);
+            result(null,res);
+        }
+    })
+}
+
+
 // return entire table
 Academic.show = (user_id, result) => {
     let query = `SELECT * from academic`;

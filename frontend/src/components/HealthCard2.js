@@ -102,25 +102,15 @@ const ModuleCard = () => {
         fetchHealthStats()
     }, []);
 
-
-    /*
-    useEffect(() => {
-        const getFitAuth = async () => {
-            
-        }
-        getFitAuth()
-    }, []);
- */
-
     return (
-        <Grid item xs={6} marginBottom={5}>
+        <Grid item xs={6} marginBottom={3}>
             <Paper sx={{ opacity: .9 }}>
                 <Box
-                    padding={2}
+                    padding={3}
                     sx={{
                         display: "flex",
                         alignItems: "left",
-                        height: 500,
+                        height: 450,
                         backgroundColor: 'lightgreen',
                         borderRadius: 1,
                     }}
@@ -128,15 +118,16 @@ const ModuleCard = () => {
                     <Stack spacing={2}
                         justifyContent="center"
                         sx={{ height: '100%', width: '100%' }}>
-                        <Item elevation={0} >
-                            <Typography
+                        {/* <Item elevation={0} > */}
+                          
+                        {/* </Item> */}
+                        <Item elevation={0}>
+                        <Typography
                                 varient='h1'
                                 sx={{ fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}
                             >
-                                Health Statistics<br />                    
+                                Health Statistics                    
                             </Typography>
-                        </Item>
-                        <Item elevation={0}>
                             <Stack
                                 sx={{
                                     height: '100%',
@@ -147,10 +138,6 @@ const ModuleCard = () => {
                                 justifyContent="center"
                             >
                                 <Paper sx={{ width: "75%", height: "60%", padding: 3 }}>
-                
-                                    {/* <Typography sx={{ fontWeight: 'bold', }}>
-                                        Today
-                                    </Typography><br /> */}
                                     <Typography sx={{ fontWeight: 'bold', fontSize: 14 }}>
                                         <DirectionsWalkIcon sx={{ fontSize: "medium" }} /> Steps:
                                     </Typography>
@@ -161,29 +148,13 @@ const ModuleCard = () => {
                                         <SportsTennisIcon sx={{ fontSize: "medium" }} /> Activities:
                                     </Typography>
                                     {DisplayActivities}
-                                    <br />
+                                    <br /><br />
 
 
                                 </Paper> <br />
                             </Stack>
                         </Item>
-                        <div alignItems="center" >
-                            <Typography
-                                sx={{
-                                    textAlign: 'center',
-                                    padding: 0
-                                }}>
-                                <a href={url} target="_blank">Google Fit Steps Log</a>
-                            </Typography>
-                            <br />
-                            <Button size="small" variant='contained'
-                                sx={{
-                                    width: "50%",
-                                }}
-                            >
-                                Add today's data
-                            </Button>
-                        </div>
+            
                         <CreateEvent/>
                     </Stack>
                 </Box>

@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
       },
     }).then((res) => {
       if (res.status === 200) {
-          alert("Successfully logged in!");
+         // alert("Successfully logged in!");
           setCurrentUser(res.data);
           localStorage.setItem("name", res.data.fname);
           localStorage.setItem("user", JSON.stringify(res.data));
@@ -49,7 +49,7 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-    alert("Bye....");
+    //alert("Bye....");
     localStorage.clear()
     // if(hasLogin) signOutWithGoogle()
     return auth.signOut()
@@ -102,10 +102,7 @@ export default AuthContext;
 
 // Setup google login tutorial: https://www.youtube.com/watch?v=vDT7EnUpEoo
 const provider = new GoogleAuthProvider()
-// provider.addScope('https://www.googleapis.com/auth/fitness.activity.read')
-// provider.addScope('https://www.googleapis.com/auth/fitness.heart_rate.read')
-// provider.addScope('https://www.googleapis.com/auth/fitness.sleep.read')
-// provider.addScope('https://www.googleapis.com/auth/fitness.blood_pressure.read')
+
 export const signInWithGoogle = () => {
   //const [user, setUser] = useState({hasLogin:false, accessToken: ''})  
   signInWithPopup(auth, provider)

@@ -81,19 +81,37 @@ Health.getOne2 = (email, result) => {
     })
 }
 
-// Health.getOne11 = (category, email, result) => {
-//     let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?) and category =\"?\" ORDER BY eventTime DESC`;
-//     sql.query(query, [email], [category], (err, res) => {
-//         if (err) {
-//             console.log("Cannot retrieve event for given user or category: ", err);
-//             result(err, null);
-//         } else {
-//             console.log("Health event: ", res);
-//             result(null, res);
-//         }
-//     })
-// }
+// query for activity streak given user email
+Health.getStreaks1 = (email, result) => {
+    let query = `SELECT count(*) as streak FROM health where userId = (SELECT id from users where email = ?) 
+                AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
+                and category =\"Activity\"`;
+    sql.query(query, [email], (err, res) => {
+        if (err) {
+            console.log("Cannot retrieve steps streak: ", err);
+            result(err, null);
+        } else {
+            console.log("Health event: ", res);
+            result(null, res);
+        }
+    })
+}
 
+// query for steps streak given user email
+Health.getStreaks2 = (email, result) => {
+    let query = `SELECT count(*) as streak FROM health where userId = (SELECT id from users where email = ?) 
+             AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
+             and category =\"Steps\"`;
+    sql.query(query, [email], (err, res) => {
+        if (err) {
+            console.log("Cannot retrieve activities streak: ", err);
+            result(err, null);
+        } else {
+            console.log("Health event: ", res);
+            result(null, res);
+        }
+    })
+}
 
 
 Health.show = (user_id, result) => {
