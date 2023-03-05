@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import Clock from './Clock'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
-import UploadImage from "./UploadImageSocial"
+import UploadImage from "./UploadImageS"
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
