@@ -21,7 +21,7 @@ export default function Header(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [data, setData] = React.useState('');
-  const user = JSON.parse(currentUser);
+  const user = currentUser;
 
  // don't set the user here! to avoid duplicate api calls, 
  // better to save the user data at login

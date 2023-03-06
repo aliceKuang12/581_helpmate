@@ -300,7 +300,6 @@ SignUp.defaultProps = {
 }
 
 SignUp.propTypes = {
-    classes: PropTypes.object.isRequired,
     isOpen: PropTypes.bool,
     handleClose: PropTypes.func,
 };  
