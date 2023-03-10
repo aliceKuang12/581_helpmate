@@ -11,7 +11,6 @@ import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
 import { Divider } from '@mui/material'
 import { useAuth } from '../context/AuthContext'
-import React, { useEffect, useState } from 'react'
 
 
 
