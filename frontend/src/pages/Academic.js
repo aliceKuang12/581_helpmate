@@ -12,7 +12,7 @@ const Template = () => {
     return(
         <div style={{ backgroundImage: `url(${Image})`, 
         backgroundSize: "cover" }}>
-            <NavBar></NavBar>
+            <NavBar/>
             <Clock/>         
             <Grid container spacing={12}>
                 <Grid  item xs={12} marginX = {5} marginBottom = {5}>
