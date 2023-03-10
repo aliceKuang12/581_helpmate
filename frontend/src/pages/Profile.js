@@ -6,94 +6,29 @@ import { styled } from '@mui/material/styles'
 import img from '../images/ku_building_1.jpg'
 import Image from '../images/streaksBackground.jpg'
 import axios from 'axios'
-import { useAuth } from '../context/AuthContext'
-//import JsonData from './user1.json'
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
+import ModuleCard from '../components/ProfileCard1'
+import ModuleCard2 from '../components/ProfileCard2'
+import Grid from "@mui/material/Grid"
+import '../App.css';
+import Clock from '../components/Clock'
 
 
 const Profile = () => {
-    // https://youtu.be/fPuLnzSjPLE?t=1335
-    //get User from the Context, then display data
-    const [data, setData] = useState([]);
-    const { currentUser } = useAuth();
-    const user = JSON.parse(currentUser);
-
-    return (
-        <div style={{
-            backgroundImage: `url(${Image})`,
-            backgroundSize: "cover"
-        }}>
-            <NavBar />
-
-            <Typography
-                sx={{
-                    textAlign: 'left',
-                    fontSize: 'h6.fontSize',
-                    px: 4,
-                    mt: 4
-                }}
-            >
-                My Profile
-            </Typography>
-            <br /><br />
-            <Stack direction="row"
-
-                spacing={4}
-                sx={{ px: 4 }}>
-
-                <Item sx={{ px: 5, py: 2 }}>
-                    <img src={localStorage.getItem("profilePic") ?
-                        localStorage.getItem("profilePic") : img}
-                        width={200} height={200} alt='Profile Photo'
-                    />
-                    <br /><br />
-                    <div>
-                    <Typography>Name: {user.fname} {user.lname}</Typography>
-                    <Typography> Username: @{user.username}</Typography>
-                    </div>
-                </Item>
-
-                <Item sx={{
-                    textAlign: 'left',
-                    width: "60%",
-                    px: 2,
-                    py: 2
-                }}
-                >
-                    <Typography
-                        sx={{ fontWeight: 'bold' }}
-                    >
-                        Contact Information
-                    </Typography>
-                    <div>
-                        <Typography>Name: {user.fname} {user.lname}</Typography>
-
-                        <Typography> Username: {user.username}</Typography>
-                        <Typography>Email: {user.email}</Typography>
-                        <Typography>Cell: {user.cell ? user.cell : "N/a"}</Typography>
-                        <Typography>Address: {user.address=='Undefined' ? "N/a" : user.address}</Typography>
-
-                        <br />
-
-                        <Typography sx={{ fontWeight: 'bold' }}>
-                            Security
-                        </Typography>
-                        <Typography> Birthday: {user.birthday} </Typography>
-                        {/* <Typography>Password: {currentUser.password}</Typography> */}
-
-                    </div>
-                </Item>
-            </Stack>
-            <br /> <br />
-            <br /> <br />
+    return(
+        <div style={{ backgroundImage: `url(${Image})`, 
+        backgroundSize: "cover" }}>
+            <NavBar></NavBar>
+            <Clock/>         
+            <Grid container spacing={12}>
+                <Grid  item xs={12} marginX = {5} marginBottom = {5}>
+                    <Grid container spacing={6}>
+                        <ModuleCard />
+                        <ModuleCard2/>
+                    </Grid>
+                </Grid>
+            </Grid>
         </div>
-    )
+    );
 }
 
 export default Profile;
