@@ -46,8 +46,11 @@ app.get("/users", user.findAll); // works, same as "select * from users"
 app.get("/user/:email", (req, res) => { user.findOne(req, res) }); // same as "select * from users where email =`:email`"
 
 //academic module
-//app.post("/academics/create", (req, res) => academic.createEvent(req, res));
 app.post("/academics/create", (req, res) => {
+  console.log(req.body);
+  academic.createEvent(req, res)});
+/* app.post("/academics/create", (req, res) => {
+  console.log(req.body);
   const q = "Insert Into academic (`userId`, `title`, `category`, `eventTime`, `location`, `completed`, `notes`) VALUES (?)";
   const values = [
     req.body.userId,
@@ -62,7 +65,7 @@ app.post("/academics/create", (req, res) => {
     if (err) return res.json(err)
     return res.json("New event added to academics");
   })
-})
+}) */
 app.get("/academics", (req, res) => academic.showAcademic(req, res));
 app.get("/academics/:email", (req, res) => academic.userAcademic(req, res));
 app.get("/academics/streak1/:email", (req, res) => academic.assignments(req, res));
