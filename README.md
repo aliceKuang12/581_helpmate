@@ -1,5 +1,4 @@
 # 581_helpmate
-EECS 581 Software Programming II project.
 
 Helpmate is a web application designed to help students keep track of events from multiple categories of life (academics, social, health, travel). It utilizes the reactjs as a frontend framework, expressjs as middlware, and nodejs, and mysql database to process data and requests on the backend. Early prototypes for the project were designed in Figma.
 
