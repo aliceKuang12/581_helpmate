@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,24 +8,32 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import Checkbox from './Checkbox';
 import { Typography } from '@mui/material';
+import axios from 'axios';
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
+  const [post, setPost] = React.useState(null);
   const [data, setData] = useState({
+    userId: 17,
     title: '',
+    category: '',
     date: '',
     time: '',
-    completed: '',
+    completed: '0',
     address: '',
     notes: '',
+    photo: '',
   });
 
   const {
+    userId,
     title,
+    category,
     date,
     time,
     completed,
     address,
     notes,
+    photo
   } = data;
   const [file, setFile] = useState();
   function saveUrl(e) {
@@ -41,9 +49,39 @@ export default function BasicForm() {
     setOpen(false);
   };
 
+  const handleCreate = () => {
+    console.log(data);
+    createSocialPost();
+    setOpen(false);
+  };
+
   const handleChange = (value, key) => {
     setData(prevState => ({...prevState, [key]: value,}));
   };
+
+  useEffect(() => {
+    const fetchSocial = async () => {
+        console.log(data);
+        await axios.get("http://localhost:3003/social/")
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    fetchSocial()
+  }, []);
+
+  function createSocialPost() {
+    console.log("creating post")
+    axios
+      .post("http://localhost:3003/social/create", data)
+      .then((response) => {
+        console.log(response.data);
+        setPost(response.data);
+      });
+  }
 
   return (
     <div >
@@ -153,7 +191,7 @@ export default function BasicForm() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Create</Button>
+          <Button onClick={handleCreate}>Create</Button>
         </DialogActions>
       </Dialog>
       

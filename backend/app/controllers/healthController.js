@@ -1,6 +1,6 @@
 /**
  * Author: Alice Kuang
- * Update Date: 2/25/23
+ * Update Date: 3/11/23
  * Creation Date: 2/20/23
  * Description: Intermediary controller for health event creation and retreival; 
  *      get all users health or specific categories (i.e. steps and activities)
@@ -10,13 +10,13 @@ import Health from "../models/health.js"
 
 export const createEvent = (req, res) => {
     const newEvent = new Health({
-        userId: req.query.userId,
-        title: req.query.title,
-        category: req.query.category,
-        eventTime: req.query.eventTime,
-        location: req.query.location,
-        notes: req.query.notes,
-        completed: req.query.completed,
+        userId: req.body.userId,
+        title: req.body.title,
+        category: req.body.category,
+        eventTime: req.body.date,
+        location: req.body.location,
+        notes: req.body.notes,
+        completed: req.body.completed,
     })
     Health.create(newEvent, (err, data) => {
         if (err) {

@@ -1,4 +1,16 @@
-import React, {useState} from 'react';
+/**
+ * CreateHealth.js 
+ *
+ * Form to create a new assignment for the health page. 
+ * Allows users to dynamically update the events stored in the DBs.
+ *
+ * @link   URL
+ * @file   This file defines the CreateAssign class.
+ * @author Eva Morrison. Alice Kuang.
+ * @since  3/11/23
+ */
+
+import React, {useEffect, useState} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,22 +20,29 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import Checkbox from './Checkbox';
 import { Typography } from '@mui/material';
+import axios from 'axios'
+
 export default function CreateHealth() {
   const [open, setOpen] = React.useState(false);
+  const [post, setPost] = React.useState(null);
   const [data, setData] = useState({
+    userId: 17,
     title: '',
     category: '',
     date: '',
     time: '',
-    completed: '',
+    location: '',
+    completed: '0',
     notes: '',
   });
 
   const {
+    userId,
     title,
     category,
     date,
     time,
+    location,
     completed,
     notes,
   } = data;
@@ -42,9 +61,37 @@ export default function CreateHealth() {
   };
 
   const handleChange = (value, key) => {
-    console.log(value);
     setData(prevState => ({...prevState, [key]: value,}));
   };
+
+  const handleCreate = () => {
+    console.log(data);
+    createHealthPost();
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    const fetchHealth = async () => {
+        await axios.get("http://localhost:3003/health/")
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    fetchHealth()
+  }, []);
+
+  function createHealthPost() {
+    console.log("creating post")
+    axios
+      .post("http://localhost:3003/health/create", data)
+      .then((response) => {
+        console.log(response.data);
+        setPost(response.data);
+      });
+  }
 
   return (
     <div >
@@ -153,7 +200,7 @@ export default function CreateHealth() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Create</Button>
+          <Button onClick={handleCreate}>Create</Button>
         </DialogActions>
       </Dialog>
       

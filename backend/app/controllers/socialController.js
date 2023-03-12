@@ -2,14 +2,14 @@ import Social from "../models/social.js"
 
 export const createEvent = (req, res) => {
     const newEvent = new Social({
-        userId: req.query.userId,
-        title: req.query.title,
-        category: req.query.category,
-        eventTime: req.query.eventTime,
-        location: req.query.location,
-        notes: req.query.notes,
-        photo: req.query.photo,
-        completed: req.query.completed,
+        userId: req.body.userId,
+        title: req.body.title,
+        category: req.body.category,
+        eventTime: req.body.date,
+        location: req.body.address,
+        notes: req.body.notes,
+        photo: req.body.photo,
+        completed: req.body.completed,
     })
     Social.create(newEvent, (err, data) => {
         if (err) {
