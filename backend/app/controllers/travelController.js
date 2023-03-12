@@ -2,14 +2,14 @@ import Travel from "../models/travel.js"
 
 export const createEvent = (req, res) => {
     const newEvent = new Travel({
-        userId: req.query.userId,
-        title: req.query.title,
-        category: req.query.category,
-        eventTime: req.query.eventTime,
-        location: req.query.location,
-        notes: req.query.notes,
-        ticket: req.query.ticket,
-        completed: req.query.completed,
+        userId: req.body.userId,
+        title: req.body.title,
+        category: req.body.category,
+        eventTime: req.body.date,
+        location: req.body.address,
+        notes: req.body.notes,
+        ticket: req.body.ticket,
+        completed: req.body.completed,
     })
     Travel.create(newEvent, (err, data) => {
         if (err) {
@@ -48,5 +48,19 @@ export const showTravel = (req, res) => {
             })
         }
         res.status(200).send(data);
+    })
+}
+
+export const deleteEvent = (req,res) => {
+    const title = req.body.title
+    //console.log(req);
+    Travel.delete(title, (err,data) => {
+        if(err) {
+            return res.status(500).send({
+                message:
+                    err.message || "Error occurred while deleting event."
+            });
+        }
+        res.send(data);
     })
 }
