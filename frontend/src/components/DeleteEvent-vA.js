@@ -9,8 +9,28 @@ import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 
+import axios from 'axios';
+import {useEffect, useState} from 'react';
+
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
+  const [post, setPost] = React.useState(null);
+
+  const [data, setData] = useState({
+    userId: '17',
+    title: '',
+    category: '',
+    date: '',
+    eventTime: '',
+  });
+
+  const {
+    userID,
+    title,
+    category,
+    date,
+    eventTime,
+  } = data;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -19,6 +39,40 @@ export default function BasicForm() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleDelete = () => {
+    console.log(data);
+    DeleteTravelEvent();
+    setOpen(false);
+  };
+
+  const handleChange = (value, key) => {
+    setData(prevState => ({...prevState, [key]: value,}));
+  };
+
+  useEffect(() => {
+    const fetchTravel = async () => {
+        await axios.get("http://localhost:3003/travel/")
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    fetchTravel()
+  }, []);
+
+  function DeleteTravelEvent() {
+    console.log("deleting event")
+    console.log(data);
+    axios
+      .delete("http://localhost:3003/travel/delete", { data: { data } })
+      .then((response) => {
+        console.log(response.data);
+        setPost(response.data);
+      });
+  }
 
   return (
     <div >
@@ -47,8 +101,8 @@ export default function BasicForm() {
                 id="title"
                 label="event title"
                 variant="outlined"
-                //onChange={e => handleChange(e.target.value, 'title')}
-                //value={title}
+                onChange={e => handleChange(e.target.value, 'title')}
+                value={title}
                 fullWidth
               /> 
             </Grid>
@@ -63,8 +117,8 @@ export default function BasicForm() {
                 id="title"
                 label="event category"
                 variant="outlined"
-                //onChange={e => handleChange(e.target.value, 'category')}
-                //value={category}
+                onChange={e => handleChange(e.target.value, 'category')}
+                value={category}
                 fullWidth
               /> 
             </Grid>
@@ -79,8 +133,8 @@ export default function BasicForm() {
               id="date"
               type="date"
               variant="outlined"
-              //onChange={e => handleChange(e.target.value, 'date')}
-              //value={date}
+              onChange={e => handleChange(e.target.value, 'date')}
+              value={date}
               fullWidth
               />  
             </Grid>
@@ -89,8 +143,8 @@ export default function BasicForm() {
                 id="eventTime"
                 type="time"
                 variant="outlined"
-                //onChange={e => handleChange(e.target.value, 'eventTime')}
-                //value={eventTime}
+                onChange={e => handleChange(e.target.value, 'eventTime')}
+                value={eventTime}
                 fullWidth
               />
             </Grid> 
@@ -99,7 +153,7 @@ export default function BasicForm() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Save</Button>
+          <Button onClick={handleDelete}>Delete</Button>
         </DialogActions>
       </Dialog>
       

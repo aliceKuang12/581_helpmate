@@ -49,47 +49,17 @@ app.get("/user/:email", (req, res) => { user.findOne(req, res) }); // same as "s
 app.post("/academics/create", (req, res) => {
   console.log(req.body);
   academic.createEvent(req, res)});
-/* app.post("/academics/create", (req, res) => {
-  console.log(req.body);
-  const q = "Insert Into academic (`userId`, `title`, `category`, `eventTime`, `location`, `completed`, `notes`) VALUES (?)";
-  const values = [
-    req.body.userId,
-    req.body.title,
-    req.body.category,
-    req.body.date,
-    req.body.location,
-    req.body.completed,
-    req.body.notes,
-  ]
-  sql.query(q, [values], (err, data) => {
-    if (err) return res.json(err)
-    return res.json("New event added to academics");
-  })
-}) */
 app.get("/academics", (req, res) => academic.showAcademic(req, res));
 app.get("/academics/:email", (req, res) => academic.userAcademic(req, res));
 app.get("/academics/streak1/:email", (req, res) => academic.assignments(req, res));
 
 //travel module
-//app.post("/travel/create", (req, res) => travel.createEvent(req, res));
-app.post("/travel/create", (req, res) => {
-  const q = "Insert Into travel(`userId`, `title`, `category`, `eventTime`, `location`, `notes`, `completed`) VALUES (?)";
-  const values = [
-    req.body.userId,
-    req.body.title,
-    req.body.category,
-    req.body.date,
-    req.body.address,
-    req.body.notes,
-    req.body.completed,
-  ]
-  sql.query(q, [values], (err, data) => {
-    if (err) return res.json(err)
-    return res.json("New event added to travel");
-  })
-})
+app.post("/travel/create", (req, res) => travel.createEvent(req, res));
 app.get("/travel", (req, res) => travel.showTravel(req, res));
 app.get("/travel/:email", (req, res) => travel.userTravel(req, res));
+app.delete("/travel/delete/", (req, res) => {
+  //console.log(req.body.data);
+  travel.deleteEvent(req,res)});
 
 //health module
 app.post("/health/create", (req, res) => health.createEvent(req, res));
@@ -101,7 +71,7 @@ app.get("/health/streak1/:email", (req, res) => health.stepStreak(req, res));
 app.get("/health/streak2/:email", (req, res) => health.activityStreak(req, res));
 
 //social module
-app.post("/social/create", (req, res) => social.createEvent(req, res));
+app.post("/social/create", (req, res) => {social.createEvent(req, res)});
 app.get("/social/", (req, res) => social.showSocial(req, res));
 app.get("/social/:email", (req, res) => social.userSocial(req, res));
 
