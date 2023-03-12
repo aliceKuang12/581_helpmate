@@ -52,14 +52,13 @@ app.post("/academics/create", (req, res) => {
 app.get("/academics", (req, res) => academic.showAcademic(req, res));
 app.get("/academics/:email", (req, res) => academic.userAcademic(req, res));
 app.get("/academics/streak1/:email", (req, res) => academic.assignments(req, res));
+app.delete("/academics/delete/", (req, res) => {academic.deleteEvent(req,res)});
 
 //travel module
 app.post("/travel/create", (req, res) => travel.createEvent(req, res));
 app.get("/travel", (req, res) => travel.showTravel(req, res));
 app.get("/travel/:email", (req, res) => travel.userTravel(req, res));
-app.delete("/travel/delete/", (req, res) => {
-  //console.log(req.body.data);
-  travel.deleteEvent(req,res)});
+app.delete("/travel/delete/", (req, res) => { travel.deleteEvent(req,res)});
 
 //health module
 app.post("/health/create", (req, res) => health.createEvent(req, res));
