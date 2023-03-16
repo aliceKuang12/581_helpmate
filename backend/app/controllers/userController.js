@@ -20,11 +20,13 @@ export const createUser = (req, res) => {
         res.status(400).send({
             message: "Content cannot be empty"
         })
+        return;
     }
     
     const newUser = new User({
         token: req.body.token,
         username: req.body.username,
+        // password: req.body.password,
         password: hashPassword(req.body.password),
         email: req.body.email,
         cell: req.body.cell,
@@ -42,16 +44,48 @@ export const createUser = (req, res) => {
             })
         } else {
             res.send(data);
-            console.log(newUser);
+            console.log(data);
         }
     })
 };
+
+export const updateUser = (req,res) => {
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Content cannot be empty"
+        })
+    }
+
+    let updatedInfo = req.body;
+    let query = "SELECT * FROM users where email = ?";
+    sql.query(query, [updatedInfo.email], (err,result) => {
+        if (err) {
+            console.log("Error occur while find user with email ", req.params.email)
+        } else {
+            if (result.length > 0) {
+                if (updatedInfo.password) {
+                    updatedInfo.password = hashPassword(updatedInfo.password);
+                }
+                User.update(updatedInfo, result[0].id, (err, data) => {
+                    if (err) {
+                        res.status(500).send({
+                            message: err.message || "An error has occured while creating new user"
+                        })
+                    } else {
+                        res.send(data);
+                    }
+                })
+            }
+        }
+    })
+}
 
 export const login = (req, res, next) => {
     if (!req.query) {
         res.status(400).send({
             message: "Content cannot be empty"
         })
+        return;
     }
 
     const email = req.query.email;
@@ -85,7 +119,6 @@ export const login = (req, res, next) => {
     
 }
 
-
 export const findOne = (req, res) => {
     const email = req.params.email;
     User.getOne(email, (err, data) => {
@@ -95,7 +128,6 @@ export const findOne = (req, res) => {
                     err.message || "Error occurred while retrieving `findone` user."
             });
         }
-        
         res.send(data);
     });
 }

@@ -14,7 +14,9 @@ import Streaks from './pages/Streaks'
 import { AuthProvider } from './context/AuthContext';
 import Container from '@mui/material/Container'
 import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import Profile from './pages/Profile';
+
 
 function App() {
   return (
@@ -39,6 +41,7 @@ function App() {
             <Route path = '/streaks' element={<Streaks/>}/>
             <Route path = '/home' element = {<Homepage/>}/>
             <Route path='/forgot-password' element={<ForgotPassword />} />
+            <Route path='/reset-password' element={<ResetPassword />} />
             {/* <Route path = '/reset' element={<PasswordReset/>}/> */}
           </Routes>c
         </AuthProvider>

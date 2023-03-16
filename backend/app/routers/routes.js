@@ -20,6 +20,7 @@ import * as social from "../controllers/socialController.js";
 import app from "../../server.js"
 import sql from "../models/db.js";
 import { google } from 'googleapis'
+import { resetPasswordMail } from "../mailer/auth.js";
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -28,7 +29,6 @@ app.use(session({
 
 //session
 app.post("/login", express.urlencoded({ extended: false }), (req, res, next) => user.login(req, res, next));
-
 app.get("/logout", (req, res, next) => {
   req.session.user = null;
   req.session.save(function (err) {
@@ -39,11 +39,14 @@ app.get("/logout", (req, res, next) => {
     })
   })
 })
-
+app.get("/reset-password-email", (req,res) => resetPasswordMail());
 //user
-app.post("/signup", (req, res) => user.createUser(req, res));
+app.post("/signup", (req, res) => { user.createUser(req, res) });
 app.get("/users", user.findAll); // works, same as "select * from users"
 app.get("/user/:email", (req, res) => { user.findOne(req, res) }); // same as "select * from users where email =`:email`"
+app.put("/user", (req,res) => user.updateUser(req,res));
+
+
 
 //academic module
 app.post("/academics/create", (req, res) => {

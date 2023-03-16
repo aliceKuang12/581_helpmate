@@ -26,6 +26,19 @@ User.create = (newUser, result) => {
     })
 }
 
+User.update = (updated, id, result) => {
+    let query = `UPDATE users SET ? WHERE id = ${id}`;
+    sql.query(query, updated, (err, res) => {
+        if (err) {
+            console.log("Cannot update: ", err);
+            result(err,null);
+        } else {
+            console.log("All users: ", res);
+            result(null,res);
+        }
+    })
+}
+
 User.getAll = (result) => {
     let query = "SELECT * FROM users";
     sql.query(query, (err, res) => {
@@ -40,8 +53,6 @@ User.getAll = (result) => {
 }
 
 User.getOne  = (email, result) => {
-    //console.log(email)
-    //const email = req.params.email;
     let query = "SELECT * FROM users where email = ?";
     sql.query(query, [email], (err, res) => {
         if (err) {
