@@ -16,24 +16,23 @@ const checkPassword = (password, User) => {
 }
 
 export const createUser = (req, res) => {
-    if (!req.query) {
+    if (!req.body) {
         res.status(400).send({
             message: "Content cannot be empty"
         })
     }
     
     const newUser = new User({
-        token: req.query.token,
-        username: req.query.username,
-        //password: req.query.password,
-        password: hashPassword(req.query.password),
-        email: req.query.email,
-        cell: req.query.cell,
-        fname: req.query.fname,
-        lname: req.query.lname,
-        birthday: req.query.birthday,
-        profilePic: req.query.profilePic,
-        address: req.query.address
+        token: req.body.token,
+        username: req.body.username,
+        password: hashPassword(req.body.password),
+        email: req.body.email,
+        cell: req.body.cell,
+        fname: req.body.fname,
+        lname: req.body.lname,
+        birthday: req.body.birthday,
+        profilePic: req.body.profilePic,
+        address: req.body.address
     })
 
     User.create(newUser, (err, data) => {

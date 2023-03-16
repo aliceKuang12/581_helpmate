@@ -103,7 +103,7 @@ const SignUp = (props) => {
             url: 'http://localhost:3003/signup',
             method: 'POST',
             headers: AXIOS_HEADER,
-            params: db,
+            data: db,
         }).then(() => {
             alert("Sucessfully signed up!")
             setData({
