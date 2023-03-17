@@ -16,6 +16,7 @@ import img1 from '../images/rollar_coaster.jpg'
 import img2 from '../images/socialimage.jpg'
 import img3 from '../images/hiker.jpg'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import axios from 'axios';
 
 export default function UploadImage() {
 
@@ -32,6 +33,31 @@ export default function UploadImage() {
     setSelectedImages(imagesArray);
   }
 
+  // const onSelectFile = (files) => {
+  //   // Update chosen files
+  //   setSelectedImages([ ...files ])
+  // };
+
+  // const uploadFiles = () => {
+  //   // Create a form and post it to server
+  //   let formData = new FormData()
+  //   selectedImages.forEach((file) => formData.append("files", file))
+
+  //   // axios send form data ref: https://stackoverflow.com/questions/47630163/axios-post-request-to-send-form-data
+  //   axios({
+  //     url: "http://localhost:3003/imageSocial/" + localStorage.getItem("email"),
+  //     method: "POST",
+  //     body: formData,
+  //     headers: { "Content-Type": "multipart/form-data" },
+  //   }).then(function (response) {
+  //     //handle success
+  //     console.log(response);
+  //   })
+  //   .catch(function (response) {
+  //     //handle error
+  //     console.log(response);
+  //   });
+  // }
 
   const MyCollection = [
     {
@@ -60,10 +86,7 @@ export default function UploadImage() {
   };
 
   const [file, setFile] = useState("Invalid Image Source");
-  // function saveUrl(e) {
-  //     console.log(e.target.files);
-  //     setFile(URL.createObjectURL(e.target.files[0]));
-  // }
+
   return (
 
     <Grid container-spacing={2} alignItems="center" justifyContent="center" >
@@ -119,20 +142,41 @@ export default function UploadImage() {
       />
       <br />
       <Grid>
-        <Button variant="outlined" component="label"
+
+        <form action={"http://localhost:3003/imageSocial/" + localStorage.getItem("email")} method="POST"
+          enctype="multipart/form-data" 
+          sx={{ textAlign: 'center' }}>
+
+          <input type="file" name="mypic" required /><br/>
+          <input type="submit" value="submit"/>
+        </form>
+
+        {/* <Button variant="outlined" component="label"
           sx={{
             // backgroundColor: "darkgreen",
             fontFamily: "arial",
           }}
         >
           <AddPhotoAlternateIcon sx={{ fontSize: "medium" }} />
-
           <input hidden accept="image/*"
-            multiple type="file"
-            onChange={onSelectFile} />
-        </Button>
+              multiple type="file"
+              onChange={onSelectFile}
+
+            />
+        </Button> */}
       </Grid>
-      <br/>
+      <br />
     </Grid>
   );
 }
+
+
+/*
+      <FileUpload
+        multiFile={true}
+        onFilesChange={handleFilesChange}
+        onContextReady={(context) => {}}
+      />
+      <button onClick={uploadFiles}>Upload</button>
+
+*/

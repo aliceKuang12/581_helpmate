@@ -14,12 +14,17 @@ import session from "express-session"
 import express from "express";
 import * as user from "../controllers/userController.js";
 import * as academic from "../controllers/academicController.js";
+import * as image from "../controllers/imageController.js";
 import * as travel from "../controllers/travelController.js";
 import * as health from "../controllers/healthController.js";
 import * as social from "../controllers/socialController.js";
 import app from "../../server.js"
+import multer from "multer";
 import sql from "../models/db.js";
 import { google } from 'googleapis'
+
+const upload = multer({ dest: 'uploads/' })
+
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -45,20 +50,54 @@ app.post("/signup", (req, res) => user.createUser(req, res));
 app.get("/users", user.findAll); // works, same as "select * from users"
 app.get("/user/:email", (req, res) => { user.findOne(req, res) }); // same as "select * from users where email =`:email`"
 
+
+// saves single file for profile page
+app.post("/uploadProfile", upload.single("mypic"), function (req, res) {
+
+  if (!req.params) {
+    return res.status(400).send({
+      message: "Content cannot be empty"
+    })
+  } else {
+    // res.send("Success, Image uploaded!", req.file)
+    console.log(req.file, req.body)
+  }
+})
+
+// saves single file for social page
+app.post("/uploadSocial", upload.single("mypic"), function (req, res) {
+
+  if (!req.params) {
+    return res.status(400).send({
+      message: "Content cannot be empty"
+    })
+  } else {
+    // res.send("Success, Image uploaded!", req.file)
+    console.log(req.file, '\n', req.body)
+  }
+})
+
+//image module
+app.get("/imageRefs", (req, res) => image.showImageRefs(req, res));
+app.get("/imageRefs/:email", (req, res) => image.userImageRefs(req, res));
+app.post("/imageSocial/:email", upload.single("mypic"), (req, res) => image.updateImageRefs(req, res));
+app.get("/imageRefs/:field", (req, res) => image.showImageRefs1(req, res)); // need userId and field to query
+
 //academic module
 app.post("/academics/create", (req, res) => {
   console.log(req.body);
-  academic.createEvent(req, res)});
+  academic.createEvent(req, res)
+});
 app.get("/academics", (req, res) => academic.showAcademic(req, res));
 app.get("/academics/:email", (req, res) => academic.userAcademic(req, res));
 app.get("/academics/streak1/:email", (req, res) => academic.assignments(req, res));
-app.delete("/academics/delete/", (req, res) => {academic.deleteEvent(req,res)});
+app.delete("/academics/delete/", (req, res) => { academic.deleteEvent(req, res) });
 
 //travel module
 app.post("/travel/create", (req, res) => travel.createEvent(req, res));
 app.get("/travel", (req, res) => travel.showTravel(req, res));
 app.get("/travel/:email", (req, res) => travel.userTravel(req, res));
-app.delete("/travel/delete/", (req, res) => { travel.deleteEvent(req,res)});
+app.delete("/travel/delete/", (req, res) => { travel.deleteEvent(req, res) });
 
 //health module
 app.post("/health/create", (req, res) => health.createEvent(req, res));
@@ -70,9 +109,11 @@ app.get("/health/streak1/:email", (req, res) => health.stepStreak(req, res));
 app.get("/health/streak2/:email", (req, res) => health.activityStreak(req, res));
 
 //social module
-app.post("/social/create", (req, res) => {social.createEvent(req, res)});
+app.post("/social/create", (req, res) => { social.createEvent(req, res) });
 app.get("/social/", (req, res) => social.showSocial(req, res));
 app.get("/social/:email", (req, res) => social.userSocial(req, res));
+
+
 
 //google calendar paths
 app.post("/create-tokens", async (req, res, next) => {
