@@ -20,7 +20,8 @@ import * as social from "../controllers/socialController.js";
 import app from "../../server.js"
 import sql from "../models/db.js";
 import { google } from 'googleapis'
-import { resetPasswordMail } from "../mailer/auth.js";
+import { resetPasswordMail } from "../mailer/actions/authMailer.js";
+
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -39,7 +40,8 @@ app.get("/logout", (req, res, next) => {
     })
   })
 })
-app.get("/reset-password-email", (req,res) => resetPasswordMail());
+app.post("/reset-password-email", (req,res) => resetPasswordMail(req,res));
+
 //user
 app.post("/signup", (req, res) => { user.createUser(req, res) });
 app.get("/users", user.findAll); // works, same as "select * from users"

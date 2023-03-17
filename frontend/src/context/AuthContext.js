@@ -34,14 +34,13 @@ export function AuthProvider({ children }) {
       },
     }).then((res) => {
       if (res.status === 200) {
-         // alert("Successfully logged in!");
           setCurrentUser(res.data);
           localStorage.setItem("name", res.data.fname);
           localStorage.setItem("user", JSON.stringify(res.data));
           setIsAuthenticated(true);
           setLoading(false);
       } else {
-          throw res;
+        throw res;
       }
     }).catch((err) => {
       alert(err.message);
@@ -55,8 +54,23 @@ export function AuthProvider({ children }) {
     return auth.signOut()
   }
 
-  function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email)
+  function resetPassword(email, password) {
+    // return auth.sendPasswordResetEmail(email)
+    return axios({
+      url: 'http://localhost:3003/user',
+      method: 'PUT',
+      headers: AXIOS_HEADER,
+      data: {
+        email: email,
+        password: password
+      },
+    }).then((res) => {
+      if (res.status !== 200) {
+        throw res;
+      }
+    }).catch((err) => {
+      alert(err.message);
+    })
   }
 
   //   function updateEmail(email) {

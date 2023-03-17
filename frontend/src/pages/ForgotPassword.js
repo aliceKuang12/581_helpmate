@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper';
@@ -29,6 +30,16 @@ export default function ForgotPassword() {
 
     }
 
+    const handleSendMail = async (e) => {
+        try {
+            await axios.post("http://localhost:3003/reset-password-email",
+                { email: emailRef.current.value });
+            setMessage('Check your email for further instructions')
+        } catch (e) {
+            setMessage('Cannot reset password')
+        }
+    };
+
     return (
         <div align="center">
             <Paper className='w-400' sx={{ maxWidth: 600, marginY: 15 }}>
@@ -45,13 +56,23 @@ export default function ForgotPassword() {
                     >
                     </TextField>
                     <br /><br />
-                    <Button
+                    {/* <Button
                         variant="contained"
                         className="w-200"
                         type="submit"
                         onClick={handleSubmit}
                     >
                        Reset Password
+                    </Button> */}
+                    <Button
+                        variant="contained"
+                        className="w-200"
+                        type="submit"
+                        onClick={handleSendMail}
+                        sx={{ width: 300, mx: 0.5 }}
+                        required
+                    >
+                        Send reset password email
                     </Button>
                     <br />
                     <Typography>

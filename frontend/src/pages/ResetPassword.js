@@ -36,7 +36,7 @@ export default function ResetPassword() {
             <Paper className='w-400' sx={{ maxWidth: 600, marginY: 15 }}>
                 {error && <Alert severity="danger">{error}</Alert>}
                 {message && <Alert severity="success">{message}</Alert>}
-                <Typography variant="h6">Enter the email associated with your account: </Typography><br /><br />
+                <Typography variant="h6">Enter the email associated with your account and your new pasword: </Typography><br /><br />
                 <FormControl>
                     <TextField
                         className='w-200'
