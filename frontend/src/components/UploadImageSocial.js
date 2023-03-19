@@ -38,26 +38,27 @@ export default function UploadImage() {
   //   setSelectedImages([ ...files ])
   // };
 
-  // const uploadFiles = () => {
-  //   // Create a form and post it to server
-  //   let formData = new FormData()
-  //   selectedImages.forEach((file) => formData.append("files", file))
+  const onSubmit = (e) => {
+    // Create a form and post it to server
+    e.preventDefault()
+    let formData = new FormData()
+    selectedImages.forEach((file) => formData.append("files", file))
 
-  //   // axios send form data ref: https://stackoverflow.com/questions/47630163/axios-post-request-to-send-form-data
-  //   axios({
-  //     url: "http://localhost:3003/imageSocial/" + localStorage.getItem("email"),
-  //     method: "POST",
-  //     body: formData,
-  //     headers: { "Content-Type": "multipart/form-data" },
-  //   }).then(function (response) {
-  //     //handle success
-  //     console.log(response);
-  //   })
-  //   .catch(function (response) {
-  //     //handle error
-  //     console.log(response);
-  //   });
-  // }
+    // axios send form data ref: https://stackoverflow.com/questions/47630163/axios-post-request-to-send-form-data
+    axios({
+      url: "http://localhost:3003/imageSocial/" + localStorage.getItem("email"),
+      method: "POST",
+      body: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    }).then(function (response) {
+      //handle success
+      console.log(response);
+    })
+    .catch(function (err) {
+      //handle error
+      console.log(err);
+    });
+  }
 
   const MyCollection = [
     {
@@ -143,11 +144,9 @@ export default function UploadImage() {
       <br />
       <Grid>
 
-        <form action={"http://localhost:3003/imageSocial/" + localStorage.getItem("email")} method="POST"
-          enctype="multipart/form-data" 
+        <form onSubmit = {onSubmit}   
           sx={{ textAlign: 'center' }}>
-
-          <input type="file" name="mypic" required /><br/>
+          <input type="file" name="social" onChange={onSelectFile} multiple /><br/>
           <input type="submit" value="submit"/>
         </form>
 
@@ -171,12 +170,3 @@ export default function UploadImage() {
 }
 
 
-/*
-      <FileUpload
-        multiFile={true}
-        onFilesChange={handleFilesChange}
-        onContextReady={(context) => {}}
-      />
-      <button onClick={uploadFiles}>Upload</button>
-
-*/
