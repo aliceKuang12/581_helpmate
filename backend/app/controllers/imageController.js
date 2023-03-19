@@ -98,24 +98,24 @@ export const profileRefs = (req, res) => {
     });
 }
 
-// // show paths where images are stored
-// export const updateSocialRefs = (req, res) => {
-//     if (!req.params) {
-//         return res.status(400).send({
-//             message: "Content cannot be empty"
-//         })
-//     }
+// show paths where images are stored
+export const updateSocialRefs = (req, res) => {
+    if (!req.params) {
+        return res.status(400).send({
+            message: "Content cannot be empty"
+        })
+    }
     
-//    // console.log(req.file.path, '\n', req.body)
-//     Images.update2(req, (err, data) => {
-//         if (err) {
-//             return res.status(500).send({
-//                 message: err.message || "Some error occurred while retrieving image paths."
-//             })
-//         }
-//         res.status(200).send(data);
-//     })
-// }
+   console.log(req) // req.file, req.body
+    Images.update2(req, (err, data) => {
+        if (err) {
+            return res.status(500).send({
+                message: err.message || "Some error occurred while retrieving image paths."
+            })
+        }
+        res.status(200).send(data);
+    })
+}
 
 // // show paths where images are stored
 // export const updateTravelRefs = (req, res) => {

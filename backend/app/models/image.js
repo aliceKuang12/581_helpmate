@@ -98,7 +98,7 @@ Images.update2 = (req, result) => {
     console.log(fp)
 
     let query = `UPDATE imagerefs SET social1=?, social2=?, social3=? WHERE userId = (SELECT id from users where email = ?)`; 
-    sql.query(query, [fp[0].filename, fp[1].filename, fp[2].filename, email], (err, res) => {
+    sql.query(query, [fp[0].filename, fp[1].filename, fp[2].filename, email], (err, res) => { // fp[0].path, fp[1].path, fp[2].path
         if (err) {
             console.log(err);
             result(err, null);

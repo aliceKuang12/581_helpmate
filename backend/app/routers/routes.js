@@ -51,6 +51,7 @@ var storage = multer.diskStorage({
 
 var maxSize = 1 * 1000 * 1000; 
 var upload = multer({ storage: storage, limits: { fileSize: maxSize } }) ;
+// var upload2 = multer({ storage: storage, limits: { fileSize: maxSize } }) ; // upload.fields([{ name: '_social', maxCount: 3 }]);
 
 app.use(session({
   secret: 'keyboard cat',
@@ -82,7 +83,7 @@ app.get("/imageRefs", (req, res) => image.showImageRefs(req, res));
 app.get("/imageRefs/:email", (req, res) => image.userImageRefs(req, res));
 app.get("/profile/:email", (req, res) => image.userImageRefs(req, res));
 app.post("/imageProfile/:email", upload.single('_profile'), (req, res) => image.updateProfileRefs(req, res));
-// app.post("/imageSocial/:email", upload.array('_social', 3), (req, res) => image.updateSocialRefs(req, res));
+app.post("/imageSocial/:email", upload.array('_social', 3), (req, res) => image.updateSocialRefs(req, res));
 // app.post("/imageTravel/:email", upload.array('travel', 3), (req, res) => image.updateTravelRefs(req, res));
 
 //academic module
