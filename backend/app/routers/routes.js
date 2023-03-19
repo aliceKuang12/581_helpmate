@@ -23,7 +23,34 @@ import multer from "multer";
 import sql from "../models/db.js";
 import { google } from 'googleapis'
 
-const upload = multer({ dest: 'uploads/' })
+// enable uploads folder to be statically served to frontend, i.e. localhost:3003/static/FILENAME.EXT
+// ref for resolving module problem: https://codingbeautydev.com/blog/javascript-dirname-is-not-defined-in-es-module-scope/
+import path from 'path'
+import { fileURLToPath } from 'url'; 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// console.log(path.join(__dirname, '..\\..\\', '/uploads'));
+app.use('/static', express.static(path.join(__dirname, '..\\..\\', '/uploads'))); 
+
+// Setup storage to save file with jpg extension to local disk
+// https://stackoverflow.com/questions/31592726/how-to-store-a-file-with-file-extension-with-multer
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '.jpg') //Appending .jpg
+  }, 
+  fileFilter: function (req, file, cb){ 
+    var filetypes = /jpeg|jpg|png/;
+    cb("Error: File upload only supports the "
+    + "following filetypes - " + filetypes);
+  }
+})
+
+var maxSize = 1 * 1000 * 1000; 
+var upload = multer({ storage: storage, limits: { fileSize: maxSize } }) ;
 
 app.use(session({
   secret: 'keyboard cat',
@@ -50,38 +77,13 @@ app.post("/signup", (req, res) => user.createUser(req, res));
 app.get("/users", user.findAll); // works, same as "select * from users"
 app.get("/user/:email", (req, res) => { user.findOne(req, res) }); // same as "select * from users where email =`:email`"
 
-
-// saves single file for profile page
-app.post("/uploadProfile", upload.single("mypic"), function (req, res) {
-
-  if (!req.params) {
-    return res.status(400).send({
-      message: "Content cannot be empty"
-    })
-  } else {
-    // res.send("Success, Image uploaded!", req.file)
-    console.log(req.file, req.body)
-  }
-})
-
-// saves single file for social page
-app.post("/uploadSocial", upload.single("mypic"), function (req, res) {
-
-  if (!req.params) {
-    return res.status(400).send({
-      message: "Content cannot be empty"
-    })
-  } else {
-    // res.send("Success, Image uploaded!", req.file)
-    console.log(req.file, '\n', req.body)
-  }
-})
-
 //image module
 app.get("/imageRefs", (req, res) => image.showImageRefs(req, res));
 app.get("/imageRefs/:email", (req, res) => image.userImageRefs(req, res));
-app.post("/imageSocial/:email", upload.single("mypic"), (req, res) => image.updateImageRefs(req, res));
-app.get("/imageRefs/:field", (req, res) => image.showImageRefs1(req, res)); // need userId and field to query
+app.get("/profile/:email", (req, res) => image.userImageRefs(req, res));
+app.post("/imageProfile/:email", upload.single('_profile'), (req, res) => image.updateProfileRefs(req, res));
+// app.post("/imageSocial/:email", upload.array('_social', 3), (req, res) => image.updateSocialRefs(req, res));
+// app.post("/imageTravel/:email", upload.array('travel', 3), (req, res) => image.updateTravelRefs(req, res));
 
 //academic module
 app.post("/academics/create", (req, res) => {
