@@ -1,3 +1,15 @@
+/**
+ * UploadImage.js 
+ *
+ * Functionality to Upload 3 Images for Travel Module
+ *
+ * @link   URL
+ * @file   
+ * @author Brooke Jackson, Alice Kuang
+ * @since  2/26/23
+ */
+
+
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -13,6 +25,8 @@ import Typography from "@material-ui/core/Typography";
 import { useTheme } from "@material-ui/core/styles";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import img1 from '../images/ku1.jpg'
+
+import img0 from '../images/f021c468d61941d5c2123f46fe03e41f.jpg'
 import img2 from '../images/ku2.jpg'
 import img3 from '../images/ku3.jpg'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
@@ -33,10 +47,11 @@ export default function UploadImage() {
   }
 
 
+  // set default images
   const MyCollection = [
     {
       label: "First Picture",
-      img: img1,
+      img: img0,
     },
     {
       label: "Second Picture",
@@ -48,6 +63,7 @@ export default function UploadImage() {
     },
   ];
 
+  // setup mobile stepper for slideshow of photos
   const CollectionSize = MyCollection.length;
   const theme = useTheme();
   const [index, setActiveStep] = React.useState(0);
@@ -60,10 +76,7 @@ export default function UploadImage() {
   };
 
   const [file, setFile] = useState("Invalid Image Source");
-  // function saveUrl(e) {
-  //     console.log(e.target.files);
-  //     setFile(URL.createObjectURL(e.target.files[0]));
-  // }
+
   return (
 
     <Grid container-spacing={2} alignItems="center" justifyContent="center" >
@@ -121,7 +134,6 @@ export default function UploadImage() {
       <Grid>
         <Button variant="outlined" component="label"
           sx={{
-            // backgroundColor: "darkgreen",
             fontFamily: "arial",
           }}
         >
