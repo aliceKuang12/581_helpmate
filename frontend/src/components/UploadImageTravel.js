@@ -25,8 +25,6 @@ import Typography from "@material-ui/core/Typography";
 import { useTheme } from "@material-ui/core/styles";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import img1 from '../images/ku1.jpg'
-
-import img0 from '../images/f021c468d61941d5c2123f46fe03e41f.jpg'
 import img2 from '../images/ku2.jpg'
 import img3 from '../images/ku3.jpg'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
@@ -51,7 +49,7 @@ export default function UploadImage() {
   const MyCollection = [
     {
       label: "First Picture",
-      img: img0,
+      img: img1,
     },
     {
       label: "Second Picture",
