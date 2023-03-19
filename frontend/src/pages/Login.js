@@ -93,6 +93,7 @@ const Login = (props) => {
                         sx={{ marginTop: 1, marginLeft: 11, color: "blue", fontSize: 14 }}
                     >
                         <Link to="/forgot-password">Forgot Password? </Link>
+
                     </Typography>
                     <br /><br /><br />
                     <Button
@@ -131,7 +132,3 @@ const Login = (props) => {
 }
 
 export default Login;
-
-/*
-
-*/
