@@ -42,7 +42,7 @@ export const userImageRefs = (req, res) => {
                     err.message || "Error occurred while retrieving user's image paths."
             });
         }
-        
+
         res.send(data);
     });
 }
@@ -71,8 +71,8 @@ export const updateProfileRefs = (req, res) => {
             message: "Content cannot be empty"
         })
     }
-    
-   // console.log(req.file.path, '\n', req.body)
+
+    // console.log(req.file.path, '\n', req.body)
     Images.update1(req, (err, data) => {
         if (err) {
             return res.status(500).send({
@@ -93,7 +93,7 @@ export const profileRefs = (req, res) => {
                     err.message || "Error occurred while retrieving user's image paths."
             });
         }
-        
+
         res.send(data);
     });
 }
@@ -105,8 +105,8 @@ export const updateSocialRefs = (req, res) => {
             message: "Content cannot be empty"
         })
     }
-    
-   console.log(req) // req.file, req.body
+
+    console.log(req) // req.file, req.body
     Images.update2(req, (err, data) => {
         if (err) {
             return res.status(500).send({
@@ -117,24 +117,24 @@ export const updateSocialRefs = (req, res) => {
     })
 }
 
-// // show paths where images are stored
-// export const updateTravelRefs = (req, res) => {
-//     if (!req.params) {
-//         return res.status(400).send({
-//             message: "Content cannot be empty"
-//         })
-//     }
-    
-//    // console.log(req.file.path, '\n', req.body)
-//     Images.update3(req, (err, data) => {
-//         if (err) {
-//             return res.status(500).send({
-//                 message: err.message || "Some error occurred while retrieving image paths."
-//             })
-//         }
-//         res.status(200).send(data);
-//     })
-// }
+// show paths where images are stored
+export const updateTravelRefs = (req, res) => {
+    if (!req.params) {
+        return res.status(400).send({
+            message: "Content cannot be empty"
+        })
+    }
+
+    console.log(req) // req.file, req.body
+    Images.update3(req, (err, data) => {
+        if (err) {
+            return res.status(500).send({
+                message: err.message || "Some error occurred while retrieving image paths."
+            })
+        }
+        res.status(200).send(data);
+    })
+}
 
 
 

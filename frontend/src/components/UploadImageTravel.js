@@ -130,7 +130,15 @@ export default function UploadImage() {
       />
       <br />
       <Grid>
-        <Button variant="outlined" component="label"
+      <form // onSubmit = {onSubmit}   
+          action={"http://localhost:3003/imageTravel/" + localStorage.getItem("email")}
+          encType="multipart/form-data"
+          method="POST"
+          sx={{ textAlign: 'center' }}>
+          <input type="file" name="_travel" multiple onChange={onSelectFile}/><br />
+          <input type="submit" value="submit" />
+        </form>
+        {/* <Button variant="outlined" component="label"
           sx={{
             fontFamily: "arial",
           }}
@@ -140,7 +148,7 @@ export default function UploadImage() {
           <input hidden accept="image/*"
             multiple type="file"
             onChange={onSelectFile} />
-        </Button>
+        </Button> */}
       </Grid>
       <br/>
     </Grid>

@@ -84,7 +84,7 @@ app.get("/imageRefs/:email", (req, res) => image.userImageRefs(req, res));
 app.get("/profile/:email", (req, res) => image.userImageRefs(req, res));
 app.post("/imageProfile/:email", upload.single('_profile'), (req, res) => image.updateProfileRefs(req, res));
 app.post("/imageSocial/:email", upload.array('_social', 3), (req, res) => image.updateSocialRefs(req, res));
-// app.post("/imageTravel/:email", upload.array('travel', 3), (req, res) => image.updateTravelRefs(req, res));
+app.post("/imageTravel/:email", upload.array('_travel', 3), (req, res) => image.updateTravelRefs(req, res));
 
 //academic module
 app.post("/academics/create", (req, res) => {

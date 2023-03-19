@@ -125,6 +125,7 @@ Images.update3 = (req, result) => {
         }
        // result(null, filePath);
         console.log(fp);
+        result(null, res);
     })
 }
 
