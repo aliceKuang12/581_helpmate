@@ -6,7 +6,9 @@ import urlParse from "url-parse"
 import queryParse from "query-string"
 import bodyParser from "body-parser";
 import axios from "axios"
+import * as dotenv from "dotenv"
 
+dotenv.config();
 var corsOptions = {
   origin: "http://localhost:3000"
 }

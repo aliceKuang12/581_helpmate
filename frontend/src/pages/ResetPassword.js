@@ -52,7 +52,7 @@ export default function ResetPassword() {
                         inputRef={newPasswordRef}
                         type="password"
                         required
-                        label='Password'
+                        label='New Password'
                     >
                     </TextField>
                     <br /><br />
