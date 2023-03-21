@@ -44,7 +44,7 @@ const Streaks = () => {
     const activityStreak = activities.map(
         (info) => {
             return (
-                <Typography sx={{ fontSize: 18 }}> * {info.streak} day steps streak!</Typography>
+                <Typography sx={{ fontSize: 18 }}> * {info.streak} day activity streak!</Typography>
             )
         }
     )
@@ -66,14 +66,14 @@ const Streaks = () => {
                 });
 
             const promise2 = await axios.get(URL2 + localStorage.getItem("email")).then(res => {
-                setSteps((res.data));
+                setActivities((res.data));
                 console.log(res.data);
             }).catch(err => {
                 console.log(err)
             });
 
             const promise3 = await axios.get(URL3 + localStorage.getItem("email")).then(res => {
-                setActivities((res.data));
+                setSteps((res.data));
                 console.log(res.data);
             }).catch(err => {
                 console.log(err)
