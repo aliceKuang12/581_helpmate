@@ -16,11 +16,12 @@ const TopicCard = ({ topic, dbObject }) => {
             // data = data.splice(1, 10);
             return (<div sx={{ textAlign: 'left' }}>
                 <img src={localStorage.getItem("profilePic")}></img> 
-                <Typography sx={{ fontWeight: 'bold' }}>Name: {localStorage.getItem("name")}</Typography>
-                <Typography> Birthday:{info.birthday}</Typography>
-                <Typography>Email: {info.email}</Typography>
+                <Typography sx={{ fontWeight: 'bold' }}>@ {info.username}</Typography>
+                <Typography >Name: {localStorage.getItem("name")}</Typography>
+                <Typography >Email: {info.email}</Typography>
+                <Typography> Birthday: {info.birthday}</Typography>
                 <Typography>Cell: {info.cell}</Typography>
-                <Typography>Address: {info.address}</Typography>
+                <Typography>Address: {info.address ? info.address: "N/A"}</Typography>
                 <br />
             </div>
             )
