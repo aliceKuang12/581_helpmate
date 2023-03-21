@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from 'react';
+/**
+ * TopicCardv2.js
+ * 
+ * Display a module card with the given topic.  
+ * 
+ * Author: Eva Morrison, Alice Kuang
+ * Since: 9/30/2022
+ */
+
+
+import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import AddIcon from '@mui/icons-material/Add';
-import AddEvent from "../components/AddEvent"
-import Divider from '@material-ui/core/Divider';
-
 
 const TopicCard = ({ topic  }) => {
 
