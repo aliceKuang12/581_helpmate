@@ -26,7 +26,6 @@ export const createUser = (req, res) => {
     const newUser = new User({
         token: req.body.token,
         username: req.body.username,
-        // password: req.body.password,
         password: hashPassword(req.body.password),
         email: req.body.email,
         cell: req.body.cell,
@@ -39,17 +38,16 @@ export const createUser = (req, res) => {
 
     User.create(newUser, (err, data) => {
         if (err) {
-            res.status(500).send({
+            return res.status(500).send({
                 message: err.message || "An error has occured while creating new user"
             })
         } else {
-            res.send(data);
-            console.log(data);
+            return res.send(data);
         }
     })
 };
 
-export const updateUser = (req,res) => {
+export const updateUser = async (req,res) => {
     if (!req.body) {
         return res.status(400).send({
             message: "Content cannot be empty"
@@ -57,27 +55,43 @@ export const updateUser = (req,res) => {
     }
 
     let updatedInfo = req.body;
-    let query = "SELECT * FROM users where email = ?";
-    sql.query(query, [updatedInfo.email], (err,result) => {
-        if (err) {
-            console.log("Error occur while find user with email ", req.params.email)
-        } else {
+    let userId = updatedInfo.id
+    
+    if (!userId) {
+        User.getOne(updatedInfo.email, (err, result) => {
+            if (err) {
+                return res.status(500).send({
+                    message: err.message
+                });
+            }
             if (result.length > 0) {
                 if (updatedInfo.password) {
                     updatedInfo.password = hashPassword(updatedInfo.password);
                 }
-                User.update(updatedInfo, result[0].id, (err, data) => {
+                userId = result[0].id;
+                User.update(updatedInfo, userId, (err, data) => {
                     if (err) {
-                        res.status(500).send({
-                            message: err.message || "An error has occured while creating new user"
+                        return res.status(500).send({
+                            message: err.message || "An error has occured while updating new user"
                         })
                     } else {
-                        res.send(data);
+                        console.log("Successss");
+                        return res.send(data);
                     }
                 })
             }
-        }
-    })
+        })
+    } else {
+        User.update(updatedInfo, userId, (err, data) => {
+            if (err) {
+                return res.status(500).send({
+                    message: err.message || "An error has occured while creating new user"
+                })
+            } else {
+                return res.send(data);
+            }
+        })
+    }
 }
 
 export const login = (req, res, next) => {

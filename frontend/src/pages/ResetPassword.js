@@ -23,10 +23,17 @@ export default function ResetPassword() {
             setMessage('')
             setError("")
             setLoading(true)
-            await resetPassword(emailRef.current.value, newPasswordRef.current.value)
-            setMessage('Your password has been updated!')
+            const res = await resetPassword(emailRef.current.value, newPasswordRef.current.value);
+            console.log(res.status);
+            if (res.status === 200) {
+                setMessage("Your password has been updated!")
+                alert("Success")
+                window.location = "/"
+            } else {
+                throw new Error("Failed to reset password")
+            }
         } catch (e) {
-            setError("Failed to reset password")
+            setError(e.message);
         }
 
     }
