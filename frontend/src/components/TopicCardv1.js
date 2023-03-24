@@ -1,11 +1,11 @@
 /**
- * TopicCard.js
+ * TopicCardv1.js
  * 
- * Pass in retreived json object from database, display the Title, time, and location 
- * from the object
+ * Display google user profile info, retreiving name, email and profile picture from google login
+ * and other attributes from database associated with user's email. 
  * 
- * Author: Eva Morrison, Alice Kuang
- * Since: 9/30/2022
+ * Author: Alice Kuang
+ * 
  */
 
 import React from 'react';
@@ -19,12 +19,14 @@ const TopicCard = ({ topic, dbObject }) => {
 
     const DisplayData = dbObject.map(
         (info) => {
-            // let data = info.eventTime;
-            // data = data.splice(1, 10);
             return (<div sx={{ textAlign: 'left' }}>
-                <Typography sx={{ fontWeight: 'bold' }}>Title: {info.title}</Typography>
-                <Typography> Time:{info.eventTime}</Typography>
-                <Typography>Location: {info.location}</Typography>
+                <img src={localStorage.getItem("profilePic")}></img> 
+                <Typography sx={{ fontWeight: 'bold' }}>@ {info.username}</Typography>
+                <Typography >Name: {localStorage.getItem("name")}</Typography>
+                <Typography >Email: {info.email}</Typography>
+                <Typography> Birthday: {info.birthday}</Typography>
+                <Typography>Cell: {info.cell}</Typography>
+                <Typography>Address: {info.address ? info.address: "N/A"}</Typography>
                 <br />
             </div>
             )
@@ -33,11 +35,7 @@ const TopicCard = ({ topic, dbObject }) => {
 
     return (<Grid item xs={4}>
         <Paper>
-            <img
-                src="https://mdbootstrap.com/img/new/slides/041.jpg"
-                alt=""
-                className="img">
-            </img>
+
             <Box padding={1}>
                 <Typography variant="subtitle1" component="h2" sx={{ fontWeight: 'bold' }}>
                     {topic}

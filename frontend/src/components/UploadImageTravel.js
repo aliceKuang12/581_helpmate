@@ -1,3 +1,15 @@
+/**
+ * UploadImage.js 
+ *
+ * Functionality to Upload 3 Images for Travel Module
+ *
+ * @link   URL
+ * @file   
+ * @author Brooke Jackson, Alice Kuang
+ * @since  2/26/23
+ */
+
+
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -33,6 +45,7 @@ export default function UploadImage() {
   }
 
 
+  // set default images
   const MyCollection = [
     {
       label: "First Picture",
@@ -48,6 +61,7 @@ export default function UploadImage() {
     },
   ];
 
+  // setup mobile stepper for slideshow of photos
   const CollectionSize = MyCollection.length;
   const theme = useTheme();
   const [index, setActiveStep] = React.useState(0);
@@ -60,10 +74,7 @@ export default function UploadImage() {
   };
 
   const [file, setFile] = useState("Invalid Image Source");
-  // function saveUrl(e) {
-  //     console.log(e.target.files);
-  //     setFile(URL.createObjectURL(e.target.files[0]));
-  // }
+
   return (
 
     <Grid container-spacing={2} alignItems="center" justifyContent="center" >
@@ -119,9 +130,16 @@ export default function UploadImage() {
       />
       <br />
       <Grid>
-        <Button variant="outlined" component="label"
+      <form // onSubmit = {onSubmit}   
+          action={"http://localhost:3003/imageTravel/" + localStorage.getItem("email")}
+          encType="multipart/form-data"
+          method="POST"
+          sx={{ textAlign: 'center' }}>
+          <input type="file" name="_travel" multiple onChange={onSelectFile}/><br />
+          <input type="submit" value="submit" />
+        </form>
+        {/* <Button variant="outlined" component="label"
           sx={{
-            // backgroundColor: "darkgreen",
             fontFamily: "arial",
           }}
         >
@@ -130,7 +148,7 @@ export default function UploadImage() {
           <input hidden accept="image/*"
             multiple type="file"
             onChange={onSelectFile} />
-        </Button>
+        </Button> */}
       </Grid>
       <br/>
     </Grid>

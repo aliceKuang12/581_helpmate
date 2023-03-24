@@ -14,13 +14,45 @@ import session from "express-session"
 import express from "express";
 import * as user from "../controllers/userController.js";
 import * as academic from "../controllers/academicController.js";
+import * as image from "../controllers/imageController.js";
 import * as travel from "../controllers/travelController.js";
 import * as health from "../controllers/healthController.js";
 import * as social from "../controllers/socialController.js";
 import app from "../../server.js"
+import multer from "multer";
 import sql from "../models/db.js";
 import { google } from 'googleapis'
 import { resetPasswordMail } from "../mailer/actions/authMailer.js";
+
+// enable uploads folder to be statically served to frontend, i.e. localhost:3003/static/FILENAME.EXT
+// ref for resolving module problem: https://codingbeautydev.com/blog/javascript-dirname-is-not-defined-in-es-module-scope/
+import path from 'path'
+import { fileURLToPath } from 'url'; 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// console.log(path.join(__dirname, '..\\..\\', '/uploads'));
+app.use('/static', express.static(path.join(__dirname, '..\\..\\', '/uploads'))); 
+
+// Setup storage to save file with jpg extension to local disk
+// https://stackoverflow.com/questions/31592726/how-to-store-a-file-with-file-extension-with-multer
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '.jpg') //Appending .jpg
+  }, 
+  fileFilter: function (req, file, cb){ 
+    var filetypes = /jpeg|jpg|png/;
+    cb("Error: File upload only supports the "
+    + "following filetypes - " + filetypes);
+  }
+})
+
+var maxSize = 1 * 1000 * 1000; 
+var upload = multer({ storage: storage, limits: { fileSize: maxSize } }) ;
+// var upload2 = multer({ storage: storage, limits: { fileSize: maxSize } }) ; // upload.fields([{ name: '_social', maxCount: 3 }]);
 
 app.use(session({
   secret: 'keyboard cat',
@@ -50,20 +82,29 @@ app.put("/user", (req,res) => user.updateUser(req,res));
 
 
 
+//image module
+app.get("/imageRefs", (req, res) => image.showImageRefs(req, res));
+app.get("/imageRefs/:email", (req, res) => image.userImageRefs(req, res));
+app.get("/profile/:email", (req, res) => image.userImageRefs(req, res));
+app.post("/imageProfile/:email", upload.single('_profile'), (req, res) => image.updateProfileRefs(req, res));
+app.post("/imageSocial/:email", upload.array('_social', 3), (req, res) => image.updateSocialRefs(req, res));
+app.post("/imageTravel/:email", upload.array('_travel', 3), (req, res) => image.updateTravelRefs(req, res));
+
 //academic module
 app.post("/academics/create", (req, res) => {
   console.log(req.body);
-  academic.createEvent(req, res)});
+  academic.createEvent(req, res)
+});
 app.get("/academics", (req, res) => academic.showAcademic(req, res));
 app.get("/academics/:email", (req, res) => academic.userAcademic(req, res));
 app.get("/academics/streak1/:email", (req, res) => academic.assignments(req, res));
-app.delete("/academics/delete/", (req, res) => {academic.deleteEvent(req,res)});
+app.delete("/academics/delete/", (req, res) => { academic.deleteEvent(req, res) });
 
 //travel module
 app.post("/travel/create", (req, res) => travel.createEvent(req, res));
 app.get("/travel", (req, res) => travel.showTravel(req, res));
 app.get("/travel/:email", (req, res) => travel.userTravel(req, res));
-app.delete("/travel/delete/", (req, res) => { travel.deleteEvent(req,res)});
+app.delete("/travel/delete/", (req, res) => { travel.deleteEvent(req, res) });
 
 //health module
 app.post("/health/create", (req, res) => health.createEvent(req, res));
@@ -75,9 +116,11 @@ app.get("/health/streak1/:email", (req, res) => health.stepStreak(req, res));
 app.get("/health/streak2/:email", (req, res) => health.activityStreak(req, res));
 
 //social module
-app.post("/social/create", (req, res) => {social.createEvent(req, res)});
+app.post("/social/create", (req, res) => { social.createEvent(req, res) });
 app.get("/social/", (req, res) => social.showSocial(req, res));
 app.get("/social/:email", (req, res) => social.userSocial(req, res));
+
+
 
 //google calendar paths
 app.post("/create-tokens", async (req, res, next) => {

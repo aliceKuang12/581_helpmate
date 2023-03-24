@@ -16,6 +16,7 @@ import img1 from '../images/rollar_coaster.jpg'
 import img2 from '../images/socialimage.jpg'
 import img3 from '../images/hiker.jpg'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import axios from 'axios';
 
 export default function UploadImage() {
 
@@ -31,7 +32,6 @@ export default function UploadImage() {
 
     setSelectedImages(imagesArray);
   }
-
 
   const MyCollection = [
     {
@@ -60,10 +60,7 @@ export default function UploadImage() {
   };
 
   const [file, setFile] = useState("Invalid Image Source");
-  // function saveUrl(e) {
-  //     console.log(e.target.files);
-  //     setFile(URL.createObjectURL(e.target.files[0]));
-  // }
+
   return (
 
     <Grid container-spacing={2} alignItems="center" justifyContent="center" >
@@ -119,20 +116,21 @@ export default function UploadImage() {
       />
       <br />
       <Grid>
-        <Button variant="outlined" component="label"
-          sx={{
-            // backgroundColor: "darkgreen",
-            fontFamily: "arial",
-          }}
-        >
-          <AddPhotoAlternateIcon sx={{ fontSize: "medium" }} />
+        <div>hi</div>
 
-          <input hidden accept="image/*"
-            multiple type="file"
-            onChange={onSelectFile} />
-        </Button>
+        <form // onSubmit = {onSubmit}   
+          action={"http://localhost:3003/imageSocial/" + localStorage.getItem("email")}
+          encType="multipart/form-data"
+          method="POST"
+          sx={{ textAlign: 'center' }}>
+          <input type="file" name="_social" multiple onChange={onSelectFile}/><br />
+          <input type="submit" value="submit" />
+        </form>
+
       </Grid>
-      <br/>
+      <br />
     </Grid>
   );
 }
+
+/* onChange={onSelectFile} */
