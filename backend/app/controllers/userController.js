@@ -1,3 +1,16 @@
+/**
+ * userController.js 
+ *
+ * The user controller contains all the logic related to users, such as creating users,
+ * updating their PII and password, hashing passwords, and login authentication. 
+ *
+ * @link   URL
+ * @file   This file defines the routes class.
+ * @author Minh Huyen Nguyen. Alice Kuang. 
+ * @since  1/26/23
+ */
+
+
 import User from "../models/user.js";
 // const User = require("../models/user.js");
 import bcrypt from 'bcrypt';
@@ -49,6 +62,7 @@ export const createUser = (req, res) => {
     })
 };
 
+// update user's password
 export const updateUser = (req,res) => {
     if (!req.body) {
         return res.status(400).send({
@@ -79,6 +93,19 @@ export const updateUser = (req,res) => {
         }
     })
 }
+
+// update user info on profile page
+export const updateProfile = (req, res) => {
+     User.update2(req, (err, data) => {
+         if (err) {
+             return res.status(500).send({
+                 message:
+                     err.message || "Error occurred while retrieving `findone` user."
+             });
+         }
+         res.send(data);
+     });
+ }
 
 export const login = (req, res, next) => {
     if (!req.query) {
@@ -118,6 +145,7 @@ export const login = (req, res, next) => {
     }
     
 }
+
 
 export const findOne = (req, res) => {
     const email = req.params.email;

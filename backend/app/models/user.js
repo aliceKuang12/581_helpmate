@@ -39,6 +39,22 @@ User.update = (updated, id, result) => {
     })
 }
 
+
+User.update2 = (req, result) => {
+    const updated = req.body;
+    const id = req.body.id;
+    let query = `UPDATE users SET ? WHERE id = ?`;
+    sql.query(query, [updated, id], (err, res) => {
+        if (err) {
+            console.log("Cannot update: ", err);
+            result(err,null);
+        } else {
+            console.log("All users: ", res);
+            result(null,res);
+        }
+    })
+}
+
 User.getAll = (result) => {
     let query = "SELECT * FROM users";
     sql.query(query, (err, res) => {

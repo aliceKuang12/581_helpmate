@@ -79,7 +79,7 @@ app.post("/signup", (req, res) => { user.createUser(req, res) });
 app.get("/users", user.findAll); // works, same as "select * from users"
 app.get("/user/:email", (req, res) => { user.findOne(req, res) }); // same as "select * from users where email =`:email`"
 app.put("/user", (req,res) => user.updateUser(req,res));
-
+app.post("/profile/:email", (req,res) => user.updateProfile(req,res));
 
 
 //image module

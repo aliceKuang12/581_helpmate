@@ -7,28 +7,38 @@ import CreateIcon from '@mui/icons-material/Create';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import Checkbox from './Checkbox';
+import { AXIOS_HEADER } from '../constants';
 import { Typography } from '@mui/material';
+import { useAuth } from '../context/AuthContext'
+import axios from 'axios'
+
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
+  const { currentUser } = useAuth();
+  const user = JSON.parse(currentUser);
+
   const [data, setData] = useState({
-    name: '',
+    id: user.id,
+    fname: '',    
+    lname: '',
     username: '',
     email: '',
     cell: '',
     address: '',
     birthday: '',
-    password: '',
   });
 
   const {
-    name,
+    id,
+    fname,   
+    lname,
     username,
     email,
     cell,
     address,
     birthday,
-    password,
   } = data;
+
   const [file, setFile] = useState();
   function saveUrl(e) {
       console.log(e.target.files);
@@ -47,6 +57,28 @@ export default function BasicForm() {
     setData(prevState => ({...prevState, [key]: value,}));
   };
 
+  const handleData = async(db) => {
+    axios({
+        url: 'http://localhost:3003/profile',
+        method: 'POST',
+        headers: AXIOS_HEADER,
+        data: db,
+    }).then(() => {
+        setData({
+            fname: '',
+            lname: '',
+            username: '',
+            email: '',
+            phone: '',
+            address: '',
+            birthday: ''
+        })
+        handleClose();
+    }).catch((e) => {
+        console.log(e);
+    })
+}
+
   return (
     <div >
       <Button onClick={handleClickOpen} variant="outlined" sx={{backgroundColor: "cornsilk", fill: "blue", color:"Black" }}>
@@ -58,7 +90,7 @@ export default function BasicForm() {
         <DialogContent>
             <br/>
             <Typography sx={{textAlign: 'center'}}>
-            Edit Personal Information  
+            Update Personal Information  
             </Typography> 
             <br/> 
           <Grid container  spacing={2}
@@ -70,19 +102,28 @@ export default function BasicForm() {
               Name:
             </Typography>  
             </Grid>
-            <Grid item xs={9.5}>
+            <Grid item xs={4.5}>
               <TextField
-                id="name"
-                label="name"
+                id="fname"
+                label="first"
                 variant="outlined"
-                onChange={e => handleChange(e.target.value, 'name')}
-                value={name}
+                onChange={e => handleChange(e.target.value, 'fname')}
+                value={fname}
                 fullWidth
               /> 
             </Grid>
-              
+            <Grid item xs={5}>
+              <TextField
+                id="lname"
+                label="last"
+                variant="outlined"
+                onChange={e => handleChange(e.target.value, 'lname')}
+                value={lname}
+                fullWidth
+              /> 
+            </Grid>
             <Grid item xs={2}>
-            <Typography sx={{fontSize: 14, textAlign: 'left', marginY: 1, padding: 2}}>
+            <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
               Username:
             </Typography>
             </Grid>
@@ -96,22 +137,6 @@ export default function BasicForm() {
               value={username}
               fullWidth
               />  
-            </Grid>
-
-            <Grid item xs={2}>
-                <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
-                  Password: 
-               </Typography>
-             </Grid> 
-             <Grid item xs={9.5}>
-              <TextField
-                  id="password"
-                  label="password"
-                  onChange={e => handleChange(e.target.value, 'password')}
-                  multiline
-                  fullWidth
-                  value={cell}
-              />
             </Grid>
 
             <Grid item xs={2}>
@@ -182,7 +207,7 @@ export default function BasicForm() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Save</Button>
+          <Button onClick={handleData}>Save</Button>
         </DialogActions>
       </Dialog>
       
