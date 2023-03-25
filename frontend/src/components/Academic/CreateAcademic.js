@@ -1,16 +1,4 @@
-/**
- * CreateHealth.js 
- *
- * Form to create a new assignment for the health page. 
- * Allows users to dynamically update the events stored in the DBs.
- *
- * @link   URL
- * @file   This file defines the CreateAssign class.
- * @author Eva Morrison. Alice Kuang.
- * @since  3/11/23
- */
-
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -18,32 +6,25 @@ import DialogContent from '@mui/material/DialogContent';
 import CreateIcon from '@mui/icons-material/Create';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
-import Checkbox from './Checkbox';
+import Checkbox from '../Checkbox';
 import { Typography } from '@mui/material';
-import axios from 'axios'
-
-export default function CreateHealth() {
+export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
-  const [post, setPost] = React.useState(null);
   const [data, setData] = useState({
-    userId: 17,
     title: '',
-    category: '',
     date: '',
     time: '',
-    location: '',
-    completed: '0',
+    completed: '',
+    address: '',
     notes: '',
   });
 
   const {
-    userId,
     title,
-    category,
     date,
     time,
-    location,
     completed,
+    address,
     notes,
   } = data;
   const [file, setFile] = useState();
@@ -64,47 +45,18 @@ export default function CreateHealth() {
     setData(prevState => ({...prevState, [key]: value,}));
   };
 
-  const handleCreate = () => {
-    console.log(data);
-    createHealthPost();
-    setOpen(false);
-  };
-
-  useEffect(() => {
-    const fetchHealth = async () => {
-        await axios.get("http://localhost:3003/health/")
-            .then(res => {
-                console.log(res.data);
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
-    fetchHealth()
-  }, []);
-
-  function createHealthPost() {
-    console.log("creating post")
-    axios
-      .post("http://localhost:3003/health/create", data)
-      .then((response) => {
-        console.log(response.data);
-        setPost(response.data);
-      });
-  }
-
   return (
     <div >
       <Button onClick={handleClickOpen} variant="outlined" sx={{backgroundColor: "cornsilk", fill: "blue", color:"Black" }}>
-      <CreateIcon sx={{fontSize: "large", color: "blue"}}/>
+      <CreateIcon sx={{fontSize: "large", color: "red"}}/>
       </Button>
 
       
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
             <br/>
-            <Typography  variant="h4" sx={{textAlign: 'center'}}>
-            Health Event
+            <Typography sx={{textAlign: 'center'}}>
+            Create Event  
             </Typography> 
             <br/> 
           <Grid container  spacing={2}
@@ -126,23 +78,7 @@ export default function CreateHealth() {
                 fullWidth
               /> 
             </Grid>
-
-            <Grid item xs={2}>
-            <Typography sx={{fontSize: 16, textAlign: 'left', padding: 2}}>
-              Category:
-            </Typography>
-            </Grid>
-            <Grid item xs={9.5}>    
-              <TextField
-                id="category"
-                label="category"
-                variant="outlined"
-                onChange={e => handleChange(e.target.value, 'category')}
-                value={category}
-                fullWidth 
-              />
-            </Grid>
-
+              
             <Grid item xs={2}>
             <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
               Date:
@@ -169,6 +105,22 @@ export default function CreateHealth() {
               />
             </Grid> 
             
+            <Grid item xs={2}>
+            <Typography sx={{fontSize: 16, textAlign: 'left', padding: 2}}>
+              Address:
+            </Typography>
+            </Grid>
+            <Grid item xs={9.5}>    
+              <TextField
+                id="address"
+                label="street address, city, state, zip"
+                variant="outlined"
+                onChange={e => handleChange(e.target.value, 'address')}
+                value={address}
+                fullWidth 
+              />
+            </Grid>
+            
              <Grid item xs={2}>
                 <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
                   Notes: 
@@ -186,7 +138,6 @@ export default function CreateHealth() {
               />
             </Grid>
 
-            <Grid item xs={4}/>
             <Grid item xs={2}>
                <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
                 Complete: 
@@ -195,18 +146,17 @@ export default function CreateHealth() {
              <Grid item xs={4}>
                 <Checkbox/>        
              </Grid>
-          
+             <Grid item xs={2}/>
+             <Grid item xs={2}><img src={file} width="40" height="40"/>
+            </Grid>
             </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleCreate}>Create</Button>
+          <Button onClick={handleClose}>Create</Button>
         </DialogActions>
       </Dialog>
       
     </div>
   );
 }
-//original button:  
-// <Button onClick={handleClickOpen} sx={{fill: "blue", color:"Black" }}>
-    

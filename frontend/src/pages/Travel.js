@@ -1,5 +1,5 @@
-import ModuleCard from '../components/TravelCard1'
-import ModuleCard2 from '../components/TravelCard2'
+import ModuleCard from '../components/Travel/TravelCard1'
+import ModuleCard2 from '../components/Travel/TravelCard2'
 import Grid from "@mui/material/Grid"
 import NavBar from '../components/NavBar'
 import '../App.css';

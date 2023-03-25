@@ -3,9 +3,9 @@ import '../App.css';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core'; //importing material ui component
 import Header from '../components/NavBar'
-import TopicCard from '../components/TopicCard'
-import TopicCard1 from '../components/TopicCardv1'
-import TopicCard2 from '../components/TopicCardv2'
+import TopicCard from '../components//Homepage/TopicCard'
+import TopicCard1 from '../components/Homepage/TopicCardv1'
+import TopicCard2 from '../components/Homepage/TopicCardv2'
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Clock from '../components/Clock'
@@ -92,7 +92,7 @@ const Homepage = (props) => {
 
                 <Container>
                     <Grid container spacing={5}>
-                        {localStorage.getItem("name") ?
+                        {localStorage.getItem("profilePic") ?
                             <TopicCard1 topic="My Profile" dbObject={user1}></TopicCard1> :
                             <TopicCard2 topic="Top Alerts" ></TopicCard2>
                         }

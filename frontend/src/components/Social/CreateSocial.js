@@ -1,15 +1,3 @@
-/**
- * CreateTravel.js 
- *
- * Form to create a new travel event for the travel page. 
- * Allows users to dynamically update the events stored in the DBs.
- *
- * @link   URL
- * @file   This file defines the CreateTravel class.
- * @author Eva Morrison. Alice Kuang.
- * @since  2/26/23
- */
-
 import React, {useEffect, useState} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -18,32 +6,34 @@ import DialogContent from '@mui/material/DialogContent';
 import CreateIcon from '@mui/icons-material/Create';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
-import Checkbox from './Checkbox';
+import Checkbox from '../Checkbox';
 import { Typography } from '@mui/material';
-import  axios from 'axios';
+import axios from 'axios';
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
   const [post, setPost] = React.useState(null);
   const [data, setData] = useState({
-    userId: '17',
+    userId: 17,
     title: '',
+    category: '',
     date: '',
     time: '',
     completed: '0',
     address: '',
     notes: '',
-    ticket: '',
+    photo: '',
   });
 
   const {
     userId,
     title,
+    category,
     date,
     time,
     completed,
     address,
     notes,
-    ticket,
+    photo
   } = data;
   const [file, setFile] = useState();
   function saveUrl(e) {
@@ -61,27 +51,18 @@ export default function BasicForm() {
 
   const handleCreate = () => {
     console.log(data);
-    createTravelPost();
+    createSocialPost();
     setOpen(false);
   };
 
   const handleChange = (value, key) => {
-    //update the data to be the user's input
     setData(prevState => ({...prevState, [key]: value,}));
-    //console.log(value);
-    axios.get('http://localhost:3003/calendar')
-  .then(response => console.log(response.data))
-  .catch(error => console.error(error));
   };
 
-  /**
- * Tutorial from: https://www.freecodecamp.org/news/how-to-use-axios-with-react/#how-to-make-a-post-request
- * useEffect hook to connect with the travel database
- * prints all travel information to the console
- */
   useEffect(() => {
-    const fetchTravel = async () => {
-        await axios.get("http://localhost:3003/travel/")
+    const fetchSocial = async () => {
+        console.log(data);
+        await axios.get("http://localhost:3003/social/")
             .then(res => {
                 console.log(res.data);
             })
@@ -89,18 +70,13 @@ export default function BasicForm() {
                 console.log(err)
             })
     }
-    fetchTravel()
+    fetchSocial()
   }, []);
 
-  /**
- * Tutorial from: https://www.freecodecamp.org/news/how-to-use-axios-with-react/#how-to-make-a-post-request
- * function: createTravelPost
- * uses axios post to take the user form data and post to local database
- */
-  function createTravelPost() {
+  function createSocialPost() {
     console.log("creating post")
     axios
-      .post("http://localhost:3003/travel/create", data)
+      .post("http://localhost:3003/social/create", data)
       .then((response) => {
         console.log(response.data);
         setPost(response.data);
@@ -110,7 +86,7 @@ export default function BasicForm() {
   return (
     <div >
       <Button onClick={handleClickOpen} variant="outlined" sx={{backgroundColor: "cornsilk", fill: "blue", color:"Black" }}>
-      <CreateIcon sx={{fontSize: "large", color: "blue"}}/>
+      <CreateIcon sx={{fontSize: "large", color: "green"}}/>
       </Button>
 
       
@@ -118,7 +94,7 @@ export default function BasicForm() {
         <DialogContent>
             <br/>
             <Typography sx={{textAlign: 'center'}}>
-            Create Travel  
+            Create Social  
             </Typography> 
             <br/> 
           <Grid container  spacing={2}
@@ -199,19 +175,6 @@ export default function BasicForm() {
                   rows={4}
               />
             </Grid>
-            
-            <Grid item xs={2}>
-                <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
-                  Files: 
-               </Typography>
-             </Grid> 
-            <Grid item xs={4}>
-            <Button variant="contained" component="label">
-               Upload
-              <input hidden accept="image/*" multiple type="file" onChange={saveUrl} />
-              
-            </Button>
-            </Grid>
 
             <Grid item xs={2}>
                <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
@@ -235,6 +198,3 @@ export default function BasicForm() {
     </div>
   );
 }
-//original button:  
-// <Button onClick={handleClickOpen} sx={{fill: "blue", color:"Black" }}>
-    

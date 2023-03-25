@@ -2,7 +2,6 @@ import Paper from "@mui/material/Paper"
 import Grid from "@mui/material/Grid"
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import Clock from './Clock'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
 import UploadImage from "./UploadImageTravel"

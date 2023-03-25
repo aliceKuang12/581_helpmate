@@ -2,12 +2,12 @@ import Paper from "@mui/material/Paper"
 import Grid from "@mui/material/Grid"
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import Clock from './Clock'
+import Clock from '../Clock'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
-import CreateEvent from "./CreateHealth"
-import DeleteEvent from "./DeleteEventHealth"
-import ViewEvent from "./ViewEvents"
+import CreateEvent from "./CreateAssign"
+import DeleteEvent from "./DeleteAssign"
+import ViewEvent from "../ViewEvents"
 
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
@@ -15,9 +15,9 @@ import React, { useEffect, useState } from 'react'
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
     padding: theme.spacing(1),
-  }));
+}));
 
-const ModuleCard = ( ) => {
+const ModuleCard = () => {
     const [data, setData] = useState([]);
 
     const DisplayTitle = data.map(
@@ -46,8 +46,8 @@ const ModuleCard = ( ) => {
     )
 
     useEffect(() => {
-        const fetchAllHealth = async () => {
-            await axios.get("http://localhost:3003/health/"+ localStorage.getItem("email"))
+        const fetchAllAcademic = async () => {
+            await axios.get("http://localhost:3003/academics/")
                 .then(res => {
                     setData((res.data));
                     console.log(res.data);
@@ -56,33 +56,33 @@ const ModuleCard = ( ) => {
                     console.log(err)
                 })
         }
-        fetchAllHealth()
+        fetchAllAcademic()
     }, []);
+
     return (
         <Grid item xs={6} marginBottom={5}>
-        <Paper sx={{ opacity: .9 }}>
-            <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
-                {DisplayData}
-            </Stack>               
-        <br/>
-            <Stack spacing={2}
-                direction="row"
-                justifyContent="center"
-                sx={{
-                    height: '100%',
-                    width: '100%',
-                    textAlign: 'center',
-                }}
-            >
-                <CreateEvent />
-                <ViewEvent color="red" />
-                <DeleteEvent />
-            </Stack>
-        </Paper>
-        <br/>   
-    </Grid>
-    )
+            <Paper sx={{ opacity: .9 }}>
+                <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
+                    {DisplayData}
+                </Stack>               
+            <br/>
+                <Stack spacing={2}
+                    direction="row"
+                    justifyContent="center"
+                    sx={{
+                        height: '100%',
+                        width: '100%',
+                        textAlign: 'center',
+                    }}
+                >
+                    <CreateEvent />
+                    <ViewEvent color="red" />
+                    <DeleteEvent />
+                </Stack>
+            </Paper>
+            <br/>   
+        </Grid>)
+     
 }
 
 export default ModuleCard
-//<Item elevation={10} sx={{width: '25%',background:'white'}}>

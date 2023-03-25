@@ -1,33 +1,14 @@
-/**
- * UploadImage.js 
- *
- * Functionality to Upload 3 Images for Travel Module
- *
- * @link   URL
- * @file   
- * @author Brooke Jackson, Alice Kuang
- * @since  2/26/23
- */
-
-
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import UploadIcon from '@mui/icons-material/Upload';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import DefaultImage from '../images/socialimage.jpg'
+// import DefaultImage from '../../images/socialimage.jpg'
 import MobileStepper from "@material-ui/core/MobileStepper";
-import Paper from "@material-ui/core/Paper";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import Typography from "@material-ui/core/Typography";
 import { useTheme } from "@material-ui/core/styles";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import img1 from '../images/ku1.jpg'
-import img2 from '../images/ku2.jpg'
-import img3 from '../images/ku3.jpg'
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import img1 from '../../images/rollar_coaster.jpg'
+import img2 from '../../images/socialimage.jpg'
+import img3 from '../../images/hiker.jpg'
 
 export default function UploadImage() {
 
@@ -44,8 +25,6 @@ export default function UploadImage() {
     setSelectedImages(imagesArray);
   }
 
-
-  // set default images
   const MyCollection = [
     {
       label: "First Picture",
@@ -61,7 +40,6 @@ export default function UploadImage() {
     },
   ];
 
-  // setup mobile stepper for slideshow of photos
   const CollectionSize = MyCollection.length;
   const theme = useTheme();
   const [index, setActiveStep] = React.useState(0);
@@ -91,7 +69,7 @@ export default function UploadImage() {
 
           }}
           alt={MyCollection[index].label}
-          onError={() => setFile(DefaultImage)}
+          onError={() => setFile(img2)}
         />
       </Grid>
       <br />
@@ -130,27 +108,21 @@ export default function UploadImage() {
       />
       <br />
       <Grid>
-      <form // onSubmit = {onSubmit}   
-          action={"http://localhost:3003/imageTravel/" + localStorage.getItem("email")}
+        <div>hi</div>
+
+        <form // onSubmit = {onSubmit}   
+          action={"http://localhost:3003/imageSocial/" + localStorage.getItem("email")}
           encType="multipart/form-data"
           method="POST"
           sx={{ textAlign: 'center' }}>
-          <input type="file" name="_travel" multiple onChange={onSelectFile}/><br />
+          <input type="file" name="_social" multiple onChange={onSelectFile}/><br />
           <input type="submit" value="submit" />
         </form>
-        {/* <Button variant="outlined" component="label"
-          sx={{
-            fontFamily: "arial",
-          }}
-        >
-          <AddPhotoAlternateIcon sx={{ fontSize: "medium" }} />
 
-          <input hidden accept="image/*"
-            multiple type="file"
-            onChange={onSelectFile} />
-        </Button> */}
       </Grid>
-      <br/>
+      <br />
     </Grid>
   );
 }
+
+/* onChange={onSelectFile} */
