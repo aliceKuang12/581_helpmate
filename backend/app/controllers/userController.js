@@ -35,7 +35,7 @@ export const createUser = (req, res) => {
         })
         return;
     }
-    
+
     const newUser = new User({
         token: req.body.token,
         username: req.body.username,
@@ -63,7 +63,7 @@ export const createUser = (req, res) => {
 };
 
 // update user's password
-export const updateUser = (req,res) => {
+export const updateUser = (req, res) => {
     if (!req.body) {
         return res.status(400).send({
             message: "Content cannot be empty"
@@ -72,7 +72,7 @@ export const updateUser = (req,res) => {
 
     let updatedInfo = req.body;
     let query = "SELECT * FROM users where email = ?";
-    sql.query(query, [updatedInfo.email], (err,result) => {
+    sql.query(query, [updatedInfo.email], (err, result) => {
         if (err) {
             console.log("Error occur while find user with email ", req.params.email)
         } else {
@@ -96,16 +96,29 @@ export const updateUser = (req,res) => {
 
 // update user info on profile page
 export const updateProfile = (req, res) => {
-     User.update2(req, (err, data) => {
-         if (err) {
-             return res.status(500).send({
-                 message:
-                     err.message || "Error occurred while retrieving `findone` user."
-             });
-         }
-         res.send(data);
-     });
- }
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Content cannot be empty"
+        })
+    }
+    let email = req.params.email;
+    let updatedInfo = req.body;
+    let query = "SELECT * FROM users where email = ?";
+    sql.query(query, [email], (err, result) => {
+        if (err) {
+            console.log("Error occur while find user with email ", email)
+        } else {
+            User.update(updatedInfo, result[0].id, (err, data) => {
+                if (err) {
+                    return res.status(500).send({
+                        message: err.message || "Error occurred while updating user."
+                    });
+                }
+                res.send(data);
+            });
+        }
+    })
+}
 
 export const login = (req, res, next) => {
     if (!req.query) {
@@ -122,10 +135,10 @@ export const login = (req, res, next) => {
         let query = `SELECT * FROM users WHERE email = (?)`;
         sql.query(query, [[email]], (err, data) => {
             if (err) {
-                return res.status(500).send({message: err.message || "Some error occurred while logging in."})
+                return res.status(500).send({ message: err.message || "Some error occurred while logging in." })
             }
             if (res.length == 0) {
-                return res.status(401).send({message: "Incorrect email address!"});
+                return res.status(401).send({ message: "Incorrect email address!" });
             } else {
                 console.log(data);
                 if (checkPassword(password, data[0])) {
@@ -138,12 +151,12 @@ export const login = (req, res, next) => {
                         })
                     })
                 } else {
-                    return res.status(401).send({message: "Incorrect password"});
+                    return res.status(401).send({ message: "Incorrect password" });
                 }
             }
         })
     }
-    
+
 }
 
 
@@ -160,7 +173,7 @@ export const findOne = (req, res) => {
     });
 }
 
-export const findAll = (req, res) => {  
+export const findAll = (req, res) => {
     User.getAll((err, data) => {
         if (err) {
             return res.status(500).send({
@@ -168,7 +181,7 @@ export const findAll = (req, res) => {
                     err.message || "Some error occurred while retrieving users."
             });
         }
-        
+
         res.send(data);
     });
 };

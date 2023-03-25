@@ -27,23 +27,10 @@ User.create = (newUser, result) => {
 }
 
 User.update = (updated, id, result) => {
-    let query = `UPDATE users SET ? WHERE id = ${id}`;
-    sql.query(query, updated, (err, res) => {
-        if (err) {
-            console.log("Cannot update: ", err);
-            result(err,null);
-        } else {
-            console.log("All users: ", res);
-            result(null,res);
-        }
-    })
-}
-
-
-User.update2 = (req, result) => {
-    const updated = req.body;
-    const id = req.body.id;
+   // const idString = id.toString();
+    // let query = `UPDATE users SET ? WHERE id = ${id}`;
     let query = `UPDATE users SET ? WHERE id = ?`;
+    console.log(updated, id);
     sql.query(query, [updated, id], (err, res) => {
         if (err) {
             console.log("Cannot update: ", err);
