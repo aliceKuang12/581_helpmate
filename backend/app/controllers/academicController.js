@@ -66,8 +66,7 @@ export const showAcademic = (req, res) => {
 }
 
 export const deleteEvent = (req,res) => {
-    const title = req.body.data.title
-    Academic.delete(title, (err,data) => {
+    Academic.delete(req, (err,data) => {
         if(err) {
             return res.status(500).send({
                 message:

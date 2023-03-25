@@ -98,7 +98,7 @@ app.post("/academics/create", (req, res) => {
 app.get("/academics", (req, res) => academic.showAcademic(req, res));
 app.get("/academics/:email", (req, res) => academic.userAcademic(req, res));
 app.get("/academics/streak1/:email", (req, res) => academic.assignments(req, res));
-app.delete("/academics/delete/", (req, res) => { academic.deleteEvent(req, res) });
+app.delete("/academics/delete/:email", (req, res) => { academic.deleteEvent(req, res) });
 
 //travel module
 app.post("/travel/create", (req, res) => travel.createEvent(req, res));

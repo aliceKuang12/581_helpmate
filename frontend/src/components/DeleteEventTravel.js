@@ -52,7 +52,7 @@ export default function BasicForm() {
 
   useEffect(() => {
     const fetchTravel = async () => {
-        await axios.get("http://localhost:3003/travel/")
+        await axios.get("http://localhost:3003/travel/"+ localStorage.getItem("email"))
             .then(res => {
                 console.log(res.data);
             })

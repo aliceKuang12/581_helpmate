@@ -6,7 +6,7 @@ import Clock from './Clock'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
 import CreateEvent from "./CreateHealth"
-import DeleteEvent from "./DeleteEvent-vA"
+import DeleteEvent from "./DeleteEventHealth"
 import ViewEvent from "./ViewEvents"
 
 import axios from 'axios'
@@ -47,7 +47,7 @@ const ModuleCard = ( ) => {
 
     useEffect(() => {
         const fetchAllHealth = async () => {
-            await axios.get("http://localhost:3003/health/")
+            await axios.get("http://localhost:3003/health/"+ localStorage.getItem("email"))
                 .then(res => {
                     setData((res.data));
                     console.log(res.data);
