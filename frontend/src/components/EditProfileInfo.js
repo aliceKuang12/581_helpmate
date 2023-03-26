@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,20 +9,29 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import Checkbox from './Checkbox';
 import { Typography } from '@mui/material';
-export default function BasicForm() {
-  const [open, setOpen] = React.useState(false);
-  const [data, setData] = useState({
-    name: '',
-    username: '',
-    email: '',
-    cell: '',
-    address: '',
-    birthday: '',
-    password: '',
-  });
+import { AXIOS_HEADER } from '../constants';
+import { useAuth } from '../context/AuthContext';
 
+export default function BasicForm() {
+  const { currentUser } = useAuth();
+  const [open, setOpen] = React.useState(false);
+  const user = JSON.parse(currentUser);
+  const currentData = {
+    id: user.id,
+    fname: user.fname,
+    lname: user.lname,
+    username: user.username,
+    email: user.email,
+    cell: user.cell,
+    address: user.address,
+    birthday: user.birthday,
+  }
+  const [data, setData] = useState(currentData);
+ 
   const {
-    name,
+    id,
+    fname,
+    lname,
     username,
     email,
     cell,
@@ -39,9 +49,30 @@ export default function BasicForm() {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleCancel = () => {
     setOpen(false);
+    setData(currentData);
   };
+
+  const handleUpdateProfile = () => {
+    axios({
+      url: "http://localhost:3003/user",
+      method: "PUT",
+      header: AXIOS_HEADER,
+      data: data
+    }).then((res) => {
+      if (res.status === 200) {
+        setOpen(false);
+        localStorage.setItem("user", JSON.stringify(data));
+        window.location.reload(true);
+      } else {
+        throw new Error("Error updating profile")
+      }
+      setData(currentData);
+    }).catch((err) => {
+      alert(err.message);
+    })
+  }
 
   const handleChange = (value, key) => {
     setData(prevState => ({...prevState, [key]: value,}));
@@ -54,7 +85,7 @@ export default function BasicForm() {
       </Button>
 
       
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogContent>
             <br/>
             <Typography sx={{textAlign: 'center'}}>
@@ -72,11 +103,19 @@ export default function BasicForm() {
             </Grid>
             <Grid item xs={9.5}>
               <TextField
-                id="name"
-                label="name"
+                id="fname"
+                label="First name"
                 variant="outlined"
-                onChange={e => handleChange(e.target.value, 'name')}
-                value={name}
+                onChange={e => handleChange(e.target.value, 'fname')}
+                value={fname}
+                fullWidth
+              />
+              <TextField
+                id="lname"
+                label="Last name"
+                variant="outlined"
+                onChange={e => handleChange(e.target.value, 'lname')}
+                value={lname}
                 fullWidth
               /> 
             </Grid>
@@ -158,7 +197,7 @@ export default function BasicForm() {
                   onChange={e => handleChange(e.target.value, 'address')}
                   multiline
                   fullWidth
-                  value={cell}
+                  value={address}
               />
             </Grid>
 
@@ -174,15 +213,15 @@ export default function BasicForm() {
                   onChange={e => handleChange(e.target.value, 'birthday')}
                   multiline
                   fullWidth
-                  value={cell}
+                  value={birthday}
               />
             </Grid>
 
             </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Save</Button>
+          <Button onClick={handleCancel}>Cancel</Button>
+          <Button onClick={handleUpdateProfile}>Save</Button>
         </DialogActions>
       </Dialog>
       
