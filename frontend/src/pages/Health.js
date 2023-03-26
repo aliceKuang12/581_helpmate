@@ -5,7 +5,7 @@ import NavBar from '../components/NavBar'
 import '../App.css';
 import Clock from '../components/Clock'
 //import Image from '../images/BirdBackground.jpg'
-import Image from '../images/hiker.jpg'
+import Image from '../images/runner.jpg'
 
 const Template = () => {
     return(

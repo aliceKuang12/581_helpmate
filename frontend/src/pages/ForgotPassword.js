@@ -76,7 +76,7 @@ export default function ForgotPassword() {
                     </Button>
                     <br />
                     <Typography>
-                     <Link to="/login" >Log in here</Link> 
+                     <Link to="/" >Log in here</Link> 
                     </Typography>
                 <br /><br />
                 </FormControl>

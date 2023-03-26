@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid"
 import NavBar from '../components/NavBar'
 import '../App.css';
 import Clock from '../components/Clock'
-import Image from '../images/streaksBackground.jpg'
+import Image from '../images/celebrate.png'
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -99,11 +99,11 @@ const Streaks = () => {
         <div style={{
             backgroundImage: `url(${Image})`,
             backgroundSize: "cover",
-            padding: 2
         }}>
-            <NavBar></NavBar>
-            <Clock />
-            <Box padding={2} marginX={2} marginY={2} sx={{ height: 600, width: 600, alignItems: 'center' }}>
+            <NavBar/>
+            <br/> 
+            {/* <Clock /> */}
+            <Box padding={2} marginX={6} marginY={3} sx={{ height: 600, width: 600, alignItems: 'center' }}>
                 <Stack spacing={.25} marginX={2} sx={{  }}>
                     <Item sx={{ backgroundColor: 'lightblue' }}>
                         <Typography sx={{fontWeight: 'bold'}}>Academics</Typography>

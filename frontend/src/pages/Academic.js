@@ -5,13 +5,13 @@ import Grid from "@mui/material/Grid"
 import NavBar from '../components/NavBar'
 import '../App.css';
 import Clock from '../components/Clock'
-import Image from '../images/BirdBackground.jpg'
+import Image from '../images/ku1.jpg'
 import axios from 'axios'
 
 const Template = () => {
     return(
         <div style={{ backgroundImage: `url(${Image})`, 
-        backgroundSize: "cover" }}>
+        backgroundSize: "1200px 900px"}}>
             <NavBar/>
             <Clock/>         
             <Grid container spacing={12}>
