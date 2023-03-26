@@ -6,9 +6,9 @@ import DialogContent from '@mui/material/DialogContent';
 import CreateIcon from '@mui/icons-material/Create';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
-import Checkbox from '../Checkbox';
 import { Typography } from '@mui/material';
-
+import { AXIOS_HEADER } from '../../constants';
+import axios from 'axios'
 
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
@@ -106,9 +106,24 @@ export default function BasicForm() {
                 onChange={e => handleChange(e.target.value, 'title')}
                 value={title}
                 fullWidth
+                required
               /> 
             </Grid>
-              
+            <Grid item xs={2}>
+            <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
+              Category:
+            </Typography>  
+            </Grid>
+            <Grid item xs={9.5}>
+              <TextField
+                id="category"
+                label="Course, Exam, Assignment"
+                variant="outlined"
+                onChange={e => handleChange(e.target.value, 'category')}
+                value={category}
+                fullWidth
+              /> 
+            </Grid>
             <Grid item xs={2}>
             <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
               Date:
@@ -117,18 +132,19 @@ export default function BasicForm() {
             <Grid item xs={9.5}>
               <TextField
               id="eventTime"
-              type="eventTime"
+              type="date"
               variant="outlined"
               onChange={e => handleChange(e.target.value, 'eventTime')}
               value={eventTime}
               fullWidth
+              required
               />  
             </Grid>
  
             
             <Grid item xs={2}>
             <Typography sx={{fontSize: 16, textAlign: 'left', padding: 2}}>
-              Address:
+              Location:
             </Typography>
             </Grid>
             <Grid item xs={9.5}>    
@@ -169,7 +185,6 @@ export default function BasicForm() {
                   id="completed"
                   label="'1' for yes, '0' for no"
                   onChange={e => handleChange(e.target.value, 'completed')}
-                  multiline
                   fullWidth
                   value={completed}
                   rows={4}
