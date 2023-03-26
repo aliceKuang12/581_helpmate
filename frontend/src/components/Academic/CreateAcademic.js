@@ -8,23 +8,25 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import Checkbox from '../Checkbox';
 import { Typography } from '@mui/material';
+
+
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState({
     title: '',
-    date: '',
-    time: '',
+    category: '',
+    eventTime: '',
     completed: '',
-    address: '',
+    location: '',
     notes: '',
   });
 
   const {
     title,
-    date,
-    time,
+    category,
+    eventTime,
     completed,
-    address,
+    location,
     notes,
   } = data;
   const [file, setFile] = useState();
@@ -44,6 +46,34 @@ export default function BasicForm() {
   const handleChange = (value, key) => {
     setData(prevState => ({...prevState, [key]: value,}));
   };
+  
+  const handleUpdate = async (e) => {
+      handleData(data);
+      setOpen(false);
+  }
+
+  const handleData = (db) => {
+    axios({
+      url: 'http://localhost:3003/academics/update/' + localStorage.getItem("email"),
+      method: 'POST',
+      headers: AXIOS_HEADER,
+      data: db,
+    }).then(() => {
+      alert("Successfully updated, logout to see changes")
+      setData({
+        title: '',
+        category: '',
+        eventTime: '',
+        completed: '',
+        location: '',
+        notes: '',
+      })
+      handleClose();
+    }).catch((e) => {
+      console.log(e);
+    })
+  }
+
 
   return (
     <div >
@@ -56,7 +86,7 @@ export default function BasicForm() {
         <DialogContent>
             <br/>
             <Typography sx={{textAlign: 'center'}}>
-            Create Event  
+            Create or Update Event  
             </Typography> 
             <br/> 
           <Grid container  spacing={2}
@@ -84,26 +114,17 @@ export default function BasicForm() {
               Date:
             </Typography>
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={9.5}>
               <TextField
-              id="date"
-              type="date"
+              id="eventTime"
+              type="eventTime"
               variant="outlined"
-              onChange={e => handleChange(e.target.value, 'date')}
-              value={date}
+              onChange={e => handleChange(e.target.value, 'eventTime')}
+              value={eventTime}
               fullWidth
               />  
             </Grid>
-            <Grid item xs={4.5}>
-            <TextField
-                id="time"
-                type="time"
-                variant="outlined"
-                onChange={e => handleChange(e.target.value, 'time')}
-                value={time}
-                fullWidth
-              />
-            </Grid> 
+ 
             
             <Grid item xs={2}>
             <Typography sx={{fontSize: 16, textAlign: 'left', padding: 2}}>
@@ -112,11 +133,11 @@ export default function BasicForm() {
             </Grid>
             <Grid item xs={9.5}>    
               <TextField
-                id="address"
-                label="street address, city, state, zip"
+                id="location"
+                label="text"
                 variant="outlined"
-                onChange={e => handleChange(e.target.value, 'address')}
-                value={address}
+                onChange={e => handleChange(e.target.value, 'location')}
+                value={location}
                 fullWidth 
               />
             </Grid>
@@ -144,16 +165,22 @@ export default function BasicForm() {
                </Typography>
              </Grid> 
              <Grid item xs={4}>
-                <Checkbox/>        
+             <TextField
+                  id="completed"
+                  label="'1' for yes, '0' for no"
+                  onChange={e => handleChange(e.target.value, 'completed')}
+                  multiline
+                  fullWidth
+                  value={completed}
+                  rows={4}
+              />   
              </Grid>
-             <Grid item xs={2}/>
-             <Grid item xs={2}><img src={file} width="40" height="40"/>
-            </Grid>
             </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleClose}>Create</Button>
+          <Button onClick={handleUpdate}>Update</Button>
         </DialogActions>
       </Dialog>
       
