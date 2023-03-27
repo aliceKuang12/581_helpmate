@@ -42,7 +42,7 @@ export default function BasicForm() {
 
   const handleDelete = () => {
     console.log(data);
-//    DeleteTravelEvent();
+    DeleteHealthEvent();
     setOpen(false);
   };
 
@@ -51,7 +51,7 @@ export default function BasicForm() {
   };
 
   useEffect(() => {
-    const fetchTravel = async () => {
+    const fetchHealth = async () => {
         await axios.get("http://localhost:3003/health/"+ localStorage.getItem("email"))
             .then(res => {
                 console.log(res.data);
@@ -60,19 +60,19 @@ export default function BasicForm() {
                 console.log(err)
             })
     }
-    fetchTravel()
+    fetchHealth();
   }, []);
 
-  // function DeleteTravelEvent() {
-  //   console.log("deleting event")
-  //   console.log(data);
-  //   axios
-  //     .delete("http://localhost:3003/health/delete", { data: { data } })
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       setPost(response.data);
-  //     });
-  // }
+   function DeleteHealthEvent() {
+    console.log("deleting event")
+    console.log(data);
+    axios
+      .delete("http://localhost:3003/health/delete", { data: { data } })
+      .then((response) => {
+        console.log(response.data);
+        setPost(response.data);
+      });
+  } 
 
   return (
     <div >

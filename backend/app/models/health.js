@@ -129,7 +129,7 @@ Health.show = (user_id, result) => {
 }
 
 Health.delete = (title, result) => {
-    let query = `DELETE FROM social WHERE title = ?`;
+    let query = `DELETE FROM health WHERE title = ?`;
     sql.query(query, [title], (err,res) => {
         if(err) {
             console.log("Unable to delete event: ", err);
