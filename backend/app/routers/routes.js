@@ -121,7 +121,9 @@ app.delete("/health/delete/", (req, res) => { health.deleteEvent(req, res) });
 app.post("/social/create", (req, res) => { social.createEvent(req, res) });
 app.get("/social/", (req, res) => social.showSocial(req, res));
 app.get("/social/:email", (req, res) => social.userSocial(req, res));
-app.delete("/social/delete/", (req, res) => { social.deleteEvent(req, res) });
+app.delete("/social/delete/", (req, res) => { 
+  //console.log(req);
+  social.deleteEvent(req, res) });
 
 
 
