@@ -50,3 +50,15 @@ export const showSocial = (req, res) => {
         res.status(200).send(data);
     })
 }
+
+export const deleteEvent = (req,res) => {
+    Social.delete(req, (err,data) => {
+        if(err) {
+            return res.status(500).send({
+                message:
+                    err.message || "Error occurred while deleting event."
+            });
+        }
+        res.send(data);
+    })
+}

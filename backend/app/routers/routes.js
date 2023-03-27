@@ -115,11 +115,13 @@ app.get("/health/steps/:email", (req, res) => health.userSteps(req, res));
 app.get("/health/activity/:email", (req, res) => health.userActivity(req, res));
 app.get("/health/streak1/:email", (req, res) => health.stepStreak(req, res));
 app.get("/health/streak2/:email", (req, res) => health.activityStreak(req, res));
+app.delete("/health/delete/", (req, res) => { health.deleteEvent(req, res) });
 
 //social module
 app.post("/social/create", (req, res) => { social.createEvent(req, res) });
 app.get("/social/", (req, res) => social.showSocial(req, res));
 app.get("/social/:email", (req, res) => social.userSocial(req, res));
+app.delete("/social/delete/", (req, res) => { social.deleteEvent(req, res) });
 
 
 

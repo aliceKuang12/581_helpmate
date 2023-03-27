@@ -117,3 +117,15 @@ export const showHealth = (req, res) => {
         res.status(200).send(data);
     })
 }
+
+export const deleteEvent = (req,res) => {
+    Health.delete(req, (err,data) => {
+        if(err) {
+            return res.status(500).send({
+                message:
+                    err.message || "Error occurred while deleting event."
+            });
+        }
+        res.send(data);
+    })
+}
