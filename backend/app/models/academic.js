@@ -65,9 +65,25 @@ Academic.show = (user_id, result) => {
     })
 }
 
-Academic.delete = (title, result) => {
-    let query = `DELETE FROM academic WHERE title = ?`;
-    sql.query(query, [title], (err,res) => {
+Academic.update = (req, id, result) => {
+     const title = req.body.data.title;
+     let query = `UPDATE users SET ? WHERE userId = ? and title = ?`;
+     sql.query(query, [req.body.data, id, title], (err, res) => {
+         if (err) {
+             console.log("Cannot update: ", err);
+             result(err,null);
+         } else {
+             console.log("All users: ", res);
+             result(null,res);
+         }
+     })
+ }
+
+Academic.delete = (req, result) => {
+    const title = req.body.data.title;
+    const email = req.params.email;
+    let query = `DELETE FROM academic WHERE title = ? and email = ?`;
+    sql.query(query, [title, email], (err,res) => {
         if(err) {
             console.log("Unable to delete event: ", err);
             result(err,null);

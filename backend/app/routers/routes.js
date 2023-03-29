@@ -81,7 +81,7 @@ app.post("/signup", (req, res) => { user.createUser(req, res) });
 app.get("/users", user.findAll); // works, same as "select * from users"
 app.get("/user/:email", (req, res) => { user.findOne(req, res) }); // same as "select * from users where email =`:email`"
 app.put("/user", (req,res) => user.updateUser(req,res));
-
+app.post("/profile/:email", (req,res) => user.updateProfile(req,res));
 
 
 //image module
@@ -100,7 +100,8 @@ app.post("/academics/create", (req, res) => {
 app.get("/academics", (req, res) => academic.showAcademic(req, res));
 app.get("/academics/:email", (req, res) => academic.userAcademic(req, res));
 app.get("/academics/streak1/:email", (req, res) => academic.assignments(req, res));
-app.delete("/academics/delete/", (req, res) => { academic.deleteEvent(req, res) });
+app.delete("/academics/delete/:email", (req, res) => { academic.deleteEvent(req, res) });
+app.put("/academics/update/:email", (req, res) => { academic.updateAcademic(req, res) });
 
 //travel module
 app.post("/travel/create", (req, res) => travel.createEvent(req, res));
@@ -116,11 +117,13 @@ app.get("/health/steps/:email", (req, res) => health.userSteps(req, res));
 app.get("/health/activity/:email", (req, res) => health.userActivity(req, res));
 app.get("/health/streak1/:email", (req, res) => health.stepStreak(req, res));
 app.get("/health/streak2/:email", (req, res) => health.activityStreak(req, res));
+app.delete("/health/delete/", (req, res) => { health.deleteEvent(req, res) });
 
 //social module
 app.post("/social/create", (req, res) => { social.createEvent(req, res) });
 app.get("/social/", (req, res) => social.showSocial(req, res));
 app.get("/social/:email", (req, res) => social.userSocial(req, res));
+app.delete("/social/delete/", (req, res) => { social.deleteEvent(req, res) });
 
 
 

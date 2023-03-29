@@ -128,7 +128,7 @@ export default function Header(props) {
               </Button>
             ))}
           </Box>
-          <Typography color="black" marginRight={3}>Welcome, { user.fname ? user.fname : localStorage.getItem("name") }</Typography>
+          <Typography color="black" marginRight={3}>Welcome, { localStorage.getItem("profilePic") ? user.fname : localStorage.getItem("name") }</Typography>
           <Box sx={{ color: 'black', flexGrow: 0 }}>
 
             <Tooltip title="Open settings">

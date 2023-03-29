@@ -27,8 +27,11 @@ User.create = (newUser, result) => {
 }
 
 User.update = (updated, id, result) => {
-    let query = `UPDATE users SET ? WHERE id = ${id}`;
-    sql.query(query, updated, (err, res) => {
+   // const idString = id.toString();
+    // let query = `UPDATE users SET ? WHERE id = ${id}`;
+    let query = `UPDATE users SET ? WHERE id = ?`;
+    console.log(updated, id);
+    sql.query(query, [updated, id], (err, res) => {
         if (err) {
             console.log("Cannot update: ", err);
             result(err,null);

@@ -242,6 +242,7 @@ const SignUp = (props) => {
                                     value={birthday}
                                     placeholder="yyyy-mm-dd"
                                     fullWidth sx={{marginBottom: '1rem'}}
+                                    required
                                     // helperText={validateDate(birthday) ? '': "Please follow formate YYYY-MM-DD"}
                                     // error={!validateDate(birthday)}
 
@@ -256,15 +257,7 @@ const SignUp = (props) => {
                                     value={address}
                                     fullWidth sx={{marginBottom: '1rem'}}/>
                             </Grid>
-                            <Grid item xs={12}>
-                                <TextField 
-                                    id="token" 
-                                    label="Token"
-                                    variant="outlined"
-                                    onChange={e => handleChange(e.target.value, 'token')}
-                                    value={token}
-                                    fullWidth sx={{marginBottom: '1rem'}}/>
-                            </Grid>
+                    
                             {/* <Grid item xs={12}>
                                 <TextField 
                                     id="avt" 

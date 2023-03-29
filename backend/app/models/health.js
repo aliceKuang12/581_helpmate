@@ -128,5 +128,18 @@ Health.show = (user_id, result) => {
     })
 }
 
+Health.delete = (title, result) => {
+    let query = `DELETE FROM health WHERE title = ?`;
+    sql.query(query, [title], (err,res) => {
+        if(err) {
+            console.log("Unable to delete event: ", err);
+            result(err,null);
+        }
+        else {
+            console.log("Event deleted: ",res);
+            result(null,res);
+        }
+    }) 
+}
 
 export default Health;

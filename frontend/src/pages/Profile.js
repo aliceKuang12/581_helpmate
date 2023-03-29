@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import NavBar from '../components/NavBar'
-import Paper from "@mui/material/Paper"
-import { Divider, Stack, Typography } from '@mui/material'
-import { styled } from '@mui/material/styles'
-import img from '../images/ku_building_1.jpg'
 import Image from '../images/streaksBackground.jpg'
-import axios from 'axios'
-import ModuleCard from '../components/ProfileCard1'
-import ModuleCard2 from '../components/ProfileCard2'
+import ModuleCard from '../components/Profile/ProfileCard1'
+import ModuleCard2 from '../components/Profile/ProfileCard2'
 import Grid from "@mui/material/Grid"
 import '../App.css';
 import Clock from '../components/Clock'
