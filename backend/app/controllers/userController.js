@@ -12,7 +12,6 @@
 
 
 import User from "../models/user.js";
-// const User = require("../models/user.js");
 import bcrypt from 'bcrypt';
 import sql from "../models/db.js";
 import session from "express-session"
@@ -108,32 +107,7 @@ export const updateUser = (req, res) => {
     }
 }
 
-// update user info on profile page
-export const updateProfile = (req, res) => {
-    if (!req.body) {
-        return res.status(400).send({
-            message: "Content cannot be empty"
-        })
-    }
-    let email = req.params.email;
-    let updatedInfo = req.body;
-    let query = "SELECT * FROM users where email = ?";
-    sql.query(query, [email], (err, result) => {
-        if (err) {
-            console.log("Error occur while find user with email ", email)
-        } else {
-            User.update(updatedInfo, result[0].id, (err, data) => {
-                if (err) {
-                    return res.status(500).send({
-                        message: err.message || "Error occurred while updating user."
-                    });
-                }
-                res.send(data);
-            });
-        }
-    })
-}
-
+//handle login
 export const login = (req, res, next) => {
     if (!req.query) {
         res.status(400).send({
@@ -173,7 +147,7 @@ export const login = (req, res, next) => {
 
 }
 
-
+//get user from email
 export const findOne = (req, res) => {
     const email = req.params.email;
     User.getOne(email, (err, data) => {
@@ -187,6 +161,7 @@ export const findOne = (req, res) => {
     });
 }
 
+//get all user
 export const findAll = (req, res) => {
     User.getAll((err, data) => {
         if (err) {
