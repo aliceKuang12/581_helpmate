@@ -137,7 +137,7 @@ export default function BasicForm() {
               />  
             </Grid>
 
-            <Grid item xs={2}>
+            {/* <Grid item xs={2}>
                 <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
                   Password: 
                </Typography>
@@ -151,7 +151,7 @@ export default function BasicForm() {
                   fullWidth
                   value={cell}
               />
-            </Grid>
+            </Grid> */}
 
             <Grid item xs={2}>
             <Typography sx={{fontSize: 16, textAlign: 'left', padding: 2}}>
