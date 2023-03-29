@@ -34,7 +34,6 @@ export default function ResetPassword() {
         } catch (e) {
             setError(e.message);
         }
-
     }
 
     return (

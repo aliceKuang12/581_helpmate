@@ -235,17 +235,19 @@ const SignUp = (props) => {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField 
-                                    id="dob" 
-                                    label="Date of birth" 
-                                    variant="outlined" 
+                                    id="dob"
+                                    type="date"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    label="Date of birth"
+                                    variant="outlined"
                                     onChange={e => handleChange(e.target.value, 'birthday')}
                                     value={birthday}
-                                    placeholder="yyyy-mm-dd"
                                     fullWidth sx={{marginBottom: '1rem'}}
                                     required
                                     // helperText={validateDate(birthday) ? '': "Please follow formate YYYY-MM-DD"}
                                     // error={!validateDate(birthday)}
-
                                 />
                             </Grid>
                             <Grid item xs={12}>
