@@ -10,7 +10,6 @@
  * @since  1/26/23
  */
 
-
 import User from "../models/user.js";
 import bcrypt from 'bcrypt';
 import sql from "../models/db.js";
@@ -109,37 +108,37 @@ export const updateUser = (req, res) => {
 
 //handle login
 export const login = (req, res, next) => {
-    if (!req.query) {
+    if (!req.body) {
         res.status(400).send({
             message: "Content cannot be empty"
         })
         return;
     }
-
-    const email = req.query.email;
-    const password = req.query.password;
+    const email = req.body.email;
+    const password = req.body.password;
 
     if (email && password) {
         let query = `SELECT * FROM users WHERE email = (?)`;
         sql.query(query, [[email]], (err, data) => {
+            // console.log
             if (err) {
                 return res.status(500).send({ message: err.message || "Some error occurred while logging in." })
             }
             if (res.length == 0) {
                 return res.status(401).send({ message: "Incorrect email address!" });
             } else {
-                console.log(data);
                 if (checkPassword(password, data[0])) {
                     req.session.regenerate(function (err) {
                         if (err) next(err)
                         req.session.user = data[0];
                         req.session.save(function (err) {
                             if (err) return next(err);
-                            return res.status(200).json(req.session.user);
+                            res.status(200).json(req.session.user);
+                            return;
                         })
                     })
                 } else {
-                    return res.status(401).send({ message: "Incorrect password" });
+                    return res.status(401).send({ message: "Incorrect password"});
                 }
             }
         })
