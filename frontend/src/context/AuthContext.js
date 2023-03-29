@@ -62,13 +62,7 @@ export function AuthProvider({ children }) {
       data: {
         email: email,
         password: password
-      },
-    }).then((res) => {
-      if (res.status !== 200) {
-        throw res;
       }
-    }).catch((err) => {
-      alert(err.message);
     })
   }
 

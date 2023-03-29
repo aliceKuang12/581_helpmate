@@ -24,10 +24,9 @@ export default function ResetPassword() {
             setError("")
             setLoading(true)
             const res = await resetPassword(emailRef.current.value, newPasswordRef.current.value);
-            console.log(res.status);
             if (res.status === 200) {
                 setMessage("Your password has been updated!")
-                alert("Success")
+                alert("Your password has been updated!")
                 window.location = "/"
             } else {
                 throw new Error("Failed to reset password")
@@ -41,7 +40,7 @@ export default function ResetPassword() {
     return (
         <div align="center">
             <Paper className='w-400' sx={{ maxWidth: 600, marginY: 15 }}>
-                {error && <Alert severity="danger">{error}</Alert>}
+                {error && <Alert severity="error">{error}</Alert>}
                 {message && <Alert severity="success">{message}</Alert>}
                 <Typography variant="h6">Enter the email associated with your account and your new pasword: </Typography><br /><br />
                 <FormControl>
