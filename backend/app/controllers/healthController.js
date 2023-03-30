@@ -54,7 +54,7 @@ export const userSteps = (req, res) => {
                     err.message || "Error occurred while retrieving health for user."
             });
         }
-        
+        //console.log("Health data:", data);
         res.send(data);
     });
 }

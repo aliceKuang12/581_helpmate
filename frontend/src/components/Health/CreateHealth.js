@@ -26,7 +26,7 @@ export default function CreateHealth() {
   const [open, setOpen] = React.useState(false);
   const [post, setPost] = React.useState(null);
   const [data, setData] = useState({
-    userId: 17,
+    userId: 20,
     title: '',
     category: '',
     date: '',

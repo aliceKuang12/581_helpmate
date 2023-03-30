@@ -47,8 +47,10 @@ const ModuleCard = ( ) => {
 
     useEffect(() => {
         const fetchAllHealth = async () => {
-            await axios.get("http://localhost:3003/health/"+ localStorage.getItem("email"))
+            //await axios.get("http://localhost:3003/health/"+ localStorage.getItem("email"))
+            await axios.get("http://localhost:3003/health/")
                 .then(res => {
+                    console.log("RES:", res);
                     setData((res.data));
                     console.log(res.data);
                 })
