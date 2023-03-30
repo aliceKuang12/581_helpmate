@@ -75,18 +75,19 @@ Images.show = (user_id, result) => {
 // update profilePic
 // Transactions w/ multiple params: https://nicholasmordecai.co.uk/database/transactions-with-multiple-queries-nodejs-mysql/
 Images.update1 = (req, result) => {
-    const filePath = req.file.filename;
+    //const filePath = req.file.filename;
+    const url = req.body.url; 
     const email = req.params.email;
 
     let query = `UPDATE imagerefs SET profile1=? WHERE userId = (SELECT id from users where email = ?)`; 
-    sql.query(query, [filePath, email], (err, res) => {
+    sql.query(query, [url, email], (err, res) => {
         if (err) {
             console.log(err);
             result(err, null);
             return;
         }
        
-        console.log(filePath); 
+        console.log(url); 
         result(null, res);
     })
 }

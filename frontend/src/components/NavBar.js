@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useAuth } from '../context/AuthContext';
+import axios from 'axios'
 
 const pages = ['home', 'academics', 'health', 'social', 'travel', 'streaks'];
 
@@ -23,8 +24,8 @@ export default function Header(props) {
   const [data, setData] = React.useState('');
   const user = currentUser;
 
- // don't set the user here! to avoid duplicate api calls, 
- // better to save the user data at login
+  // don't set the user here! to avoid duplicate api calls, 
+  // better to save the user data at login
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -56,6 +57,23 @@ export default function Header(props) {
     setAnchorElUser(null);
     window.location.href = '/' + page;
   }
+
+  useEffect(() => {
+    const fetchImage = async () => {
+
+      // upload the photo
+      await axios.get("http://localhost:3003/profileUrl/" + localStorage.getItem('email'))
+        .then(res => {
+          console.log(res.data[0].profile1);
+          localStorage.setItem("profileUrl", res.data[0].profile1);
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+    fetchImage();
+  }, []);
+
 
   return (
     <AppBar position="static" sx={{ bgcolor: "yellow" }}>
@@ -128,7 +146,7 @@ export default function Header(props) {
               </Button>
             ))}
           </Box>
-          <Typography color="black" marginRight={3}>Welcome, { localStorage.getItem("profilePic") ? user.fname : localStorage.getItem("name") }</Typography>
+          <Typography color="black" marginRight={3}>Welcome, {localStorage.getItem("profilePic") ? user.fname : localStorage.getItem("name")}</Typography>
           <Box sx={{ color: 'black', flexGrow: 0 }}>
 
             <Tooltip title="Open settings">
@@ -136,7 +154,7 @@ export default function Header(props) {
                 onClick={handleOpenUserMenu}
                 sx={{ p: 0 }}
               >
-                <Avatar alt="Remy Sharp" src={localStorage.getItem("profilePic")} />
+                <Avatar alt="Remy Sharp" src={localStorage.getItem("profilePic") ? localStorage.getItem("profilePic") : localStorage.getItem("profileUrl")} />
               </IconButton>
             </Tooltip>
             <Menu
