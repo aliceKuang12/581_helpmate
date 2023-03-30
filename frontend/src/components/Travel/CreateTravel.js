@@ -11,6 +11,7 @@
  */
 
 import React, {useEffect, useState} from 'react';
+import  axios from 'axios';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -18,14 +19,18 @@ import DialogContent from '@mui/material/DialogContent';
 import CreateIcon from '@mui/icons-material/Create';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
-import Checkbox from '../Checkbox';
 import { Typography } from '@mui/material';
-import  axios from 'axios';
+import Checkbox from '../Checkbox';
+import { useAuth } from '../../context/AuthContext';
+
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
-  const [post, setPost] = React.useState(null);
+  // const [post, setPost] = React.useState(null);
+  const { currentUser } = useAuth();
+  const user = JSON.parse(currentUser);
+
   const [data, setData] = useState({
-    userId: '17',
+    userId: user.id,
     title: '',
     date: '',
     time: '',
@@ -51,27 +56,51 @@ export default function BasicForm() {
       setFile(URL.createObjectURL(e.target.files[0]));
   }
 
+/**
+ * Tutorial from: https://www.freecodecamp.org/news/how-to-use-axios-with-react/#how-to-make-a-post-request
+ * function: createTravelPost
+ * uses axios post to take the user form data and post to local database
+ */
+  const createTravelPost = () => {
+    axios
+      .post("http://localhost:3003/travel/create", data)
+      .then((response) => {
+        handleClose();
+        window.location.reload();
+      }).catch((e) => {
+        alert("An error has occured");
+      });
+  }
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    setData({
+      userId: user.id,
+      title: '',
+      category: '',
+      date: '',
+      time: '',
+      location: '',
+      completed: '0',
+      notes: '',
+    });
     setOpen(false);
   };
 
   const handleCreate = () => {
     console.log(data);
     createTravelPost();
-    setOpen(false);
   };
 
   const handleChange = (value, key) => {
     //update the data to be the user's input
     setData(prevState => ({...prevState, [key]: value,}));
-    //console.log(value);
     axios.get('http://localhost:3003/calendar')
-  .then(response => console.log(response.data))
-  .catch(error => console.error(error));
+    .then(response => console.log(response.data))
+    .catch(error => console.error(error));
   };
 
   /**
@@ -91,21 +120,6 @@ export default function BasicForm() {
     }
     fetchTravel()
   }, []);
-
-  /**
- * Tutorial from: https://www.freecodecamp.org/news/how-to-use-axios-with-react/#how-to-make-a-post-request
- * function: createTravelPost
- * uses axios post to take the user form data and post to local database
- */
-  function createTravelPost() {
-    console.log("creating post")
-    axios
-      .post("http://localhost:3003/travel/create", data)
-      .then((response) => {
-        console.log(response.data);
-        setPost(response.data);
-      });
-  }
 
   return (
     <div >
