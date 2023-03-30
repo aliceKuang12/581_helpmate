@@ -30,7 +30,9 @@ import path from 'path'
 import { fileURLToPath } from 'url'; 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 // console.log(path.join(__dirname, '..\\..\\', '/uploads'));
+
 app.use('/static', express.static(path.join(__dirname, '..\\..\\', '/uploads'))); 
 
 // Setup storage to save file with jpg extension to local disk
@@ -79,8 +81,6 @@ app.post("/signup", (req, res) => { user.createUser(req, res) });
 app.get("/users", user.findAll); // works, same as "select * from users"
 app.get("/user/:email", (req, res) => { user.findOne(req, res) }); // same as "select * from users where email =`:email`"
 app.put("/user", (req,res) => user.updateUser(req,res));
-app.post("/profile/:email", (req,res) => user.updateProfile(req,res));
-
 
 //image module
 app.get("/imageRefs", (req, res) => image.showImageRefs(req, res));
@@ -103,13 +103,13 @@ app.put("/academics/update/:email", (req, res) => { academic.updateAcademic(req,
 
 //travel module
 app.post("/travel/create", (req, res) => travel.createEvent(req, res));
-app.get("/travel", (req, res) => travel.showTravel(req, res));
+app.get("/travels", (req, res) => travel.showTravel(req, res));
 app.get("/travel/:email", (req, res) => travel.userTravel(req, res));
 app.delete("/travel/delete/", (req, res) => { travel.deleteEvent(req, res) });
 
 //health module
 app.post("/health/create", (req, res) => health.createEvent(req, res));
-app.get("/health/", (req, res) => health.showHealth(req, res));
+app.get("/healths", (req, res) => health.showHealth(req, res));
 app.get("/health/:email", (req, res) => health.userHealth(req, res));
 app.get("/health/steps/:email", (req, res) => health.userSteps(req, res));
 app.get("/health/activity/:email", (req, res) => health.userActivity(req, res));
@@ -119,7 +119,7 @@ app.delete("/health/delete/", (req, res) => { health.deleteEvent(req, res) });
 
 //social module
 app.post("/social/create", (req, res) => { social.createEvent(req, res) });
-app.get("/social/", (req, res) => social.showSocial(req, res));
+app.get("/social", (req, res) => social.showSocial(req, res));
 app.get("/social/:email", (req, res) => social.userSocial(req, res));
 app.delete("/social/delete/", (req, res) => { social.deleteEvent(req, res) });
 

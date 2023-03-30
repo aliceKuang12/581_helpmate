@@ -55,6 +55,9 @@ Academic.getStreak  = (email, result) => {
 // return entire table
 Academic.show = (user_id, result) => {
     let query = `SELECT * from academic`;
+    if (user_id) {
+        query = `SELECT * from academic WHERE userId = ? ORDER BY eventTime DESC`
+    }
     sql.query(query, [user_id], (err, res) => {
         if (err) {
             console.log(err);

@@ -21,41 +21,41 @@ export function AuthProvider({ children }) {
     return credential
   }
 
-  function login(email, password) {
+  async function login(email, password) {
     localStorage.setItem("email", email);
 
-    return axios({
-      url: 'http://localhost:3003/login',
-      method: 'POST',
-      headers: AXIOS_HEADER,
-      params: {
-        email: email,
-        password: password
-      },
-    }).then((res) => {
+    try {
+      const res = await axios({
+        url: 'http://localhost:3003/login',
+        method: 'POST',
+        headers: AXIOS_HEADER,
+        data: {
+          email: email,
+          password: password
+        },
+      })
       if (res.status === 200) {
-          setCurrentUser(res.data);
-          localStorage.setItem("name", res.data.fname);
-          localStorage.setItem("user", JSON.stringify(res.data));
-          setIsAuthenticated(true);
-          setLoading(false);
-      } else {
-        throw res;
+        setCurrentUser(res.data);
+        localStorage.setItem("name", res.data.fname);
+        localStorage.setItem("userId", res.data.id);
+        localStorage.setItem("user", JSON.stringify(res.data));
+        setIsAuthenticated(true);
+        setLoading(false);
+        return true;
       }
-    }).catch((err) => {
-      alert(err.message);
-    })
+    } catch(e) {
+      alert(e.response.data.message);
+      return false;
+    }
   }
 
   function logout() {
-    //alert("Bye....");
     localStorage.clear()
     // if(hasLogin) signOutWithGoogle()
     return auth.signOut()
   }
 
   function resetPassword(email, password) {
-    // return auth.sendPasswordResetEmail(email)
     return axios({
       url: 'http://localhost:3003/user',
       method: 'PUT',
@@ -63,13 +63,7 @@ export function AuthProvider({ children }) {
       data: {
         email: email,
         password: password
-      },
-    }).then((res) => {
-      if (res.status !== 200) {
-        throw res;
       }
-    }).catch((err) => {
-      alert(err.message);
     })
   }
 
@@ -90,7 +84,7 @@ export function AuthProvider({ children }) {
     const unsubscribe = async  () => {
       const user = localStorage.getItem('user');
       setCurrentUser(user);
-      setLoading(false)
+      setLoading(false);
     }
     unsubscribe();
   }, [])

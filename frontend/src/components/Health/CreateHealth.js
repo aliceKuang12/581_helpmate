@@ -21,12 +21,15 @@ import TextField from '@mui/material/TextField'
 import Checkbox from '../Checkbox';
 import { Typography } from '@mui/material';
 import axios from 'axios'
+import { useAuth } from '../../context/AuthContext';
 
 export default function CreateHealth() {
   const [open, setOpen] = React.useState(false);
   const [post, setPost] = React.useState(null);
+  const { currentUser } = useAuth();
+  const user = JSON.parse(currentUser);
   const [data, setData] = useState({
-    userId: 20,
+    userId: user.id,
     title: '',
     category: '',
     date: '',
@@ -57,6 +60,16 @@ export default function CreateHealth() {
   };
 
   const handleClose = () => {
+    setData({
+      userId: user.id,
+      title: '',
+      category: '',
+      date: '',
+      time: '',
+      location: '',
+      completed: '0',
+      notes: '',
+    });
     setOpen(false);
   };
 
@@ -88,8 +101,19 @@ export default function CreateHealth() {
     axios
       .post("http://localhost:3003/health/create", data)
       .then((response) => {
+        setData({
+          userId: user.id,
+          title: '',
+          category: '',
+          date: '',
+          time: '',
+          location: '',
+          completed: '0',
+          notes: '',
+        });
         console.log(response.data);
         setPost(response.data);
+        window.location.reload()
       });
   }
 

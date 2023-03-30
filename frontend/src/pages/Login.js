@@ -1,16 +1,12 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
-import PropTypes from 'prop-types';
 import { Typography, Container, TextField, Box, Paper } from "@mui/material";
 import Button from '@mui/material/Button';
 import BasicForm from "../components/BasicForm";
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { signInWithGoogle } from "../context/AuthContext"
 import "./Login.css"
-import { AXIOS_HEADER } from '../constants';
-
 
 const CLIENT_ID = "604737241673-l8a7fo1div65eqnasbf4jute8v3pc764.apps.googleusercontent.com"
 
@@ -30,14 +26,11 @@ const Login = (props) => {
         }
     }
 
-    const handleLogin = async (e) => {
-        try {
-            await login(emailRef.current.value, passwordRef.current.value);
-            navigate("/home");
-        } catch (e) {
-            alert(e);
+    const handleLogin = async () => {
+        const res = await login(emailRef.current.value, passwordRef.current.value);
+        if (res) {
+            navigate('/home');
         }
-        console.log("Logging in")
     }
 
     return (

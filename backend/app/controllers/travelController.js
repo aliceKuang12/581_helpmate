@@ -36,12 +36,7 @@ export const userTravel = (req, res) => {
 }
 
 export const showTravel = (req, res) => {
-    if (!req.params) {
-        return res.status(400).send({
-            message: "Content cannot be empty"
-        })
-    }
-    Travel.show(req.params.user_id, (err, data) => {
+    Travel.show(req.query.user_id, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message: err.message || "Some error occurred while retrieving academic events."

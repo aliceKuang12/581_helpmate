@@ -103,12 +103,7 @@ export const activityStreak = (req, res) => {
 }
 
 export const showHealth = (req, res) => {
-    if (!req.params) {
-        return res.status(400).send({
-            message: "Content cannot be empty"
-        })
-    }
-    Health.show(req.params.user_id, (err, data) => {
+    Health.show(req.query.user_id, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message: err.message || "Some error occurred while retrieving heatlh events."

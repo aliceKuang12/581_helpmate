@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios'
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,11 +9,14 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import { Typography } from '@mui/material';
 import { AXIOS_HEADER } from '../../constants';
-import axios from 'axios'
+import { useAuth } from '../../context/AuthContext';
 
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
+  const { currentUser } = useAuth();
+  const user = JSON.parse(currentUser);
   const [data, setData] = useState({
+    userId: user.id,
     title: '',
     category: '',
     eventTime: '',
@@ -22,6 +26,7 @@ export default function BasicForm() {
   });
 
   const {
+    userId,
     title,
     category,
     eventTime,
@@ -61,6 +66,7 @@ export default function BasicForm() {
     }).then(() => {
       alert("Successfully updated, logout to see changes")
       setData({
+        userId: user.id,
         title: '',
         category: '',
         eventTime: '',

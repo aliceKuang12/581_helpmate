@@ -9,24 +9,15 @@ import ViewEvent from "../ViewEvents"
 
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { AXIOS_HEADER } from "../../constants";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
     padding: theme.spacing(1),
-  }));
+}));
 
 const ModuleCard = ( ) => {
     const [data, setData] = useState([]);
-
-    const DisplayTitle = data.map(
-        (info) => {
-            return (
-                <div>
-                    <Typography>Title: {info.title}</Typography>
-                </div>
-            )
-        }
-    )
 
     const DisplayData = data.map(
         (info) => {
@@ -45,14 +36,18 @@ const ModuleCard = ( ) => {
 
     useEffect(() => {
         const fetchAllSocial = async () => {
-            await axios.get("http://localhost:3003/social/")
-                .then(res => {
-                    setData((res.data));
-                    console.log(res.data);
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+            await axios({
+                url: "http://localhost:3003/social",
+                method: "GET",
+                params: {user_id: localStorage.getItem("userId")},
+                headers: AXIOS_HEADER
+            })
+            .then(res => {
+                setData((res.data.slice(0,3)));
+            })
+            .catch(err => {
+                console.log(err)
+            })
         }
         fetchAllSocial()
     }, []);
