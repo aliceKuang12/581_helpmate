@@ -63,15 +63,6 @@ export default function UploadImage() {
     setOpen(false);
   };
 
-  // function saveUrl() {
-  //   axios
-  //     .post("http://localhost:3003/imageProfile2/" + localStorage.getItem('email'), data)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       setPost(response.data);
-  //     });
-  // }
-
   const saveUrl = (db) => {
     axios({
       url: 'http://localhost:3003/imageProfile2/' + localStorage.getItem("email"),
@@ -124,22 +115,18 @@ export default function UploadImage() {
         />
 
       </Grid>
-      <br />
-
-      <Button variant="outlined" onClick={handleClickOpen}>
-        <InsertPhotoIcon /> &nbsp; Upload Photo
+      
+      <br/>
+      <Button onClick={handleClickOpen}>
+        <InsertPhotoIcon /> &nbsp; Change photo
       </Button>
 
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <br />
           Photo url:
-
           <br /> <br />
-          {/* <Grid container spacing={2}
-            //justifyContent="center"
-            alignItems="center"
-          > */}
+
 
           <Grid item xs={15} >
             <TextField
