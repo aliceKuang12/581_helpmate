@@ -57,10 +57,15 @@ export default function UploadImage() {
     setOpen(false);
   };
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   const handleSave = () => {
     console.log(data);
     saveUrl(data);
     setOpen(false);
+    refreshPage();
   };
 
   const saveUrl = (db) => {
@@ -70,7 +75,7 @@ export default function UploadImage() {
       headers: AXIOS_HEADER,
       data: db,
     }).then(() => {
-      alert("Successfully updated");
+      // alert("Successfully updated");
       setData({
         url: '',
       })
@@ -88,6 +93,7 @@ export default function UploadImage() {
       await axios.get("http://localhost:3003/profileUrl/" + localStorage.getItem('email'))
         .then(res => {
           console.log(res.data[0].profile1);
+          setImage(res.data[0].profile1);
           localStorage.setItem("profileUrl", res.data[0].profile1);
         })
         .catch(err => {
@@ -101,8 +107,9 @@ export default function UploadImage() {
     <Grid container-spacing={2} alignItems="center" justifyContent="center" >
       <Grid item xs={10} sx={{ mx: 5 }}>
         <img
-          //src="https://www.ediblearrangements.com/blog/wp-content/uploads/2021/11/Dahlia-min.jpg"
-          src={localStorage.getItem("profileUrl") ? localStorage.getItem("profileUrl") : MyCollection[index].img}
+        
+        src={image ? image : MyCollection[index].img}
+//          src={localStorage.getItem("profileUrl") ? localStorage.getItem("profileUrl") : MyCollection[index].img}
           style={{
             height: 255,
             width: "100%",
@@ -148,14 +155,3 @@ export default function UploadImage() {
   );
 }
 
-{/*      <Button variant="contained" component="label"
-        sx={{
-          backgroundColor: "darkblue",
-          fontFamily: "arial",
-        }}
-      > <UploadIcon sx={{fontSize: "medium" }} /> &nbsp; Upload
-        <input hidden accept="image/*" 
-                multiple type="file" 
-                onChange={onSelectFile}/>
-         </Button> 
-*/}
