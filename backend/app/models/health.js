@@ -118,6 +118,9 @@ Health.show = (user_id, result) => {
     // WHERE userId = ? 
     // implement when pulling data with a specific userID
     let query = `SELECT * from health`;
+    if (user_id) {
+        query = `SELECT * from health WHERE userId = ? ORDER BY eventTime DESC`
+    }
     sql.query(query, [user_id], (err, res) => {
         if (err) {
             console.log(err);

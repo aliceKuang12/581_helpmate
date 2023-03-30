@@ -39,10 +39,11 @@ Travel.getOne  = (email, result) => {
 }
 
 Travel.show = (user_id, result) => {
-    // WHERE userId = ${user_id}
-    // add to end of querery when checking userId
     let query = `SELECT * from travel`
-    sql.query(query, (err, res) => {
+    if (user_id) {
+        query = `SELECT * from travel WHERE userId = ? ORDER BY eventTime DESC`
+    }
+    sql.query(query, [user_id], (err, res) => {
         if (err) {
             result(err,null);
             return;

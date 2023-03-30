@@ -103,13 +103,13 @@ app.put("/academics/update/:email", (req, res) => { academic.updateAcademic(req,
 
 //travel module
 app.post("/travel/create", (req, res) => travel.createEvent(req, res));
-app.get("/travel", (req, res) => travel.showTravel(req, res));
+app.get("/travels", (req, res) => travel.showTravel(req, res));
 app.get("/travel/:email", (req, res) => travel.userTravel(req, res));
 app.delete("/travel/delete/", (req, res) => { travel.deleteEvent(req, res) });
 
 //health module
 app.post("/health/create", (req, res) => health.createEvent(req, res));
-app.get("/health/", (req, res) => health.showHealth(req, res));
+app.get("/healths", (req, res) => health.showHealth(req, res));
 app.get("/health/:email", (req, res) => health.userHealth(req, res));
 app.get("/health/steps/:email", (req, res) => health.userSteps(req, res));
 app.get("/health/activity/:email", (req, res) => health.userActivity(req, res));

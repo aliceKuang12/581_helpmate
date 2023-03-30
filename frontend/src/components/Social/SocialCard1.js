@@ -44,7 +44,6 @@ const ModuleCard = ( ) => {
             })
             .then(res => {
                 setData((res.data.slice(0,3)));
-                console.log(res.data);
             })
             .catch(err => {
                 console.log(err)

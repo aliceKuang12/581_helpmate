@@ -9,6 +9,7 @@ import ViewEvent from "../ViewEvents"
 
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { AXIOS_HEADER } from "../../constants";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
@@ -45,16 +46,21 @@ const ModuleCard = () => {
 
     useEffect(() => {
         const fetchAllAcademic = async () => {
-            await axios.get("http://localhost:3003/academics/")
-                .then(res => {
-                    setData((res.data.slice(0,3)));
-                    console.log(res.data);
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+            await axios({
+                url: "http://localhost:3003/academics",
+                method: "GET",
+                params: {user_id: localStorage.getItem("userId")},
+                headers: AXIOS_HEADER
+            })
+            .then(res => {
+                setData((res.data.slice(0,3)));
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
         }
-        fetchAllAcademic()
+        fetchAllAcademic();
     }, []);
 
     return (
