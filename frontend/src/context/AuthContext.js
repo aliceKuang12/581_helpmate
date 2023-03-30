@@ -37,6 +37,7 @@ export function AuthProvider({ children }) {
       if (res.status === 200) {
         setCurrentUser(res.data);
         localStorage.setItem("name", res.data.fname);
+        localStorage.setItem("userId", res.data.id);
         localStorage.setItem("user", JSON.stringify(res.data));
         setIsAuthenticated(true);
         setLoading(false);

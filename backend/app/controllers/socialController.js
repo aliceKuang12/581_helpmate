@@ -36,12 +36,12 @@ export const userSocial = (req, res) => {
 }
 
 export const showSocial = (req, res) => {
-    if (!req.params) {
+    if (!req.query) {
         return res.status(400).send({
             message: "Content cannot be empty"
         })
     }
-    Social.show(req.params.user_id, (err, data) => {
+    Social.show(req.query.user_id, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message: err.message || "Some error occurred while retrieving social events."

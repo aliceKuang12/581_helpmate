@@ -53,7 +53,7 @@ const ModuleCard = () => {
         const fetchAllTravel = async () => {
             await axios.get("http://localhost:3003/travel/")
                 .then(res => {
-                    setData((res.data));
+                    setData((res.data.slice(0,3)));
                     console.log(res.data);
                 })
                 .catch(err => {

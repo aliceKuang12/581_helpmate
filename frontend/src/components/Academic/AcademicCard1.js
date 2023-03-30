@@ -47,7 +47,7 @@ const ModuleCard = () => {
         const fetchAllAcademic = async () => {
             await axios.get("http://localhost:3003/academics/")
                 .then(res => {
-                    setData((res.data));
+                    setData((res.data.slice(0,3)));
                     console.log(res.data);
                 })
                 .catch(err => {
