@@ -51,9 +51,9 @@ Health.getOne = (email, result) => {
 
 // query for steps category given user email
 Health.getOne1 = (email, result) => {
-    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?)`; 
-                //AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
-                //and category =\"Steps\" ORDER BY eventTime DESC`;
+    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?) 
+                AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
+                and category =\"Steps\" ORDER BY eventTime DESC`;
     sql.query(query, [email], (err, res) => {
         if (err) {
             console.log("Cannot retrieve event for given user or category: ", err);
@@ -117,9 +117,9 @@ Health.getStreaks2 = (email, result) => {
 Health.show = (user_id, result) => {
     // WHERE userId = ? 
     // implement when pulling data with a specific userID
-    let query = `SELECT * from health`;
+    let query = `SELECT * from health WHERE (category != \"Steps\") and (category !=\"Activity\")`;
     if (user_id) {
-        query = `SELECT * from health WHERE userId = ? ORDER BY eventTime DESC`
+        query = `SELECT * from health WHERE (category != \"Steps\") and (category !=\"Activity\") and userId = ? ORDER BY eventTime DESC`
     }
     sql.query(query, [user_id], (err, res) => {
         if (err) {
