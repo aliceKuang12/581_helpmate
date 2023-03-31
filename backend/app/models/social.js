@@ -26,7 +26,9 @@ Social.getOne  = (email, result) => {
     //const email = req.params.email;
     //let q1 = "SELECT userId from users where email = ?" ;
   //  let query = "SELECT * FROM health where userId = (SELECT userId from users where email = ?)";
-    let query = `SELECT * FROM social where userId = (SELECT id from users where email = ?)`;
+    let query = `SELECT * FROM social where userId = (SELECT id from users where email = ?)
+                AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
+                ORDER BY eventTime DESC`;
     sql.query(query, [email], (err, res) => {
         if (err) {
             console.log("Cannot retrieve user with email: ", err);
@@ -41,7 +43,10 @@ Social.getOne  = (email, result) => {
 
 Social.show = (user_id, result) => {
     // implement when pulling data with a specific userID
-    let query = `SELECT * from social WHERE userId = ? ORDER BY eventTime DESC`;
+    let query = `SELECT * from social`;
+    if (user_id) {
+        query = `SELECT * from social WHERE userId = ? ORDER BY eventTime DESC`;
+    }
     sql.query(query, [user_id], (err, res) => {
         if (err) {
             console.log(err);

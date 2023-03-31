@@ -23,7 +23,9 @@ Academic.create = (newEvent, result) => {
 
 // return academic events based on userId
 Academic.getOne  = (email, result) => {
-    let query = "SELECT * FROM academic where userId = (SELECT id from users where email = ?)";
+    let query = `SELECT * FROM academic where userId = (SELECT id from users where email = ?)
+                AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
+                ORDER BY eventTime DESC`;
     sql.query(query, [email], (err, res) => {
         if (err) {
             console.log("Cannot retrieve user's academic info: ", err);

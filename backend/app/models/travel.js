@@ -26,7 +26,9 @@ Travel.create = (newEvent, result) => {
 Travel.getOne  = (email, result) => {
     //console.log(email)
     //const email = req.params.email;
-    let query = "SELECT * FROM travel where userId = (SELECT id from users where email = ?)";
+    let query = `SELECT * FROM travel where userId = (SELECT id from users where email = ?)
+                AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
+                ORDER BY eventTime DESC`;
     sql.query(query, [email], (err, res) => {
         if (err) {
             console.log("Cannot retrieve user's travel info: ", err);
