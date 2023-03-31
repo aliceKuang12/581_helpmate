@@ -58,8 +58,9 @@ const ModuleCard = ( ) => {
 
     return (
         <Grid item xs={6} marginBottom={5}>
-            <Paper sx={{ opacity: .9 }}>
+            <Paper sx={{ opacity: .9, backgroundColor: 'coral' }}>
                 <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
+                <Typography  sx={{ fontWeight: 'bold', fontSize: 20, fontFamily: 'cursive' }}> Events </Typography>
                     {DisplayData}
                 </Stack>               
             <br/>
