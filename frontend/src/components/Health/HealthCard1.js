@@ -66,8 +66,9 @@ const ModuleCard = ( ) => {
     }, []);
     return (
         <Grid item xs={6} marginBottom={5}>
-        <Paper sx={{ opacity: .9 }}>
-            <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
+        <Paper sx={{ opacity: .9, backgroundColor: 'forestgreen'  }}>
+            <br/>
+            <Stack spacing={2} sx={{ height: '100%', width: '100%'}}>
                 {DisplayData}
             </Stack>               
         <br/>
@@ -81,9 +82,10 @@ const ModuleCard = ( ) => {
                 }}
             >
                 <CreateEvent />
-                <ViewEvent color="red" />
+                <ViewEvent color="blue" />
                 <DeleteEvent />
-            </Stack>
+               
+            </Stack> <br/>
         </Paper>
         <br/>   
     </Grid>

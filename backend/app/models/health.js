@@ -29,25 +29,20 @@ Health.create = (newEvent, result) => {
     })
 }
 
-
-Health.getOne = (email, result) => {
-    console.log(email)
-    //const email = req.params.email;
-    //let q1 = "SELECT userId from users where email = ?" ;
-    //  let query = "SELECT * FROM health where userId = (SELECT userId from users where email = ?)";
-    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?)
-                AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
-                ORDER BY eventTime DESC`;
-    sql.query(query, [email], (err, res) => {
+Health.update = (req, id, result) => {
+    const title = req.body.data.title;
+    let query = `UPDATE health SET ? WHERE userId = ? and title = ?`;
+    sql.query(query, [req.body.data, id, title], (err, res) => {
         if (err) {
-            console.log("Cannot retrieve user with email: ", err);
-            result(err, null);
+            console.log("Cannot update: ", err);
+            result(err,null);
         } else {
-            console.log("Health event: ", res);
-            result(null, res);
+            console.log("All users: ", res);
+            result(null,res);
         }
     })
 }
+
 
 // query for steps category given user email
 Health.getOne1 = (email, result) => {

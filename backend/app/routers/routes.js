@@ -111,16 +111,17 @@ app.put("/academics/update/:email", (req, res) => { academic.updateAcademic(req,
 app.post("/travel/create", (req, res) => travel.createEvent(req, res));
 app.get("/travels", (req, res) => travel.showTravel(req, res));
 app.get("/travel/:email", (req, res) => travel.userTravel(req, res));
+app.put("/travel/update/:email", (req, res) => { academic.updateAcademic(req, res) });
 app.delete("/travel/delete/", (req, res) => { travel.deleteEvent(req, res) });
 
 //health module
 app.post("/health/create", (req, res) => health.createEvent(req, res));
 app.get("/healths", (req, res) => health.showHealth(req, res));
-app.get("/health/:email", (req, res) => health.userHealth(req, res));
 app.get("/health/steps/:email", (req, res) => health.userSteps(req, res));
 app.get("/health/activity/:email", (req, res) => health.userActivity(req, res));
 app.get("/health/streak1/:email", (req, res) => health.stepStreak(req, res));
 app.get("/health/streak2/:email", (req, res) => health.activityStreak(req, res));
+app.delete("/health/update/:email", (req, res) => { health.updateEvent(req, res) });
 app.delete("/health/delete/", (req, res) => { health.deleteEvent(req, res) });
 
 //social module

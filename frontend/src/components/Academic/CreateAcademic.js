@@ -48,6 +48,8 @@ export default function BasicForm() {
     setOpen(false);
   };
 
+  
+
   const handleChange = (value, key) => {
     setData(prevState => ({...prevState, [key]: value,}));
   };
@@ -57,6 +59,7 @@ export default function BasicForm() {
       setOpen(false);
   }
 
+  // update route
   const handleData = (db) => {
     axios({
       url: 'http://localhost:3003/academics/update/' + localStorage.getItem("email"),
@@ -79,6 +82,25 @@ export default function BasicForm() {
       console.log(e);
     })
   }
+
+  // create route
+  const [post, setPost] = React.useState(null);
+  function createAcademicPost() {
+    console.log("creating post")
+    axios
+      .post("http://localhost:3003/academics/create", data)
+      .then((response) => {
+        console.log(response.data);
+        setPost(response.data);
+      });
+  }
+
+  const handleCreate = () => {
+    console.log(data);
+    createAcademicPost();
+    setOpen(false);
+  };
+
 
 
   return (
@@ -200,7 +222,7 @@ export default function BasicForm() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Create</Button>
+          <Button onClick={handleCreate}>Create</Button>
           <Button onClick={handleUpdate}>Update</Button>
         </DialogActions>
       </Dialog>
