@@ -26,14 +26,14 @@ const ModuleCard = ( ) => {
             const date = time.slice(5,10);
             const year = time.slice(0, 4);
             return (
-                <Item elevation={0} sx={{ height: '90%', width: '100%', }}>
+                <div>
                     <Typography sx={{ fontWeight: 'bold' }}>Title: {info.title}</Typography>
                     <Typography>Category: {info.category}</Typography>
                     <Typography>Event Time: {exactTime}, {date}-{year}</Typography>
-                    <Typography>Location: {info.location}</Typography>
+                    {info.location ? <Typography>Location: {info.location}</Typography>: ""}
                     {info.notes ? <Typography>Notes: {info.notes} </Typography> : ""}
                     <Typography>Status: {info.completed ? "Complete" : "Incomplete"}</Typography>
-                </Item>
+                </div>
             )
         }
     )
@@ -58,8 +58,9 @@ const ModuleCard = ( ) => {
 
     return (
         <Grid item xs={6} marginBottom={5}>
-            <Paper sx={{ opacity: .9, backgroundColor: 'coral' }}>
+            <Paper sx={{ opacity: .9, backgroundColor: 'orange !important' }}>
                 <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
+                <br/>
                 <Typography  sx={{ fontWeight: 'bold', fontSize: 20, fontFamily: 'cursive' }}> Events </Typography>
                     {DisplayData}
                 </Stack>               
@@ -74,9 +75,10 @@ const ModuleCard = ( ) => {
                     }}
                 >
                     <CreateEvent />
-                    <ViewEvent color="red" />
+                    <ViewEvent color="darkorange" />
                     <DeleteEvent />
                 </Stack>
+                <br/>
             </Paper>
             <br/>   
         </Grid>

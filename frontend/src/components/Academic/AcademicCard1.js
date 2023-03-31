@@ -11,23 +11,10 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { AXIOS_HEADER } from "../../constants";
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: 'transparent',
-    padding: theme.spacing(1),
-}));
 
 const ModuleCard = () => {
     const [data, setData] = useState([]);
 
-    const DisplayTitle = data.map(
-        (info) => {
-            return (
-                <div>
-                    <Typography>Title: {info.title}</Typography>
-                </div>
-            )
-        }
-    )
 
     const DisplayData = data.map(
         (info) => {
@@ -72,10 +59,9 @@ const ModuleCard = () => {
         <Grid item xs={6} marginBottom={5}>
               <br/>
             <Paper sx={{ opacity: .9, backgroundColor: 'coral' }}>
-                    <br />
+                   
                     <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
-                    <Typography  sx={{ fontWeight: 'bold', fontSize: 20, fontFamily: 'cursive' }}> Events </Typography>                
-         
+                    <Typography  sx={{ fontWeight: 'bold', fontSize: 20, fontFamily: 'cursive' }}> Events </Typography>                  
                         {DisplayData}
                     </Stack>
                     <br />

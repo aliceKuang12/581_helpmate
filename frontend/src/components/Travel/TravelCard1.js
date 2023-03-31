@@ -12,10 +12,6 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { AXIOS_HEADER } from "../../constants"
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: 'transparent'
-}));
-
 
 
 const ModuleCard = () => {
@@ -39,17 +35,16 @@ const ModuleCard = () => {
             const date = time.slice(5,10);
             const year = time.slice(0, 4);
             return (
-                <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
-                    <Item elevation={0} sx={{ height: '90%', width: '100%', }}>
+                    <div >
                         <Typography sx={{ fontWeight: 'bold' }}>Title: {info.title}</Typography>
                         {/* <Typography>Category: {info.category}</Typography> */}
                         <Typography>Event Time: {exactTime}, {date}-{year}</Typography>
                         <Typography>Location: {info.location}</Typography>
                         {info.notes ? <Typography>Notes: {info.notes} </Typography> : ""}
                         <Typography>Status: {info.completed ? "Complete" : "Incomplete"}</Typography>
-                    </Item>
-                    <br/>
-                </Stack>
+                        <br/>
+                    </div>
+                    
             );
         }
     )
@@ -75,13 +70,16 @@ const ModuleCard = () => {
 
     return (
         <Grid item xs={6} marginBottom={5} > 
-            <Paper sx={{ opacity: .9, bg: 'lightblue'}}>
+            <Paper sx={{ opacity: .9, backgroundColor: 'lightblue !important' }}>
                 <br />
-                <Typography varient='h2' component='h2' sx={{ fontWeight: 'bold' }}>
-                    Today's Events:
+                <Typography varient='h2' component='h2' sx={{ fontWeight: 'bold', fontSize: 20 }}>
+                    Events
                 </Typography>
                 <br/>
+                
+                <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
                 {DisplayData}
+                </Stack>
                 <br />  <br />
                 <Stack spacing={2}
                     direction="row"

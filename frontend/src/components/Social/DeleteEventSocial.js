@@ -77,7 +77,7 @@ export default function BasicForm() {
   return (
     <div >
       <Button onClick={handleClickOpen} variant="outlined" sx={{backgroundColor: "cornsilk", fill: "blue", color:"Black", }}>
-      <DeleteIcon sx={{fontSize: "large", color: "green"}}/>
+      <DeleteIcon sx={{fontSize: "large", color: "darkorange"}}/>
       </Button>
 
       <Dialog open={open} onClose={handleClose}>

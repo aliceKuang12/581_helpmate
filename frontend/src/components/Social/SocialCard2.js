@@ -15,42 +15,48 @@ const ModuleCard = () => {
 
     return (
         <Grid item xs={6} marginBottom={5}>
-            <Paper sx={{ opacity: .9 }}>
+            <Paper sx={{ opacity: .9, backgroundColor: 'orange' }}>
                 <Box
-                    padding={2}
+                    paddingX={6} 
+                    paddingY={3}
                     sx={{
                         display: "flex",
                         alignItems: "left",
                         height: 500,
-                        backgroundColor: 'lightgreen',
-                        borderRadius: 1,
+                        backgroundColor: 'orange',
+                        
                     }}
                 >
                     <Stack spacing={2}
                         justifyContent="center"
                         sx={{ height: '100%', width: '100%' }}>
-
+                        <br/>
                         <Typography
                             varient='h4'
                             component='h2'
-                            sx={{ fontWeight: 'bold', textAlign: 'center' }}
+                            sx={{ fontWeight: 'bold', textAlign: 'center', fontSize: 20, fontFamily: 'cursive' }}
                         >
                             Pictures
                         </Typography>
+                        <br/>
                         <Item elevation={0}>
                             <Stack
+                                
                                 direction="row"
                                 justifyContent="center"
                                 sx={{
                                     height: '100%',
                                     width: '100%',
                                     textAlign: 'center',
+                                    paddingY: "2px"
                                 }}
                             >
                                 <UploadImage />
                                 <br />
                             </Stack>
                         </Item>
+                    <br />
+                    <br />
                     </Stack>
                 </Box>
             </Paper>

@@ -17,7 +17,8 @@ const ModuleCard = (  ) => {
     <Grid item xs={6} marginBottom = {5}>
         <Paper sx = {{opacity:.9}}>
             <Box 
-                padding={2}
+                paddingX={4}
+                paddingY={2}
                 sx={{
                     display: "flex",
                     alignItems: "left",
@@ -29,29 +30,17 @@ const ModuleCard = (  ) => {
             <Stack spacing={2} 
                    justifyContent="center" 
                    sx={{height: '100%', width: '100%'}}>
-                {/* <Item elevation={0} > */}
                     <Typography 
                         varient='h4' 
                         component='h2' 
-                        sx={{fontWeight: 'bold', textAlign: 'center'}}
+                        sx={{fontWeight: 'bold', textAlign: 'center', fontSize: 18}}
                     >
                     Travel Information
                     </Typography>
-                {/* </Item> */}
-                <Item elevation={0}>
-                {/* <Stack  
-                    direction="row" 
-                    justifyContent="center" 
-                    sx={{height: '100%', 
-                        width: '100%', 
-                        textAlign: 'center',}}
-                    >
-                    <br/>
-                </Stack> */}
-                
+                <Item elevation={0}>             
                 <UploadImage/>
                 </Item>
-                
+                <br/>
             </Stack>
             </Box>
         </Paper>

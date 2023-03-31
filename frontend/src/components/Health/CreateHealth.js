@@ -261,6 +261,7 @@ const handleData = (db) => {
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleCreate}>Create</Button>
+          <Button onClick={handleUpdate}>Update</Button>
         </DialogActions>
       </Dialog>
       

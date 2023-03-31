@@ -106,10 +106,7 @@ export default function UploadImage() {
           </Button>
         }
       />
-      <br />
       <Grid>
-        <div>hi</div>
-
         <form // onSubmit = {onSubmit}   
           action={"http://localhost:3003/imageSocial/" + localStorage.getItem("email")}
           encType="multipart/form-data"
