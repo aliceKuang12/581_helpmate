@@ -22,6 +22,7 @@ import TextField from '@mui/material/TextField'
 import { Typography } from '@mui/material';
 import Checkbox from '../Checkbox';
 import { useAuth } from '../../context/AuthContext';
+import { AXIOS_HEADER } from '../../constants';
 
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
@@ -120,6 +121,35 @@ export default function BasicForm() {
     }
     fetchTravel()
   }, []);
+
+  const handleUpdate = async (e) => {
+    handleData(data);
+    setOpen(false);
+}
+
+// update route
+const handleData = (db) => {
+  axios({
+    url: 'http://localhost:3003/academics/update/' + localStorage.getItem("email"),
+    method: 'POST',
+    headers: AXIOS_HEADER,
+    data: db,
+  }).then(() => {
+    alert("Successfully updated, logout to see changes")
+    setData({
+      userId: user.id,
+      title: '',
+      category: '',
+      eventTime: '',
+      completed: '',
+      location: '',
+      notes: '',
+    })
+    handleClose();
+  }).catch((e) => {
+    console.log(e);
+  })
+}
 
   return (
     <div >
@@ -233,10 +263,14 @@ export default function BasicForm() {
                </Typography>
              </Grid> 
              <Grid item xs={4}>
-                <Checkbox/>        
-             </Grid>
-             <Grid item xs={2}/>
-             <Grid item xs={2}><img src={file} width="40" height="40"/>
+              <TextField
+                id="completed"
+                label="'1' for yes, '0' for no"
+                onChange={e => handleChange(e.target.value, 'completed')}
+                fullWidth
+                value={completed}
+                rows={4}
+              />
             </Grid>
             </Grid>
         </DialogContent>

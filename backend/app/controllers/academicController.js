@@ -36,6 +36,7 @@ export const userAcademic = (req, res) => {
     });
 }
 
+
 export const assignments = (req, res) => {
     const email = req.params.email;
     Academic.getStreak(email, (err, data) => {
@@ -51,10 +52,23 @@ export const assignments = (req, res) => {
 }
 
 export const showAcademic = (req, res) => {
-    Academic.show(req.query.userId, (err, data) => {
+    Academic.show(req.query.user_id, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message: err.message || "Some error occurred while retrieving academic events."
+            })
+        }
+        res.status(200).send(data);
+    })
+}
+
+
+// get user's academic event with Category "Assignment"
+export const showAssign = (req, res) => {
+    Academic.show2(req.query.user_id, (err, data) => {
+        if (err) {
+            return res.status(500).send({
+                message: err.message || "Some error occurred while retrieving assignments."
             })
         }
         res.status(200).send(data);

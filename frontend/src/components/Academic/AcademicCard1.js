@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles';
 import CreateEvent from "./CreateAssign"
 import DeleteEvent from "./DeleteAssign"
 import ViewEvent from "../ViewEvents"
-
+import Box from "@mui/material/Box";
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { AXIOS_HEADER } from "../../constants";
@@ -31,15 +31,20 @@ const ModuleCard = () => {
 
     const DisplayData = data.map(
         (info) => {
+            const time = info.eventTime;
+            const exactTime = time.slice(11,16);
+            const date = time.slice(5,10);
+            const year = time.slice(0, 4);
             return (
-                <Item elevation={0} sx={{ height: '90%', width: '100%', }}>
+                <div>
                     <Typography sx={{ fontWeight: 'bold' }}>Title: {info.title}</Typography>
                     <Typography>Category: {info.category}</Typography>
-                    <Typography>Event Time: {info.eventTime}</Typography>
+                    <Typography>Event Time: {exactTime}, {date}-{year}  </Typography>
                     <Typography>Location: {info.location}</Typography>
                     {info.notes ? <Typography>Notes: {info.notes} </Typography> : ""}
-                    <Typography>Status: {info.completed ? "Complete" : "Incomplete"}</Typography>
-                </Item>
+                    {/* <Typography>Status: {info.completed ? "Complete" : "Incomplete"}</Typography> */}
+                    <br/>
+                </div>
             )
         }
     )
@@ -49,44 +54,50 @@ const ModuleCard = () => {
             await axios({
                 url: "http://localhost:3003/academics",
                 method: "GET",
-                params: {user_id: localStorage.getItem("userId")},
+                params: { user_id: localStorage.getItem("userId") },
                 headers: AXIOS_HEADER
             })
-            .then(res => {
-                setData((res.data.slice(0,3)));
-                console.log(res.data);
-            })
-            .catch(err => {
-                console.log(err)
-            })
+                .then(res => {
+                    setData((res.data.slice(0, 3)));
+                    console.log(res.data);
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
         fetchAllAcademic();
     }, []);
 
     return (
         <Grid item xs={6} marginBottom={5}>
-            <Paper sx={{ opacity: .9 }}>
-                <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
-                    {DisplayData}
-                </Stack>               
-            <br/>
-                <Stack spacing={2}
-                    direction="row"
-                    justifyContent="center"
-                    sx={{
-                        height: '100%',
-                        width: '100%',
-                        textAlign: 'center',
-                    }}
-                >
-                    <CreateEvent />
-                    <ViewEvent color="red" />
-                    <DeleteEvent />
-                </Stack>
+              <br/>
+            <Paper sx={{ opacity: .9, backgroundColor: 'coral' }}>
+                    <br />
+                    <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
+                    <Typography  sx={{ fontWeight: 'bold', fontSize: 20, fontFamily: 'cursive' }}> Events </Typography>                
+         
+                        {DisplayData}
+                    </Stack>
+                    <br />
+                    <Stack spacing={2}
+                        direction="row"
+                        justifyContent="center"
+                        sx={{
+                            height: '100%',
+                            width: '100%',
+                            textAlign: 'center',
+                        }}
+                    >
+                        <CreateEvent />
+                        <ViewEvent color="red" />
+                        <DeleteEvent />
+                        <br />
+                    </Stack>
+                    <br />
             </Paper>
-            <br/>   
+            <br />
         </Grid>)
-     
+
 }
 
 export default ModuleCard

@@ -21,11 +21,9 @@ Academic.create = (newEvent, result) => {
     })
 }
 
-// return academic events based on userId
-Academic.getOne  = (email, result) => {
-    let query = `SELECT * FROM academic where userId = (SELECT id from users where email = ?)
-                AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
-                ORDER BY eventTime DESC`;
+// return entire table
+Academic.getAssign = (email, result) => {
+    let query = `SELECT * FROM academic where userId = (SELECT id from users where email = ?) and category = \"Assignment\"`;
     sql.query(query, [email], (err, res) => {
         if (err) {
             console.log("Cannot retrieve user's academic info: ", err);
@@ -36,6 +34,7 @@ Academic.getOne  = (email, result) => {
         }
     })
 }
+
 
 // return assignment completion streak
 Academic.getStreak  = (email, result) => {
@@ -53,12 +52,42 @@ Academic.getStreak  = (email, result) => {
     })
 }
 
+// return academic events based on userId , ignore assignments
+Academic.getOne  = (email, result) => {
+    let query = `SELECT * FROM academic where userId = (SELECT id from users where email = ?) and category != \"Assignment\" ORDER BY eventTime DESC`;
+    sql.query(query, [email], (err, res) => {
+        if (err) {
+            console.log("Cannot retrieve user's academic info: ", err);
+            result(err,null);
+        } else {
+            console.log("User: ", res);
+            result(null,res);
+        }
+    })
+}
 
 // return entire table
 Academic.show = (user_id, result) => {
-    let query = `SELECT * from academic`;
+    let query = `SELECT * from academic WHERE category != \"Assignment\"`;
     if (user_id) {
-        query = `SELECT * from academic WHERE userId = ? ORDER BY eventTime DESC`
+        query = `SELECT * from academic WHERE userId = ? AND category != \"Assignment\" ORDER BY eventTime DESC`
+    }
+    sql.query(query, [user_id], (err, res) => {
+        if (err) {
+            console.log(err);
+            result(err, null);
+            return;
+        }
+        result(null, res);
+    })
+}
+
+
+// return entire table
+Academic.show2 = (user_id, result) => {
+    let query = `SELECT * from academic WHERE category = \"Assignment\"`;
+    if (user_id) {
+        query = `SELECT * from academic WHERE userId = ? AND category = \"Assignment\" ORDER BY eventTime DESC`
     }
     sql.query(query, [user_id], (err, res) => {
         if (err) {

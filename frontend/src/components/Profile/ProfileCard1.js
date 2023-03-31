@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
-import CreateEvent from "./EditProfileInfo"
+import UpdateUser from "./EditProfileInfo"
 import React, { useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
 
@@ -45,7 +45,7 @@ const ModuleCard = ( ) => {
                     <Typography
                         sx={{ fontWeight: 'bold' }}
                     >
-                        Contact Information
+                        Contact Information 
                     </Typography>
                     <div>
                         <Typography>Name: {user.fname} {user.lname}</Typography>
@@ -61,8 +61,10 @@ const ModuleCard = ( ) => {
                         </Typography>
                         <Typography> Birthday:  {user.birthday}</Typography>
                         {/* <Typography>Password: {currentUser.password}</Typography> */}
-
+                        
                     </div>
+                    <br/><br/> <br/><br/> <br/><br/> <br/><br/>
+                    <UpdateUser/>
                 </Item>
                 <Item elevation={0}>
                 <Stack spacing={2} 
@@ -72,7 +74,7 @@ const ModuleCard = ( ) => {
                         width: '100%', 
                         textAlign: 'center',}}
                     >
-                    <CreateEvent/>
+                   
                 </Stack>
                 </Item>
             </Stack>

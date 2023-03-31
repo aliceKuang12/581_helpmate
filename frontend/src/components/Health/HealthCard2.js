@@ -111,7 +111,7 @@ const ModuleCard = () => {
                         display: "flex",
                         alignItems: "left",
                         height: 450,
-                        backgroundColor: 'lightgreen',
+                        backgroundColor: 'forestgreen',
                         borderRadius: 1,
                     }}
                 >

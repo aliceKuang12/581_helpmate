@@ -28,20 +28,31 @@ export const createEvent = (req, res) => {
     })
 }
 
-// query by email
-export const userHealth = (req, res) => {
-    const email = req.params.email;
-    Health.getOne(email, (err, data) => {
+// update user info on profile page
+export const updateEvent = (req, res) => {
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Content cannot be empty"
+        })
+    }
+    let email = req.params.email;
+    let query = "SELECT * FROM users where email = ?";
+    sql.query(query, [email], (err, result) => {
         if (err) {
-            return res.status(500).send({
-                message:
-                    err.message || "Error occurred while retrieving health for user."
+            console.log("Error occur while find user with email ", email)
+        } else {
+            Health.update(req, result[0].id, (err, data) => {
+                if (err) {
+                    return res.status(500).send({
+                        message: err.message || "Error occurred while updating user."
+                    });
+                }
+                res.send(data);
             });
         }
-        
-        res.send(data);
-    });
+    })
 }
+
 
 // get steps, query by email 
 export const userSteps = (req, res) => {
@@ -54,7 +65,7 @@ export const userSteps = (req, res) => {
                     err.message || "Error occurred while retrieving health for user."
             });
         }
-        
+        //console.log("Health data:", data);
         res.send(data);
     });
 }

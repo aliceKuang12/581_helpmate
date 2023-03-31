@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
-import UploadImage from "./UploadImageProfile";
+import UploadImage from "./UrlProfile";
 import React, { useEffect, useState } from 'react'
 import { Divider } from '@mui/material'
 import { useAuth } from '../../context/AuthContext'
