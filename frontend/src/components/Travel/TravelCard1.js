@@ -34,12 +34,16 @@ const ModuleCard = () => {
 
     const DisplayData = data.map(
         (info) => {
+            const time = info.eventTime;
+            const exactTime = time.slice(11,16);
+            const date = time.slice(5,10);
+            const year = time.slice(0, 4);
             return (
                 <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
                     <Item elevation={0} sx={{ height: '90%', width: '100%', }}>
                         <Typography sx={{ fontWeight: 'bold' }}>Title: {info.title}</Typography>
                         {/* <Typography>Category: {info.category}</Typography> */}
-                        <Typography>Event Time: {info.eventTime}</Typography>
+                        <Typography>Event Time: {exactTime}, {date}-{year}</Typography>
                         <Typography>Location: {info.location}</Typography>
                         {info.notes ? <Typography>Notes: {info.notes} </Typography> : ""}
                         <Typography>Status: {info.completed ? "Complete" : "Incomplete"}</Typography>
