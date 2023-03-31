@@ -76,7 +76,7 @@ export default function Header(props) {
 
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "yellow" }}>
+    <AppBar position="static" sx={{ bgcolor: "white" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
