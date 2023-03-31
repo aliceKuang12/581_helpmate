@@ -29,7 +29,7 @@ const ModuleCard = ( ) => {
                 <Item elevation={0} sx={{ height: '90%', width: '100%', }}>
                     <Typography sx={{ fontWeight: 'bold' }}>Title: {info.title}</Typography>
                     <Typography>Category: {info.category}</Typography>
-                    <Typography>Event Time: {info.exactTime}, {date}-{year}</Typography>
+                    <Typography>Event Time: {exactTime}, {date}-{year}</Typography>
                     <Typography>Location: {info.location}</Typography>
                     {info.notes ? <Typography>Notes: {info.notes} </Typography> : ""}
                     <Typography>Status: {info.completed ? "Complete" : "Incomplete"}</Typography>
