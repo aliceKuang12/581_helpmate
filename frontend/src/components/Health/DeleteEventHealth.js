@@ -44,6 +44,7 @@ export default function BasicForm() {
     console.log(data);
     DeleteHealthEvent();
     setOpen(false);
+    window.location.reload();
   };
 
   const handleChange = (value, key) => {
