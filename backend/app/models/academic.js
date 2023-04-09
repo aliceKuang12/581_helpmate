@@ -114,10 +114,17 @@ Academic.update = (req, id, result) => {
  }
 
 Academic.delete = (req, result) => {
-    const title = req.body.data.title;
-    const email = req.params.email;
-    let query = `DELETE FROM academic WHERE title = ? and email = ?`;
-    sql.query(query, [title, email], (err,res) => {
+    const title = req.title;
+    const user_id = req.userId;
+    const category = req.category;
+    const date = req.date;
+    //const email = req.params.email;
+    //let query = `DELETE FROM academic WHERE title = ? and email = ?`;
+    let query = `DELETE FROM academic WHERE userID = ? 
+                    AND title = ?
+                    AND category = ?
+                    AND eventTime = ?`;
+    sql.query(query, [user_id,title, category,date], (err,res) => {
         if(err) {
             console.log("Unable to delete event: ", err);
             result(err,null);

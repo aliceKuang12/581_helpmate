@@ -102,7 +102,9 @@ export const updateAcademic = (req, res) => {
 
 
 export const deleteEvent = (req,res) => {
-    Academic.delete(req, (err,data) => {
+    const academic_data = req.body.data;
+    console.log("Data: ", academic_data)
+    Academic.delete(academic_data, (err,data) => {
         if(err) {
             return res.status(500).send({
                 message:
