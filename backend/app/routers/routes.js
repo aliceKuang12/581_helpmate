@@ -102,7 +102,8 @@ app.get("/academics", (req, res) => academic.showAcademic(req, res));
 app.get("/assignment", (req, res) => { academic.showAssign(req, res) });
 app.get("/academics/:email", (req, res) => academic.userAcademic(req, res));
 app.get("/academics/streak1/:email", (req, res) => academic.assignments(req, res));
-app.delete("/academics/delete/:email", (req, res) => { academic.deleteEvent(req, res) });
+//app.delete("/academics/delete/:email", (req, res) => { academic.deleteEvent(req, res) });
+app.delete("/academics/delete", (req, res) => { academic.deleteEvent(req, res) });
 app.put("/academics/update/:email", (req, res) => { academic.updateAcademic(req, res) });
 
 
