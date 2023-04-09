@@ -49,6 +49,7 @@ export default function BasicForm() {
     console.log(data);
     deleteAcademicEvent();
     setOpen(false);
+    window.location.reload();
   }
 
   const handleChange = (value, key) => {
