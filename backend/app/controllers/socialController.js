@@ -47,9 +47,11 @@ export const showSocial = (req, res) => {
 }
 
 export const deleteEvent = (req,res) => {
-    const title = req.body.data.title
-    console.log(title);
-    Social.delete(title, (err,data) => {
+    const social_data = req.body.data;
+    //const title = req.body.data.title
+    //console.log(title);
+    console.log("Social Data: ", social_data)
+    Social.delete(social_data, (err,data) => {
         if(err) {
             return res.status(500).send({
                 message:

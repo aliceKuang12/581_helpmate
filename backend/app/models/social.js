@@ -57,9 +57,14 @@ Social.show = (user_id, result) => {
     })
 }
 
-Social.delete = (title, result) => {
-    let query = `DELETE FROM social WHERE title = ?`;
-    sql.query(query, [title], (err,res) => {
+Social.delete = (social_data, result) => {
+    const user_id = social_data.userId
+    const title = social_data.title
+    const date = social_data.date
+    let query = `DELETE FROM social WHERE userId = ? 
+                    AND title = ?
+                    AND eventTime = ?`;
+    sql.query(query, [user_id,title,date], (err,res) => {
         if(err) {
             console.log("Unable to delete event: ", err);
             result(err,null);
