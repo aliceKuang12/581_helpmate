@@ -54,9 +54,15 @@ Travel.show = (user_id, result) => {
     })
 }
 
-Travel.delete = (title, result) => {
-    let query = `DELETE FROM travel WHERE title = ?`;
-    sql.query(query, [title], (err,res) => {
+Travel.delete = (travel_data, result) => {
+    const user_id = travel_data.userId
+    const title = travel_data.title
+    const date = travel_data.date
+    let query = `DELETE FROM travel WHERE userId = ? 
+                    AND title = ?
+                    AND eventTime = ?`;
+    sql.query(query, [user_id,title,date], (err,res) => {
+        console.log("Query: ", query)
         if(err) {
             console.log("Unable to delete event: ", err);
             result(err,null);
