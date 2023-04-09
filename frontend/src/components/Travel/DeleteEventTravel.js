@@ -12,12 +12,17 @@ import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 
+import { useAuth } from '../../context/AuthContext';
+
 export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
   const [post, setPost] = React.useState(null);
 
+  const { currentUser } = useAuth();
+  const user = JSON.parse(currentUser);
+
   const [data, setData] = useState({
-    userId: '17',
+    userId: user.id,
     title: '',
     category: '',
     date: '',
