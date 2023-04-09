@@ -126,9 +126,17 @@ Health.show = (user_id, result) => {
     })
 }
 
-Health.delete = (title, result) => {
-    let query = `DELETE FROM health WHERE title = ?`;
-    sql.query(query, [title], (err,res) => {
+//Health.delete = (title, result) => {
+Health.delete = (health_data, result) => {
+    const title = health_data.title
+    const user_id = health_data.userId
+    const category = health_data.category
+    const date = health_data.date
+    let query = `DELETE FROM health WHERE userID = ? 
+                    AND title = ?
+                    AND category = ?
+                    AND eventTime = ?`;
+    sql.query(query, [user_id,title,category,date], (err,res) => {
         if(err) {
             console.log("Unable to delete event: ", err);
             result(err,null);

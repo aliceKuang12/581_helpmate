@@ -125,9 +125,12 @@ export const showHealth = (req, res) => {
 }
 
 export const deleteEvent = (req,res) => {
-    const title = req.body.data.title
-    console.log(title);
-    Health.delete(title, (err,data) => {
+    //const title = req.body.data.title
+    const health_data = req.body.data
+    //console.log(title);
+    console.log("Data: ", health_data)
+    //Health.delete(title, (err,data) => {
+    Health.delete(health_data, (err,data) => {
         if(err) {
             return res.status(500).send({
                 message:
