@@ -146,20 +146,6 @@ export const login = (req, res, next) => {
 
 }
 
-//get user from email
-export const findOne = (req, res) => {
-    const email = req.params.email;
-    User.getOne(email, (err, data) => {
-        if (err) {
-            return res.status(500).send({
-                message:
-                    err.message || "Error occurred while retrieving `findone` user."
-            });
-        }
-        res.send(data);
-    });
-}
-
 //get all user
 export const findAll = (req, res) => {
     User.getAll((err, data) => {

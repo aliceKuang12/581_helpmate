@@ -21,20 +21,6 @@ export const createEvent = (req, res) => {
     })
 }
 
-export const userTravel = (req, res) => {
-    const email = req.params.email;
-    Travel.getOne(email, (err, data) => {
-        if (err) {
-            return res.status(500).send({
-                message:
-                    err.message || "Error occurred while retrieving `findone` user."
-            });
-        }
-        
-        res.send(data);
-    });
-}
-
 export const showTravel = (req, res) => {
     Travel.show(req.query.user_id, (err, data) => {
         if (err) {

@@ -38,8 +38,7 @@ export const userAcademic = (req, res) => {
 
 
 export const assignments = (req, res) => {
-    const email = req.params.email;
-    Academic.getStreak(email, (err, data) => {
+    Academic.getStreak(req.query.user_id, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message:
