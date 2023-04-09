@@ -1,3 +1,11 @@
+/**
+ * Author: Alice Kuang
+ * Update Date: 4/9/2023
+ * Creation Date: 2/20/23
+ * Description: Methods for creating a academic event and retreiving academic events with for 
+ *      specific categories
+ */
+
 import sql from "./db.js";
 
 const Academic = function(academic) {
@@ -113,13 +121,14 @@ Academic.update = (req, id, result) => {
      })
  }
 
+ //function to remove events and assignments
 Academic.delete = (req, result) => {
+    //parameters required to delete
     const title = req.title;
     const user_id = req.userId;
     const category = req.category;
     const date = req.date;
-    //const email = req.params.email;
-    //let query = `DELETE FROM academic WHERE title = ? and email = ?`;
+    //create sql query to remove
     let query = `DELETE FROM academic WHERE userID = ? 
                     AND title = ?
                     AND category = ?
