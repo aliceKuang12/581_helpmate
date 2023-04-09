@@ -6,6 +6,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+import { useAuth } from '../../context/AuthContext';
+
 import axios from 'axios';
 
 import { Typography } from '@mui/material';
@@ -16,8 +18,11 @@ export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
   const [post, setPost] = React.useState(null);
 
+  const { currentUser } = useAuth();
+  const user = JSON.parse(currentUser);
+
   const [data, setData] = useState({
-    userId: '17',
+    userId: user.id,
     title: '',
     category: '',
     date: '',
