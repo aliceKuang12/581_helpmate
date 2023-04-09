@@ -39,7 +39,7 @@ export default function BasicForm() {
   }); */
 
   const [data, setData] = useState({
-    userId: '17',
+    userId: user.id,
     title: '',
     category: '',
     date: '',
