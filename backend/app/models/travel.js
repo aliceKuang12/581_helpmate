@@ -62,7 +62,7 @@ Travel.delete = (travel_data, result) => {
                     AND title = ?
                     AND eventTime = ?`;
     sql.query(query, [user_id,title,date], (err,res) => {
-        console.log("Query: ", query)
+        //console.log("Query: ", query)
         if(err) {
             console.log("Unable to delete event: ", err);
             result(err,null);

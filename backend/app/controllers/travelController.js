@@ -48,9 +48,7 @@ export const showTravel = (req, res) => {
 
 export const deleteEvent = (req,res) => {
     const travel_data = req.body.data;
-    //const title = req.body.data.title
-    //console.log(title);
-    console.log("Travel Data: ", travel_data)
+    //console.log("Travel Data: ", travel_data)
     Travel.delete(travel_data, (err,data) => {
         if(err) {
             return res.status(500).send({
