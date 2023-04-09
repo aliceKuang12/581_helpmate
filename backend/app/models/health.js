@@ -1,6 +1,6 @@
 /**
  * Author: Alice Kuang
- * Update Date: 2/25/23
+ * Update Date: 4/9/2023
  * Creation Date: 2/20/23
  * Description: Methods for creating a health event and retreiving health events with for 
  *      specific categories (i.e. steps and activities)
@@ -128,10 +128,12 @@ Health.show = (user_id, result) => {
 
 //Health.delete = (title, result) => {
 Health.delete = (health_data, result) => {
+    //parameters necessary to delete
     const title = health_data.title
     const user_id = health_data.userId
     const category = health_data.category
     const date = health_data.date
+    //creating the sql delete query
     let query = `DELETE FROM health WHERE userID = ? 
                     AND title = ?
                     AND category = ?
