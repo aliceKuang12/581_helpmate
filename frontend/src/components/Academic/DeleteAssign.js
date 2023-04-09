@@ -57,7 +57,7 @@ export default function BasicForm() {
 
   useEffect(() => {
     const fetchAcademic = async () => {
-        await axios.get("http://localhost:3003/academics/")
+        await axios.get("http://localhost:3003/academics/"+ localStorage.getItem("email"))
             .then(res => {
                 console.log(res.data);
             })
