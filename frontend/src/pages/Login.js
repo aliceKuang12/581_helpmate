@@ -36,7 +36,7 @@ const Login = (props) => {
     return (
         <Container className="LoginPage" sx={{ width: 1300, height: 1000 }}>
             <br /><br /><br />
-            <Paper elevation={9} sx={{ width: 600, height: 800 }}>
+            <Paper elevation={9} sx={{ width: 600, height: 800, margin: "auto" }}>
 
                 <Box >
                     <br /><br /> <br /><br /><br />

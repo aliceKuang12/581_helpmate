@@ -74,11 +74,11 @@ Academic.getOne  = (email, result) => {
     })
 }
 
-// return entire table
+// return upcoming events
 Academic.show = (user_id, result) => {
     let query = `SELECT * from academic WHERE category != \"Assignment\"`;
     if (user_id) {
-        query = `SELECT * from academic WHERE userId = ? AND category != \"Assignment\" ORDER BY eventTime DESC`
+        query = `SELECT * from academic WHERE userId = ? AND eventTime >= NOW() AND category != \"Assignment\" ORDER BY eventTime ASC`
     }
     sql.query(query, [user_id], (err, res) => {
         if (err) {

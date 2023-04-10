@@ -45,7 +45,7 @@ Social.show = (user_id, result) => {
     // implement when pulling data with a specific userID
     let query = `SELECT * from social`;
     if (user_id) {
-        query = `SELECT * from social WHERE userId = ? ORDER BY eventTime DESC`;
+        query = `SELECT * from social WHERE userId = ? AND eventTime >= NOW() ORDER BY eventTime ASC`;
     }
     sql.query(query, [user_id], (err, res) => {
         if (err) {

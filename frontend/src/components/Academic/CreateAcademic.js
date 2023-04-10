@@ -90,8 +90,17 @@ export default function BasicForm() {
     axios
       .post("http://localhost:3003/academics/create", data)
       .then((response) => {
-        console.log(response.data);
+        setData({
+          userId: user.id,
+          title: '',
+          category: '',
+          eventTime: '',
+          completed: '',
+          location: '',
+          notes: '',
+        })
         setPost(response.data);
+        window.location.reload();
       });
   }
 

@@ -114,7 +114,7 @@ Health.show = (user_id, result) => {
     // implement when pulling data with a specific userID
     let query = `SELECT * from health WHERE (category != \"Steps\") and (category !=\"Activity\")`;
     if (user_id) {
-        query = `SELECT * from health WHERE (category != \"Steps\") and (category !=\"Activity\") and userId = ? ORDER BY eventTime DESC`
+        query = `SELECT * from health WHERE (category != \"Steps\") and (category !=\"Activity\") and userId = ?  AND eventTime >= NOW() ORDER BY eventTime ASC`
     }
     sql.query(query, [user_id], (err, res) => {
         if (err) {
