@@ -44,7 +44,7 @@ Travel.show = (user_id, result) => {
     let query = `SELECT * from travel`
     if (user_id) {
         query = `SELECT * from travel WHERE userId = ? AND eventTime >= NOW() ORDER BY eventTime ASC`
-    }
+}
     sql.query(query, [user_id], (err, res) => {
         if (err) {
             result(err,null);
