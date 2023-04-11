@@ -28,6 +28,26 @@ export const createEvent = (req, res) => {
     })
 }
 
+export const createQuickHealth = (req, res) => {
+    const newEvent = new Health({
+        userId: req.body.userId,
+        title: req.body.title,
+        category: req.body.category,
+        eventTime: req.body.date,
+        location: req.body.location,
+        notes: req.body.notes,
+        completed: req.body.completed,
+    })
+    Health.create(newEvent, (err, data) => {
+        if (err) {
+            return res.status(500).send({
+                message: err.message || "An error has occured while creating a new heatlh event"
+            })
+        }
+        return res.status(200).send(data);
+    })
+}
+
 // update user info on profile page
 export const updateEvent = (req, res) => {
     if (!req.body) {
