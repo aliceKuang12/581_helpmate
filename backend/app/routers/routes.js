@@ -117,6 +117,7 @@ app.delete("/travel/delete/", (req, res) => { travel.deleteEvent(req, res) });
 
 //health module
 app.post("/health/create", (req, res) => health.createEvent(req, res));
+app.post("/health/createQuick", (req, res) => health.createEvent(req, res));
 app.get("/healths", (req, res) => health.showHealth(req, res));
 app.get("/health/steps/:email", (req, res) => health.userSteps(req, res));
 app.get("/health/activity/:email", (req, res) => health.userActivity(req, res));

@@ -1,15 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import CreateIcon from '@mui/icons-material/Create';
 import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField'
+import TextField from '@mui/material/TextField';
+import { useAuth } from '../../context/AuthContext';
 import { Typography } from '@mui/material';
+import axios from 'axios'
 
 export default function CreateHealth() {
   const [open, setOpen] = React.useState(false);
+  const [post, setPost] = React.useState(false);
+  const { currentUser } = useAuth();
+  const user = JSON.parse(currentUser);
   const [data, setData] = useState({
     title: '',
     category: '',
@@ -31,6 +36,12 @@ export default function CreateHealth() {
       setFile(URL.createObjectURL(e.target.files[0]));
   }
 
+  const handleCreate = () => {
+    console.log(data);
+    createHealthPost();
+    setOpen(false);
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -42,6 +53,42 @@ export default function CreateHealth() {
   const handleChange = (value, key) => {
     setData(prevState => ({...prevState, [key]: value,}));
   };
+
+  function createHealthPost() {
+    console.log("creating post")
+    axios
+      .post("http://localhost:3003/health/createQuick", data)
+      .then((response) => {
+        setData({
+          userId: user.id,
+          title: '',
+          category: '',
+          date: '',
+          time: '',
+          location: '',
+          completed: '0',
+          notes: '',
+        });
+        console.log(response.data);
+        setPost(response.data);
+        window.location.reload()
+      });
+  }
+
+
+  useEffect(() => {
+    const fetchHealth = async () => {
+        await axios.get("http://localhost:3003/healths")
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    fetchHealth()
+  }, []);
+
 
   return (
     <div >
@@ -142,7 +189,7 @@ export default function CreateHealth() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Create</Button>
+          <Button onClick={handleCreate}>Create</Button>
         </DialogActions>
       </Dialog>
       
