@@ -10,6 +10,7 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { Typography } from "@material-ui/core";
+import { AXIOS_HEADER } from '../constants';
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.h4,
@@ -21,9 +22,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Streaks = () => {
-    const [assign, setAcademic] = useState([]);
+    const [assign, setAssignmts] = useState([]);
     const [steps, setSteps] = useState([]);
     const [activities, setActivities] = useState([]);
+
     //const assign = Json.parse()
     const assignStreak = assign.map(
         (info) => {
@@ -48,6 +50,22 @@ const Streaks = () => {
             )
         }
     )
+
+    const travelStreak = assign.map(
+        (info) => {
+            return (
+                <Typography sx={{ fontSize: 18, fontWeight: 'medium' }}> * {info.streak} day travel streak!</Typography>
+            )
+        }
+    )
+
+    const socialStreak = steps.map(
+        (info) => {
+            return (
+                <Typography sx={{ fontSize: 24 }}> * {info.streak} day social streak!</Typography>
+            )
+        }
+    )
     // https://stackoverflow.com/questions/52669596/promise-all-with-axios
     useEffect(() => {
         const fetchAllTables = async () => {
@@ -57,22 +75,36 @@ const Streaks = () => {
             let URL3 = "http://localhost:3003/health/streak2/"
             //  let URL4 = "http://localhost:3003/social/"
 
-            const promise1 = await axios.get(URL1 + localStorage.getItem("email")).then(res => {
-                setAcademic((res.data));
+            const promise1 = await axios({
+                url: URL1,
+                method: "GET",
+                header: AXIOS_HEADER,
+                params: { user_id: localStorage.getItem("userId") },
+            }).then(res => {
+                setAssignmts((res.data));
                 console.log(res.data);
-            })
-                .catch(err => {
+            }).catch(err => {
                     console.log(err)
                 });
 
-            const promise2 = await axios.get(URL2 + localStorage.getItem("email")).then(res => {
+            const promise2 = await axios({
+                url: URL2,
+                method: "GET",
+                header: AXIOS_HEADER,
+                params: { user_id: localStorage.getItem("userId") },
+            }).then(res => {
                 setActivities((res.data));
                 console.log(res.data);
             }).catch(err => {
                 console.log(err)
             });
 
-            const promise3 = await axios.get(URL3 + localStorage.getItem("email")).then(res => {
+            const promise3 = await axios({
+                url: URL3,
+                method: "GET",
+                header: AXIOS_HEADER,
+                params: { user_id: localStorage.getItem("userId") },
+            }).then(res => {
                 setSteps((res.data));
                 console.log(res.data);
             }).catch(err => {
@@ -100,13 +132,13 @@ const Streaks = () => {
             backgroundImage: `url(${Image})`,
             backgroundSize: "cover",
         }}>
-            <NavBar/>
-            <br/> 
+            <NavBar />
+            <br />
             {/* <Clock /> */}
             <Box padding={2} marginX={6} marginY={3} sx={{ height: 600, width: 600, alignItems: 'center' }}>
-                <Stack spacing={.25} marginX={2} sx={{  }}>
+                <Stack spacing={.25} marginX={2} sx={{}}>
                     <Item sx={{ backgroundColor: 'lightblue' }}>
-                        <Typography sx={{fontWeight: 'bold'}}>Academics</Typography>
+                        <Typography sx={{ fontWeight: 'bold' }}>Academics</Typography>
                         {assignStreak}
                     </Item>
                     <br />
@@ -118,10 +150,12 @@ const Streaks = () => {
                     <br />
                     <Item sx={{ backgroundColor: 'lightgreen' }}>
                         <Typography>Social</Typography>
+                        {socialStreak}
                     </Item>
                     <br />
                     <Item sx={{ backgroundColor: 'lightcoral' }}>
                         <Typography>Travel</Typography>
+                        {travelStreak}
                     </Item>
                 </Stack>
             </Box>

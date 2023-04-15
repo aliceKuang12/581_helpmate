@@ -108,8 +108,7 @@ export const userActivity = (req, res) => {
 
 // get activity, query by email 
 export const stepStreak = (req, res) => {
-    const email = req.params.email;
-    Health.getStreaks1(email, (err, data) => {
+    Health.getStreaks1(req.query.user_id, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message:
@@ -121,8 +120,7 @@ export const stepStreak = (req, res) => {
 }
 
 export const activityStreak = (req, res) => {
-    const email = req.params.email;
-    Health.getStreaks2(email, (err, data) => {
+    Health.getStreaks2(req.query.user_id, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message:

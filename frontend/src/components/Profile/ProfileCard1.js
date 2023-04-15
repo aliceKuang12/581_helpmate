@@ -21,6 +21,9 @@ const ModuleCard = ( ) => {
     const { currentUser } = useAuth();
     const user = JSON.parse(currentUser);
 
+    const date = user.birthday.slice(5,10);
+    const year = user.birthday.slice(0, 4);
+
     return (
     <Grid item xs={6} marginBottom = {5}>
         <Paper sx = {{opacity:.9}}>
@@ -59,7 +62,7 @@ const ModuleCard = ( ) => {
                         <Typography sx={{ fontWeight: 'bold' }}>
                             Security
                         </Typography>
-                        <Typography> Birthday:  {user.birthday}</Typography>
+                        <Typography> Birthday:  {date}-{year}</Typography>
                         {/* <Typography>Password: {currentUser.password}</Typography> */}
                         
                     </div>
