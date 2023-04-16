@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
-import CreateEvent from "./CreateAcademic"
+import CreateEvent from "./CreateAcad2"
 import DeleteEvent from "./DeleteEventAcademic"
 import ViewEvent from "../ViewEvents"
 

@@ -1,16 +1,5 @@
-/**
- * CreateHealth.js 
- *
- * Form to create a new assignment for the health page. 
- * Allows users to dynamically update the events stored in the DBs.
- *
- * @link   URL
- * @file   This file defines the CreateAssign class.
- * @author Eva Morrison. Alice Kuang.
- * @since  3/11/23
- */
-
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
+import axios from 'axios'
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -18,15 +7,13 @@ import DialogContent from '@mui/material/DialogContent';
 import CreateIcon from '@mui/icons-material/Create';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
-import Checkbox from '../Checkbox';
 import { Typography } from '@mui/material';
-import axios from 'axios'
-import { useAuth } from '../../context/AuthContext';
 import { AXIOS_HEADER } from '../../constants';
+import { useAuth } from '../../context/AuthContext';
 
-export default function CreateHealth() {
+export default function BasicForm() {
   const [open, setOpen] = React.useState(false);
-  const [post, setPost] = React.useState(null);
+  const [file, setFile] = useState();
   const { currentUser } = useAuth();
   const user = JSON.parse(currentUser);
   const [data, setData] = useState({
@@ -35,32 +22,27 @@ export default function CreateHealth() {
     category: '',
     date: '',
     time: '',
-    location: '',
     completed: '0',
+    location: '',
     notes: '',
   });
 
   const {
     userId,
     title,
-    category,
+    category,  
     date,
-    time,
-    location,
+    time,    
     completed,
+    location,
     notes,
   } = data;
-  // const [file, setFile] = useState();
-  // function saveUrl(e) {
-  //     console.log(e.target.files);
-  //     setFile(URL.createObjectURL(e.target.files[0]));
-  // }
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = () => {    
     setData({
       userId: user.id,
       title: '',
@@ -74,91 +56,82 @@ export default function CreateHealth() {
     setOpen(false);
   };
 
+  
   const handleChange = (value, key) => {
     setData(prevState => ({...prevState, [key]: value,}));
   };
+  
+  const handleUpdate = async (e) => {
+      handleData(data);
+      setOpen(false);
+  }
 
-  const handleCreate = () => {
-    console.log(data);
-    createHealthPost();
-    setOpen(false);
-  };
+  // update route
+  const handleData = (db) => {
+    axios({
+      url: 'http://localhost:3003/academics/update/' + localStorage.getItem("email"),
+      method: 'POST',
+      headers: AXIOS_HEADER,
+      data: db,
+    }).then(() => {
+      alert("Successfully updated, logout to see changes")
+      setData({
+        userId: user.id,
+        title: '',
+        category: '',
+        date: '',
+        time: '',
+        completed: '',
+        location: '',
+        notes: '',
+      })
+      handleClose();
+    }).catch((e) => {
+      console.log(e);
+    })
+  }
 
-  useEffect(() => {
-    const fetchHealth = async () => {
-        await axios.get("http://localhost:3003/health/")
-            .then(res => {
-                console.log(res.data);
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
-    fetchHealth()
-  }, []);
-
-  function createHealthPost() {
+  // create route
+  const [post, setPost] = React.useState(null);
+  function createAcademicPost() {
     console.log("creating post")
     axios
-      .post("http://localhost:3003/health/create", data)
+      .post("http://localhost:3003/academics/create", data)
       .then((response) => {
         setData({
           userId: user.id,
           title: '',
           category: '',
-          date: '',
-          time: '',
+          eventTime: '',
+          completed: '',
           location: '',
-          completed: '0',
           notes: '',
-        });
-        console.log(response.data);
+        })
         setPost(response.data);
-        window.location.reload()
       });
   }
 
-  const handleUpdate = async (e) => {
-    handleData(data);
+  const handleCreate = () => {
+    console.log(data);
+    createAcademicPost();
     setOpen(false);
-}
+    window.location.reload();
+  };
 
-// update route
-const handleData = (db) => {
-  axios({
-    url: 'http://localhost:3003/health/update/' + localStorage.getItem("email"),
-    method: 'POST',
-    headers: AXIOS_HEADER,
-    data: db,
-  }).then(() => {
-    alert("Successfully updated, logout to see changes")
-    setData({
-      userId: user.id,
-      title: '',
-      category: '',
-      eventTime: '',
-      completed: '',
-      location: '',
-      notes: '',
-    })
-    handleClose();
-  }).catch((e) => {
-    console.log(e);
-  })
-}
+
 
   return (
     <div >
       <Button onClick={handleClickOpen} variant="outlined" sx={{backgroundColor: "cornsilk", fill: "blue", color:"Black" }}>
-      <CreateIcon sx={{fontSize: "large", color: "blue"}}/>
+      <CreateIcon sx={{fontSize: "large", color: "red"}}/>
       </Button>
 
       
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
             <br/>
-            <Typography  variant="h4" sx={{textAlign: 'center'}}>
-            Health Event
+            <Typography sx={{textAlign: 'center'}}>
+            Academic Event  
             </Typography> 
             <br/> 
           <Grid container  spacing={2}
@@ -178,23 +151,23 @@ const handleData = (db) => {
                 onChange={e => handleChange(e.target.value, 'title')}
                 value={title}
                 fullWidth
+                required
               /> 
             </Grid>
-
             <Grid item xs={2}>
-            <Typography sx={{fontSize: 16, textAlign: 'left', padding: 2}}>
+            <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
               Category:
-            </Typography>
+            </Typography>  
             </Grid>
-            <Grid item xs={9.5}>    
+            <Grid item xs={9.5}>
               <TextField
                 id="category"
-                label="category"
+                label="Course, Exam, Assignment"
                 variant="outlined"
                 onChange={e => handleChange(e.target.value, 'category')}
                 value={category}
-                fullWidth 
-              />
+                fullWidth
+              /> 
             </Grid>
 
             <Grid item xs={2}>
@@ -222,6 +195,23 @@ const handleData = (db) => {
                 fullWidth
               />
             </Grid> 
+ 
+            
+            <Grid item xs={2}>
+            <Typography sx={{fontSize: 16, textAlign: 'left', padding: 2}}>
+              Location:
+            </Typography>
+            </Grid>
+            <Grid item xs={9.5}>    
+              <TextField
+                id="location"
+                label="text"
+                variant="outlined"
+                onChange={e => handleChange(e.target.value, 'location')}
+                value={location}
+                fullWidth 
+              />
+            </Grid>
             
              <Grid item xs={2}>
                 <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
@@ -240,22 +230,21 @@ const handleData = (db) => {
               />
             </Grid>
 
-            <Grid item xs={4}/>
             <Grid item xs={2}>
                <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
                 Complete: 
                </Typography>
              </Grid> 
              <Grid item xs={4}>
-              <TextField
-                id="completed"
-                label="'1' for yes, '0' for no"
-                onChange={e => handleChange(e.target.value, 'completed')}
-                fullWidth
-                value={completed}
-                rows={4}
-              />
-            </Grid>
+             <TextField
+                  id="completed"
+                  label="'1' for yes, '0' for no"
+                  onChange={e => handleChange(e.target.value, 'completed')}
+                  fullWidth
+                  value={completed}
+                  rows={4}
+              />   
+             </Grid>
             </Grid>
         </DialogContent>
         <DialogActions>
@@ -268,6 +257,3 @@ const handleData = (db) => {
     </div>
   );
 }
-//original button:  
-// <Button onClick={handleClickOpen} sx={{fill: "blue", color:"Black" }}>
-    

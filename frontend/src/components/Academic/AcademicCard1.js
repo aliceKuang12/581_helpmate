@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid"
 import Typography from '@mui/material/Typography'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
-import CreateEvent from "./CreateAssign"
+import CreateEvent from "./CreateAcad1"
 import DeleteEvent from "./DeleteAssign"
 import ViewEvent from "../ViewEvents"
 import Box from "@mui/material/Box";

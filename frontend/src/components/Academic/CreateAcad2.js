@@ -29,51 +29,28 @@ export default function BasicForm() {
   const { currentUser } = useAuth();
   const user = JSON.parse(currentUser);
   const [post, setPost] = React.useState(null);
-  /* const [data, setData] = useState({
-    title: '',
-    date: '',
-    time: '',
-    completed: '',
-    address: '',
-    notes: '',
-  }); */
 
   const [data, setData] = useState({
     userId: user.id,
     title: '',
-    category: '',
+    category: 'Assignment',
     date: '',
-    eventTime: '',
+    time: '',
     location: '',
     completed: '0',
     notes: '',
   });
-
-  /* const {
-    title,
-    date,
-    time,
-    completed,
-    address,
-    notes,
-  } = data; */
 
   const {
     userID,
     title,
     category,
     date,
-    eventTime,
+    time,
     location,
     completed,
     notes,
   } = data;
-
-  const [file, setFile] = useState();
-  function saveUrl(e) {
-    console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
-  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -87,29 +64,12 @@ export default function BasicForm() {
     console.log(data);
     createAcademicPost();
     setOpen(false);
+    window.location.reload();
   };
 
   const handleChange = (value, key) => {
     setData(prevState => ({ ...prevState, [key]: value, }));
   };
-
-  /**
-  * Tutorial from: https://www.freecodecamp.org/news/how-to-use-axios-with-react/#how-to-make-a-post-request
-  * useEffect hook to connect with the travel database
-  * prints all travel information to the console
-  */
-  useEffect(() => {
-    const fetchAcademic = async () => {
-      await axios.get("http://localhost:3003/academics/")
-        .then(res => {
-          console.log(res.data);
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
-    fetchAcademic()
-  }, []);
 
   /**
   * Tutorial from: https://www.freecodecamp.org/news/how-to-use-axios-with-react/#how-to-make-a-post-request
@@ -143,9 +103,10 @@ export default function BasicForm() {
       setData({
         userId: user.id,
         title: '',
-        category: '',
-        eventTime: '',
-        completed: '',
+        category: 'Assignment',
+        date: '',
+        time: '',
+        completed: '0',
         location: '',
         notes: '',
       })
@@ -188,7 +149,7 @@ export default function BasicForm() {
                 fullWidth
               />
             </Grid>
-
+              {/*
             <Grid item xs={2}>
               <Typography sx={{ fontSize: 16, textAlign: 'left', marginY: 1, padding: 2 }}>
                 Category:
@@ -203,7 +164,7 @@ export default function BasicForm() {
                 value={category}
                 fullWidth
               />
-            </Grid>
+            </Grid> */}
 
             <Grid item xs={2}>
               <Typography sx={{ fontSize: 16, textAlign: 'left', marginY: 1, padding: 2 }}>
@@ -222,11 +183,11 @@ export default function BasicForm() {
             </Grid>
             <Grid item xs={4.5}>
               <TextField
-                id="eventTime"
+                id="time"
                 type="time"
                 variant="outlined"
-                onChange={e => handleChange(e.target.value, 'eventTime')}
-                value={eventTime}
+                onChange={e => handleChange(e.target.value, 'time')}
+                value={time}
                 fullWidth
               />
             </Grid>
