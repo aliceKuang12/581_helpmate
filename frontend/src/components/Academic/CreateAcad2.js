@@ -15,7 +15,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import CreateIcon from '@mui/icons-material/Create';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import { AXIOS_HEADER } from '../../constants';
@@ -67,6 +67,12 @@ export default function BasicForm() {
     window.location.reload();
   };
 
+  const handleUpdate = async (e) => {
+    handleData(data);
+    setOpen(false);
+    window.location.reload();
+  }
+
   const handleChange = (value, key) => {
     setData(prevState => ({ ...prevState, [key]: value, }));
   };
@@ -86,15 +92,10 @@ export default function BasicForm() {
       });
   }
 
-  const handleUpdate = async (e) => {
-    handleData(data);
-    setOpen(false);
-  }
-
   // update route
   const handleData = (db) => {
     axios({
-      url: 'http://localhost:3003/academics/update/' + localStorage.getItem("email"),
+      url: 'http://localhost:3003/academics/update/',
       method: 'POST',
       headers: AXIOS_HEADER,
       data: db,
@@ -119,7 +120,7 @@ export default function BasicForm() {
   return (
     <div >
       <Button onClick={handleClickOpen} variant="outlined" sx={{ backgroundColor: "cornsilk", fill: "blue", color: "Black" }}>
-        <CreateIcon sx={{ fontSize: "large", color: "red" }} />
+        <LibraryAddIcon sx={{ fontSize: "large", color: "red" }} />
       </Button>
 
 

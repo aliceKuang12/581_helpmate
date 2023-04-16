@@ -5,8 +5,8 @@ import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
 import CreateEvent from "./CreateTravel"
+import UpdateEvent from "./UpdateTravel1"
 import DeleteEvent from "./DeleteEventTravel"
-import ViewEvent from "../ViewEvents"
 
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
@@ -91,7 +91,7 @@ const ModuleCard = () => {
                     }}
                 >
                     <CreateEvent />
-                    <ViewEvent color="blue" />
+                    <UpdateEvent />
                     <DeleteEvent />
                 </Stack>
                 <br />

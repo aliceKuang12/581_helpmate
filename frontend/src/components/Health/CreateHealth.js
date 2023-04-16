@@ -15,7 +15,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import CreateIcon from '@mui/icons-material/Create';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import Checkbox from '../Checkbox';
@@ -50,11 +50,6 @@ export default function CreateHealth() {
     completed,
     notes,
   } = data;
-  // const [file, setFile] = useState();
-  // function saveUrl(e) {
-  //     console.log(e.target.files);
-  //     setFile(URL.createObjectURL(e.target.files[0]));
-  // }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -86,7 +81,7 @@ export default function CreateHealth() {
 
   useEffect(() => {
     const fetchHealth = async () => {
-        await axios.get("http://localhost:3003/health/")
+        await axios.get("http://localhost:3003/healths/")
             .then(res => {
                 console.log(res.data);
             })
@@ -118,47 +113,19 @@ export default function CreateHealth() {
       });
   }
 
-  const handleUpdate = async (e) => {
-    handleData(data);
-    setOpen(false);
-}
-
-// update route
-const handleData = (db) => {
-  axios({
-    url: 'http://localhost:3003/health/update/' + localStorage.getItem("email"),
-    method: 'POST',
-    headers: AXIOS_HEADER,
-    data: db,
-  }).then(() => {
-    alert("Successfully updated, logout to see changes")
-    setData({
-      userId: user.id,
-      title: '',
-      category: '',
-      eventTime: '',
-      completed: '',
-      location: '',
-      notes: '',
-    })
-    handleClose();
-  }).catch((e) => {
-    console.log(e);
-  })
-}
 
   return (
     <div >
       <Button onClick={handleClickOpen} variant="outlined" sx={{backgroundColor: "cornsilk", fill: "blue", color:"Black" }}>
-      <CreateIcon sx={{fontSize: "large", color: "blue"}}/>
+      <LibraryAddIcon sx={{fontSize: "large", color: "blue"}}/>
       </Button>
 
       
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
             <br/>
-            <Typography  variant="h4" sx={{textAlign: 'center'}}>
-            Health Event
+            <Typography  variant="h6" sx={{textAlign: 'center'}}>
+            Create Event
             </Typography> 
             <br/> 
           <Grid container  spacing={2}
@@ -240,7 +207,6 @@ const handleData = (db) => {
               />
             </Grid>
 
-            <Grid item xs={4}/>
             <Grid item xs={2}>
                <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
                 Complete: 
@@ -261,7 +227,6 @@ const handleData = (db) => {
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleCreate}>Create</Button>
-          <Button onClick={handleUpdate}>Update</Button>
         </DialogActions>
       </Dialog>
       

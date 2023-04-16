@@ -4,11 +4,10 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import CreateIcon from '@mui/icons-material/Create';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import { Typography } from '@mui/material';
-import Checkbox from '../Checkbox';
 import { useAuth } from '../../context/AuthContext';
 import { AXIOS_HEADER } from '../../constants';
 
@@ -93,7 +92,7 @@ export default function BasicForm() {
 // update route
 const handleData = (db) => {
   axios({
-    url: 'http://localhost:3003/academics/update/' + localStorage.getItem("email"),
+    url: 'http://localhost:3003/social/update/',
     method: 'POST',
     headers: AXIOS_HEADER,
     data: db,
@@ -117,7 +116,7 @@ const handleData = (db) => {
   return (
     <div >
       <Button onClick={handleClickOpen} variant="outlined" sx={{backgroundColor: "cornsilk", fill: "blue", color:"Black" }}>
-      <CreateIcon sx={{fontSize: "large", color: "darkorange"}}/>
+      <LibraryAddIcon sx={{fontSize: "large", color: "darkorange"}}/>
       </Button>
 
       

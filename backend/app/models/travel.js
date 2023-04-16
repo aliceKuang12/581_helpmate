@@ -37,6 +37,20 @@ Travel.show = (user_id, result) => {
     })
 }
 
+Travel.update = (updated, id, result) => {
+    let query = `UPDATE travel SET ? WHERE userID = ? 
+                 AND title = ? 
+                 AND eventTime = ?`;
+    sql.query(query, [updated, id, updated.title, updated.eventTime], (err, res) => {
+        if (err) {
+            console.log("Cannot update travel: ", err);
+            result(err,null);
+        } 
+        result(null,res);
+    })
+}
+
+
 Travel.delete = (travel_data, result) => {
     const user_id = travel_data.userId
     const title = travel_data.title

@@ -22,20 +22,6 @@ export const createEvent = (req, res) => {
     })
 }
 
-export const userAcademic = (req, res) => {
-    const email = req.params.email;
-    Academic.getOne(email, (err, data) => {
-        if (err) {
-            return res.status(500).send({
-                message:
-                    err.message || "Error occurred while retrieving user's academic info."
-            });
-        }
-        
-        res.send(data);
-    });
-}
-
 
 export const assignments = (req, res) => {
     Academic.getStreak(req.query.user_id, (err, data) => {
@@ -81,13 +67,15 @@ export const updateAcademic = (req, res) => {
             message: "Content cannot be empty"
         })
     }
-    let email = req.params.email;
-    let query = "SELECT * FROM users where email = ?";
-    sql.query(query, [email], (err, result) => {
+
+    let user_id = req.body.userId;
+    let query = "SELECT * FROM academic where userId = ?";
+    sql.query(query, [user_id], (err, result) => {
         if (err) {
-            console.log("Error occur while find user with email ", email)
+            console.log("Unable to find events with id ", user_id)
         } else {
-            Academic.update(req, result[0].id, (err, data) => {
+            const updated = req.body;
+            Academic.update(updated, user_id, (err, data) => {
                 if (err) {
                     return res.status(500).send({
                         message: err.message || "Error occurred while updating user."

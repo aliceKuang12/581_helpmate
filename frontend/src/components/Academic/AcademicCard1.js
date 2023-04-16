@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
 import CreateEvent from "./CreateAcad1"
+import UpdateEvent from "./UpdateAcad1"
 import DeleteEvent from "./DeleteAssign"
 import ViewEvent from "../ViewEvents"
 import Box from "@mui/material/Box";
@@ -75,7 +76,8 @@ const ModuleCard = () => {
                         }}
                     >
                         <CreateEvent />
-                        <ViewEvent color="red" />
+                        <UpdateEvent />
+                        {/* <ViewEvent color="red" /> */}
                         <DeleteEvent />
                         <br />
                     </Stack>

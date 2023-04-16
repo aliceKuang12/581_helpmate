@@ -29,10 +29,11 @@ Health.create = (newEvent, result) => {
     })
 }
 
-Health.update = (req, id, result) => {
-    const title = req.body.data.title;
-    let query = `UPDATE health SET ? WHERE userId = ? and title = ?`;
-    sql.query(query, [req.body.data, id, title], (err, res) => {
+Health.update = (updated, id, result) => {
+    let query = `UPDATE health SET ? WHERE userID = ? 
+                 AND title = ? 
+                 AND eventTime = ?`;
+    sql.query(query, [updated, id, updated.title, updated.eventTime], (err, res) => {
         if (err) {
             console.log("Cannot update: ", err);
             result(err,null);
@@ -45,11 +46,11 @@ Health.update = (req, id, result) => {
 
 
 // query for steps category given user email
-Health.getOne1 = (email, result) => {
-    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?) 
+Health.getOne1 = (user_id, result) => {
+    let query = `SELECT * FROM health where userId = ? 
                 AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
                 and category =\"Steps\" ORDER BY eventTime DESC`;
-    sql.query(query, [email], (err, res) => {
+    sql.query(query, [user_id], (err, res) => {
         if (err) {
             console.log("Cannot retrieve event for given user or category: ", err);
             result(err, null);
@@ -61,11 +62,11 @@ Health.getOne1 = (email, result) => {
 }
 
 // query for activity category given user email
-Health.getOne2 = (email, result) => {
-    let query = `SELECT * FROM health where userId = (SELECT id from users where email = ?) 
+Health.getOne2 = (user_id, result) => {
+    let query = `SELECT * FROM health where userId = ? 
                 AND eventTime between SUBDATE(NOW(), INTERVAL 7 DAY) and NOW()
                 and category =\"Activity\" ORDER BY eventTime DESC`;
-    sql.query(query, [email], (err, res) => {
+    sql.query(query, [user_id], (err, res) => {
         if (err) {
             console.log("Cannot retrieve event for given user or category: ", err);
             result(err, null);
@@ -110,11 +111,9 @@ Health.getStreaks2 = (user_id, result) => {
 
 
 Health.show = (user_id, result) => {
-    // WHERE userId = ? 
-    // implement when pulling data with a specific userID
     let query = `SELECT * from health WHERE (category != \"Steps\") and (category !=\"Activity\")`;
     if (user_id) {
-        query = `SELECT * from health WHERE (category != \"Steps\") and (category !=\"Activity\") and userId = ?  AND eventTime >= NOW() ORDER BY eventTime ASC`
+        query = `SELECT * from health WHERE category != \"Steps\" and category !=\"Activity\" and userId = ?  AND eventTime >= NOW() ORDER BY eventTime ASC`
     }
     sql.query(query, [user_id], (err, res) => {
         if (err) {

@@ -62,19 +62,6 @@ Academic.getStreak  = (user_id, result) => {
     })
 }
 
-// return academic events based on userId , ignore assignments
-Academic.getOne  = (email, result) => {
-    let query = `SELECT * FROM academic where userId = (SELECT id from users where email = ?) and category != \"Assignment\" ORDER BY eventTime DESC`;
-    sql.query(query, [email], (err, res) => {
-        if (err) {
-            console.log("Cannot retrieve user's academic info: ", err);
-            result(err,null);
-        } else {
-            console.log("User: ", res);
-            result(null,res);
-        }
-    })
-}
 
 // return upcoming events
 Academic.show = (user_id, result) => {
@@ -109,10 +96,12 @@ Academic.show2 = (user_id, result) => {
     })
 }
 
-Academic.update = (req, id, result) => {
-     const title = req.body.data.title;
-     let query = `UPDATE users SET ? WHERE userId = ? and title = ?`;
-     sql.query(query, [req.body.data, id, title], (err, res) => {
+Academic.update = (updated, id, result) => {
+
+     let query = `UPDATE academic SET ? WHERE userID = ? 
+                  AND title = ? 
+                  AND eventTime = ?`;
+     sql.query(query, [updated, id, updated.title, updated.eventTime], (err, res) => {
          if (err) {
              console.log("Cannot update: ", err);
              result(err,null);

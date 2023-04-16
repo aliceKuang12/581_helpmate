@@ -32,6 +32,35 @@ export const showTravel = (req, res) => {
     })
 }
 
+// update user info on profile page
+export const updateTravel = (req, res) => {
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Content cannot be empty"
+        })
+    }
+
+    let user_id = req.body.userId;
+    let query = "SELECT * FROM travel where userId = ?";
+    sql.query(query, [user_id], (err, result) => {
+        if (err) {
+            console.log("Unable to find events with id ", user_id)
+        } else {
+            const updated = req.body;
+            Travel.update(updated, user_id, (err, data) => {
+                if (err) {
+                    return res.status(500).send({
+                        message: err.message || "Error occurred while updating user."
+                    });
+                }
+                res.send(data);
+            });
+        }
+    })
+}
+
+
+
 export const deleteEvent = (req,res) => {
     const travel_data = req.body.data;
     //console.log("Travel Data: ", travel_data)

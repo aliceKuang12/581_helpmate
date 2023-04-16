@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import CreateIcon from '@mui/icons-material/Create';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import { Typography } from '@mui/material';
@@ -20,8 +20,8 @@ export default function BasicForm() {
     userId: user.id,
     title: '',
     category: '',
-    date: '',
-    time: '',
+    eventTime: '',
+    // time: '',
     completed: '0',
     location: '',
     notes: '',
@@ -31,8 +31,8 @@ export default function BasicForm() {
     userId,
     title,
     category,  
-    date,
-    time,    
+    eventTime,
+    // time,    
     completed,
     location,
     notes,
@@ -47,8 +47,8 @@ export default function BasicForm() {
       userId: user.id,
       title: '',
       category: '',
-      date: '',
-      time: '',
+      eventTime: '',
+     // time: '',
       location: '',
       completed: '0',
       notes: '',
@@ -70,18 +70,18 @@ export default function BasicForm() {
   // update route
   const handleData = (db) => {
     axios({
-      url: 'http://localhost:3003/academics/update/',
+      url: 'http://localhost:3003/health/update/',
       method: 'PUT',
       headers: AXIOS_HEADER,
       data: db,
     }).then(() => {
-      alert("Successfully updated, logout to see changes")
+      console.log(db);
       setData({
         userId: user.id,
         title: '',
         category: '',
-        date: '',
-        time: '',
+        // date: '',
+        eventTime: '',
         completed: '',
         location: '',
         notes: '',
@@ -92,47 +92,19 @@ export default function BasicForm() {
     })
   }
 
-  // create route
-  const [post, setPost] = React.useState(null);
-  function createAcademicPost() {
-    console.log("creating post")
-    axios
-      .post("http://localhost:3003/academics/create", data)
-      .then((response) => {
-        setData({
-          userId: user.id,
-          title: '',
-          category: '',
-          eventTime: '',
-          completed: '',
-          location: '',
-          notes: '',
-        })
-        setPost(response.data);
-      });
-  }
-
-  const handleCreate = () => {
-    console.log(data);
-    createAcademicPost();
-    setOpen(false);
-    window.location.reload();
-  };
-
-
 
   return (
     <div >
       <Button onClick={handleClickOpen} variant="outlined" sx={{backgroundColor: "cornsilk", fill: "blue", color:"Black" }}>
-      <LibraryAddIcon sx={{fontSize: "large", color: "red"}}/>
+      <CreateIcon sx={{fontSize: "large", color: "blue"}}/>
       </Button>
 
       
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
             <br/>
-            <Typography sx={{textAlign: 'center'}}>
-            Academic Event  
+            <Typography variant="h6" sx={{textAlign: 'center'}}>
+            Update Event   
             </Typography> 
             <br/> 
           <Grid container  spacing={2}
@@ -163,7 +135,7 @@ export default function BasicForm() {
             <Grid item xs={9.5}>
               <TextField
                 id="category"
-                label="Course, Exam, Assignment"
+                label="category"
                 variant="outlined"
                 onChange={e => handleChange(e.target.value, 'category')}
                 value={category}
@@ -181,20 +153,20 @@ export default function BasicForm() {
               id="date"
               type="date"
               variant="outlined"
-              onChange={e => handleChange(e.target.value, 'date')}
-              value={date}
+              onChange={e => handleChange(e.target.value, 'eventTime')}
+              value={eventTime}
               fullWidth
               />  
             </Grid>
             <Grid item xs={4.5}>
-            <TextField
+            {/* <TextField
                 id="time"
                 type="time"
                 variant="outlined"
                 onChange={e => handleChange(e.target.value, 'time')}
                 value={time}
                 fullWidth
-              />
+              /> */}
             </Grid> 
  
             
@@ -250,7 +222,6 @@ export default function BasicForm() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleCreate}>Create</Button>
           <Button onClick={handleUpdate}>Update</Button>
         </DialogActions>
       </Dialog>

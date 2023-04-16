@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
 import CreateEvent from "./CreateSocial"
+import UpdateEvent from "./UpdateSocial1"
 import DeleteEvent from "./DeleteEventSocial"
 import ViewEvent from "../ViewEvents"
 
@@ -75,7 +76,7 @@ const ModuleCard = ( ) => {
                     }}
                 >
                     <CreateEvent />
-                    <ViewEvent color="darkorange" />
+                    <UpdateEvent />
                     <DeleteEvent />
                 </Stack>
                 <br/>

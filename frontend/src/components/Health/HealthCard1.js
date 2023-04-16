@@ -6,6 +6,7 @@ import Clock from '../Clock'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
 import CreateEvent from "./CreateHealth"
+import UpdateEvent from "./UpdateHealth1"
 import DeleteEvent from "./DeleteEventHealth"
 import ViewEvent from "../ViewEvents"
 
@@ -86,7 +87,7 @@ const ModuleCard = ( ) => {
                 }}
             >
                 <CreateEvent />
-                <ViewEvent color="blue" />
+                <UpdateEvent />
                 <DeleteEvent />
                
             </Stack> <br/>

@@ -57,6 +57,21 @@ Social.show = (user_id, result) => {
     })
 }
 
+Social.update = (updated, id, result) => {
+    let query = `UPDATE social SET ? WHERE userID = ? 
+                 AND title = ? 
+                 AND eventTime = ?`;
+    sql.query(query, [updated, id, updated.title, updated.eventTime], (err, res) => {
+        if (err) {
+            console.log("Cannot update: ", err);
+            result(err,null);
+        } else {
+            console.log("All users: ", res);
+            result(null,res);
+        }
+    })
+}
+
 Social.delete = (social_data, result) => {
     const user_id = social_data.userId
     const title = social_data.title

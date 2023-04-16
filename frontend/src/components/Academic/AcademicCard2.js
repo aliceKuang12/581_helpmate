@@ -9,6 +9,7 @@ import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
 import CreateEvent from "./CreateAcad2"
+import UpdateEvent from "./UpdateAcad1"
 import DeleteEvent from "./DeleteEventAcademic"
 import ViewEvent from "../ViewEvents"
 
@@ -91,7 +92,7 @@ const ModuleCard = () => {
                     }}
                 >
                         <CreateEvent />
-                        <ViewEvent color="red" />
+                        <UpdateEvent/>
                         <DeleteEvent />
                  
                 </Stack>

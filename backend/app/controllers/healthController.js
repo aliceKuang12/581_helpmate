@@ -48,37 +48,12 @@ export const createQuickHealth = (req, res) => {
     })
 }
 
-// update user info on profile page
-export const updateEvent = (req, res) => {
-    if (!req.body) {
-        return res.status(400).send({
-            message: "Content cannot be empty"
-        })
-    }
-    let email = req.params.email;
-    let query = "SELECT * FROM users where email = ?";
-    sql.query(query, [email], (err, result) => {
-        if (err) {
-            console.log("Error occur while find user with email ", email)
-        } else {
-            Health.update(req, result[0].id, (err, data) => {
-                if (err) {
-                    return res.status(500).send({
-                        message: err.message || "Error occurred while updating user."
-                    });
-                }
-                res.send(data);
-            });
-        }
-    })
-}
 
 
-// get steps, query by email 
+// get steps, query by userid 
 export const userSteps = (req, res) => {
-    const email = req.params.email;
-    // const cat = req.params.category;
-    Health.getOne1(email, (err, data) => {
+    const user_id = req.query.user_id;
+    Health.getOne1(user_id, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message:
@@ -90,11 +65,10 @@ export const userSteps = (req, res) => {
     });
 }
 
-// get activity, query by email 
+// get activity, query by userid 
 export const userActivity = (req, res) => {
-    const email = req.params.email;
-    // const cat = req.params.category;
-    Health.getOne2(email, (err, data) => {
+    const user_id = req.query.user_id;
+    Health.getOne2(user_id, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message:
@@ -139,6 +113,33 @@ export const showHealth = (req, res) => {
             })
         }
         res.status(200).send(data);
+    })
+}
+
+// update user info on profile page
+export const updateHealth = (req, res) => {
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Content cannot be empty"
+        })
+    }
+
+    let user_id = req.body.userId;
+    let query = "SELECT * FROM health where userId = ?";
+    sql.query(query, [user_id], (err, result) => {
+        if (err) {
+            console.log("Unable to find events with id ", user_id)
+        } else {
+            const updated = req.body;
+            Health.update(updated, user_id, (err, data) => {
+                if (err) {
+                    return res.status(500).send({
+                        message: err.message || "Error occurred while updating user."
+                    });
+                }
+                res.send(data);
+            });
+        }
     })
 }
 
