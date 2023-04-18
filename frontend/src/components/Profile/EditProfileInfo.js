@@ -14,6 +14,8 @@ import { useAuth } from '../../context/AuthContext';
 export default function BasicForm() {
   const { currentUser } = useAuth();
   const [open, setOpen] = React.useState(false);
+  const [confirm, setConfirm] = useState(false);
+
   const user = JSON.parse(currentUser);
   const currentData = {
     id: user.id,
@@ -52,7 +54,10 @@ export default function BasicForm() {
     setOpen(false);
     setData(currentData);
   };
-
+  
+  const handleSubmit = () => {
+    setConfirm(true);
+  }
   const handleUpdateProfile = () => {
     axios({
       url: "http://localhost:3003/user",
@@ -203,10 +208,23 @@ export default function BasicForm() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancel}>Cancel</Button>
-          <Button onClick={handleUpdateProfile}>Save</Button>
+          <Button onClick={handleSubmit}>Save</Button>
         </DialogActions>
       </Dialog>
-      
+      <Dialog open={confirm} onClose={() => setConfirm(false)}>
+        <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
+          Please confirm your password to make changes
+        </Typography>
+        <TextField
+          label="password"
+          onChange={e => handleChange(e.target.value, 'password')}
+          type="password"
+          multiline
+          fullWidth
+          value={password}
+        />
+        <Button onClick={handleUpdateProfile}>Confirm</Button>
+      </Dialog>
     </div>
   );
 }
