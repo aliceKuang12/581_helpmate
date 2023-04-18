@@ -94,15 +94,28 @@ export const updateUser = (req, res) => {
             }
         })
     } else {
-        User.update(updatedInfo, userId, (err, data) => {
+        User.getFromId(userId, (err, result) => {
             if (err) {
                 return res.status(500).send({
-                    message: err.message || "An error has occured while creating new user"
+                    message: err.message
+                });
+            }
+            if (checkPassword(updatedInfo.password, result[0])) {
+                updatedInfo.password = result[0].password;
+                User.update(updatedInfo, userId, (err, data) => {
+                    if (err) {
+                        return res.status(500).send({
+                            message: err.message || "An error has occured while creating new user"
+                        })
+                    } else {
+                        return res.send(data);
+                    }
                 })
             } else {
-                return res.send(data);
+                return res.status(401).send({message: "Password is incorrect."})
             }
         })
+        
     }
 }
 

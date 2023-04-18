@@ -55,6 +55,19 @@ User.getAll = (result) => {
     })
 }
 
+User.getFromId  = (id, result) => {
+    let query = "SELECT * FROM users where id = ?";
+    sql.query(query, [id], (err, res) => {
+        if (err) {
+            console.log("Cannot retrieve user with id: ", err);
+            result(err,null);
+        } else {
+            console.log("User: ", res);
+            result(null,res);
+        }
+    })
+}
+
 User.getOne  = (email, result) => {
     let query = "SELECT * FROM users where email = ?";
     sql.query(query, [email], (err, res) => {
