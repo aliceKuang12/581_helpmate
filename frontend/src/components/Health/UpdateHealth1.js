@@ -150,7 +150,7 @@ export default function BasicForm() {
             </Grid>
             <Grid item xs={5}>
               <TextField
-              id="date"
+              id="eventTime"
               type="date"
               variant="outlined"
               onChange={e => handleChange(e.target.value, 'eventTime')}

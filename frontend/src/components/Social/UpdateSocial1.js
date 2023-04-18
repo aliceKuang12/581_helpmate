@@ -70,7 +70,7 @@ export default function BasicForm() {
   // update route
   const handleData = (db) => {
     axios({
-      url: 'http://localhost:3003/health/update/',
+      url: 'http://localhost:3003/social/update/',
       method: 'PUT',
       headers: AXIOS_HEADER,
       data: db,

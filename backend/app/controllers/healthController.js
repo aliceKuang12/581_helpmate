@@ -7,6 +7,7 @@
  */
 
 import Health from "../models/health.js"
+import sql from "../models/db.js";
 
 export const createEvent = (req, res) => {
     const newEvent = new Health({

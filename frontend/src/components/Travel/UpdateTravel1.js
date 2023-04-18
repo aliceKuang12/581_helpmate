@@ -70,7 +70,7 @@ export default function BasicForm() {
   // update route
   const handleData = (db) => {
     axios({
-      url: 'http://localhost:3003/health/update/',
+      url: 'http://localhost:3003/travel/update/',
       method: 'PUT',
       headers: AXIOS_HEADER,
       data: db,
@@ -159,14 +159,14 @@ export default function BasicForm() {
               />  
             </Grid>
             <Grid item xs={4.5}>
-            {/* <TextField
+            <TextField
                 id="time"
                 type="time"
                 variant="outlined"
-                onChange={e => handleChange(e.target.value, 'time')}
-                value={time}
+                // onChange={e => handleChange(e.target.value, 'time')}
+                // value={time}
                 fullWidth
-              /> */}
+              />
             </Grid> 
  
             

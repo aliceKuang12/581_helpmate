@@ -1,4 +1,5 @@
 import Travel from "../models/travel.js"
+import sql from "../models/db.js";
 
 export const createEvent = (req, res) => {
     const newEvent = new Travel({

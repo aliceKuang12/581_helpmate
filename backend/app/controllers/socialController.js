@@ -1,4 +1,5 @@
 import Social from "../models/social.js"
+import sql from "../models/db.js";
 
 export const createEvent = (req, res) => {
     const newEvent = new Social({

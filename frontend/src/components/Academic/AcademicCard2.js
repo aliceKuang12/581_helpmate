@@ -44,7 +44,7 @@ const ModuleCard = () => {
                     <Typography sx={{ fontWeight: 'bold' }}>Title: {info.title}</Typography>
                     <Typography>Status: {info.completed ? "Complete" : "Incomplete"}</Typography>
                     <Typography>Event Time: {date}-{year}</Typography>
-                    {info.location ? <Typography>Location: {info.not}</Typography> : <br/>}
+                    {info.location ? <Typography>Location: {info.location}</Typography> : <br/>}
                     {info.notes ? <Typography>Notes: {info.notes} </Typography> : <br/>}
                    <br/>
                 </div>

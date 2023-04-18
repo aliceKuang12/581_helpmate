@@ -82,7 +82,7 @@ app.get("/health/streak2/", (req, res) => health.activityStreak(req, res));
 //travel module
 app.post("/travel/create", (req, res) => travel.createEvent(req, res));
 app.get("/travels", (req, res) => travel.showTravel(req, res));
-app.put("/travel/update/", (req, res) => { academic.updateTravel(req, res) });
+app.put("/travel/update/", (req, res) => { travel.updateTravel(req, res) });
 app.delete("/travel/delete/", (req, res) => { travel.deleteEvent(req, res) });
 
 //social module

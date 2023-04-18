@@ -130,7 +130,7 @@ export default function BasicForm() {
 // update route
 const handleData = (db) => {
   axios({
-    url: 'http://localhost:3003/academics/update/' + localStorage.getItem("email"),
+    url: 'http://localhost:3003/travel/update/',
     method: 'POST',
     headers: AXIOS_HEADER,
     data: db,
@@ -244,18 +244,7 @@ const handleData = (db) => {
               />
             </Grid>
             
-            <Grid item xs={2}>
-                <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
-                  Files: 
-               </Typography>
-             </Grid> 
-            <Grid item xs={4}>
-            <Button variant="contained" component="label">
-               Upload
-              <input hidden accept="image/*" multiple type="file" onChange={saveUrl} />
-              
-            </Button>
-            </Grid>
+  
 
             <Grid item xs={2}>
                <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
@@ -285,4 +274,18 @@ const handleData = (db) => {
 }
 //original button:  
 // <Button onClick={handleClickOpen} sx={{fill: "blue", color:"Black" }}>
+/*
+          <Grid item xs={2}>
+                <Typography sx={{fontSize: 16, textAlign: 'left', marginY: 1, padding: 2}}>
+                  Files: 
+               </Typography>
+             </Grid> 
+            <Grid item xs={4}>
+            <Button variant="contained" component="label">
+               Upload
+              <input hidden accept="image/*" multiple type="file" onChange={saveUrl} />
+              
+            </Button>
+            </Grid>
+            */
     
