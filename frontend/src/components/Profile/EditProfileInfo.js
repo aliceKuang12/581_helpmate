@@ -1,3 +1,15 @@
+/**
+ * EditProfileInfo.js
+ * 
+ * EditProfileInfo is a form that allows user to modify personal account fields.
+ * The initial state of the form contains the data the user currently has. Modifying
+ * the data and submitting the info sends the information to the backend and the page 
+ * is then automatically reloaded to display the most recent data. 
+ * 
+ * Author: Huyen Minh Nguyen
+ * Date: 3/23/23
+ */
+
 import React, {useState} from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';

@@ -5,7 +5,7 @@
  * and other attributes from database associated with user's email. 
  * 
  * Author: Alice Kuang
- * 
+ * Since: 3/15/23
  */
 
 import React from 'react';

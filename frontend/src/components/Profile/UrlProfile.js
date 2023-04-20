@@ -5,7 +5,7 @@
  * which will be used as the image source for the user's profile.
  * 
  * Author: Alice Kuang
- * Since: 3/29/23
+ * Since: 3/13/23
  */
 
 import React, { useState, useEffect } from 'react';
@@ -75,7 +75,6 @@ export default function UploadImage() {
       headers: AXIOS_HEADER,
       data: db,
     }).then(() => {
-      // alert("Successfully updated");
       setData({
         url: '',
       })
@@ -134,7 +133,7 @@ export default function UploadImage() {
           Photo url:
           <br /> <br />
 
-
+          {/* form to send url of photo with */}
           <Grid item xs={15} >
             <TextField
               id="url"

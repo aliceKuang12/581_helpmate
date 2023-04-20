@@ -1,12 +1,14 @@
 /**
  * UploadImageProfile
  * 
+ * Note: RETIRED- currently using  UrlProfile.js to get photos
+ * 
  * The upload profile functionality allows you to upload 1 image and sends the 
  * image to be saved in the upload folder on the backend. We save the filename to 
  * localStorage and access where the file is stored on backend to display on the frontend.
  * 
  * Author: Alice Kuang
- * Since: 3/18/23
+ * Since: 3/24/23
  */
 
 import React, { useState, useEffect } from 'react';

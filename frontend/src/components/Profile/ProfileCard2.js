@@ -1,3 +1,13 @@
+/**
+ * ProfileCard2
+ * 
+ * Shows the user's name, username, and profile photo. The profile photo can be uploaded
+ * via the UploadImage function from UrlProfile.js
+ * 
+ * Author: Brooke Jackson
+ * Since: 3/10/23
+ */
+
 import Paper from "@mui/material/Paper"
 import Grid from "@mui/material/Grid"
 import Typography from '@mui/material/Typography'

@@ -1,7 +1,7 @@
 /**
  * TopicCard.js
  * 
- * Pass in retreived json object from database, display the Title, time, and location 
+ * Pass in retreived json object from database, display the title, time, and location 
  * from the object
  * 
  * Author: Eva Morrison, Alice Kuang
@@ -19,11 +19,13 @@ const TopicCard = ({ topic, dbObject }) => {
 
     const DisplayData = dbObject.map(
         (info) => {
-            // let data = info.eventTime;
-            // data = data.splice(1, 10);
+            // extract the date (MM-DD) and year(yy) from eventTime record
+            let time = info.eventTime;
+            const date = time.slice(5,10);
+            const year = time.slice(0, 4);
             return (<div sx={{ textAlign: 'left' }}>
                 <Typography sx={{ fontWeight: 'bold' }}>Title: {info.title}</Typography>
-                <Typography> Time:{info.eventTime}</Typography>
+                <Typography> Date: {date}-{year}</Typography>
                 <Typography>Location: {info.location}</Typography>
                 <br />
             </div>
