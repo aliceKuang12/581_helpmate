@@ -3,7 +3,6 @@ import { useState } from "react";
 import axios from 'axios';
 import Homepage from './pages/Homepage'
 import Login from './pages/Login'
-import Template from './pages/Template'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Health from './pages/Health'
 import Travel from './pages/Travel'
@@ -35,7 +34,6 @@ function App() {
             <Route path = '/health' element={<Health/>} />
             <Route path = '/travel' element={<Travel/>}/>
             <Route path = '/social' element={<Social/>}/>
-            <Route path = '/template' element={<Template/>}/>
             <Route path = '/academics' element={<Academics/>}/>
             <Route path = '/profile' element={<Profile/>}/>
             <Route path = '/streaks' element={<Streaks/>}/>

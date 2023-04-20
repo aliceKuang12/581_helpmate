@@ -9,7 +9,8 @@
  * @author Eva Morrison. Alice Kuang. Minh Huyen Nguyen. Minh Thong Pham. 
  * @since  2/26/23
  */
-
+import cors from "cors"
+import bodyParser from "body-parser";
 import session from "express-session"
 import express from "express";
 import * as user from "../controllers/userController.js";
@@ -18,10 +19,19 @@ import * as image from "../controllers/imageController.js";
 import * as travel from "../controllers/travelController.js";
 import * as health from "../controllers/healthController.js";
 import * as social from "../controllers/socialController.js";
-import app from "../../server.js"
+// import app from "../../server.js"
 import { google } from 'googleapis'
 import { resetPasswordMail } from "../mailer/actions/authMailer.js";
 
+const app = express();
+var corsOptions = {
+  origin: "http://localhost:3000"
+}
+
+app.use(cors(corsOptions));
+app.use(bodyParser.urlencoded({ extende: true }));
+app.use(bodyParser.json());
+app.use(express.json());
 
 
 app.use(session({
@@ -128,3 +138,8 @@ app.get('/calendar', (req, res) => {
   });
 });
 
+// set port, listen for requests
+const PORT = process.env.PORT || 3003;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
