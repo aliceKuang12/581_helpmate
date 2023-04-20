@@ -1,7 +1,7 @@
 /**
  * imageController.js 
  *
- * Controller to store relative paths of user uploaded photos 
+ * Controller to store photo urls 
  *
  * @author Alice Kuang
  * @since  3/17/23
@@ -32,20 +32,6 @@ export const createRefs = (req, res) => {
     })
 }
 
-// show image paths for a given user
-export const userImageRefs = (req, res) => {
-    const email = req.params.email;
-    Images.getOne(email, (err, data) => {
-        if (err) {
-            return res.status(500).send({
-                message:
-                    err.message || "Error occurred while retrieving user's image paths."
-            });
-        }
-
-        res.send(data);
-    });
-}
 
 // show paths where images are stored
 export const showImageRefs = (req, res) => {
@@ -66,14 +52,14 @@ export const showImageRefs = (req, res) => {
 
 // show paths where images are stored
 export const updateProfileRefs = (req, res) => {
-    if (!req.params) {
+    if (!req.body) {
         return res.status(400).send({
             message: "Content cannot be empty"
         })
     }
 
-    // console.log(req.file.path, '\n', req.body)
-    Images.update1(req, (err, data) => {
+    console.log(req.body);
+    Images.updateProfile(req, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message: err.message || "Some error occurred while retrieving image paths."
@@ -85,8 +71,7 @@ export const updateProfileRefs = (req, res) => {
 
 // show image paths for a given user
 export const profileRefs = (req, res) => {
-    const email = req.params.email;
-    Images.getOne1(email, (err, data) => {
+    Images.profileUrl(req.query.user_id, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message:
@@ -99,15 +84,51 @@ export const profileRefs = (req, res) => {
 }
 
 // show paths where images are stored
-export const updateSocialRefs = (req, res) => {
-    if (!req.params) {
+export const socialRefs = (req, res) => {
+    if (!req.body) {
         return res.status(400).send({
             message: "Content cannot be empty"
         })
     }
 
-    console.log(req) // req.file, req.body
-    Images.update2(req, (err, data) => {
+    Images.getSocials(req.query.user_id, (err, data) => {
+        if (err) {
+            return res.status(500).send({
+                message: err.message || "Some error occurred while retrieving image paths."
+            })
+        }
+        res.status(200).send(data);
+    })
+}
+
+// show paths where images are stored
+export const travelRefs = (req, res) => {
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Content cannot be empty"
+        })
+    }
+
+    Images.getTravels(req.query.user_id, (err, data) => {
+        if (err) {
+            return res.status(500).send({
+                message: err.message || "Some error occurred while retrieving image paths."
+            })
+        }
+        res.status(200).send(data);
+    })
+}
+
+
+// show paths where images are stored
+export const updateSocialRefs = (req, res) => {
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Content cannot be empty"
+        })
+    }
+
+    Images.updateSocials(req, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message: err.message || "Some error occurred while retrieving image paths."
@@ -119,14 +140,13 @@ export const updateSocialRefs = (req, res) => {
 
 // show paths where images are stored
 export const updateTravelRefs = (req, res) => {
-    if (!req.params) {
+    if (!req.body) {
         return res.status(400).send({
             message: "Content cannot be empty"
         })
     }
 
-    console.log(req) // req.file, req.body
-    Images.update3(req, (err, data) => {
+    Images.updateTravels(req, (err, data) => {
         if (err) {
             return res.status(500).send({
                 message: err.message || "Some error occurred while retrieving image paths."

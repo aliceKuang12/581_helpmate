@@ -46,9 +46,9 @@ Images.getOne  = (email, result) => {
 }
 
 // return image events based on userId field
-Images.getOne1  = (email, result) => {
-    let query = "SELECT profile1 FROM imagerefs where userId = (SELECT id from users where email = ?)";
-    sql.query(query, [email], (err, res) => {
+Images.profileUrl  = (user_id, result) => {
+    let query = "SELECT profile1 FROM imagerefs where userId = ?";
+    sql.query(query, [user_id], (err, res) => {
         if (err) {
             console.log("Cannot retrieve user's image info: ", err);
             result(err,null);
@@ -74,13 +74,12 @@ Images.show = (user_id, result) => {
 
 // update profilePic
 // Transactions w/ multiple params: https://nicholasmordecai.co.uk/database/transactions-with-multiple-queries-nodejs-mysql/
-Images.update1 = (req, result) => {
-    //const filePath = req.file.filename;
+Images.updateProfile = (req, result) => {
     const url = req.body.url; 
-    const email = req.params.email;
+    const userId = req.body.user_id;
 
-    let query = `UPDATE imagerefs SET profile1=? WHERE userId = (SELECT id from users where email = ?)`; 
-    sql.query(query, [url, email], (err, res) => {
+    let query = `UPDATE imagerefs SET profile1=? WHERE userId = ?`; 
+    sql.query(query, [url, userId], (err, res) => {
         if (err) {
             console.log(err);
             result(err, null);
@@ -93,41 +92,80 @@ Images.update1 = (req, result) => {
 }
 
 // update social, saving relative paths of 3 photos
-Images.update2 = (req, result) => {
-    const fp = req.files; // array of files
-    const email = req.params.email;
-    console.log(fp)
-
-    let query = `UPDATE imagerefs SET social1=?, social2=?, social3=? WHERE userId = (SELECT id from users where email = ?)`; 
-    sql.query(query, [fp[0].filename, fp[1].filename, fp[2].filename, email], (err, res) => { // fp[0].path, fp[1].path, fp[2].path
+Images.getSocials = (user_id, result) => {
+    let query = `SELECT social1, social2, social3 FROM imagerefs WHERE userId = ?`; 
+    sql.query(query, [user_id], (err, res) => { 
         if (err) {
             console.log(err);
             result(err, null);
             return;
         }
-       
-        console.log(fp);
         result(null, res);
     })
 }
 
-// update travel, saving relative paths of 3 photos
-Images.update3 = (req, result) => {
-    const fp = req.files; // array of files
-    const email = req.params.email;
-    console.log(fp)
+// update social, saving relative paths of 3 photos
+Images.updateSocials = (req, result) => {
+    const rb = req.body; // array of files
+    const user_id = req.body.user_id;
 
-    let query = `UPDATE imagerefs SET travel1=?, travel2=?, travel3=? WHERE userId = (SELECT id from users where email = ?)`; 
-    sql.query(query, [fp[0].filename, fp[1].filename, fp[2].filename, email], (err, res) => {
+    let query = `UPDATE imagerefs SET social1=?, social2=?, social3=? WHERE userId = ?`; 
+    sql.query(query, [rb.soc1, rb.soc2, rb.soc3, user_id], (err, res) => { 
         if (err) {
             console.log(err);
             result(err, null);
             return;
         }
-       // result(null, filePath);
-        console.log(fp);
         result(null, res);
     })
 }
+
+
+// update social, saving relative paths of 3 photos
+Images.getTravels = (user_id, result) => {
+    let query = `SELECT travel1, travel2, travel3 FROM imagerefs WHERE userId = ?`; 
+    sql.query(query, [user_id], (err, res) => { 
+        if (err) {
+            console.log(err);
+            result(err, null);
+            return;
+        }
+        result(null, res);
+    })
+}
+
+// update travel, save urls of 3 photos
+Images.updateTravels = (req, result) => {
+    const rb = req.body; 
+    const user_id = req.body.user_id;
+
+    let query = `UPDATE imagerefs SET travel1=?, travel2=?, travel3=? WHERE userId = ?`; 
+    sql.query(query, [rb.soc1, rb.soc2, rb.soc3, user_id], (err, res) => { 
+        if (err) {
+            console.log(err);
+            result(err, null);
+            return;
+        }
+        result(null, res);
+    })
+}
+
+// Images.updateTravels = (req, result) => {
+//     const fp = req.files; // array of files
+//     const email = req.params.email;
+//     console.log(fp)
+
+//     let query = `UPDATE imagerefs SET travel1=?, travel2=?, travel3=? WHERE userId = (SELECT id from users where email = ?)`; 
+//     sql.query(query, [fp[0].filename, fp[1].filename, fp[2].filename, email], (err, res) => {
+//         if (err) {
+//             console.log(err);
+//             result(err, null);
+//             return;
+//         }
+//        // result(null, filePath);
+//         console.log(fp);
+//         result(null, res);
+//     })
+// }
 
 export default Images;

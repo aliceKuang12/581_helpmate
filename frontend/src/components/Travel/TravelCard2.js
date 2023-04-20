@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles';
-import UploadImage from "./UploadImageTravel"
+import UploadImage from "./UploadTravelUrls"
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',

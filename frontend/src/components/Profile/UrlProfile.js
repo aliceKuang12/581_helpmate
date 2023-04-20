@@ -26,10 +26,12 @@ export default function UploadImage() {
   const [open, setOpen] = React.useState(false);
   const [post, setPost] = React.useState(null);
   const [data, setData] = useState({
+    user_id: localStorage.getItem("userId"),
     url: '',
   });
 
   const {
+    user_id,
     url
   } = data;
 
@@ -61,7 +63,7 @@ export default function UploadImage() {
     window.location.reload(false);
   }
 
-  const handleSave = () => {
+  const handleSave = async (e) => {
     console.log(data);
     saveUrl(data);
     setOpen(false);
@@ -70,12 +72,13 @@ export default function UploadImage() {
 
   const saveUrl = (db) => {
     axios({
-      url: 'http://localhost:3003/imageProfile2/' + localStorage.getItem("email"),
+      url: 'http://localhost:3003/saveProfile',
       method: 'POST',
       headers: AXIOS_HEADER,
       data: db,
     }).then(() => {
       setData({
+        user_id: localStorage.getItem("userId"),
         url: '',
       })
       handleClose();
@@ -87,10 +90,13 @@ export default function UploadImage() {
 
   useEffect(() => {
     const fetchImage = async () => {
-
-      // upload the photo
-      await axios.get("http://localhost:3003/profileUrl/" + localStorage.getItem('email'))
-        .then(res => {
+      await 
+      axios({
+        url: "http://localhost:3003/getProfile",
+        method: "GET",
+        params: {user_id: localStorage.getItem("userId")},
+        header: AXIOS_HEADER
+      }).then(res => {
           console.log(res.data[0].profile1);
           setImage(res.data[0].profile1);
           localStorage.setItem("profileUrl", res.data[0].profile1);
