@@ -6,7 +6,7 @@ export const createEvent = (req, res) => {
         userId: req.body.userId,
         title: req.body.title,
         category: req.body.category,
-        eventTime: req.body.date,
+        eventTime: req.body.date + " " + req.body.time,
         location: req.body.address,
         notes: req.body.notes,
         ticket: req.body.ticket,
