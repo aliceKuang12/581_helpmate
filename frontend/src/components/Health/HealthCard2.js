@@ -98,7 +98,7 @@ const ModuleCard = () => {
         <Grid item xs={6} marginBottom={5}>
             <Paper sx={{ opacity: .9 }}>
                 <Box
-                    padding={2}
+                    padding={1}
                     sx={{
                         display: "flex",
                         alignItems: "left",
