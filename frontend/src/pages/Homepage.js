@@ -23,8 +23,7 @@ const Homepage = (props) => {
     const [Health, setHealth] = useState([]);
     const [user1, setUser1] = useState([]);
     const { currentUser } = useAuth();
-    const user = JSON.parse(currentUser);
-    console.log(user.id);
+    const user = currentUser;
     // https://stackoverflow.com/questions/52669596/promise-all-with-axios
     useEffect(() => {
         const fetchAllTables = async () => {
