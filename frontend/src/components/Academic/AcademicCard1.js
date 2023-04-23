@@ -60,7 +60,7 @@ const ModuleCard = () => {
         <Grid item xs={6} marginBottom={5}>
               <br/>
             <Paper sx={{ opacity: .9, backgroundColor: 'coral' }}>
-                   
+                   <br/>
                     <Stack spacing={2} sx={{ height: '100%', width: '100%', }}>
                     <Typography  sx={{ fontWeight: 'bold', fontSize: 20, fontFamily: 'cursive' }}> Events </Typography>                  
                         {DisplayData}
