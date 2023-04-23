@@ -95,7 +95,7 @@ const ModuleCard = () => {
     }, []);
 
     return (
-        <Grid item xs={6} marginBottom={3}>
+        <Grid item xs={6} marginBottom={5}>
             <Paper sx={{ opacity: .9 }}>
                 <Box
                     padding={2}
@@ -115,7 +115,7 @@ const ModuleCard = () => {
                         {/* <Item elevation={0}> */}
                             <Typography
                                 varient='h6'
-                                sx={{ fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}
+                                sx={{ fontWeight: 'bold', textAlign: 'center', fontSize: 20, fontFamily: 'cursive'}}
                             >
                                 Health Statistics
                             </Typography>

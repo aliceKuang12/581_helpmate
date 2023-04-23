@@ -74,6 +74,7 @@ const ModuleCard = ( ) => {
         <Paper sx={{ opacity: .9, backgroundColor: 'forestgreen'  }}>
             <br/>
             <Stack spacing={2} sx={{ height: '100%', width: '100%'}}>
+            <Typography  sx={{ fontWeight: 'bold', fontSize: 20, fontFamily: 'cursive' }}> Events </Typography>
                 {DisplayData}
             </Stack>               
         <br/>
