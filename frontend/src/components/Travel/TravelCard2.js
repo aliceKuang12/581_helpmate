@@ -18,7 +18,6 @@ const ModuleCard = (  ) => {
         <Paper sx = {{opacity:.9}}>
             <Box 
                 paddingX={4}
-                paddingY={2}
                 sx={{
                     display: "flex",
                     alignItems: "left",
@@ -33,7 +32,7 @@ const ModuleCard = (  ) => {
                     <Typography 
                         varient='h4' 
                         component='h2' 
-                        sx={{fontWeight: 'bold', textAlign: 'center', fontSize: 18}}
+                        sx={{fontWeight: 'bold', textAlign: 'center', fontSize: 20, fontFamily: 'cursive'}}
                     >
                     Travel Information
                     </Typography>

@@ -72,7 +72,7 @@ const ModuleCard = () => {
         <Grid item xs={6} marginBottom={5} > 
             <Paper sx={{ opacity: .9, backgroundColor: 'lightblue !important' }}>
                 <br />
-                <Typography varient='h2' component='h2' sx={{ fontWeight: 'bold', fontSize: 20 }}>
+                <Typography varient='h2' component='h2' sx={{ fontWeight: 'bold', fontSize: 20, fontFamily: 'cursive' }}>
                     Events
                 </Typography>
                 <br/>
