@@ -1,7 +1,8 @@
 /**
  * TopicCardv2.js
  * 
- * Display a module card with the given topic.  
+ * Display a module card with the given topic. This card is corresponds to the top alerts
+ * card and the add notes card on the homepage, both of which are not yet implemented
  * 
  * Author: Eva Morrison, Alice Kuang
  * Since: 9/30/2022
@@ -26,6 +27,7 @@ const TopicCard = ({ topic  }) => {
             </img>
             <Box padding={1}>
                 <Typography variant="subtitle1" component="h2" sx={{fontWeight: 'bold'}}>
+                    {/* display the topic as the title of the card */}
                  {topic} 
                 </Typography>
                 <Box
@@ -35,19 +37,10 @@ const TopicCard = ({ topic  }) => {
                     }}
                 >
                     <Stack sx={{ padding: 1 }}>
+                        {/* location of where data will be displayed */}
+                        
                         None currently!
-                        {/*
-                        <Divider style={{ height: 1, backgroundColor: 'black', marginTop: 10, marginBottom: 10 }} />
-                        <Grid container spacing={2} sx={{ mx: 2 }}>
 
-                            <Grid item xs={2} sx={{ mt: 5 }}>
-                                <AddIcon />
-                            </Grid> 
-                            <Grid item xs={8} sx={{}}>
-                                <AddEvent />
-                            </Grid>
-
-                        </Grid>*/}
                     </Stack>
                 </Box>
             </Box>
@@ -57,14 +50,3 @@ const TopicCard = ({ topic  }) => {
 };
 
 export default TopicCard;
-
-{/* <Typography variant = "body2" component = "li">
-                       
-                        {topic.event1}
-                    </Typography> 
-                    <Typography variant = "body2" component = "li">
-                        {topic.event2}
-                    </Typography>
-                    <Typography variant = "body2" component = "li">
-                        {topic.event3}
-                    </Typography> */}

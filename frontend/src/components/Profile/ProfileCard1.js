@@ -1,3 +1,13 @@
+/**
+ * ProfileCard2
+ * 
+ * Shows the user's name, username, email, cell, and birthday. These fields can be edited
+ * with the updateUser functionality found in EditProfileInfo.js
+ * 
+ * Author: Brooke Jackson
+ * Since: 3/10/23
+ */
+
 import Paper from "@mui/material/Paper"
 import Grid from "@mui/material/Grid"
 import Typography from '@mui/material/Typography'
@@ -63,8 +73,7 @@ const ModuleCard = ( ) => {
                             Security
                         </Typography>
                         <Typography> Birthday:  {date}-{year}</Typography>
-                        {/* <Typography>Password: {currentUser.password}</Typography> */}
-                        
+                                  
                     </div>
                     <br/><br/> <br/><br/> <br/><br/> <br/><br/>
                     <UpdateUser/>

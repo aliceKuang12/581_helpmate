@@ -17,8 +17,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField'
-import Checkbox from '../Checkbox';
+import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
 import axios from 'axios'
 import { useAuth } from '../../context/AuthContext';

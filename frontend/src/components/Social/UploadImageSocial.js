@@ -1,3 +1,15 @@
+/**
+ * UploadImageSocial
+ * 
+ * Note: defunct since 4/20. Currently using UploadSocialUrls to save photos. 
+ * 
+ * Show slideshow of 3 default photos. Allow user to upload 3 photos from local computer and store 
+ * images to upload folder in backend, and file location to database.
+ * 
+ * Author: Brooke Jackson, Alice Kuang
+ * Since: 2/26/23
+ */
+
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';

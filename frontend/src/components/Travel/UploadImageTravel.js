@@ -1,12 +1,13 @@
 /**
- * UploadImage.js 
- *
- * Functionality to Upload 3 Images for Travel Module
- *
- * @link   URL
- * @file   
- * @author Brooke Jackson, Alice Kuang
- * @since  2/26/23
+ * UploadImageTravel
+ * 
+ * Note: defunct since 4/20. Currently using UploadSocialUrls to save photos. 
+ * 
+ * Show slideshow of 3 default photos. Allow user to upload 3 photos from local computer and store 
+ * images to upload folder in backend, and file location to database.
+ * 
+ * Author: Brooke Jackson Alice Kuang
+ * Since: 2/26/23
  */
 
 

@@ -9,7 +9,8 @@
  * @author Eva Morrison. Alice Kuang. Minh Huyen Nguyen. Minh Thong Pham. 
  * @since  2/26/23
  */
-
+import cors from "cors"
+import bodyParser from "body-parser";
 import session from "express-session"
 import express from "express";
 import * as user from "../controllers/userController.js";
@@ -18,12 +19,23 @@ import * as image from "../controllers/imageController.js";
 import * as travel from "../controllers/travelController.js";
 import * as health from "../controllers/healthController.js";
 import * as social from "../controllers/socialController.js";
-import app from "../../server.js"
+// import app from "../../server.js"
 import { google } from 'googleapis'
 import { resetPasswordMail } from "../mailer/actions/authMailer.js";
 
 
+// setup cross origin access to frontend (@port 3000)
+const app = express();
+var corsOptions = {
+  origin: "http://localhost:3000"
+}
 
+app.use(cors(corsOptions));
+app.use(bodyParser.urlencoded({ extende: true }));
+app.use(bodyParser.json());
+app.use(express.json());
+
+// save session data
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -51,12 +63,13 @@ app.put("/user", (req,res) => user.updateUser(req,res));
 
 
 //image module
-app.get("/imageRefs", (req, res) => image.showImageRefs(req, res));
-app.get("/imageRefs/:email", (req, res) => image.userImageRefs(req, res));
-app.get("/profileUrl/:email", (req, res) => image.profileRefs(req, res));
-
-// image url paths
-app.post("/imageProfile2/:email", (req, res) => image.updateProfileRefs(req, res));
+app.get("/imageRefs", (req, res) => image.showImageRefs(req, res)); // check if files saved
+app.get("/getProfile", (req, res) => image.profileRefs(req, res));
+app.post("/saveProfile", (req, res) => image.updateProfileRefs(req, res));
+app.get("/getSocials", (req, res) => image.socialRefs(req, res));
+app.post("/saveSocials", (req, res) => image.updateSocialRefs(req, res));
+app.get("/getTravels", (req, res) => image.travelRefs(req, res));
+app.post("/saveTravels", (req, res) => image.updateTravelRefs(req, res));
 
 //academic module
 app.get("/academics", (req, res) => academic.showAcademic(req, res));
@@ -128,3 +141,8 @@ app.get('/calendar', (req, res) => {
   });
 });
 
+// set port, listen for requests
+const PORT = process.env.PORT || 3003;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
