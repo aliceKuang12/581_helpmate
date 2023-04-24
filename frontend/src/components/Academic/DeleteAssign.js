@@ -1,3 +1,12 @@
+/**
+ * Author: Eva Morrison, Alice Kuang
+ * Created: 3/25/23
+ * Update Date: 4/09/23
+ * Description: Delete academic component. Handles collecting user information through 
+ * a form to delete from the users stored events in backend database
+ * 
+ */
+
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import Button from '@mui/material/Button';

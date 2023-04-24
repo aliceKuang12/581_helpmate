@@ -1,3 +1,12 @@
+/**
+ * Author: Eva Morrison, Alice Kuang
+ * Created: 3/25/23
+ * Update Date: 4/23/23
+ * Description: Academic card 2. Displays the users most relevant assignments. 
+ * Card on the right side of academic module page
+ * 
+ */
+
 import React, { useEffect, useState } from 'react'
 import { AXIOS_HEADER } from "../../constants";
 import axios from 'axios'

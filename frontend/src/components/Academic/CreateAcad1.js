@@ -1,3 +1,12 @@
+/**
+ * Author: Eva Morrison, Alice Kuang
+ * Created: 4/15/23
+ * Update Date: 4/16/23
+ * Description: Create academic component. Handles collecting user information through 
+ * a form and pusihing to the backend databases.
+ * 
+ */
+
 import React, {useState} from 'react';
 import axios from 'axios'
 import Button from '@mui/material/Button';

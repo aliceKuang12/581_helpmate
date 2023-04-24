@@ -4,10 +4,12 @@
  * Form to create a new assignment for the academic page. 
  * Allows users to dynamically update the events stored in the DBs.
  *
- * @link   URL
  * @file   This file defines the CreateAssign class.
  * @author Eva Morrison. Alice Kuang.
  * @since  2/26/23
+ * 
+ * Resources:
+ *  https://www.freecodecamp.org/news/how-to-use-axios-with-react/#how-to-make-a-post-request
  */
 
 import React, { useEffect, useState } from 'react';

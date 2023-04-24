@@ -1,3 +1,12 @@
+/**
+ * Author: Eva Morrison, Minh Huyen, Alice Kuang
+ * Created: 3/25/23
+ * Update Date: 4/23/23
+ * Description: Academic card 1. Displays the users most relevant Events. 
+ * Card on the left side of academic module page
+ * 
+ */
+
 import Paper from "@mui/material/Paper"
 import Grid from "@mui/material/Grid"
 import Typography from '@mui/material/Typography'
