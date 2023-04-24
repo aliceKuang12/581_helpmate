@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { AXIOS_HEADER } from "../../constants";
+import moment from "moment-timezone";
 
 
 const ModuleCard = () => {
@@ -20,6 +21,7 @@ const ModuleCard = () => {
     const DisplayData = data.map(
         (info) => {
             const time = info.eventTime;
+            const cst_time = moment.tz(time, "America/Chicago").format();
             const exactTime = time.slice(11,16);
             const date = time.slice(5,10);
             const year = time.slice(0, 4);

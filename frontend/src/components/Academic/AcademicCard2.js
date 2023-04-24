@@ -12,6 +12,7 @@ import CreateEvent from "./CreateAcad2"
 import UpdateEvent from "./UpdateAcad1"
 import DeleteEvent from "./DeleteEventAcademic"
 import ViewEvent from "../ViewEvents"
+import moment from "moment-timezone";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
@@ -35,15 +36,16 @@ const ModuleCard = () => {
     const DisplayData = data.map(
         (info) => {
             const time = info.eventTime;
-            const exactTime = time.slice(11,16);
-            const date = time.slice(5,10);
-            const year = time.slice(0, 4);
+            const cst_time = moment.tz(time, "America/Chicago").format();
+            const exactTime = cst_time.slice(11,16);
+            const date = cst_time.slice(5,10);
+            const year = cst_time.slice(0, 4);
             return (
                 // <Item elevation={0} sx={{ height: '90%', width: '100%', }}>    {/* </Item> */}
                 <div>
                     <Typography sx={{ fontWeight: 'bold' }}>Title: {info.title}</Typography>
                     <Typography>Status: {info.completed ? "Complete" : "Incomplete"}</Typography>
-                    <Typography>Event Time: {date}-{year}</Typography>
+                    <Typography>Event Time: {exactTime}, {date}-{year}</Typography>
                     {info.location ? <Typography>Location: {info.location}</Typography> : <br/>}
                     {info.notes ? <Typography>Notes: {info.notes} </Typography> : <br/>}
                    <br/>

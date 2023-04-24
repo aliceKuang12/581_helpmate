@@ -7,6 +7,7 @@ import { styled } from '@mui/material/styles';
 import CreateEvent from "./CreateTravel"
 import UpdateEvent from "./UpdateTravel1"
 import DeleteEvent from "./DeleteEventTravel"
+import moment from "moment-timezone";
 
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
@@ -31,6 +32,7 @@ const ModuleCard = () => {
     const DisplayData = data.map(
         (info) => {
             const time = info.eventTime;
+            const cst_time = moment.tz(time, "America/Chicago").format();
             const exactTime = time.slice(11,16);
             const date = time.slice(5,10);
             const year = time.slice(0, 4);
