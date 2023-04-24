@@ -1,3 +1,17 @@
+/**
+ * Author: Eva Morrison, Alice Quang, Minh Nguyen, Minh Huyen
+ * Created: 11/11/22
+ * Update Date: 03/31/23
+ * Description: Navigation bar. Displays all the pages the user can navigate to on left side. Displays 
+ * user name and profile picture in the right side.
+ * 
+ * Resources used: 
+ *  https://reactjsexample.com/tag/navbar/
+ *  https://www.geeksforgeeks.org/create-a-responsive-navbar-using-reactjs/
+ * 
+ */
+
+//React dependencies
 import { useState, useEffect } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -15,6 +29,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios'
 
+//Project pages
 const pages = ['home', 'academics', 'health', 'social', 'travel', 'streaks'];
 
 export default function Header(props) {
@@ -26,41 +41,43 @@ export default function Header(props) {
 
   // don't set the user here! to avoid duplicate api calls, 
   // better to save the user data at login
+
+  //Event Handlers
+  //Open navigation menu
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+  //Close navigation menu
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
     console.log(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  //Handle redirection to profile page
   const goToProfile = () => {
     setAnchorElUser(null);
     window.location.href = '/profile';
   }
-
+  //handle logout
   const handleLogOut = () => {
     setAnchorElUser(null);
     logout();
     window.location.href = '/';
   }
-
+  //handle redirection to other module pages
   const handleChangePage = (page) => {
     setAnchorElUser(null);
     window.location.href = '/' + page;
   }
 
   useEffect(() => {
+    //load profile image
     const fetchImage = async () => {
-
       // upload the photo
       await axios.get("http://localhost:3003/profileUrl/" + localStorage.getItem('email'))
         .then(res => {
