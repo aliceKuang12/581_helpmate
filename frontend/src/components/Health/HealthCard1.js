@@ -9,6 +9,7 @@ import CreateEvent from "./CreateHealth"
 import UpdateEvent from "./UpdateHealth1"
 import DeleteEvent from "./DeleteEventHealth"
 import ViewEvent from "../ViewEvents"
+import moment from "moment-timezone";
 
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
@@ -35,9 +36,10 @@ const ModuleCard = ( ) => {
     const DisplayData = data.map(
         (info) => {
             const time = info.eventTime;
-            const exactTime = time.slice(11,16);
-            const date = time.slice(5,10);
-            const year = time.slice(0, 4);
+            const cst_time = moment.tz(time, "America/Chicago").format();
+            const exactTime = cst_time.slice(11,16);
+            const date = cst_time.slice(5,10);
+            const year = cst_time.slice(0, 4);
             return (
                 <Item elevation={0} sx={{ height: '90%', width: '100%', }}>
                     <Typography sx={{ fontWeight: 'bold' }}>Title: {info.title}</Typography>
