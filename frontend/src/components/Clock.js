@@ -1,3 +1,16 @@
+/**
+ * Author: Eva Morrison
+ * Created: 11/17/22
+ * Update Date: 1/29/23
+ * Description: Clock component. Gets the current time and date to display in the upper right hand corner
+ * automatically and continously refreshes
+ * 
+ * Resources used: 
+ *  https://www.youtube.com/watch?v=T_lFnwLiATc
+ *  https://medium.com/12-developer-labors/css-all-the-ways-to-align-elements-left-and-right-52ecce4a4af9
+ */
+
+
 import {useState} from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -23,6 +36,7 @@ const Clock = () => {
     }   
     
 
+    //update time and date every second (1000ms)
     setInterval(updateTime, 1000);
     setInterval(updateDate, 1000);
 
@@ -31,19 +45,17 @@ const Clock = () => {
     return (
         //https://medium.com/12-developer-labors/css-all-the-ways-to-align-elements-left-and-right-52ecce4a4af9
         <Container sx ={{marginRight: 2, marginY: 1}}> 
+            {/* //Display current time */}
             <Typography
             variant = "h4"
             component = "h4"
             position = "relative"
-            //right = {15}
-            //align = 'center'
             align = 'right'
-            //marginTop = {5}
-            //marginBottom = {3}
             color = 'white'
             >
                 {currentTime}
             </Typography>
+            {/* Display current date */}
             <Typography
             variant = "h5"
             component = "h5"
