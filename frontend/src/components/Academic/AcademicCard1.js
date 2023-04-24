@@ -22,9 +22,9 @@ const ModuleCard = () => {
         (info) => {
             const time = info.eventTime;
             const cst_time = moment.tz(time, "America/Chicago").format();
-            const exactTime = time.slice(11,16);
-            const date = time.slice(5,10);
-            const year = time.slice(0, 4);
+            const exactTime = cst_time.slice(11,16);
+            const date = cst_time.slice(5,10);
+            const year = cst_time.slice(0, 4);
             return (
                 <div>
                     <Typography sx={{ fontWeight: 'bold' }}>Title: {info.title}</Typography>
