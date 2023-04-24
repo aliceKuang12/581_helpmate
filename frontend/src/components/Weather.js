@@ -1,9 +1,8 @@
 /**
  * Author: Eva Morrison
- * Created: 11/17/22
+ * Created: 1/29/23
  * Update Date: 1/29/23
- * Description: Clock component. Gets the current time and date to display in the upper right hand corner
- * automatically and continously refreshes
+ * Description: Weather component. Gets the current weather and location to display in the upper right hand corner
  * 
  * Resources used: 
  *  https://maxrozen.com/fetching-data-react-with-useeffect
