@@ -1,13 +1,25 @@
+/**
+ * Author: Eva Morrison
+ * Created: 11/17/22
+ * Update Date: 1/29/23
+ * Description: Clock component. Gets the current time and date to display in the upper right hand corner
+ * automatically and continously refreshes
+ * 
+ * Resources used: 
+ *  https://maxrozen.com/fetching-data-react-with-useeffect
+ *  https://bobbyhadz.com/blog/react-cant-perform-react-state-update-on-unmounted-component
+ *  https://javascript.info/fetch
+ *  https://www.weatherapi.com/api-explorer.aspx
+ *  https://developer.mozilla.org/en-US/docs/Web/API/Response/json
+ */
+
+
+//React Dependencies
 import {useEffect, useState, useRef} from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-//https://maxrozen.com/fetching-data-react-with-useeffect
-//https://bobbyhadz.com/blog/react-cant-perform-react-state-update-on-unmounted-component
-//https://javascript.info/fetch
-//https://www.weatherapi.com/api-explorer.aspx
-//https://developer.mozilla.org/en-US/docs/Web/API/Response/json
-
+//ensure the component is loaded into the DOM
 function useIsMounted() {
   const isMounted = useRef(false);
 
@@ -22,6 +34,7 @@ function useIsMounted() {
   return isMounted;
 }
 
+
 const Weather = () => {
   const [weather, setWeather] = useState(null)
   const [location, setLocation] = useState(null)
@@ -30,6 +43,7 @@ const Weather = () => {
 
     useEffect(() => {
       const getWeather = async () => {
+        //fetch up to date Lawrence, KS weather
         await fetch("http://api.weatherapi.com/v1/current.json?key=7f716f37a5c243009af191541232501&q=Lawrence, KS&aqi=no", {
           "method": "GET",
           "headers": {}
@@ -39,7 +53,7 @@ const Weather = () => {
           })
           .then((data) => {
             if(isMountedRef.current){
-              console.log(data);
+              //console.log(data);
               setWeather(data.current);
               setLocation(data.location);
             }  
@@ -51,6 +65,7 @@ const Weather = () => {
       getWeather();
     }, [isMountedRef]);
 
+    //while weather is not null print to top right corner of homepage
     if(weather){
       return(
         <Container sx ={{marginRight: 2, marginY: .5}}> 
