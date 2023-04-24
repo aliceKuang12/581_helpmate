@@ -1,3 +1,14 @@
+/**
+ * TravelCard1.js 
+ *
+ * Display the user's most relevant travel events. Card is displayed on the left side of the travel module page.
+ *
+ * @link   URL
+ * @file   This file defines the DeleteEventTravel class.
+ * @author Eva Morrison. Alice Kuang.
+ * @since  3/25/23
+ */
+
 import Paper from "@mui/material/Paper"
 import Grid from "@mui/material/Grid"
 import Typography from '@mui/material/Typography'

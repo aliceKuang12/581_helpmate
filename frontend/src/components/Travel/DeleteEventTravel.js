@@ -1,3 +1,15 @@
+/**
+ * DeleteEventTravel.js 
+ *
+ * Form to delete an existing travel event for the travel page. 
+ * Allows users to dynamically update the events stored in the DBs.
+ *
+ * @link   URL
+ * @file   This file defines the DeleteEventTravel class.
+ * @author Eva Morrison. Alice Kuang.
+ * @since  3/25/23
+ */
+
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
