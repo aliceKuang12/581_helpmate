@@ -12,24 +12,9 @@ import Alert from '@mui/material/Alert';
 export default function ForgotPassword() {
     const emailRef = useRef()
     const [error, setError] = useState("")  
-    const [loading, setLoading] = useState(false)
-    const { resetPassword } = useAuth()
     const [message, setMessage] = useState("")  
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            setMessage('')
-            setError("")
-            setLoading(true)
-            await resetPassword(emailRef.current.value)
-            setMessage('Check your inbox for further instructions')
-        } catch (e) {
-            setError("Failed to reset password")
-        }
-
-    }
-
+    //call send mail api
     const handleSendMail = async (e) => {
         try {
             await axios.post("http://localhost:3003/reset-password-email",
@@ -56,14 +41,6 @@ export default function ForgotPassword() {
                     >
                     </TextField>
                     <br /><br />
-                    {/* <Button
-                        variant="contained"
-                        className="w-200"
-                        type="submit"
-                        onClick={handleSubmit}
-                    >
-                       Reset Password
-                    </Button> */}
                     <Button
                         variant="contained"
                         className="w-200"

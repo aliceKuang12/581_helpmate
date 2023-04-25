@@ -10,6 +10,7 @@ import { useAuth } from '../context/AuthContext'
 import Alert from '@mui/material/Alert';
 
 export default function ResetPassword() {
+    //initialize fields
     const newPasswordRef = useRef()
     const emailRef = useRef();
     const [error, setError] = useState("")  
@@ -17,6 +18,7 @@ export default function ResetPassword() {
     const { resetPassword } = useAuth()
     const [message, setMessage] = useState("")  
 
+    //call the function from AuthContext to handle reset email
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

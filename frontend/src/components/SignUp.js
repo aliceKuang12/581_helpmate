@@ -20,7 +20,6 @@ const SignUp = (props) => {
         handleClose,
     } = props;
     const { signup } = useAuth()
-   // const { deleteuser } = useAuth()
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
@@ -70,6 +69,8 @@ const SignUp = (props) => {
         })
         handleClose()
     }
+
+    //check daet format
     const validateDate = (dateStr) => {
         if (dateStr.match(DATE_REGEX) === null) {
             setError("Invalid birthday format");
@@ -78,6 +79,8 @@ const SignUp = (props) => {
         }
         return true;
     }
+
+    //call the action to signup
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (passwordConfirmRef.current.value !== passwordRef.current.value) {
@@ -95,6 +98,7 @@ const SignUp = (props) => {
         }
     }
     
+    //call the api for signup
     const handleData = (db) => {
         if (_isEmpty(db.birthday)) {
             db.birthday = '0001-01-01'
